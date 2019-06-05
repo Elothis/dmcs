@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: mic.model_code_synchronization.designmodel;singleton:=true
+Automatic-Module-Name: mic.model_code_synchronization.designmodel
+Bundle-Version: 0.1.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: mic.model_code_synchronization.designmodel,
+ mic.model_code_synchronization.designmodel.impl,
+ mic.model_code_synchronization.designmodel.util
+Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
