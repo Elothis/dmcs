@@ -10,9 +10,9 @@ import org.apache.commons.io.FileUtils;
 
 public class Utility {
 	
-	public static List<File> getAllJavaFilesInDir(String directoryPath) throws IOException {
+	public static List<File> getAllFilesByExtension(String directoryPath, String extension) throws IOException {
 		File directory = new File(directoryPath);
-		String[] extensions = new String[] { "java" };
+		String[] extensions = new String[] { extension };
 		List<File> files = (List<File>) FileUtils.listFiles(directory, extensions, true);
 		return files;
     }
