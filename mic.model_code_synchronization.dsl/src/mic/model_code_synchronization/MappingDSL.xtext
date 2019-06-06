@@ -3,7 +3,7 @@ grammar mic.model_code_synchronization.MappingDSL with org.eclipse.xtext.common.
 generate mappingDSL "http://www.model_code_synchronization.mic/MappingDSL"
 //import "http://www.example.org/designmodel"
 
-Model:
+RootModel:
 	elements+=AbstractElement*;
 
 AbstractElement:
@@ -12,7 +12,7 @@ AbstractElement:
 
 IntegrationMechanismDeclaration:
 	'IM' name=ID '{'
-		codestructure=Codestructure & modelelement=ModelElement & condition=Condition & mapping=Mapping
+		codestructure=Codestructure & modelelement=ModelElement & (condition=Condition)? & mapping=Mapping
 	'}'
 ;
 
@@ -31,7 +31,10 @@ enum ModelElementType:
 ;
 
 Condition:
-	'condition' ':' condition=STRING
+	'condition' ':' 'codestructure' condition=ConditionType
+;
+enum ConditionType:
+	IMPLEMENTS='implements' | ANNOTATED='annotated with'
 ;
 
 Mapping:
