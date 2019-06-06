@@ -5,7 +5,9 @@ import java.util.Set;
 import mic.model_code_synchronization.designmodel.DesignmodelFactory;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.reference.CtTypeReference;
+import spoon.reflect.visitor.CtAbstractVisitor;
 
 
 public class MarkerInterfaceProcessor extends AbstractProcessor<CtClass> {
@@ -35,7 +37,7 @@ public class MarkerInterfaceProcessor extends AbstractProcessor<CtClass> {
 			element.setSimpleName("ChangedClassName");
 			System.out.println("Changed name: " + element.getSimpleName());
 		}
-		DesignmodelFactory.eINSTANCE.createState();
+		//DesignmodelFactory.eINSTANCE.createState();
 		
 		/*
 		Factory factory = element.getFactory();
@@ -43,6 +45,8 @@ public class MarkerInterfaceProcessor extends AbstractProcessor<CtClass> {
 		CtAnnotation newAnnotation = factory.createAnnotation(newAnnotationType.getReference());
 		element.addAnnotation(newAnnotation);
 		*/
+		
 	}
+	
 
 }

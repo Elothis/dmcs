@@ -40,7 +40,7 @@ public class MappingGenerator {
 		env.setCommentEnabled(true);
 		env.setAutoImports(true);
 		
-		//this.astModel = this.launcher.buildModel();
+		this.astModel = this.launcher.buildModel();
 	}
 	
 	/**
@@ -57,7 +57,8 @@ public class MappingGenerator {
 	}
 	
 	private void identifyMarkerInterfaceMechanisms(String interfaceName) {
-		this.launcher.addProcessor(new MarkerInterfaceProcessor(interfaceName));
-		this.launcher.run();
+		this.astModel.processWith(new MarkerInterfaceProcessor(interfaceName));;
+		//this.launcher.run();
+		this.launcher.prettyprint();
 	}
 }
