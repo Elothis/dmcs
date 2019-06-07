@@ -13,6 +13,7 @@ import java.util.List;
 public class MappingDatabase {
 	
 	private List<IntegrationMechanismMappingDeclaration> imDeclarations;
+	//TODO implement mapping from imDeclaration to concrete model structures
 	
 	public MappingDatabase(List<IntegrationMechanismMappingDeclaration> imDeclarations) {
 		this.imDeclarations = imDeclarations;

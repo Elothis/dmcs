@@ -68,6 +68,7 @@ public class MappingParser implements IMappingParser {
 			});
 			
 			Utility.getAllFilesByExtension(this.path, MAPPING_INSTANTIATION_FILE_EXTENSION).forEach(f -> {
+				//TODO create mapping from imMappingDeclaration to concrete model elements and store them in MappingDatabase
 			});
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
