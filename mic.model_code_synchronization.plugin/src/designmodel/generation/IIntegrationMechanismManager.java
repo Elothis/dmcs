@@ -1,5 +1,5 @@
 package designmodel.generation;
 
-public interface IntegrationMechanismManager {
+public interface IIntegrationMechanismManager {
 	public void generateModel();
 }

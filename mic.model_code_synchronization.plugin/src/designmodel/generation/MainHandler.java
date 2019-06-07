@@ -1,5 +1,7 @@
 package designmodel.generation;
 
+import java.io.IOException;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -9,6 +11,8 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
+
+import mapping.MappingParser;
 
 
 
@@ -35,8 +39,15 @@ public class MainHandler extends AbstractHandler {
 	            IProject project = (IProject)((IAdaptable)projectObj).getAdapter(IProject.class);
 	            String projectPath = project.getLocation().toString();;
 	            
-	            MappingGenerator mappingGenerator = new MappingGenerator(projectPath);
-				mappingGenerator.createMapping("dummy");
+	            MappingParser parser = new MappingParser("C:/Daten/UNI/Masterarbeit_Tool/mappingDirectory");
+				try {
+					parser.parseMappingDirectory();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+	           // MappingGenerator mappingGenerator = new MappingGenerator(projectPath);
+				//mappingGenerator.createMapping("dummy");
 	        }
 		
 				
