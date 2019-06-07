@@ -1,5 +1,11 @@
 package mapping;
 
+/**
+ * Supported keywords defined here to describe the codestructure being mapped to in the mapping files. 
+ *
+ * @author Fabian Glittenberg
+ *
+ */
 public enum Codestructure {
 	CLASS("class"),
 	INTERFACE("interface"),

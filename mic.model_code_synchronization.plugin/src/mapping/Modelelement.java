@@ -1,5 +1,11 @@
 package mapping;
 
+/**
+ * Supported keywords defined here to describe the modelelment being mapped to in the mapping files.
+ * 
+ * @author Fabian Glittenberg
+ *
+ */
 public enum Modelelement {
 	CLASS("class"),
 	ATTRIBUTE("attribute"),
