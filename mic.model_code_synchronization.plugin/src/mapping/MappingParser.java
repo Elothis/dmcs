@@ -45,15 +45,19 @@ public class MappingParser {
 			attributeMappingParsed = false;
 	
 	private String path;
+	private MappingDatabase mappingDatabase;
 	
 	public MappingParser(String path) {
 		this.path = path;
+		this.mappingDatabase = new MappingDatabase();
 	}
 	
 	public void parseMappingDirectory() throws IOException {
 		Utility.getAllFilesByExtension(this.path, INTEGRATION_MECHANISM_MAPPING_DECLARATION_FILE_EXTENSION).forEach(f -> {
 			try {
-				System.out.println(parseIMFile(f));
+				IntegrationMechanismMappingDeclaration imDeclaration = parseIMFile(f);
+				this.mappingDatabase.addIntegrationMechanismDeclaration(imDeclaration);
+				System.out.println(f);
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (ParserException e) {
