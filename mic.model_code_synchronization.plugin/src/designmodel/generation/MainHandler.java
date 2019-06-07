@@ -12,6 +12,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import mapping.IMappingParser;
 import mapping.MappingParser;
 
 
@@ -39,12 +40,8 @@ public class MainHandler extends AbstractHandler {
 	            IProject project = (IProject)((IAdaptable)projectObj).getAdapter(IProject.class);
 	            String projectPath = project.getLocation().toString();;
 	            
-	            MappingParser parser = new MappingParser("C:/Daten/UNI/Masterarbeit_Tool/mappingDirectory");
-				try {
-					parser.parseMappingDirectory();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+	            IMappingParser parser = new MappingParser("C:/Daten/UNI/Masterarbeit_Tool/mappingDirectory");
+				parser.parseMappingDirectory();
 				
 	           // MappingGenerator mappingGenerator = new MappingGenerator(projectPath);
 				//mappingGenerator.createMapping("dummy");

@@ -12,7 +12,7 @@ import util.Utility;
  * @author Fabian Glittenberg
  *
  */
-public class MappingParser {
+public class MappingParser implements IMappingParser {
 	
 	/**
 	 * File extension of the files containing the mapping description of an integration mechanism
@@ -52,22 +52,28 @@ public class MappingParser {
 		this.mappingDatabase = new MappingDatabase();
 	}
 	
-	public void parseMappingDirectory() throws IOException {
-		Utility.getAllFilesByExtension(this.path, INTEGRATION_MECHANISM_MAPPING_DECLARATION_FILE_EXTENSION).forEach(f -> {
-			try {
-				IntegrationMechanismMappingDeclaration imDeclaration = parseIMFile(f);
-				this.mappingDatabase.addIntegrationMechanismDeclaration(imDeclaration);
-				System.out.println(f);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ParserException e) {
-				e.printStackTrace();
-			}
-		});
-		
-		Utility.getAllFilesByExtension(this.path, MAPPING_INSTANTIATION_FILE_EXTENSION).forEach(f -> {
-		});
-		
+	public MappingDatabase parseMappingDirectory() {
+		try {
+			Utility.getAllFilesByExtension(this.path, INTEGRATION_MECHANISM_MAPPING_DECLARATION_FILE_EXTENSION).forEach(f -> {
+				IntegrationMechanismMappingDeclaration imDeclaration;
+				try {
+					imDeclaration = parseIMFile(f);
+					this.mappingDatabase.addIntegrationMechanismDeclaration(imDeclaration);
+					System.out.println(f);
+				} catch (ParserException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			});
+			
+			Utility.getAllFilesByExtension(this.path, MAPPING_INSTANTIATION_FILE_EXTENSION).forEach(f -> {
+			});
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return this.mappingDatabase;
 	}
 	
 	private IntegrationMechanismMappingDeclaration parseIMFile(File f) throws IOException, ParserException {
