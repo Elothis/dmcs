@@ -2,6 +2,8 @@ package designmodel.generation;
 
 import java.io.File;
 
+import mapping.IMappingParser;
+import mapping.MappingDatabase;
 import spoon.Launcher;
 import spoon.compiler.Environment;
 import spoon.reflect.CtModel;
@@ -19,6 +21,8 @@ public class MappingGenerator {
 	private Launcher launcher;
 	private String projectPath;
 	private CtModel astModel;
+	private IMappingParser mappingParser;
+	private MappingDatabase mappingDatabase;
 	
 	public String getDirectoryPath() {
 		return projectPath;
@@ -28,7 +32,7 @@ public class MappingGenerator {
 	 * Constructor, taking the project path of the target Java program as parameter.
 	 * @param projectPath
 	 */
-	public MappingGenerator(String projectPath) {
+	public MappingGenerator(String projectPath, IMappingParser mappingParser) {
 		this.projectPath = projectPath;
 		this.launcher = new Launcher();
 		this.launcher.addInputResource(projectPath);
@@ -41,6 +45,8 @@ public class MappingGenerator {
 		env.setAutoImports(true);
 		
 		this.astModel = this.launcher.buildModel();
+		
+		this.mappingParser = mappingParser;
 	}
 	
 	/**
@@ -49,15 +55,17 @@ public class MappingGenerator {
 	 * of the underlying project.
 	 * @param mappingFileHere
 	 */
-	public void createMapping(String mappingFileHere) {
+	public void createMapping() {
+		this.mappingDatabase = this.mappingParser.parseMappingDirectory();
 		//TODO
-		System.out.println("Parse in mapping file and create mapping");
-		
+		//how to create processors at runtime that identify the codestructures and create mapping that are parsed in at runtime through mapping file?
+		//xtend-classes to write processors at runtime and then instantiate here? (via dependency injection)
+		//create additional processors with xtend for transformations if model gets changed at runtime?
 		identifyMarkerInterfaceMechanisms("State");
 	}
 	
 	private void identifyMarkerInterfaceMechanisms(String interfaceName) {
-		this.astModel.processWith(new MarkerInterfaceProcessor(interfaceName));;
+		this.astModel.processWith(new MarkerInterfaceProcessor(interfaceName));
 		//this.launcher.run();
 		this.launcher.prettyprint();
 	}

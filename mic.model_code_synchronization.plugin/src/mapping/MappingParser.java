@@ -47,6 +47,10 @@ public class MappingParser implements IMappingParser {
 	private String path;
 	private MappingDatabase mappingDatabase;
 	
+	/**
+	 * Constructor instantiating a MappingParser object operating on the specified path as the directory containing the required mapping files.
+	 * @param path to the directory containing mapping files
+	 */
 	public MappingParser(String path) {
 		this.path = path;
 		this.mappingDatabase = new MappingDatabase();
@@ -68,10 +72,12 @@ public class MappingParser implements IMappingParser {
 			});
 			
 			Utility.getAllFilesByExtension(this.path, MAPPING_INSTANTIATION_FILE_EXTENSION).forEach(f -> {
-				//TODO create mapping from imMappingDeclaration to concrete model elements and store them in MappingDatabase
+				//TODO
+				//create mapping from imMappingDeclaration to concrete model elements and store them in MappingDatabase
+				//instantiate spoon-model with java-elements from mapping file
+				//build ecore-design model for integration mechanisms and save mapping from spoon-java-elements to ecore-elements
 			});
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return this.mappingDatabase;
@@ -112,15 +118,21 @@ public class MappingParser implements IMappingParser {
 				break;
 			case CONDITION:
 				if(conditionParsed) {
-					throw new ParserException("Conditionalready parsed! Cannot parse condition twice in same mapping file");
+					throw new ParserException("Condition already parsed! Cannot parse condition twice in same mapping file");
 				}
+				//TODO
+				//implement condition parsing in condition object
+				//condition needs to hold keyword (probably via enum) like 'implements', 'annotated with', etc.
+				//does it need to hold a keyword to what it applies to (like 'codestructure') or does it always apply to the codestructure? <- probably yes?!
+				//target of what the 'implements', 'annotated with' etc. keyword applies to (e.g. Interface XYZ
 				this.conditionParsed = true;
 				break;
 			case ATTRIBUTE_MAPPING:
 				if(attributeMappingParsed) {
 					throw new ParserException("Attribute mapping already parsed! Cannot parse mapping twice in same mapping file");
 				}
-				
+				//TODO
+				//
 				this.attributeMappingParsed = true;
 	
 				break;
