@@ -22,6 +22,10 @@ public class MappingDatabase {
 	public MappingDatabase() {
 		this.imDeclarations = new ArrayList<>();
 	}
+	
+	public List<IntegrationMechanismMappingDeclaration> getIntegrationMechanismDeclarations() {
+		return this.imDeclarations;
+	}
 
 	public boolean addIntegrationMechanismDeclaration(IntegrationMechanismMappingDeclaration imDeclaration) {
 		return this.imDeclarations.add(imDeclaration);
