@@ -125,6 +125,7 @@ public class MappingParser implements IMappingParser {
 				//condition needs to hold keyword (probably via enum) like 'implements', 'annotated with', etc.
 				//does it need to hold a keyword to what it applies to (like 'codestructure') or does it always apply to the codestructure? <- probably yes?!
 				//target of what the 'implements', 'annotated with' etc. keyword applies to (e.g. Interface XYZ
+				
 				this.conditionParsed = true;
 				break;
 			case ATTRIBUTE_MAPPING:
@@ -139,6 +140,11 @@ public class MappingParser implements IMappingParser {
 				default:
 					throw new ParserException("Unknown keyword/element in mapping file");
 			}
+		}
+		
+		//throw exception if codestructure, modelelement or attribute-mapping is missing in .im-file (condition is optional and can be missing)
+		if(!codestructureParsed || !modelelementParsed || !attributeMappingParsed) {
+			throw new ParserException("Uncompletely mapping file! Some necessary fields are missing!");
 		}
 		
 		//reset flags to false after finishing parsing one .im-file
