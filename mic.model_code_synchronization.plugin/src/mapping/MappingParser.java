@@ -92,6 +92,12 @@ public class MappingParser implements IMappingParser {
 		String[] fields = content.split(";");
 		if(fields.length < 3) throw new ParserException("Mapping file does not contain all necessary fields!");
 		
+		//set flags to false
+		this.attributeMappingParsed = false;
+		this.codestructureParsed = false;
+		this.modelelementParsed = false;
+		this.conditionParsed = false;
+		
 		for(int i = 0; i < fields.length; i++) {
 			fields[i] = fields[i].trim();
 			String[] lineElements = fields[i].split(":");	//split line with ":" delimiter between keyword and content
@@ -104,6 +110,9 @@ public class MappingParser implements IMappingParser {
 				}
 				//dispatch the type of codestructure being declared in the mapping file
 				String codestructureName = lineElements[1].trim();
+				if(codestructureName.contentEquals("")) {
+					throw new ParserException("Please provide a codestructure");
+				}
 				imMappingDeclaration.setCodestructure(Codestructure.getCodeStructureFor(codestructureName));
 				this.codestructureParsed = true;
 				break;
@@ -113,6 +122,9 @@ public class MappingParser implements IMappingParser {
 				}
 				//dispatch the type of modelelement being declared in the mapping file
 				String modelelementName = lineElements[1].trim();
+				if(modelelementName.contentEquals("")) {
+					throw new ParserException("Please provide a modelelement");
+				}
 				imMappingDeclaration.setModelelement(Modelelement.getModelelementFor(modelelementName));
 				this.modelelementParsed = true;
 				break;
@@ -146,12 +158,6 @@ public class MappingParser implements IMappingParser {
 		if(!codestructureParsed || !modelelementParsed || !attributeMappingParsed) {
 			throw new ParserException("Uncompletely mapping file! Some necessary fields are missing!");
 		}
-		
-		//reset flags to false after finishing parsing one .im-file
-		this.attributeMappingParsed = false;
-		this.codestructureParsed = false;
-		this.modelelementParsed = false;
-		this.conditionParsed = false;
 		
 		return imMappingDeclaration;
 	}
