@@ -65,7 +65,7 @@ public class IntegrationMechanismMappingDeclaration {
 			sb.append("\nCondition: ").append(getCondition().toString());
 		if(this.getAttributeMapping() != null)
 			sb.append("\nMapping: ").append(getAttributeMapping().toString());
-		sb.append("\n---------------------------------------------------");
+		sb.append("\n---------------------------------------------------\n");
 		return sb.toString();
 	}
 	

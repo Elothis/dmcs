@@ -31,4 +31,14 @@ public class MappingDatabase {
 		return this.imDeclarations.add(imDeclaration);
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		this.imDeclarations.forEach(i -> {
+			sb.append(i.toString());
+		});
+		return sb.toString();
+	}
+
+	
 }
