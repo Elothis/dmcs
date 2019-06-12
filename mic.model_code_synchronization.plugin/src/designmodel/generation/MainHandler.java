@@ -40,7 +40,13 @@ public class MainHandler extends AbstractHandler {
 	            IProject project = (IProject)((IAdaptable)projectObj).getAdapter(IProject.class);
 	            String projectPath = project.getLocation().toString();;
 	            
-	            IMappingParser mappingParser = new MappingParser("C:/Daten/UNI/Masterarbeit_Tool/mappingDirectory");
+	            StringBuilder sb = new StringBuilder();
+	            String mappingDirectoryPath;
+				sb.append(System.getProperty("user.home").replace('\\', '/'))
+				.append('/').append("mappingDirectory");
+				mappingDirectoryPath = sb.toString();
+	            
+	            IMappingParser mappingParser = new MappingParser(mappingDirectoryPath);
 				
 	            MappingGenerator mappingGenerator = new MappingGenerator(projectPath, mappingParser);
 				mappingGenerator.createMapping();

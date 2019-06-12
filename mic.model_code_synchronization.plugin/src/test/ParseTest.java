@@ -1,7 +1,5 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
 import mapping.MappingParser;
@@ -10,7 +8,14 @@ class ParseTest {
 
 	@Test
 	void testParseMappingDirectory() {
-		MappingParser parser = new MappingParser("C:/Daten/UNI/Masterarbeit_Tool/mappingDirectory");
+		
+		 StringBuilder sb = new StringBuilder();
+         String mappingDirectoryPath;
+			sb.append(System.getProperty("user.home").replace('\\', '/'))
+			.append('/').append("mappingDirectory");
+		mappingDirectoryPath = sb.toString();
+		
+		MappingParser parser = new MappingParser(mappingDirectoryPath);
 		System.out.println(parser.parseMappingDirectory());
 	}
 

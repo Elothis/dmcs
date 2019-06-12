@@ -63,7 +63,6 @@ public class MappingParser implements IMappingParser {
 				try {
 					imDeclaration = parseIMFile(f);
 					this.mappingDatabase.addIntegrationMechanismDeclaration(imDeclaration);
-					System.out.println(f);
 				} catch (ParserException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
