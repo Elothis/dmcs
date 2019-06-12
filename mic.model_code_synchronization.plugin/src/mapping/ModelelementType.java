@@ -17,7 +17,7 @@ public enum ModelelementType {
 		this.textRepresentation = textRepresentation;
 	}
 	
-	public static ModelelementType getModelelementFor(String desired) throws ParserException {
+	public static ModelelementType getModelelementTypeFor(String desired) throws ParserException {
 	    for (ModelelementType element : values()) {
 	      if (desired.contentEquals(element.textRepresentation)) {
 	        return element;

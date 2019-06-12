@@ -10,8 +10,8 @@ import mapping.condition.AbstractCondition;
  */
 public class IntegrationMechanismMappingDeclaration {
 	private String name;
-	private Codestructure codestructure;
-	private ModelelementType modelelement;
+	private CodestructureType codestructure;
+	private ModelelementType modelelementType;
 	private AbstractCondition condition;
 	private AttributeMapping attributeMapping;
 	
@@ -19,20 +19,20 @@ public class IntegrationMechanismMappingDeclaration {
 		this.name = name;
 	}
 
-	public Codestructure getCodestructure() {
+	public CodestructureType getCodestructure() {
 		return codestructure;
 	}
 
-	public void setCodestructure(Codestructure codestructure) {
+	public void setCodestructure(CodestructureType codestructure) {
 		this.codestructure = codestructure;
 	}
 
 	public ModelelementType getModelelement() {
-		return modelelement;
+		return modelelementType;
 	}
 
 	public void setModelelement(ModelelementType modelelement) {
-		this.modelelement = modelelement;
+		this.modelelementType = modelelement;
 	}
 
 	public AbstractCondition getCondition() {

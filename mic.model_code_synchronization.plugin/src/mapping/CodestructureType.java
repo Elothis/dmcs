@@ -6,7 +6,7 @@ package mapping;
  * @author Fabian Glittenberg
  *
  */
-public enum Codestructure {
+public enum CodestructureType {
 	CLASS("class"),
 	INTERFACE("interface"),
 	METHOD("method"),
@@ -14,12 +14,12 @@ public enum Codestructure {
 	
 	private String textRepresentation;
 	
-	private Codestructure(String textRepresentation) {
+	private CodestructureType(String textRepresentation) {
 		this.textRepresentation = textRepresentation;
 	}
 
-	public static Codestructure getCodeStructureFor(String desired) throws ParserException {
-	    for (Codestructure codestructure : values()) {
+	public static CodestructureType getCodeStructureTypeFor(String desired) throws ParserException {
+	    for (CodestructureType codestructure : values()) {
 	      if (desired.contentEquals(codestructure.textRepresentation)) {
 	        return codestructure;
 	      }

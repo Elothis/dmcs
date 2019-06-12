@@ -125,7 +125,7 @@ public class MappingParser implements IMappingParser {
 				if(codestructureName.contentEquals("")) {
 					throw new ParserException("Please provide a codestructure");
 				}
-				imMappingDeclaration.setCodestructure(Codestructure.getCodeStructureFor(codestructureName));
+				imMappingDeclaration.setCodestructure(CodestructureType.getCodeStructureTypeFor(codestructureName));
 				this.codestructureParsed = true;
 				break;
 			case MODELELEMENT:
@@ -140,7 +140,7 @@ public class MappingParser implements IMappingParser {
 				if(modelelementName.contentEquals("")) {
 					throw new ParserException("Please provide a modelelement");
 				}
-				imMappingDeclaration.setModelelement(ModelelementType.getModelelementFor(modelelementName));
+				imMappingDeclaration.setModelelement(ModelelementType.getModelelementTypeFor(modelelementName));
 				this.modelelementParsed = true;
 				break;
 			case CONDITION:
