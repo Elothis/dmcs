@@ -1,5 +1,7 @@
 package mapping;
 
+import mapping.condition.AbstractCondition;
+
 /**
  * Class holding all data declared in one mapping file that declares an integration mechanism.
  * 
@@ -9,8 +11,8 @@ package mapping;
 public class IntegrationMechanismMappingDeclaration {
 	private String name;
 	private Codestructure codestructure;
-	private Modelelement modelelement;
-	private Condition condition;
+	private ModelelementType modelelement;
+	private AbstractCondition condition;
 	private AttributeMapping attributeMapping;
 	
 	public IntegrationMechanismMappingDeclaration(String name) {
@@ -25,19 +27,19 @@ public class IntegrationMechanismMappingDeclaration {
 		this.codestructure = codestructure;
 	}
 
-	public Modelelement getModelelement() {
+	public ModelelementType getModelelement() {
 		return modelelement;
 	}
 
-	public void setModelelement(Modelelement modelelement) {
+	public void setModelelement(ModelelementType modelelement) {
 		this.modelelement = modelelement;
 	}
 
-	public Condition getCondition() {
+	public AbstractCondition getCondition() {
 		return condition;
 	}
 
-	public void setCondition(Condition condition) {
+	public void setCondition(AbstractCondition condition) {
 		this.condition = condition;
 	}
 

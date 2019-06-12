@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import mapping.condition.AbstractCondition;
+import mapping.condition.ConditionFactory;
+import mapping.condition.ConditionKeyword;
 import util.Utility;
 
 /**
@@ -82,6 +85,13 @@ public class MappingParser implements IMappingParser {
 		return this.mappingDatabase;
 	}
 	
+	/**
+	 * Parses an integration mechanism file into a respective data object containing all information defined in the .im-file
+	 * @param f file containing definition of one integration mechanism
+	 * @return IntegrationMechanismMappingDeclaration containing all data
+	 * @throws IOException
+	 * @throws ParserException
+	 */
 	private IntegrationMechanismMappingDeclaration parseIMFile(File f) throws IOException, ParserException {
 		String integrationMechanismName = f.getName().split("\\.")[0];
 		IntegrationMechanismMappingDeclaration imMappingDeclaration = new IntegrationMechanismMappingDeclaration(integrationMechanismName);
@@ -130,18 +140,25 @@ public class MappingParser implements IMappingParser {
 				if(modelelementName.contentEquals("")) {
 					throw new ParserException("Please provide a modelelement");
 				}
-				imMappingDeclaration.setModelelement(Modelelement.getModelelementFor(modelelementName));
+				imMappingDeclaration.setModelelement(ModelelementType.getModelelementFor(modelelementName));
 				this.modelelementParsed = true;
 				break;
 			case CONDITION:
 				if(conditionParsed) {
 					throw new ParserException("Condition already parsed! Cannot parse condition twice in same mapping file");
 				}
-				//TODO
-				//implement condition parsing in condition object
-				//condition needs to hold keyword (probably via enum) like 'implements', 'annotated with', etc.
-				//does it need to hold a keyword to what it applies to (like 'codestructure') or does it always apply to the codestructure? <- probably yes?!
-				//target of what the 'implements', 'annotated with' etc. keyword applies to (e.g. Interface XYZ)
+				if(lineElements.length < 2 ) {
+					throw new ParserException("Please provide a condition");
+				}
+				String[] conditionDefinition = lineElements[1].trim().split(" ");
+				if(conditionDefinition.length < 2) {
+					throw new ParserException("Please provide a target-element the condition shall get evaluated against in addition to the keyword");
+				}
+
+				AbstractCondition condition = ConditionFactory.createCondition(ConditionKeyword.getConditionKeywordFor(conditionDefinition[0]), conditionDefinition[1]);
+				imMappingDeclaration.setCondition(condition);
+				
+				//TODO support list of conditions separated by '&'
 				
 				this.conditionParsed = true;
 				break;

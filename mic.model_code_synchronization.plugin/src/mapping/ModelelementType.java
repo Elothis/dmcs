@@ -6,19 +6,19 @@ package mapping;
  * @author Fabian Glittenberg
  *
  */
-public enum Modelelement {
+public enum ModelelementType {
 	CLASS("class"),
 	ATTRIBUTE("attribute"),
 	REFERENCE("reference");
 	
 	private String textRepresentation;
 	
-	private Modelelement(String textRepresentation) {
+	private ModelelementType(String textRepresentation) {
 		this.textRepresentation = textRepresentation;
 	}
 	
-	public static Modelelement getModelelementFor(String desired) throws ParserException {
-	    for (Modelelement element : values()) {
+	public static ModelelementType getModelelementFor(String desired) throws ParserException {
+	    for (ModelelementType element : values()) {
 	      if (desired.contentEquals(element.textRepresentation)) {
 	        return element;
 	      }
