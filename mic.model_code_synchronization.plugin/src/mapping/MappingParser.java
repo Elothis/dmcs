@@ -109,6 +109,9 @@ public class MappingParser implements IMappingParser {
 					throw new ParserException("Codestructure already parsed! Cannot parse codestructure twice in same mapping file");
 				}
 				//dispatch the type of codestructure being declared in the mapping file
+				if(lineElements.length < 2 ) {
+					throw new ParserException("Please provide a codestructure");
+				}
 				String codestructureName = lineElements[1].trim();
 				if(codestructureName.contentEquals("")) {
 					throw new ParserException("Please provide a codestructure");
@@ -121,6 +124,9 @@ public class MappingParser implements IMappingParser {
 					throw new ParserException("Modelelement already parsed! Cannot parse modelelement twice in same mapping file");
 				}
 				//dispatch the type of modelelement being declared in the mapping file
+				if(lineElements.length < 2 ) {
+					throw new ParserException("Please provide a modelelement");
+				}
 				String modelelementName = lineElements[1].trim();
 				if(modelelementName.contentEquals("")) {
 					throw new ParserException("Please provide a modelelement");
@@ -136,7 +142,7 @@ public class MappingParser implements IMappingParser {
 				//implement condition parsing in condition object
 				//condition needs to hold keyword (probably via enum) like 'implements', 'annotated with', etc.
 				//does it need to hold a keyword to what it applies to (like 'codestructure') or does it always apply to the codestructure? <- probably yes?!
-				//target of what the 'implements', 'annotated with' etc. keyword applies to (e.g. Interface XYZ
+				//target of what the 'implements', 'annotated with' etc. keyword applies to (e.g. Interface XYZ)
 				
 				this.conditionParsed = true;
 				break;
