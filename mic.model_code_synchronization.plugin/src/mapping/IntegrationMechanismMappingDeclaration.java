@@ -14,7 +14,7 @@ import mapping.condition.Condition;
  */
 public class IntegrationMechanismMappingDeclaration {
 	private String name;
-	private CodestructureType codestructure;
+	private CodestructureType codestructureType;
 	private ModelelementType modelelementType;
 	private Condition condition;
 	private List<MappedDesignmodelElement> attributeMappings;
@@ -24,20 +24,20 @@ public class IntegrationMechanismMappingDeclaration {
 		this.attributeMappings = new ArrayList<>();
 	}
 
-	public CodestructureType getCodestructure() {
-		return codestructure;
+	public CodestructureType getCodestructureType() {
+		return codestructureType;
 	}
 
-	public void setCodestructure(CodestructureType codestructure) {
-		this.codestructure = codestructure;
+	public void setCodestructure(CodestructureType codestructureType) {
+		this.codestructureType = codestructureType;
 	}
 
-	public ModelelementType getModelelement() {
+	public ModelelementType getModelelementType() {
 		return modelelementType;
 	}
 
-	public void setModelelement(ModelelementType modelelement) {
-		this.modelelementType = modelelement;
+	public void setModelelementType(ModelelementType modelelementType) {
+		this.modelelementType = modelelementType;
 	}
 
 	public Condition getCondition() {
@@ -64,10 +64,10 @@ public class IntegrationMechanismMappingDeclaration {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Name: ").append(this.name);
-		if(this.getCodestructure() != null)
-			sb.append("\nCodestructure: ").append(getCodestructure().toString());
-		if(this.getModelelement() != null)
-			sb.append("\nModelelement: ").append(getModelelement().toString());
+		if(this.getCodestructureType() != null)
+			sb.append("\nCodestructure: ").append(getCodestructureType().toString());
+		if(this.getModelelementType() != null)
+			sb.append("\nModelelement: ").append(getModelelementType().toString());
 		if(this.getCondition() != null)
 			sb.append("\nCondition: ").append(getCondition().toString());
 		if(this.getAttributeMappings() != null)

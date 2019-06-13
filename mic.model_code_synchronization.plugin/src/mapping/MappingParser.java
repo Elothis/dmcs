@@ -144,7 +144,7 @@ public class MappingParser implements IMappingParser {
 				if(modelelementName.contentEquals("")) {
 					throw new ParserException("Please provide a modelelement");
 				}
-				imMappingDeclaration.setModelelement(ModelelementType.getModelelementTypeFor(modelelementName));
+				imMappingDeclaration.setModelelementType(ModelelementType.getModelelementTypeFor(modelelementName));
 				this.modelelementParsed = true;
 				break;
 			case CONDITION:
@@ -170,6 +170,9 @@ public class MappingParser implements IMappingParser {
 				if(attributeMappingParsed) {
 					throw new ParserException("Attribute mapping already parsed! Cannot parse mapping twice in same mapping file");
 				}
+				if(!codestructureParsed || !modelelementParsed) {
+					throw new ParserException("Please provide the codestructure and modelelement the mapping refers to first");
+				}
 				
 				if(lineElements.length < 2 ) {
 					throw new ParserException("Please provide an attribute mapping");
@@ -179,8 +182,8 @@ public class MappingParser implements IMappingParser {
 				for(String amd: attributeMappingDefinitions) {
 					amd = amd.trim();
 					String[] assignmentValues = amd.split("=");
-					MappedCodeElement mce = MappedCodeElementFactory.createMappedCodeElement(assignmentValues[1]);
-					MappedDesignmodelElement mde = MappedDesignmodelElementFactory.createMappedDesignmodelElement(assignmentValues[0], mce);
+					MappedCodeElement mce = MappedCodeElementFactory.createMappedCodeElement(assignmentValues[1], imMappingDeclaration.getCodestructureType());
+					MappedDesignmodelElement mde = MappedDesignmodelElementFactory.createMappedDesignmodelElement(assignmentValues[0], imMappingDeclaration.getModelelementType(), mce);
 					imMappingDeclaration.getAttributeMappings().add(mde);
 				}
 				
