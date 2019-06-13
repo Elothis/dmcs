@@ -11,7 +11,8 @@ import mapping.ParserException;
 public enum ConditionKeyword {
 	NONE(""),
 	IMPLEMENTS("implements"),
-	ANNOTATED_WITH("annotatedWith");
+	ANNOTATED_WITH("annotatedWith"),
+	HAS_NAME_OF("hasNameOf");
 	
 	private String textRepresentation;
 	

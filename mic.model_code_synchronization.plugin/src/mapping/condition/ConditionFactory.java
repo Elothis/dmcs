@@ -23,6 +23,9 @@ public class ConditionFactory {
 		case ANNOTATED_WITH:
 			condition = new AnnotatedWithCondition(targetElement);
 			break;
+		case HAS_NAME_OF:
+			condition = new HasNameOfCondition(targetElement);
+			break;
 			default:
 				throw new IllegalArgumentException("Unknown ConditionKeyword provided for factory class");
 		}

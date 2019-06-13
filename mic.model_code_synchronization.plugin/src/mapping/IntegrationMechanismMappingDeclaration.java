@@ -1,5 +1,6 @@
 package mapping;
 
+import mapping.attribute_mapping.AttributeMapping;
 import mapping.condition.AbstractCondition;
 
 /**
