@@ -11,7 +11,6 @@ import mapping.attribute_mapping.MappedDesignmodelElementFactory;
 import mapping.condition.Condition;
 import mapping.condition.ConditionFactory;
 import mapping.condition.ConditionKeyword;
-import mic.model_code_synchronization.mapping_metamodel.Mapping_metamodelFactory;
 import util.Utility;
 
 /**
