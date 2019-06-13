@@ -4,9 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import mapping.condition.AbstractCondition;
+import mapping.attribute_mapping.MappedCodeElement;
+import mapping.attribute_mapping.MappedCodeElementFactory;
+import mapping.attribute_mapping.MappedDesignmodelElement;
+import mapping.attribute_mapping.MappedDesignmodelElementFactory;
+import mapping.condition.Condition;
 import mapping.condition.ConditionFactory;
 import mapping.condition.ConditionKeyword;
+import mic.model_code_synchronization.mapping_metamodel.Mapping_metamodelFactory;
 import util.Utility;
 
 /**
@@ -155,7 +160,7 @@ public class MappingParser implements IMappingParser {
 					throw new ParserException("Please provide a target-element the condition shall get evaluated against in addition to the keyword");
 				}
 
-				AbstractCondition condition = ConditionFactory.createCondition(ConditionKeyword.getConditionKeywordFor(conditionDefinition[0]), conditionDefinition[1]);
+				Condition condition = ConditionFactory.createCondition(ConditionKeyword.getConditionKeywordFor(conditionDefinition[0]), conditionDefinition[1]);
 				imMappingDeclaration.setCondition(condition);
 				
 				//TODO support list of conditions separated by '&'
@@ -166,8 +171,20 @@ public class MappingParser implements IMappingParser {
 				if(attributeMappingParsed) {
 					throw new ParserException("Attribute mapping already parsed! Cannot parse mapping twice in same mapping file");
 				}
-				//TODO
-				//
+				
+				if(lineElements.length < 2 ) {
+					throw new ParserException("Please provide an attribute mapping");
+				}
+				
+				String[] attributeMappingDefinitions = lineElements[1].trim().split("&");
+				for(String amd: attributeMappingDefinitions) {
+					amd = amd.trim();
+					String[] assignmentValues = amd.split("=");
+					MappedCodeElement mce = MappedCodeElementFactory.createMappedCodeElement(assignmentValues[1]);
+					MappedDesignmodelElement mde = MappedDesignmodelElementFactory.createMappedDesignmodelElement(assignmentValues[0], mce);
+					imMappingDeclaration.getAttributeMappings().add(mde);
+				}
+				
 				this.attributeMappingParsed = true;
 	
 				break;
@@ -176,8 +193,8 @@ public class MappingParser implements IMappingParser {
 			}
 		}
 		
-		//throw exception if codestructure, modelelement or attribute-mapping is missing in .im-file (condition is optional and can be missing)
-		if(!codestructureParsed || !modelelementParsed || !attributeMappingParsed) {
+		//throw exception if one element is missing
+		if(!codestructureParsed || !modelelementParsed || !conditionParsed || !attributeMappingParsed) {
 			throw new ParserException("Uncompletely mapping file! Some necessary fields are missing!");
 		}
 		

@@ -7,7 +7,7 @@ package mapping.condition;
  * @author Fabian Glittenberg
  *
  */
-public class ImplementedInterfaceCondition extends AbstractCondition {
+public class ImplementedInterfaceCondition extends Condition {
 
 	public ImplementedInterfaceCondition(String targetElement) {
 		super(targetElement);

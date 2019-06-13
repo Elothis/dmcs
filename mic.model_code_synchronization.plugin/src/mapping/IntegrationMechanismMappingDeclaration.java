@@ -1,7 +1,10 @@
 package mapping;
 
-import mapping.attribute_mapping.AttributeMapping;
-import mapping.condition.AbstractCondition;
+import java.util.ArrayList;
+import java.util.List;
+
+import mapping.attribute_mapping.MappedDesignmodelElement;
+import mapping.condition.Condition;
 
 /**
  * Class holding all data declared in one mapping file that declares an integration mechanism.
@@ -13,11 +16,12 @@ public class IntegrationMechanismMappingDeclaration {
 	private String name;
 	private CodestructureType codestructure;
 	private ModelelementType modelelementType;
-	private AbstractCondition condition;
-	private AttributeMapping attributeMapping;
+	private Condition condition;
+	private List<MappedDesignmodelElement> attributeMappings;
 	
 	public IntegrationMechanismMappingDeclaration(String name) {
 		this.name = name;
+		this.attributeMappings = new ArrayList<>();
 	}
 
 	public CodestructureType getCodestructure() {
@@ -36,20 +40,20 @@ public class IntegrationMechanismMappingDeclaration {
 		this.modelelementType = modelelement;
 	}
 
-	public AbstractCondition getCondition() {
+	public Condition getCondition() {
 		return condition;
 	}
 
-	public void setCondition(AbstractCondition condition) {
+	public void setCondition(Condition condition) {
 		this.condition = condition;
 	}
 
-	public AttributeMapping getAttributeMapping() {
-		return attributeMapping;
+	public List<MappedDesignmodelElement> getAttributeMappings() {
+		return this.attributeMappings;
 	}
 
-	public void setAttributeMapping(AttributeMapping attributeMapping) {
-		this.attributeMapping = attributeMapping;
+	public void setAttributeMappings(List<MappedDesignmodelElement> attributeMappings) {
+		this.attributeMappings = attributeMappings;
 	}
 
 	public String getName() {
@@ -66,8 +70,8 @@ public class IntegrationMechanismMappingDeclaration {
 			sb.append("\nModelelement: ").append(getModelelement().toString());
 		if(this.getCondition() != null)
 			sb.append("\nCondition: ").append(getCondition().toString());
-		if(this.getAttributeMapping() != null)
-			sb.append("\nMapping: ").append(getAttributeMapping().toString());
+		if(this.getAttributeMappings() != null)
+			sb.append("\nMapping: ").append(getAttributeMappings().toString());
 		sb.append("\n---------------------------------------------------\n");
 		return sb.toString();
 	}

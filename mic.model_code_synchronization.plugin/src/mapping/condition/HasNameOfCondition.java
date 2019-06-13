@@ -1,6 +1,6 @@
 package mapping.condition;
 
-public class HasNameOfCondition extends AbstractCondition {
+public class HasNameOfCondition extends Condition {
 
 	public HasNameOfCondition(String targetElement) {
 		super(targetElement);

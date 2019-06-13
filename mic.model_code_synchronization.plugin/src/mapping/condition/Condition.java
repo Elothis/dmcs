@@ -1,6 +1,6 @@
 package mapping.condition;
 
-public abstract class AbstractCondition {
+public abstract class Condition {
 	//TODO until now only as string, has to be dispatched to actual element
 	private String targetElement;
 	
@@ -12,7 +12,7 @@ public abstract class AbstractCondition {
 		this.targetElement = targetElement;
 	}
 
-	public AbstractCondition(String targetElement) {
+	public Condition(String targetElement) {
 		this.targetElement = targetElement;
 	}
 }

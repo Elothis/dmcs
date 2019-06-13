@@ -13,8 +13,8 @@ public class ConditionFactory {
 	 * @param targetElement
 	 * @return concrete condition object respective to the specified type of condition by the ConditionKeyword
 	 */
-	public static AbstractCondition createCondition(ConditionKeyword keyword, String targetElement) {
-		AbstractCondition condition;
+	public static Condition createCondition(ConditionKeyword keyword, String targetElement) {
+		Condition condition;
 		
 		switch (keyword) {
 		case IMPLEMENTS:

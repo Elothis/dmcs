@@ -7,7 +7,7 @@ package mapping.condition;
  * @author Fabian Glittenberg
  *
  */
-public class AnnotatedWithCondition extends AbstractCondition {
+public class AnnotatedWithCondition extends Condition {
 
 	public AnnotatedWithCondition(String targetElement) {
 		super(targetElement);
