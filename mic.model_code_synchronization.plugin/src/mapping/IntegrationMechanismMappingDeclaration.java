@@ -70,7 +70,9 @@ public class IntegrationMechanismMappingDeclaration {
 			sb.append("\nModelelement: ").append(getModelelementType().toString());
 		if(this.getCondition() != null)
 			sb.append("\nCondition: ").append(getCondition().toString());
-		if(this.getAttributeMappings() != null)
+		if(this.getAttributeMappings() != null) {
+			
+		}
 			sb.append("\nMapping: ").append(getAttributeMappings().toString());
 		sb.append("\n---------------------------------------------------\n");
 		return sb.toString();

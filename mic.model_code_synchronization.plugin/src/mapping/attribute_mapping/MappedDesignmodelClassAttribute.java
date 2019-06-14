@@ -29,5 +29,11 @@ public class MappedDesignmodelClassAttribute extends MappedDesignmodelElement {
 	public void setMappedValue(String mappedValue) {
 		this.mappedValue = mappedValue;
 	}
+
+	@Override
+	public String toString() {
+		return "MappedDesignmodelClassAttribute [holdingClassName=" + holdingClassName + ", attributeName="
+				+ attributeName + ", mappedValue=" + mappedValue + "]";
+	}
 	
 }
