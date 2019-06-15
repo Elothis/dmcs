@@ -2,14 +2,12 @@ package mapping.attribute_mapping;
 
 public class MappedCodeAnnotation extends MappedCodeElement {
 
-	private MappedCodeAnnotationParameter annotationParameter;
-
-	public MappedCodeAnnotation() {
-		super();
+	public MappedCodeAnnotation(String targetValue) {
+		super(targetValue);
 	}
 
 	@Override
 	public String toString() {
-		return "CodeAnnotation '" + this.getName() + "' with parameter (" + annotationParameter + ")";
+		return "Mapped to an annotation in the code with the target value '" + this.getTargetValue() + "'";
 	}
 }

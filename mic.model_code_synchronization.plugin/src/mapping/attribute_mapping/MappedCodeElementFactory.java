@@ -15,19 +15,19 @@ public class MappedCodeElementFactory {
 	 * Takes the right-hand-side String of the attribute-mapping assignment from the "mapping:" element in the mapping-file and the CodestructureType
 	 * it refers to as parameters.
 	 * 
-	 * @param mappedCodeElement Right-hand-side String of the attribute-mapping-assignment from "mapping:"-element in the .im-file
+	 * @param mappedCodeElementTargetValue Right-hand-side String of the attribute-mapping-assignment from "mapping:"-element in the .im-file
 	 * @param codestructureType CodestructureType it refers to
 	 * @return concrete instance of MappedCodeElement
 	 * @throws ParserException 
 	 */
-	public static MappedCodeElement createMappedCodeElement(String mappedCodeElement, CodestructureType codestructureType) throws ParserException {
+	public static MappedCodeElement createMappedCodeElement(String mappedCodeElementTargetValue, CodestructureType codestructureType) throws ParserException {
 		//TODO parse right hand side of mapping attribute assignment here
 		// e.g. mapping: modelelement.attribute(name) = |||||codestructure.name|||||;
 		//trim off the initial "codestructure."
-		if(mappedCodeElement.startsWith("codestructure.")) {
-			mappedCodeElement = mappedCodeElement.split("codestructure.")[1];
+		if(mappedCodeElementTargetValue.startsWith("codestructure.")) {
+			mappedCodeElementTargetValue = mappedCodeElementTargetValue.split("codestructure.")[1];
 		}
-		if (mappedCodeElement.contentEquals("")) {
+		if (mappedCodeElementTargetValue.contentEquals("")) {
 			throw new ParserException("Right hand side of an attribute-mapping cannot be empty");
 		}
 		switch (codestructureType) {
@@ -35,9 +35,9 @@ public class MappedCodeElementFactory {
 			
 			break;
 		case CLASS:
-			return new MappedCodeClass();
+			return new MappedCodeClass(mappedCodeElementTargetValue);
 		case INTERFACE:
-			return new MappedCodeInterface();
+			return new MappedCodeInterface(mappedCodeElementTargetValue);
 		case METHOD:
 			break;
 		default:
@@ -45,6 +45,6 @@ public class MappedCodeElementFactory {
 		
 		}
 		
-		return new MappedCodeClass();
+		return new MappedCodeClass(mappedCodeElementTargetValue);
 	}
 }
