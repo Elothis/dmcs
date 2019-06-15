@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mapping.condition.Condition;
+import util.Utility;
 
 /**
  * Class holding all data declared in one mapping file that declares an integration mechanism.
@@ -70,9 +71,8 @@ public class IntegrationMechanismMappingDeclaration {
 		if(this.getCondition() != null)
 			sb.append("\nCondition: ").append(getCondition().toString());
 		if(this.getAttributeMappings() != null) {
-			
+			sb.append("\nAttribute mappings: ").append(Utility.mapToString(getAttributeMappings()));
 		}
-			sb.append("\nMapping: ").append(getAttributeMappings().toString());
 		sb.append("\n---------------------------------------------------\n");
 		return sb.toString();
 	}

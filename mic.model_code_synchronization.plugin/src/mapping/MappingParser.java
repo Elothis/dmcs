@@ -190,7 +190,7 @@ public class MappingParser implements IMappingParser {
 //					//create MappedDesignmodelElement, by parsing the left hand side of the assignment and providing it with previously parsed MappedCodeElement
 //					MappedDesignmodelElement mde = MappedDesignmodelElementFactory.createMappedDesignmodelElement(assignmentValues[0], imMappingDeclaration.getModelelementType(), mce);
 //					imMappingDeclaration.getAttributeMappings().add(mde);
-					imMappingDeclaration.getAttributeMappings().put(assignmentValues[0], assignmentValues[1]);
+					imMappingDeclaration.getAttributeMappings().put(assignmentValues[0].trim(), assignmentValues[1].trim());
 					
 				}
 				
