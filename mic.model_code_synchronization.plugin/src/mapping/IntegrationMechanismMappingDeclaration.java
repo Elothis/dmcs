@@ -1,9 +1,8 @@
 package mapping;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import mapping.attribute_mapping.MappedDesignmodelElement;
 import mapping.condition.Condition;
 
 /**
@@ -17,11 +16,11 @@ public class IntegrationMechanismMappingDeclaration {
 	private CodestructureType codestructureType;
 	private ModelelementType modelelementType;
 	private Condition condition;
-	private List<MappedDesignmodelElement> attributeMappings;
+	private Map<String, String> attributeMappings;
 	
 	public IntegrationMechanismMappingDeclaration(String name) {
 		this.name = name;
-		this.attributeMappings = new ArrayList<>();
+		this.attributeMappings = new HashMap<>();
 	}
 
 	public CodestructureType getCodestructureType() {
@@ -48,11 +47,11 @@ public class IntegrationMechanismMappingDeclaration {
 		this.condition = condition;
 	}
 
-	public List<MappedDesignmodelElement> getAttributeMappings() {
+	public Map<String, String> getAttributeMappings() {
 		return this.attributeMappings;
 	}
 
-	public void setAttributeMappings(List<MappedDesignmodelElement> attributeMappings) {
+	public void setAttributeMappings(Map<String, String> attributeMappings) {
 		this.attributeMappings = attributeMappings;
 	}
 

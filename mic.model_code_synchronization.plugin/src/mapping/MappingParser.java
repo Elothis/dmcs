@@ -185,11 +185,13 @@ public class MappingParser implements IMappingParser {
 					amd = amd.trim();
 					//split assignments left (modelelement side) and right (codestructure side)
 					String[] assignmentValues = amd.split("=");
-					//first create MappedCodeElement by parsing the right hand side of the assignment, since it is held in the following MappedDesignmodelElement
-					MappedCodeElement mce = MappedCodeElementFactory.createMappedCodeElement(assignmentValues[1], imMappingDeclaration.getCodestructureType());
-					//create MappedDesignmodelElement, by parsing the left hand side of the assignment and providing it with previously parsed MappedCodeElement
-					MappedDesignmodelElement mde = MappedDesignmodelElementFactory.createMappedDesignmodelElement(assignmentValues[0], imMappingDeclaration.getModelelementType(), mce);
-					imMappingDeclaration.getAttributeMappings().add(mde);
+//					//first create MappedCodeElement by parsing the right hand side of the assignment, since it is held in the following MappedDesignmodelElement
+//					MappedCodeElement mce = MappedCodeElementFactory.createMappedCodeElement(assignmentValues[1], imMappingDeclaration.getCodestructureType());
+//					//create MappedDesignmodelElement, by parsing the left hand side of the assignment and providing it with previously parsed MappedCodeElement
+//					MappedDesignmodelElement mde = MappedDesignmodelElementFactory.createMappedDesignmodelElement(assignmentValues[0], imMappingDeclaration.getModelelementType(), mce);
+//					imMappingDeclaration.getAttributeMappings().add(mde);
+					imMappingDeclaration.getAttributeMappings().put(assignmentValues[0], assignmentValues[1]);
+					
 				}
 				
 				this.attributeMappingParsed = true;
