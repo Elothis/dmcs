@@ -2,8 +2,8 @@ package mapping.attribute_mapping;
 
 public class MappedCodeClass extends MappedCodeElement {
 
-	public MappedCodeClass(String name) {
-		super(name);
+	public MappedCodeClass() {
+		super();
 	}
 
 	@Override

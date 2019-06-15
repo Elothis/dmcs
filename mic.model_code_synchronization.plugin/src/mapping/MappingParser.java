@@ -86,6 +86,7 @@ public class MappingParser implements IMappingParser {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		return this.mappingDatabase;
 	}
 	

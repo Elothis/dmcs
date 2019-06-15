@@ -11,8 +11,7 @@ public abstract class MappedCodeElement {
 		this.name = name;
 	}
 
-	public MappedCodeElement(String name) {
+	public MappedCodeElement() {
 		super();
-		this.name = name;
 	}
 }

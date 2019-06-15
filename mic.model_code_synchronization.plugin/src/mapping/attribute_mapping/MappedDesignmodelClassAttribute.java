@@ -33,7 +33,7 @@ public class MappedDesignmodelClassAttribute extends MappedDesignmodelElement {
 	@Override
 	public String toString() {
 		return "MappedDesignmodelClassAttribute [holdingClassName=" + holdingClassName + ", attributeName="
-				+ attributeName + ", mappedValue=" + mappedValue + "]";
+				+ attributeName + ", mappedValue=" + mappedValue  + ", mappedCodeElement=" + this.getMappedCodeElement() + "]";
 	}
 	
 }

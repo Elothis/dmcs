@@ -2,7 +2,6 @@ package designmodel.generation;
 
 import java.util.Set;
 
-import mic.model_code_synchronization.designmodel.DesignmodelFactory;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
