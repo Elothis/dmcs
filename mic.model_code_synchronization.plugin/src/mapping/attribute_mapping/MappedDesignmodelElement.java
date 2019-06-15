@@ -1,7 +1,8 @@
 package mapping.attribute_mapping;
 
 /**
- * Abstract super class representing one attribute-mapping from designmodel element to code element. Holding the mapped code element, thus making this a complete mapping. 
+ * Abstract super class representing one attribute-mapping from designmodel element to code element.
+ * Holding the mapped code element and the designmodel-element's targetValue the code element is mapped to, thus making this a complete mapping. 
  * 
  * @author Fabian Glittenberg
  *

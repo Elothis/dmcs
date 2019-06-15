@@ -1,5 +1,13 @@
 package mapping.attribute_mapping;
 
+
+/**
+ * Abstract super class representing one attribute-mapping code element.
+ * Belongs to one MappedDesignmodelElement and holds the targetValue of the concrete code element that gets assigned to the respective MappedDesignmodelElement.
+ * 
+ * @author Fabian Glittenberg
+ *
+ */
 public abstract class MappedCodeElement {
 	/**
 	 * Concrete value the modelelement gets assigned from the codestrucuture.
