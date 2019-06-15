@@ -32,13 +32,14 @@ public class MappedCodeElementFactory {
 		}
 		switch (codestructureType) {
 		case ANNOTATION:
-			
+			//TODO
 			break;
 		case CLASS:
 			return new MappedCodeClass(mappedCodeElementTargetValue);
 		case INTERFACE:
 			return new MappedCodeInterface(mappedCodeElementTargetValue);
 		case METHOD:
+			//TODO
 			break;
 		default:
 			break;

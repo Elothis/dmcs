@@ -18,10 +18,4 @@ class ParseTest {
 		MappingParser parser = new MappingParser(mappingDirectoryPath);
 		System.out.println(parser.parseMappingDirectory());
 	}
-
-	@Test
-	void testStuff() {
-		String blub = "codestructure.name";
-		System.out.println(blub.split("codestructure.")[1]);
-	}
 }

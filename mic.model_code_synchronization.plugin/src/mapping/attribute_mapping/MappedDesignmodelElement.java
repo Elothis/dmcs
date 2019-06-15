@@ -8,6 +8,7 @@ package mapping.attribute_mapping;
  */
 public abstract class MappedDesignmodelElement {
 	private MappedCodeElement mappedCodeElement;
+	private String targetValue;
 
 	public MappedCodeElement getMappedCodeElement() {
 		return mappedCodeElement;
@@ -17,7 +18,16 @@ public abstract class MappedDesignmodelElement {
 		this.mappedCodeElement = mappedCodeElement;
 	}
 
-	public MappedDesignmodelElement(MappedCodeElement mappedCodeElement) {
+	public String getTargetValue() {
+		return targetValue;
+	}
+
+	public void setTargetValue(String targetValue) {
+		this.targetValue = targetValue;
+	}
+
+	public MappedDesignmodelElement(String targetValue, MappedCodeElement mappedCodeElement) {
+		this.targetValue = targetValue;
 		this.mappedCodeElement = mappedCodeElement;
 	}
 	
