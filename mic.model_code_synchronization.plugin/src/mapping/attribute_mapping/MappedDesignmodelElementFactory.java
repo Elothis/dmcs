@@ -35,11 +35,13 @@ public class MappedDesignmodelElementFactory {
 		
 		switch (modelelementType) {
 		case ATTRIBUTE:
+			//TODO
 			break;
 		case CLASS:
 			return new MappedDesignmodelClass(mappedDesignmodelElementTargetValue, mappedCodeElement);
 			
 		case REFERENCE:
+			//TODO
 			break;
 		default:
 			break;
