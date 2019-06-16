@@ -19,8 +19,8 @@ public abstract class MappedCodeElement {
 		return targetValue;
 	}
 
-	public void setTargetValue(String name) {
-		this.targetValue = name;
+	public void setTargetValue(String targetValue) {
+		this.targetValue = targetValue;
 	}
 
 	public MappedCodeElement(String targetValue) {
