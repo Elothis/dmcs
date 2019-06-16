@@ -1,5 +1,13 @@
 package mapping.attribute_mapping;
 
+/**
+ * Representing the mapping to the value of a method in the code
+ * OR
+ * the mapping to the value of an annotation attached to a method in the code if this.annotation is != NULL
+ * 
+ * @author Fabian Glittenberg
+ *
+ */
 public class MappedCodeMethod extends MappedCodeElement {
 	
 	

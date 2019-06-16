@@ -1,5 +1,11 @@
 package mapping.attribute_mapping;
 
+/**
+ * Representing the mapping to the value of an annotation in the code.
+ * 
+ * @author Fabian Glittenberg
+ *
+ */
 public class MappedCodeAnnotation extends MappedCodeElement {
 	
 

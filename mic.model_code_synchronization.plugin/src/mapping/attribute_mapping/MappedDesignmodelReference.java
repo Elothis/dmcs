@@ -1,5 +1,13 @@
 package mapping.attribute_mapping;
 
+/**
+ * Representing the mapping to a value of a reference in the design model
+ * OR
+ * the mapping to a value of the target class of a reference in the design model, if this.target != NULL
+ * 
+ * @author Fabian Glittenberg
+ *
+ */
 public class MappedDesignmodelReference extends MappedDesignmodelElement {
 	
 	/**
