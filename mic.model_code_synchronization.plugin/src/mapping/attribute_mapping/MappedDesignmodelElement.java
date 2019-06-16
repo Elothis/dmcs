@@ -11,6 +11,8 @@ public abstract class MappedDesignmodelElement {
 	private MappedCodeElement mappedCodeElement;
 	private String targetValue;
 
+	//TODO maybe add 'private MappedDesignModelelement subElement' that is either NULL or not, depending on whether the targetValue is from directly this object or a subElement
+	
 	public MappedCodeElement getMappedCodeElement() {
 		return mappedCodeElement;
 	}

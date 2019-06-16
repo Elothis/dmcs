@@ -14,6 +14,8 @@ public abstract class MappedCodeElement {
 	 * E.g.: "name" from codestructure.name in a mapping statement like "mapping: modelelement.attribute(name) = codestructure.name"
 	 */
 	private String targetValue;
+	
+	//TODO maybe add 'private MappedCodeElement subElement' that is either NULL or not, depending on whether the targetValue is from directly this object or a subElement
 
 	public String getTargetValue() {
 		return targetValue;
