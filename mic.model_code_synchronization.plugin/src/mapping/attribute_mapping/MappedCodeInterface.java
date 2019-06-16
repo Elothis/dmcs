@@ -8,6 +8,6 @@ public class MappedCodeInterface extends MappedCodeElement {
 
 	@Override
 	public String toString() {
-		return "Mapped to an interface in the code with the target value '" + this.getTargetValue() + "'";
+		return "Mapped to the '" + this.getTargetValue() + "' of an interface in the code.";
 	}
 }

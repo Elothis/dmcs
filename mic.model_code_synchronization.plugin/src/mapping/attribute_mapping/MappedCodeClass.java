@@ -8,7 +8,7 @@ public class MappedCodeClass extends MappedCodeElement {
 
 	@Override
 	public String toString() {
-		return "Mapped to a class in the code with the target value '" + this.getTargetValue() + "'";
+		return "Mapped to the '" + this.getTargetValue() + "' of a class in the code.";
 	}
 
 }

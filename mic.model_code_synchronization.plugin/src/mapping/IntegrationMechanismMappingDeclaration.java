@@ -1,6 +1,7 @@
 package mapping;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import mapping.attribute_mapping.MappedDesignmodelElement;
@@ -71,9 +72,13 @@ public class IntegrationMechanismMappingDeclaration {
 		if(this.getCondition() != null)
 			sb.append("\nCondition: ").append(getCondition().toString());
 		if(this.getAttributeMappings() != null) {
-			
-		}
-			sb.append("\nMapping: ").append(getAttributeMappings().toString());
+			sb.append("\nMapping: ");
+			Iterator<MappedDesignmodelElement> it = getAttributeMappings().iterator();
+			while(it.hasNext()) {
+				sb.append(it.next());
+				if(it.hasNext()) sb.append(" &\n\t");
+			}
+		}	
 		sb.append("\n---------------------------------------------------\n");
 		return sb.toString();
 	}

@@ -1,7 +1,7 @@
 package mapping.condition;
 
 public abstract class Condition {
-	//TODO until now only as string, has to be dispatched to actual element
+	//TODO until now only as string, has to be dispatched to actual element?
 	private String targetElement;
 	
 	public String getTargetElement() {

@@ -8,6 +8,6 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 
 	@Override
 	public String toString() {
-		return "Modelelement of type class with the target value '" + this.getTargetValue() + "' " + this.getMappedCodeElement();
+		return "The '" + this.getTargetValue() + "' of a class in the designmodel is " + this.getMappedCodeElement();
 	}
 }
