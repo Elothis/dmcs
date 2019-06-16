@@ -32,7 +32,6 @@ public class MappedCodeElementFactory {
 		}
 		switch (codestructureType) {
 		case ANNOTATION:
-			//TODO
 			return new MappedCodeAnnotation(mappedCodeElementTargetValue);
 		case CLASS:
 			return new MappedCodeClass(mappedCodeElementTargetValue);
@@ -51,10 +50,7 @@ public class MappedCodeElementFactory {
 			//return it with the targetValue attached to it directly			
 			return new MappedCodeMethod(mappedCodeElementTargetValue);
 		default:
-			break;
-		
+			throw new ParserException("Codestructure-Type not supported");		
 		}
-		
-		return new MappedCodeClass(mappedCodeElementTargetValue);
 	}
 }

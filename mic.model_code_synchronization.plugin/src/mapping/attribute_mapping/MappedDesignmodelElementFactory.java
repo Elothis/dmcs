@@ -35,8 +35,7 @@ public class MappedDesignmodelElementFactory {
 		
 		switch (modelelementType) {
 		case ATTRIBUTE:
-			//TODO
-			break;
+			return new MappedDesignmodelAttribute(mappedDesignmodelElementTargetValue, mappedCodeElement);
 		case CLASS:
 			return new MappedDesignmodelClass(mappedDesignmodelElementTargetValue, mappedCodeElement);
 		case REFERENCE:
@@ -52,12 +51,8 @@ public class MappedDesignmodelElementFactory {
 			//return it with the targetValue attached to it directly			
 			return new MappedDesignmodelReference(mappedDesignmodelElementTargetValue, mappedCodeElement);
 		default:
-			break;
+			throw new ParserException("ModelelementType not supported");
 		
 		}
-		
-		MappedDesignmodelClass mdc = new MappedDesignmodelClass(mappedDesignmodelElementTargetValue, mappedCodeElement);
-
-		return mdc;
 	}
 }
