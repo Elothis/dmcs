@@ -243,6 +243,9 @@ public class MappingParser implements IMappingParser {
 	 * @throws ParserException 
 	 */
 	private Map<String, IntegrationMechanismMappingDeclaration> parseMappingInstantiationFile(File f) throws IOException, ParserException {
+		
+		//TODO maybe add parsing of URI for underlying ecore meta model here
+		
 		Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiation = new HashMap<>();
 		String content = new String(Files.readAllBytes(f.toPath()));
 		if(content.trim().isEmpty()) {
