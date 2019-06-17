@@ -21,8 +21,7 @@ public class MappedCodeElementFactory {
 	 * @throws ParserException 
 	 */
 	public static MappedCodeElement createMappedCodeElement(String mappedCodeElementTargetValue, CodestructureType codestructureType) throws ParserException {
-		//TODO parse right hand side of mapping attribute assignment here
-		// e.g. mapping: modelelement.attribute(name) = |||||codestructure.name|||||;
+
 		//trim off the initial "codestructure."
 		if(mappedCodeElementTargetValue.startsWith("codestructure.")) {
 			mappedCodeElementTargetValue = mappedCodeElementTargetValue.split("codestructure.")[1];

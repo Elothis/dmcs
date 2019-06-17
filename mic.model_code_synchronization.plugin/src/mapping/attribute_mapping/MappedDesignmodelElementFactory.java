@@ -23,8 +23,6 @@ public class MappedDesignmodelElementFactory {
 	 * @throws ParserException 
 	 */
 	public static MappedDesignmodelElement createMappedDesignmodelElement(String mappedDesignmodelElementTargetValue, ModelelementType modelelementType, MappedCodeElement mappedCodeElement) throws ParserException {
-		//TODO parse left hand side of mapping attribute assignment here
-		// e.g. mapping: |||||modelelement.attribute(name)||||| = codestructure.name;
 		
 		if(mappedDesignmodelElementTargetValue.startsWith("modelelement.")) {
 			mappedDesignmodelElementTargetValue = mappedDesignmodelElementTargetValue.split("modelelement.")[1];

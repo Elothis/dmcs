@@ -3,6 +3,11 @@ package mapping;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import mapping.attribute_mapping.MappedCodeElement;
 import mapping.attribute_mapping.MappedCodeElementFactory;
@@ -66,9 +71,8 @@ public class MappingParser implements IMappingParser {
 	public MappingDatabase parseMappingDirectory() {
 		try {
 			Utility.getAllFilesByExtension(this.path, INTEGRATION_MECHANISM_MAPPING_DECLARATION_FILE_EXTENSION).forEach(f -> {
-				IntegrationMechanismMappingDeclaration imDeclaration;
 				try {
-					imDeclaration = parseIMFile(f);
+					IntegrationMechanismMappingDeclaration imDeclaration = this.parseIMFile(f);
 					this.mappingDatabase.addIntegrationMechanismDeclaration(imDeclaration);
 				} catch (ParserException e) {
 					e.printStackTrace();
@@ -77,13 +81,15 @@ public class MappingParser implements IMappingParser {
 				}
 			});
 			
-			Utility.getAllFilesByExtension(this.path, MAPPING_INSTANTIATION_FILE_EXTENSION).forEach(f -> {
-				//TODO
-				//create mapping from imMappingDeclaration to concrete model elements and store them in MappingDatabase
-				//instantiate spoon-model with java-elements from mapping file
-				//build ecore-design model for integration mechanisms and save mapping from spoon-java-elements to ecore-elements
-			});
+			List<File> l = Utility.getAllFilesByExtension(this.path, MAPPING_INSTANTIATION_FILE_EXTENSION);
+			if(l.size() != 1) {
+				throw new ParserException("Please provide exactly one mapping instantiation file!");
+			}
+			Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiation = this.parseMappingInstantiationFile(l.get(0));
+			this.mappingDatabase.setMappingInstantiation(mappingInstantiation);
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParserException e) {
 			e.printStackTrace();
 		}
 
@@ -91,7 +97,11 @@ public class MappingParser implements IMappingParser {
 	}
 	
 	/**
-	 * Parses an integration mechanism file into a respective data object containing all information defined in the .im-file
+	 * Parses an integration mechanism file into a respective data object containing all information defined in the .im-file with the following outline:<br>
+	 * codestructure: class;<br>
+	 * modelelement: class;<br>
+	 * condition: implements modelelement.name;<br>
+	 * mapping: modelelement.attribute(name) = codestructure.name;
 	 * @param f file containing definition of one integration mechanism
 	 * @return IntegrationMechanismMappingDeclaration containing all data
 	 * @throws IOException
@@ -206,6 +216,65 @@ public class MappingParser implements IMappingParser {
 		}
 		
 		return imMappingDeclaration;
+	}
+	
+	/**
+	 * Parses the mapping instantiation file that maps concrete model elements to integration mechanisms they shall get translated with.
+	 * File getting parsed looks like this:<br>
+	 * TypeAnnotation {<br>
+	 * 		ComponentType<br>
+	 * 	};<br>
+	 * 
+	 * MarkerInterface {<br>
+	 * 		State<br>
+	 * };<br>
+	 *
+	 * StaticInterface {<br>
+	 * 		Interface<br>
+	 * };<br>
+	 * @param f mapping instantiation file to parse
+	 * @return map with name of the modelelement as key and IntegrationMechanismDeclaration it gets translated with as value
+	 * @throws IOException
+	 * @throws ParserException 
+	 */
+	private Map<String, IntegrationMechanismMappingDeclaration> parseMappingInstantiationFile(File f) throws IOException, ParserException {
+		Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiation = new HashMap<>();
+		String content = new String(Files.readAllBytes(f.toPath()));
+		
+		//different instantiations from IMs to specific Model elements are split by ';'
+		String[] imInstantiations = content.split(";");
+		
+		//iterate over all IM-instantiations
+		for(String imInstantiation: imInstantiations) {
+			//get integration mechanism
+			String integrationMechanismName = imInstantiation.split("\\{")[0].trim();
+			IntegrationMechanismMappingDeclaration imd = this.getIntegrationMechanismByName(integrationMechanismName);
+			if(imd == null) {
+				throw new ParserException("The integration mechanism applied to certain model elements in the .mapping-file does not exist");
+			}
+			
+			//get all names between {} separated by commas
+			String[] appliedModelelements = StringUtils.substringBetween(imInstantiation, "{", "}").trim().split(",");
+			for(String modelElement: appliedModelelements) {
+				mappingInstantiation.put(modelElement.trim(), imd);
+			}
+		}
+		if(mappingInstantiation.isEmpty()) {
+			throw new ParserException("The mapping instantiation file is empty! Please provide an instantiation from the declared integration mechanisms to model elements");
+		}
+		return mappingInstantiation;
+	}
+	
+	/**
+	 * Gets an IntegrationMechanismMappingDeclaration based on the specified name of the IM.
+	 * @param name
+	 * @return IntegrationMechanismDeclaration if found, NULL if no such IM exists
+	 */
+	private IntegrationMechanismMappingDeclaration getIntegrationMechanismByName(String name) {
+		for(IntegrationMechanismMappingDeclaration imd: this.mappingDatabase.getIntegrationMechanismDeclarations()) {
+			if(imd.getName().contentEquals(name)) return imd;
+		}
+		return null;
 	}
 	
 }
