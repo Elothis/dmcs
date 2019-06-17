@@ -68,6 +68,12 @@ public class MappingParser implements IMappingParser {
 		this.mappingDatabase = new MappingDatabase();
 	}
 	
+	/**
+	 * Parses the mapping directory associated with this MappingParser and stores the defined Integration Mechanisms
+	 * and the instantiation of these Integration Mechanisms applied to concrete model elements in a MappingDatabase.
+	 * @return MappingDatabase containing all parsed information
+	 */
+
 	public MappingDatabase parseMappingDirectory() {
 		try {
 			Utility.getAllFilesByExtension(this.path, INTEGRATION_MECHANISM_MAPPING_DECLARATION_FILE_EXTENSION).forEach(f -> {
