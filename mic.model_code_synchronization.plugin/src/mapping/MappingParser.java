@@ -246,6 +246,9 @@ public class MappingParser implements IMappingParser {
 	private Map<String, IntegrationMechanismMappingDeclaration> parseMappingInstantiationFile(File f) throws IOException, ParserException {
 		Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiation = new HashMap<>();
 		String content = new String(Files.readAllBytes(f.toPath()));
+		if(content.trim().isEmpty()) {
+			throw new ParserException("Mapping instantiation file cannot be empty");
+		}
 		
 		//different instantiations from IMs to specific Model elements are split by ';'
 		String[] imInstantiations = content.split(";");
