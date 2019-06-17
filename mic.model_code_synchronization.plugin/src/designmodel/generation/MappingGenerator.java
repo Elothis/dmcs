@@ -3,7 +3,7 @@ package designmodel.generation;
 import java.io.File;
 
 import mapping.IMappingParser;
-import mapping.MappingDatabase;
+import mapping.MappingDeclarationDatabase;
 import spoon.Launcher;
 import spoon.compiler.Environment;
 import spoon.reflect.CtModel;
@@ -22,7 +22,7 @@ public class MappingGenerator {
 	private String projectPath;
 	private CtModel astModel;
 	private IMappingParser mappingParser;
-	private MappingDatabase mappingDatabase;
+	private MappingDeclarationDatabase mappingDatabase;
 	
 	public String getDirectoryPath() {
 		return projectPath;

@@ -57,7 +57,7 @@ public class MappingParser implements IMappingParser {
 			attributeMappingParsed = false;
 	
 	private String path;
-	private MappingDatabase mappingDatabase;
+	private MappingDeclarationDatabase mappingDeclarationDatabase;
 	
 	/**
 	 * Constructor instantiating a MappingParser object operating on the specified path as the directory containing the required mapping files.
@@ -65,21 +65,20 @@ public class MappingParser implements IMappingParser {
 	 */
 	public MappingParser(String path) {
 		this.path = path;
-		this.mappingDatabase = new MappingDatabase();
+		this.mappingDeclarationDatabase = new MappingDeclarationDatabase();
 	}
 	
 	/**
 	 * Parses the mapping directory associated with this MappingParser and stores the defined Integration Mechanisms
-	 * and the instantiation of these Integration Mechanisms applied to concrete model elements in a MappingDatabase.
+	 * and the instantiation of these Integration Mechanisms applied to concrete model elements in a MappingDeclarationDatabase.
 	 * @return MappingDatabase containing all parsed information
 	 */
-
-	public MappingDatabase parseMappingDirectory() {
+	public MappingDeclarationDatabase parseMappingDirectory() {
 		try {
 			Utility.getAllFilesByExtension(this.path, INTEGRATION_MECHANISM_MAPPING_DECLARATION_FILE_EXTENSION).forEach(f -> {
 				try {
 					IntegrationMechanismMappingDeclaration imDeclaration = this.parseIMFile(f);
-					this.mappingDatabase.addIntegrationMechanismDeclaration(imDeclaration);
+					this.mappingDeclarationDatabase.addIntegrationMechanismDeclaration(imDeclaration);
 				} catch (ParserException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -92,14 +91,14 @@ public class MappingParser implements IMappingParser {
 				throw new ParserException("Please provide exactly one mapping instantiation file!");
 			}
 			Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiation = this.parseMappingInstantiationFile(l.get(0));
-			this.mappingDatabase.setMappingInstantiation(mappingInstantiation);
+			this.mappingDeclarationDatabase.setMappingInstantiation(mappingInstantiation);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ParserException e) {
 			e.printStackTrace();
 		}
 
-		return this.mappingDatabase;
+		return this.mappingDeclarationDatabase;
 	}
 	
 	/**
@@ -257,7 +256,7 @@ public class MappingParser implements IMappingParser {
 		for(String imInstantiation: imInstantiations) {
 			//get integration mechanism
 			String integrationMechanismName = imInstantiation.split("\\{")[0].trim();
-			IntegrationMechanismMappingDeclaration imd = this.getIntegrationMechanismByName(integrationMechanismName);
+			IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByName(integrationMechanismName);
 			if(imd == null) {
 				throw new ParserException("The integration mechanism applied to certain model elements in the .mapping-file does not exist");
 			}
@@ -274,16 +273,6 @@ public class MappingParser implements IMappingParser {
 		return mappingInstantiation;
 	}
 	
-	/**
-	 * Gets an IntegrationMechanismMappingDeclaration based on the specified name of the IM.
-	 * @param name
-	 * @return IntegrationMechanismDeclaration if found, NULL if no such IM exists
-	 */
-	private IntegrationMechanismMappingDeclaration getIntegrationMechanismByName(String name) {
-		for(IntegrationMechanismMappingDeclaration imd: this.mappingDatabase.getIntegrationMechanismDeclarations()) {
-			if(imd.getName().contentEquals(name)) return imd;
-		}
-		return null;
-	}
+	
 	
 }

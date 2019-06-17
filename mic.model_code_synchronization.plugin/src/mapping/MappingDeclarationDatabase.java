@@ -11,22 +11,33 @@ import java.util.Map;
  * @author Fabian Glittenberg
  *
  */
-public class MappingDatabase {
+public class MappingDeclarationDatabase {
 	
 	private List<IntegrationMechanismMappingDeclaration> imDeclarations;
 	private Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiation;
-	//TODO implement mapping from imDeclaration to concrete model structures
 	
-	public MappingDatabase(List<IntegrationMechanismMappingDeclaration> imDeclarations) {
+	public MappingDeclarationDatabase(List<IntegrationMechanismMappingDeclaration> imDeclarations) {
 		this.imDeclarations = imDeclarations;
 	}
 
-	public MappingDatabase() {
+	public MappingDeclarationDatabase() {
 		this.imDeclarations = new ArrayList<>();
 	}
 	
 	public List<IntegrationMechanismMappingDeclaration> getIntegrationMechanismDeclarations() {
 		return this.imDeclarations;
+	}
+	
+	/**
+	 * Gets an IntegrationMechanismMappingDeclaration based on the specified name of the IM.
+	 * @param name
+	 * @return IntegrationMechanismDeclaration if found, NULL if no such IM exists
+	 */
+	public IntegrationMechanismMappingDeclaration getIntegrationMechanismByName(String name) {
+		for(IntegrationMechanismMappingDeclaration imd: this.imDeclarations) {
+			if(imd.getName().contentEquals(name)) return imd;
+		}
+		return null;
 	}
 
 	public boolean addIntegrationMechanismDeclaration(IntegrationMechanismMappingDeclaration imDeclaration) {
