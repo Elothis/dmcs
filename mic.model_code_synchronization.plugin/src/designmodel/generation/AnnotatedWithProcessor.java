@@ -4,7 +4,6 @@ import java.lang.annotation.Annotation;
 
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.declaration.CtAnnotation;
-import spoon.reflect.declaration.CtAnnotationType;
 import spoon.reflect.declaration.CtNamedElement;
 
 //TODO check spoon type hierarchy: which super interface can be used to get all elements that can be annotated with (methods, classes etc.)

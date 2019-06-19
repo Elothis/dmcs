@@ -22,7 +22,12 @@ public class ConditionFactory {
 		
 		switch (keyword) {
 		case IMPLEMENTS:
-			condition = new ImplementedInterfaceCondition(targetElement);
+			if(codestructureType == CodestructureType.CLASS) {
+				condition = new ImplementedInterfaceCondition(targetElement);
+			}
+			else {
+				throw new ParserException("implements-condition cannot be applied to any other codestructure-type than a class");
+			}
 			break;
 		case ANNOTATED_WITH:
 			condition = new AnnotatedWithCondition(targetElement);
