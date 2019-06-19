@@ -14,7 +14,7 @@ import java.util.Map;
 public class MappingDeclarationDatabase {
 	
 	private List<IntegrationMechanismMappingDeclaration> imDeclarations;
-	private Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiation;
+	private Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiations;
 	
 	public MappingDeclarationDatabase(List<IntegrationMechanismMappingDeclaration> imDeclarations) {
 		this.imDeclarations = imDeclarations;
@@ -48,12 +48,12 @@ public class MappingDeclarationDatabase {
 		return this.imDeclarations.add(imDeclaration);
 	}
 	
-	public void setMappingInstantiation(Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiation) {
-		this.mappingInstantiation = mappingInstantiation;
+	public void setMappingInstantiations(Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiations) {
+		this.mappingInstantiations = mappingInstantiations;
 	}
 
-	public Map<String, IntegrationMechanismMappingDeclaration> getMappingInstantiation() {
-		return mappingInstantiation;
+	public Map<String, IntegrationMechanismMappingDeclaration> getMappingInstantiations() {
+		return mappingInstantiations;
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class MappingDeclarationDatabase {
 			sb.append(i.toString());
 		});
 		sb.append("\n\nMapping instantiations:\n");
-		this.mappingInstantiation.forEach((modelElementName, imDeclaration) -> {
+		this.mappingInstantiations.forEach((modelElementName, imDeclaration) -> {
 			sb.append(modelElementName + " -> ").append(imDeclaration.getName()).append("\n");
 		});
 		return sb.toString();

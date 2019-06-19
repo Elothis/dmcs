@@ -22,7 +22,7 @@ public class MappingGenerator {
 	private String projectPath;
 	private CtModel astModel;
 	private IMappingParser mappingParser;
-	private MappingDeclarationDatabase mappingDatabase;
+	private MappingDeclarationDatabase mappingDeclarationDatabase;
 	
 	public String getDirectoryPath() {
 		return projectPath;
@@ -56,11 +56,13 @@ public class MappingGenerator {
 	 * @param mappingFileHere
 	 */
 	public void createMapping() {
-		this.mappingDatabase = this.mappingParser.parseMappingDirectory();
+		this.mappingDeclarationDatabase = this.mappingParser.parseMappingDirectory();
 		//TODO
 		//how to create processors at runtime that identify the codestructures and create mapping that are parsed in at runtime through mapping file?
 		//xtend-classes to write processors at runtime and then instantiate here? (via dependency injection)
 		//create additional processors with xtend for transformations if model gets changed at runtime?
+		
+		//create processor for each keyword -> probably in abstract method implementation in concrete keyword class to return abstract processor that does the things
 		identifyMarkerInterfaceMechanisms("State");
 	}
 	
