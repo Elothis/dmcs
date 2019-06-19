@@ -91,7 +91,7 @@ public class MappingParser implements IMappingParser {
 				throw new ParserException("Please provide exactly one mapping instantiation file!");
 			}
 			Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiation = this.parseMappingInstantiationFile(l.get(0));
-			this.mappingDeclarationDatabase.setMappingInstantiation(mappingInstantiation);
+			this.mappingDeclarationDatabase.setMappingInstantiations(mappingInstantiation);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ParserException e) {
