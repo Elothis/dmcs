@@ -9,10 +9,11 @@ import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.CtAbstractVisitor;
 
 
-public class MarkerInterfaceProcessor extends AbstractProcessor<CtClass> {
+public class ImplementedInterfaceProcessor extends AbstractProcessor<CtClass> {
 	private String markerInterface;
-	
-	public MarkerInterfaceProcessor(String markerInterface) {
+
+	public ImplementedInterfaceProcessor(String markerInterface) {
+		super();
 		this.markerInterface = markerInterface;
 	}
 

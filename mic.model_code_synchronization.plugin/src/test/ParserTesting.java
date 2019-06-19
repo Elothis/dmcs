@@ -2,9 +2,10 @@ package test;
 
 import org.junit.jupiter.api.Test;
 
+import designmodel.generation.MappingGenerator;
 import mapping.MappingParser;
 
-class ParseTest {
+class ParserTesting {
 
 	@Test
 	void testParseMappingDirectory() {
