@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.declaration.CtAnnotation;
+import spoon.reflect.declaration.CtAnnotationType;
 import spoon.reflect.declaration.CtNamedElement;
 
 //TODO check spoon type hierarchy: which super interface can be used to get all elements that can be annotated with (methods, classes etc.)
@@ -19,7 +20,7 @@ public class AnnotatedWithProcessor extends AbstractProcessor<CtNamedElement> {
 	public boolean isToBeProcessed(CtNamedElement candidate) {
 
 		for(CtAnnotation<? extends Annotation> a: candidate.getAnnotations()) {
-			if(a.getActualAnnotation().toString().split("@")[1].contentEquals(annotationName)) {
+			if(a.toString().split("@")[1].contentEquals(annotationName)) {
 				return true;
 			}
 		}
@@ -30,5 +31,4 @@ public class AnnotatedWithProcessor extends AbstractProcessor<CtNamedElement> {
 	public void process(CtNamedElement arg0) {
 		System.out.println(arg0.getSimpleName() + " is annotated with " + annotationName + " and thus got processed with annotatedWithProcessor");
 	}
-
 }

@@ -28,11 +28,9 @@ public class ImplementedInterfaceProcessor extends AbstractProcessor<CtClass> {
 
 	@Override
 	public void process(CtClass element) {
-		String initialName = element.getSimpleName();
-		//System.out.println("Initial name: " + initialName);
 		//TODO create Ecore-Model here and save mapping from this CtClass to the created Ecore element
 		
-		System.out.println(element.getSimpleName() + " processed as marker interface");
+		System.out.println(element.getSimpleName() + " implements " + markerInterface + " and thus got processed with ImplementedInterfaceProcessor");
 //		if (initialName.equals("AnotherOne")) {
 //			element.setSimpleName("ChangedClassName");
 //			System.out.println("Changed name: " + element.getSimpleName());

@@ -16,7 +16,7 @@ public class AnnotationHasNameOfProcessor extends AbstractProcessor<CtAnnotation
 
 	@Override
 	public boolean isToBeProcessed(CtAnnotation candidate) {
-		return candidate.getActualAnnotation().toString().split("@")[1].contentEquals(nameToMatch);
+		return candidate.toString().split("@")[1].contentEquals(nameToMatch);
 	}
 
 	@Override

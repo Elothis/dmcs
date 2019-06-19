@@ -261,12 +261,16 @@ public class MappingParser implements IMappingParser {
 			String integrationMechanismName = imInstantiation.split("\\{")[0].trim();
 			IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByName(integrationMechanismName);
 			if(imd == null) {
+				System.out.println("blub");
 				throw new ParserException("The integration mechanism applied to certain model elements in the .mapping-file does not exist");
 			}
 			
 			//get all names between {} separated by commas
 			String[] appliedModelelements = StringUtils.substringBetween(imInstantiation, "{", "}").trim().split(",");
 			for(String modelElement: appliedModelelements) {
+				if(mappingInstantiation.get(modelElement) != null) {
+					throw new ParserException("Cannot map one design model element multiple times!");
+				}
 				mappingInstantiation.put(modelElement.trim(), imd);
 			}
 		}
