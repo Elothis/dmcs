@@ -13,7 +13,13 @@ import java.util.Map;
  */
 public class MappingDeclarationDatabase {
 	
+	/**
+	 * List holding all Integration Mechanism Declarations that got parsed from the .im-files
+	 */
 	private List<IntegrationMechanismMappingDeclaration> imDeclarations;
+	/**
+	 * Holds information of which model element (saved as String) gets translated with which IM
+	 */
 	private Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiations;
 	
 	public MappingDeclarationDatabase(List<IntegrationMechanismMappingDeclaration> imDeclarations) {
@@ -52,6 +58,10 @@ public class MappingDeclarationDatabase {
 		this.mappingInstantiations = mappingInstantiations;
 	}
 
+	/**
+	 * Gets the information of which design model element (saved as String) gets translated with which integration mechanism.
+	 * @return map of design model element-name (key) to IM (value)
+	 */
 	public Map<String, IntegrationMechanismMappingDeclaration> getMappingInstantiations() {
 		return mappingInstantiations;
 	}
