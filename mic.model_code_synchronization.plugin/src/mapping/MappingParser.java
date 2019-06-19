@@ -175,7 +175,7 @@ public class MappingParser implements IMappingParser {
 					throw new ParserException("Please provide a target-element the condition shall get evaluated against in addition to the keyword");
 				}
 
-				Condition condition = ConditionFactory.createCondition(ConditionKeyword.getConditionKeywordFor(conditionDefinition[0]), conditionDefinition[1]);
+				Condition condition = ConditionFactory.createCondition(ConditionKeyword.getConditionKeywordFor(conditionDefinition[0]), conditionDefinition[1], imMappingDeclaration.getCodestructureType());
 				imMappingDeclaration.setCondition(condition);
 				
 				//TODO support list of conditions separated by '&'

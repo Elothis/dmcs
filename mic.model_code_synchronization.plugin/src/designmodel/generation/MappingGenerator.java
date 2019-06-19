@@ -65,7 +65,9 @@ public class MappingGenerator {
 		//create processor for each keyword -> probably in abstract method implementation in concrete keyword class to return abstract processor that does the things
 		//identifyMarkerInterfaceMechanisms("State");
 		this.mappingDeclarationDatabase.getMappingInstantiations().forEach((modelElementName, imDeclaration) -> {
-			imDeclaration.getCondition().getProcessor();
+			//creates a processor that acts upon the specific condition target and runs it
+			imDeclaration.getCondition().createProcessor(modelElementName);
+			this.astModel.processWith(imDeclaration.getCondition().getProcessor());
 		});
 	}
 	

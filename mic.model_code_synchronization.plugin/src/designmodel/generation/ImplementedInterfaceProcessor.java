@@ -4,9 +4,7 @@ import java.util.Set;
 
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtElement;
 import spoon.reflect.reference.CtTypeReference;
-import spoon.reflect.visitor.CtAbstractVisitor;
 
 
 public class ImplementedInterfaceProcessor extends AbstractProcessor<CtClass> {
@@ -31,12 +29,14 @@ public class ImplementedInterfaceProcessor extends AbstractProcessor<CtClass> {
 	@Override
 	public void process(CtClass element) {
 		String initialName = element.getSimpleName();
-		System.out.println("Initial name: " + initialName);
+		//System.out.println("Initial name: " + initialName);
 		//TODO create Ecore-Model here and save mapping from this CtClass to the created Ecore element
-		if (initialName.equals("AnotherOne")) {
-			element.setSimpleName("ChangedClassName");
-			System.out.println("Changed name: " + element.getSimpleName());
-		}
+		
+		System.out.println(element.getSimpleName() + " processed as marker interface");
+//		if (initialName.equals("AnotherOne")) {
+//			element.setSimpleName("ChangedClassName");
+//			System.out.println("Changed name: " + element.getSimpleName());
+//		}
 		//DesignmodelFactory.eINSTANCE.createState();
 		
 		/*

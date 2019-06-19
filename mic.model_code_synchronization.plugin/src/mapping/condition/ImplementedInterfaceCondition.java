@@ -13,7 +13,6 @@ public class ImplementedInterfaceCondition extends Condition {
 
 	public ImplementedInterfaceCondition(String targetElement) {
 		super(targetElement);
-		this.setProcessor(new ImplementedInterfaceProcessor("State"));
 	}
 
 
@@ -24,6 +23,9 @@ public class ImplementedInterfaceCondition extends Condition {
 			.append(this.getTargetElement());
 		return sb.toString();
 	}
-	
-	
+
+	@Override
+	public void createProcessor(String targetName) {
+		this.setProcessor(new ImplementedInterfaceProcessor(targetName));
+	}
 }
