@@ -253,7 +253,7 @@ public class MappingParser implements IMappingParser {
 		}
 		
 		//different instantiations from IMs to specific Model elements are split by ';'
-		String[] imInstantiations = content.split(";");
+		String[] imInstantiations = content.trim().split(";");
 		
 		//iterate over all IM-instantiations
 		for(String imInstantiation: imInstantiations) {
@@ -261,7 +261,6 @@ public class MappingParser implements IMappingParser {
 			String integrationMechanismName = imInstantiation.split("\\{")[0].trim();
 			IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByName(integrationMechanismName);
 			if(imd == null) {
-				System.out.println("blub");
 				throw new ParserException("The integration mechanism applied to certain model elements in the .mapping-file does not exist");
 			}
 			

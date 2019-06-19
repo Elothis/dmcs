@@ -57,11 +57,7 @@ public class MappingGenerator {
 	 */
 	public void buildDesignModel() {
 		this.mappingDeclarationDatabase = this.mappingParser.parseMappingDirectory();
-		//TODO
-		//how to create processors at runtime that identify the codestructures and create mapping that are parsed in at runtime through mapping file?
-		//xtend-classes to write processors at runtime and then instantiate here? (via dependency injection)
-		//create additional processors with xtend for transformations if model gets changed at runtime?
-		
+		//TODO		
 		//create processor for each keyword -> probably in abstract method implementation in concrete keyword class to return abstract processor that does the things
 		//identifyMarkerInterfaceMechanisms("State");
 		this.mappingDeclarationDatabase.getMappingInstantiations().forEach((modelElementName, imDeclaration) -> {
