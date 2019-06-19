@@ -2,8 +2,11 @@ package designmodel.generation;
 
 import java.io.File;
 
+import org.apache.commons.lang3.NotImplementedException;
+
 import mapping.IMappingParser;
 import mapping.MappingDeclarationDatabase;
+import mapping.ParserException;
 import spoon.Launcher;
 import spoon.compiler.Environment;
 import spoon.reflect.CtModel;
@@ -62,6 +65,9 @@ public class MappingGenerator {
 		//identifyMarkerInterfaceMechanisms("State");
 		this.mappingDeclarationDatabase.getMappingInstantiations().forEach((modelElementName, imDeclaration) -> {
 			//creates a processor that acts upon the specific condition target and runs it
+			if(!imDeclaration.getCondition().getTargetElement().contentEquals("modelelement.name")) {
+				throw new NotImplementedException("Currently cannot apply conditions to other elements than 'modelelement.name'");
+			}
 			imDeclaration.getCondition().createProcessor(modelElementName);
 			this.astModel.processWith(imDeclaration.getCondition().getProcessor());
 		});
