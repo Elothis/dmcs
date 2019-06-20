@@ -17,6 +17,14 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 public class Utility {
 	
+	/**
+	 * Gets all files in the specified directory that have the specified file extension.
+	 * 
+	 * @param directoryPath
+	 * @param extension
+	 * @return
+	 * @throws IOException
+	 */
 	public static List<File> getAllFilesByExtension(String directoryPath, String extension) throws IOException {
 		File directory = new File(directoryPath);
 		String[] extensions = new String[] { extension };
@@ -34,6 +42,12 @@ public class Utility {
 		} 
 	}
 	
+	/**
+	 * Persists an EObject into a "designmodel.xmi" file located at the specified directory path.
+	 * 
+	 * @param eObject
+	 * @param path
+	 */
 	public static void storeAsXMI(EObject eObject, String path) {
 	    ResourceSet resSet = new ResourceSetImpl();
 	    resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
