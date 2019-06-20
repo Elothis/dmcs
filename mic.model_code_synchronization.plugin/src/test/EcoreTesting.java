@@ -40,7 +40,7 @@ class EcoreTesting {
 		EObject stateInstance = metafactory.create(stateClass);
 		stateInstance.eSet(nameAttr, "Ready");
 		
-		Utility.storeAsXMI(stateInstance, "C:/Users/Fabian/mappingDirectory/designmodel.xmi");
+		Utility.storeAsXMI(stateInstance, "C:/Users/Fabian/mappingDirectory");
 	}
 
 }

@@ -38,7 +38,7 @@ public class Utility {
 	    ResourceSet resSet = new ResourceSetImpl();
 	    resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 
-	    XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(path), null);
+	    XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(path + "/designmodel.xmi"), null);
 	    resource.getDefaultSaveOptions().put(XMIResource.OPTION_KEEP_DEFAULT_CONTENT, Boolean.TRUE);
 	    resource.getContents().add(eObject);
 
