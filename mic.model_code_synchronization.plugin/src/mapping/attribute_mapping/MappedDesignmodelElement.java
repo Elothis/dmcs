@@ -1,5 +1,8 @@
 package mapping.attribute_mapping;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+
 /**
  * Abstract super class representing one attribute-mapping from designmodel element to code element.
  * Holding the mapped code element and the designmodel-element's targetValue the code element is mapped to, thus making this a complete mapping. 
@@ -33,5 +36,14 @@ public abstract class MappedDesignmodelElement {
 		this.targetValue = targetValue;
 		this.mappedCodeElement = mappedCodeElement;
 	}
+	
+	/**
+	 * Creates the design model element as part of the specified EPackage.
+	 * 
+	 * @param metapackage EPackage the model element gets created in (based on the specific meta model, containing factory etc.)
+	 * @param metamodelElement the meta model element that shall get created (type depends on the specific implementing class)
+	 * @return
+	 */
+	public abstract EObject createDesignmodelElement(EPackage metapackage, String metamodelElement);
 	
 }

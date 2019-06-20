@@ -2,6 +2,8 @@ package mapping.condition;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EPackage;
+
 import designmodel.generation.GenerationProcessor;
 import mapping.attribute_mapping.MappedDesignmodelElement;
 
@@ -37,5 +39,5 @@ public abstract class Condition {
 	 * @param targetName
 	 * @param attributeMappings
 	 */
-	public abstract void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings);
+	public abstract void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings, EPackage metapackage);
 }

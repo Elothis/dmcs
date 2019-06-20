@@ -2,6 +2,8 @@ package designmodel.generation;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EPackage;
+
 import mapping.attribute_mapping.MappedDesignmodelElement;
 import spoon.reflect.declaration.CtAnnotation;
 
@@ -11,8 +13,8 @@ public class AnnotationHasNameOfProcessor extends GenerationProcessor<CtAnnotati
 	
 	private String nameToMatch;
 	
-	public AnnotationHasNameOfProcessor(String nameToMatch, List<MappedDesignmodelElement> attributeMappings) {
-		super(attributeMappings);
+	public AnnotationHasNameOfProcessor(String nameToMatch, List<MappedDesignmodelElement> attributeMappings, EPackage metapackage) {
+		super(attributeMappings, metapackage);
 		this.nameToMatch = nameToMatch;
 	}
 

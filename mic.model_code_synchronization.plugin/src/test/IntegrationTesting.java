@@ -1,5 +1,7 @@
 package test;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.Test;
 
 import designmodel.generation.MappingGenerator;
@@ -8,7 +10,7 @@ import mapping.MappingParser;
 public class IntegrationTesting {
 
 	@Test
-	void testMenuEntryClick() {
+	void testMenuEntryClick() throws IOException {
 		StringBuilder sb = new StringBuilder();
         String mappingDirectoryPath;
 			sb.append(System.getProperty("user.home").replace('\\', '/'))

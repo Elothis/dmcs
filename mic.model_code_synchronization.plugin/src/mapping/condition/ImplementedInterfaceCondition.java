@@ -2,6 +2,8 @@ package mapping.condition;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EPackage;
+
 import designmodel.generation.ImplementedInterfaceProcessor;
 import mapping.attribute_mapping.MappedDesignmodelElement;
 
@@ -28,7 +30,7 @@ public class ImplementedInterfaceCondition extends Condition {
 	}
 
 	@Override
-	public void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings) {
-		this.setProcessor(new ImplementedInterfaceProcessor(targetName, attributeMappings));
+	public void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings, EPackage metapackage) {
+		this.setProcessor(new ImplementedInterfaceProcessor(targetName, attributeMappings, metapackage));
 	}
 }

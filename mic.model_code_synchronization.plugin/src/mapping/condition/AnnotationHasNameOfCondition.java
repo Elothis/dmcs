@@ -2,6 +2,8 @@ package mapping.condition;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EPackage;
+
 import designmodel.generation.AnnotationHasNameOfProcessor;
 import mapping.attribute_mapping.MappedDesignmodelElement;
 
@@ -20,8 +22,8 @@ public class AnnotationHasNameOfCondition extends Condition {
 	}
 
 	@Override
-	public void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings) {
-		this.setProcessor(new AnnotationHasNameOfProcessor(targetName, attributeMappings));
+	public void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings, EPackage metapackage) {
+		this.setProcessor(new AnnotationHasNameOfProcessor(targetName, attributeMappings, metapackage));
 		
 	}
 }

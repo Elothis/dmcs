@@ -3,6 +3,9 @@ package designmodel.generation;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+
 import mapping.attribute_mapping.MappedDesignmodelElement;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.reference.CtTypeReference;
@@ -11,8 +14,8 @@ import spoon.reflect.reference.CtTypeReference;
 public class ImplementedInterfaceProcessor extends GenerationProcessor<CtClass> {
 	public String markerInterface;
 
-	public ImplementedInterfaceProcessor(String markerInterface, List<MappedDesignmodelElement> attributeMappings) {
-		super(attributeMappings);
+	public ImplementedInterfaceProcessor(String markerInterface, List<MappedDesignmodelElement> attributeMappings, EPackage metapackage) {
+		super(attributeMappings, metapackage);
 		this.markerInterface = markerInterface;
 	}
 
@@ -29,8 +32,12 @@ public class ImplementedInterfaceProcessor extends GenerationProcessor<CtClass> 
 
 	@Override
 	public void process(CtClass element) {
-		//TODO create Ecore-Model here and save mapping from this CtClass to the created Ecore element
-		this.setMyData("BLUBBERINO");
+		this.getAttributeMappings().forEach(am -> {
+			EObject generatedDesignmodelElement = am.createDesignmodelElement(getMetapackage(), markerInterface);
+			this.setGeneratedDesignmodelElement(generatedDesignmodelElement);
+			//TODO also save a mapping from this generated ecore element to the spoon-element (probably also in a field in GenerationProcessor)
+			//then collect these mapping infos from ecore to spoon elements and build a mappingDatabase in MappingGenerator
+		});
 		
 		System.out.println(element.getSimpleName() + " implements " + markerInterface + " and thus got processed with ImplementedInterfaceProcessor");
 //		if (initialName.equals("AnotherOne")) {

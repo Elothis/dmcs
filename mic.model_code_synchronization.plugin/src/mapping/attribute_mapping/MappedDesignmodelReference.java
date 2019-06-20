@@ -1,5 +1,8 @@
 package mapping.attribute_mapping;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+
 /**
  * Representing the mapping to a value of a reference in the design model
  * OR
@@ -26,6 +29,12 @@ public class MappedDesignmodelReference extends MappedDesignmodelElement {
 
 	public void setTarget(MappedDesignmodelClass target) {
 		this.target = target;
+	}
+
+	@Override
+	public EObject createDesignmodelElement(EPackage metapackage, String metamodelElement) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

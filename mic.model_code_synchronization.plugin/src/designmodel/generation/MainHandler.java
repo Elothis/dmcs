@@ -49,7 +49,12 @@ public class MainHandler extends AbstractHandler {
 	            IMappingParser mappingParser = new MappingParser(mappingDirectoryPath);
 				
 	            MappingGenerator mappingGenerator = new MappingGenerator(projectPath, mappingParser);
-				mappingGenerator.buildDesignModel();
+				try {
+					mappingGenerator.buildDesignModel();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	        }
 		
 				

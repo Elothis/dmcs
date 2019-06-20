@@ -1,14 +1,24 @@
 package designmodel.generation;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Collections;
 
 import org.apache.commons.lang3.NotImplementedException;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import mapping.IMappingParser;
 import mapping.MappingDeclarationDatabase;
 import spoon.Launcher;
 import spoon.compiler.Environment;
 import spoon.reflect.CtModel;
+import util.Utility;
 
 
 /**
@@ -19,6 +29,10 @@ import spoon.reflect.CtModel;
  *
  */
 public class MappingGenerator {
+	
+	//TODO parse these from .mapping file or so
+	public static final String ECORE_PATH = "C:/Daten/MIC_Sync_Tool_Repo/mic.model_code_synchronization.designmodel/model/designmodel.ecore";
+	public static final String DESIGNMODEL_TARGET_PATH = "C:/Users/Fabian/mappingDirectory/designmodel.xmi";
 	
 	private Launcher launcher;
 	private String projectPath;
@@ -57,23 +71,50 @@ public class MappingGenerator {
 	 * Called when clicking context menu entry on Java Project.
 	 * Parses in the mapping file and starts the process of creating the design model on the basis of the mapping file and the Java source code
 	 * of the underlying project.
-	 * @param mappingFileHere
+	 * @throws IOException 
 	 */
-	public void buildDesignModel() {
+	public void buildDesignModel() throws IOException {
 		this.mappingDeclarationDatabase = this.mappingParser.parseMappingDirectory();
-		//TODO		
-		//create processor for each keyword -> probably in abstract method implementation in concrete keyword class to return abstract processor that does the things
-		//identifyMarkerInterfaceMechanisms("State");
+		//get meta model and create metapackage from it
+		ResourceSet rs = new ResourceSetImpl();
+		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
+		Resource res = rs.createResource(URI.createFileURI(ECORE_PATH));
+		res.load(null);
+		EPackage metapackage = (EPackage) res.getContents().get(0);
+		
+		//initialize resource for saving the design model as xmi
+		XMIResource savingRes = initializePersistingResource(DESIGNMODEL_TARGET_PATH);
+		
 		this.mappingDeclarationDatabase.getMappingInstantiations().forEach((modelElementName, imDeclaration) -> {
 			//creates a processor that acts upon the specific condition target and runs it
 			if(!imDeclaration.getCondition().getTargetElement().contentEquals("modelelement.name")) {
 				throw new NotImplementedException("Currently cannot apply conditions to other elements than 'modelelement.name'");
 			}
-			imDeclaration.getCondition().createProcessor(modelElementName, imDeclaration.getAttributeMappings());
+			//creates the respective processor, handing over the modelelement.name,
+			//the attribute mappings of the IM and the metapackage of the meta model that the design model gets instantiated with
+			imDeclaration.getCondition().createProcessor(modelElementName, imDeclaration.getAttributeMappings(), metapackage);
 			GenerationProcessor<?> processor = imDeclaration.getCondition().getProcessor();
 			this.astModel.processWith(processor);
-			System.out.println(processor.getMyData());
+			if(processor.getGeneratedDesignmodelElement() != null) {
+				savingRes.getContents().add(processor.getGeneratedDesignmodelElement());
+			}
+				
+			try {
+				savingRes.save(Collections.EMPTY_MAP);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		});
+	}
+	
+	private XMIResource initializePersistingResource(String output) {
+		ResourceSet savingResSet = new ResourceSetImpl();
+		savingResSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+
+		XMIResource savingRes = (XMIResource) savingResSet.createResource(URI.createFileURI(DESIGNMODEL_TARGET_PATH), null);
+		savingRes.getDefaultSaveOptions().put(XMIResource.OPTION_KEEP_DEFAULT_CONTENT, Boolean.TRUE);
+		
+		return savingRes;
 	}
 
 }
