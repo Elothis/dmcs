@@ -1,6 +1,9 @@
 package mapping.condition;
 
+import java.util.List;
+
 import designmodel.generation.AnnotatedWithProcessor;
+import mapping.attribute_mapping.MappedDesignmodelElement;
 
 /**
  * Condition representing an "annotated with" relationship for the codestructure mapped to.
@@ -24,7 +27,7 @@ public class AnnotatedWithCondition extends Condition {
 	}
 
 	@Override
-	public void createProcessor(String targetName) {
-		this.setProcessor(new AnnotatedWithProcessor(targetName));
+	public void createProcessor(String targetName, List<MappedDesignmodelElement>attributeMappings) {
+		this.setProcessor(new AnnotatedWithProcessor(targetName, attributeMappings));
 	}
 }

@@ -1,17 +1,18 @@
 package designmodel.generation;
 
 import java.lang.annotation.Annotation;
+import java.util.List;
 
-import spoon.processing.AbstractProcessor;
+import mapping.attribute_mapping.MappedDesignmodelElement;
 import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtNamedElement;
 
 //TODO check spoon type hierarchy: which super interface can be used to get all elements that can be annotated with (methods, classes etc.)
-public class AnnotatedWithProcessor extends AbstractProcessor<CtNamedElement> {
+public class AnnotatedWithProcessor extends GenerationProcessor<CtNamedElement> {
 	private String annotationName;
 	
-	public AnnotatedWithProcessor(String annotationName) {
-		super();
+	public AnnotatedWithProcessor(String annotationName, List<MappedDesignmodelElement> attributeMappings) {
+		super(attributeMappings);
 		this.annotationName = annotationName;
 	}
 

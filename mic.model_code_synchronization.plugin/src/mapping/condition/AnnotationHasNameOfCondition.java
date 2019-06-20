@@ -1,6 +1,9 @@
 package mapping.condition;
 
+import java.util.List;
+
 import designmodel.generation.AnnotationHasNameOfProcessor;
+import mapping.attribute_mapping.MappedDesignmodelElement;
 
 public class AnnotationHasNameOfCondition extends Condition {
 
@@ -17,8 +20,8 @@ public class AnnotationHasNameOfCondition extends Condition {
 	}
 
 	@Override
-	public void createProcessor(String targetName) {
-		this.setProcessor(new AnnotationHasNameOfProcessor(targetName));
+	public void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings) {
+		this.setProcessor(new AnnotationHasNameOfProcessor(targetName, attributeMappings));
 		
 	}
 }

@@ -1,6 +1,9 @@
 package mapping.condition;
 
+import java.util.List;
+
 import designmodel.generation.ImplementedInterfaceProcessor;
+import mapping.attribute_mapping.MappedDesignmodelElement;
 
 /**
  * Condition reprenseting an "implements" relationship of codestructure mapped to.
@@ -25,7 +28,7 @@ public class ImplementedInterfaceCondition extends Condition {
 	}
 
 	@Override
-	public void createProcessor(String targetName) {
-		this.setProcessor(new ImplementedInterfaceProcessor(targetName));
+	public void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings) {
+		this.setProcessor(new ImplementedInterfaceProcessor(targetName, attributeMappings));
 	}
 }

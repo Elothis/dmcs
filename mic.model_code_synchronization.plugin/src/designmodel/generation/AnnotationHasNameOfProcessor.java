@@ -1,16 +1,18 @@
 package designmodel.generation;
 
-import spoon.processing.AbstractProcessor;
+import java.util.List;
+
+import mapping.attribute_mapping.MappedDesignmodelElement;
 import spoon.reflect.declaration.CtAnnotation;
 
 
 //TODO generics type named element best fit here?
-public class AnnotationHasNameOfProcessor extends AbstractProcessor<CtAnnotation> {
+public class AnnotationHasNameOfProcessor extends GenerationProcessor<CtAnnotation> {
 	
 	private String nameToMatch;
 	
-	public AnnotationHasNameOfProcessor(String nameToMatch) {
-		super();
+	public AnnotationHasNameOfProcessor(String nameToMatch, List<MappedDesignmodelElement> attributeMappings) {
+		super(attributeMappings);
 		this.nameToMatch = nameToMatch;
 	}
 

@@ -1,17 +1,18 @@
 package designmodel.generation;
 
+import java.util.List;
 import java.util.Set;
 
-import spoon.processing.AbstractProcessor;
+import mapping.attribute_mapping.MappedDesignmodelElement;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.reference.CtTypeReference;
 
 
-public class ImplementedInterfaceProcessor extends AbstractProcessor<CtClass> {
-	private String markerInterface;
+public class ImplementedInterfaceProcessor extends GenerationProcessor<CtClass> {
+	public String markerInterface;
 
-	public ImplementedInterfaceProcessor(String markerInterface) {
-		super();
+	public ImplementedInterfaceProcessor(String markerInterface, List<MappedDesignmodelElement> attributeMappings) {
+		super(attributeMappings);
 		this.markerInterface = markerInterface;
 	}
 
@@ -29,6 +30,7 @@ public class ImplementedInterfaceProcessor extends AbstractProcessor<CtClass> {
 	@Override
 	public void process(CtClass element) {
 		//TODO create Ecore-Model here and save mapping from this CtClass to the created Ecore element
+		this.setMyData("BLUBBERINO");
 		
 		System.out.println(element.getSimpleName() + " implements " + markerInterface + " and thus got processed with ImplementedInterfaceProcessor");
 //		if (initialName.equals("AnotherOne")) {

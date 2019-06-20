@@ -1,11 +1,14 @@
 package mapping.condition;
 
-import spoon.processing.AbstractProcessor;
+import java.util.List;
+
+import designmodel.generation.GenerationProcessor;
+import mapping.attribute_mapping.MappedDesignmodelElement;
 
 public abstract class Condition {
 	//TODO until now only as string, has to be dispatched to actual element?
 	private String targetElement;
-	private AbstractProcessor<?> processor;
+	private GenerationProcessor<?> processor;
 
 	
 	public String getTargetElement() {
@@ -20,18 +23,19 @@ public abstract class Condition {
 		this.targetElement = targetElement;
 	}
 
-	public AbstractProcessor<?> getProcessor() {
+	public GenerationProcessor<?> getProcessor() {
 		return processor;
 	}
 
-	public void setProcessor(AbstractProcessor<?> processor) {
+	public void setProcessor(GenerationProcessor<?> processor) {
 		this.processor = processor;
 	}
 	
 	/**
-	 * Creates and sets the processor for the condition based on the specific, instantiated target name of the condition.<br>
-	 * E.g. for "condition: implements modelelement.name" it creates a processor that acts on all classes that implement the targetName
+	 * Creates and sets the processor for the condition based on the specific, instantiated target name of the condition and the attribute mappings of that IM.<br>
+	 * E.g. for "condition: implements modelelement.name" it creates a processor that acts on all classes that implement the targetName.
 	 * @param targetName
+	 * @param attributeMappings
 	 */
-	public abstract void createProcessor(String targetName);
+	public abstract void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings);
 }

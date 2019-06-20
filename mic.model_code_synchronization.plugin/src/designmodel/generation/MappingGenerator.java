@@ -69,14 +69,11 @@ public class MappingGenerator {
 			if(!imDeclaration.getCondition().getTargetElement().contentEquals("modelelement.name")) {
 				throw new NotImplementedException("Currently cannot apply conditions to other elements than 'modelelement.name'");
 			}
-			imDeclaration.getCondition().createProcessor(modelElementName);
-			this.astModel.processWith(imDeclaration.getCondition().getProcessor());
+			imDeclaration.getCondition().createProcessor(modelElementName, imDeclaration.getAttributeMappings());
+			GenerationProcessor<?> processor = imDeclaration.getCondition().getProcessor();
+			this.astModel.processWith(processor);
+			System.out.println(processor.getMyData());
 		});
 	}
-	
-	private void identifyMarkerInterfaceMechanisms(String interfaceName) {
-		this.astModel.processWith(new ImplementedInterfaceProcessor("State"));
-		//this.launcher.run();
-		this.launcher.prettyprint();
-	}
+
 }
