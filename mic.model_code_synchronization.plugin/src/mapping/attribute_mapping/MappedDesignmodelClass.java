@@ -29,7 +29,10 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 		//probably 3-tupels of structuralFeatureName (e.g. "name" here),
 		//structuralFeatureType to know what to cast to (here "EAttribute") and
 		//structuralFeatureInstanceValue to know what to set it to (here "Ready")
+		
+		//and what about this.getMappedCodeElement()? what do I do with that data?
 		EClass stateClass = (EClass) metapackage.getEClassifier(metamodelElement);
+		//where do I get the "name" from? -> shouldnt this be somewhere in the "attribute(name)" part? how do I get that info?
 		EAttribute nameAttr = (EAttribute) stateClass.getEStructuralFeature("name");
 		
 		EFactory metafactory = metapackage.getEFactoryInstance();
