@@ -17,7 +17,7 @@ public class IntegrationTesting {
 		
 		MappingParser parser = new MappingParser(mappingDirectoryPath);
 		
-		MappingGenerator mappingGenerator = new MappingGenerator("C:/Daten/MIC_Sync_Tool_Repo", parser);
+		MappingGenerator mappingGenerator = new MappingGenerator("C:/Daten/MIC_Sync_Tool_Repo/TestProject", parser);
 		mappingGenerator.buildDesignModel();
 	}
 }

@@ -6,7 +6,6 @@ import org.apache.commons.lang3.NotImplementedException;
 
 import mapping.IMappingParser;
 import mapping.MappingDeclarationDatabase;
-import mapping.ParserException;
 import spoon.Launcher;
 import spoon.compiler.Environment;
 import spoon.reflect.CtModel;
@@ -50,6 +49,8 @@ public class MappingGenerator {
 		this.astModel = this.launcher.buildModel();
 		
 		this.mappingParser = mappingParser;
+		
+		
 	}
 	
 	/**

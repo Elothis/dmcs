@@ -19,7 +19,7 @@ public class AnnotatedWithProcessor extends AbstractProcessor<CtNamedElement> {
 	public boolean isToBeProcessed(CtNamedElement candidate) {
 
 		for(CtAnnotation<? extends Annotation> a: candidate.getAnnotations()) {
-			if(a.toString().split("@")[1].contentEquals(annotationName)) {
+			if(a.toString().split("@")[1].split("\\(")[0].contentEquals(annotationName)) {
 				return true;
 			}
 		}
