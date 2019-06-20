@@ -1,7 +1,6 @@
 package test;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
@@ -40,7 +39,7 @@ class EcoreTesting {
 		EObject stateInstance = metafactory.create(stateClass);
 		stateInstance.eSet(nameAttr, "Ready");
 		
-		Utility.storeAsXMI(stateInstance, "C:/Users/Fabian/mappingDirectory");
+		Utility.storeAsXMI(stateInstance, "C:/Users/Fabian/mappingDirectory/");
 	}
 
 }
