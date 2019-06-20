@@ -58,6 +58,12 @@ public class DesignmodelFactoryImpl extends EFactoryImpl implements DesignmodelF
 		switch (eClass.getClassifierID()) {
 		case DesignmodelPackage.STATE:
 			return createState();
+		case DesignmodelPackage.COMPONENT_TYPE:
+			return createComponentType();
+		case DesignmodelPackage.INTERFACE:
+			return createInterface();
+		case DesignmodelPackage.TRANSITION:
+			return createTransition();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -72,6 +78,39 @@ public class DesignmodelFactoryImpl extends EFactoryImpl implements DesignmodelF
 	public State createState() {
 		StateImpl state = new StateImpl();
 		return state;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ComponentType createComponentType() {
+		ComponentTypeImpl componentType = new ComponentTypeImpl();
+		return componentType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Interface createInterface() {
+		InterfaceImpl interface_ = new InterfaceImpl();
+		return interface_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Transition createTransition() {
+		TransitionImpl transition = new TransitionImpl();
+		return transition;
 	}
 
 	/**

@@ -13,6 +13,17 @@
       ecorePackage="designmodel.ecore#/">
     <genClasses ecoreClass="designmodel.ecore#//State">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute designmodel.ecore#//State/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference designmodel.ecore#//State/transitions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute designmodel.ecore#//State/immediate"/>
+    </genClasses>
+    <genClasses ecoreClass="designmodel.ecore#//ComponentType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute designmodel.ecore#//ComponentType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="designmodel.ecore#//Interface">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute designmodel.ecore#//Interface/name"/>
+    </genClasses>
+    <genClasses ecoreClass="designmodel.ecore#//Transition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute designmodel.ecore#//Transition/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
