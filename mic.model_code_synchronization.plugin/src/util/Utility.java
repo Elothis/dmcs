@@ -4,9 +4,16 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 public class Utility {
 	
@@ -26,4 +33,20 @@ public class Utility {
 			e.printStackTrace();
 		} 
 	}
+	
+	public static void storeAsXMI(EObject eObject, String path) {
+	    ResourceSet resSet = new ResourceSetImpl();
+	    resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+
+	    XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(path), null);
+	    resource.getDefaultSaveOptions().put(XMIResource.OPTION_KEEP_DEFAULT_CONTENT, Boolean.TRUE);
+	    resource.getContents().add(eObject);
+
+	    try {
+	      resource.save(Collections.emptyMap());
+	    }
+	    catch (IOException exception) {
+	      exception.printStackTrace();
+	    }
+	  }
 }
