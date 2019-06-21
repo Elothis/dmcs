@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import mapping.ParserException;
+import spoon.reflect.declaration.CtNamedElement;
 
 /**
  * Representing the mapping to a value of a class in the design model.
@@ -31,14 +32,19 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 	}
 
 	@Override
-	public EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, String instanceValue) throws MappingException {
-		//TODO add parameters for structuralFeatures of the metamodelElement that shall get set as well
-		//probably 3-tupels of structuralFeatureName (e.g. "name" here),
-		//structuralFeatureType to know what to cast to (here "EAttribute") and
-		//structuralFeatureInstanceValue to know what to set it to (here "Ready")
+	public EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, CtNamedElement mappedCodeElement) throws MappingException {		
+		//TODO and what about this.getMappedCodeElement()? what do I do with that data?
+		//-> need to interpret as of what from the codestructure shall get set to the metamodelElement.field
 		
-		//and what about this.getMappedCodeElement()? what do I do with that data?
-		EClass stateClass = (EClass) metapackage.getEClassifier(metamodelElement);
+		//first look up what from the codestructure shall get mapped to some value of the metamodel element
+		//currently only 'codestructure.name' supported, rest is TODO
+		if(!this.getMappedCodeElement().getTargetValue().contentEquals("name")) {
+			throw new MappingException(this.getMappedCodeElement().getTargetValue() + " as the target value of a MappedCodeElement is currently not yet implemented.");
+		}
+		
+		this.getMappedCodeElement().getTargetValue();
+		
+		EClass metaClass = (EClass) metapackage.getEClassifier(metamodelElement);
 		
 		//test whether targetValue is of format 'attribute(xyz)'
 		String re1="(attribute)";
@@ -49,14 +55,14 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 	    if (m.find()) {
 	        String attributeName = StringUtils.substringBetween(m.group(2), "(", ")");
 
-			EAttribute classAttribute = (EAttribute) stateClass.getEStructuralFeature(attributeName);
+			EAttribute classAttribute = (EAttribute) metaClass.getEStructuralFeature(attributeName);
 			if(classAttribute == null) {
 				throw new MappingException(attributeName + " is no attribute of the meta model class!");
 			}
 			
 			EFactory metafactory = metapackage.getEFactoryInstance();
-			EObject stateInstance = metafactory.create(stateClass);
-			stateInstance.eSet(classAttribute, instanceValue);
+			EObject stateInstance = metafactory.create(metaClass);
+			stateInstance.eSet(classAttribute, mappedCodeElement.getSimpleName());
 			
 			return stateInstance;
 	    }
@@ -64,6 +70,39 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 	    	throw new MappingException(this.getTargetValue() + " as the target value of a MappedDesignmodelClass is currently not yet implemented.");
 	    }
 
+	}
+
+	@Override
+	public EObject addMappedAttribute(EPackage metapackage, EObject obj, String metamodelElement, CtNamedElement mappedCodeElement) throws MappingException {
+		//first look up what from the codestructure shall get mapped to some value of the metamodel element
+		//currently only 'codestructure.name' supported, rest is TODO
+		if(!this.getMappedCodeElement().getTargetValue().contentEquals("name")) {
+			throw new MappingException(this.getMappedCodeElement().getTargetValue() + " as the target value of a MappedCodeElement is currently not yet implemented.");
+		}
+		
+		EClass metaClass = (EClass) metapackage.getEClassifier(metamodelElement);
+
+		//test whether targetValue is of format 'attribute(xyz)'
+		String re1="(attribute)";
+	    String re2="(\\(.*\\))";
+
+	    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+	    Matcher m = p.matcher(this.getTargetValue());
+	    if (m.find()) {
+	        String attributeName = StringUtils.substringBetween(m.group(2), "(", ")");
+	        
+	        EAttribute classAttribute = (EAttribute) metaClass.getEStructuralFeature(attributeName);
+			if(classAttribute == null) {
+				throw new MappingException(attributeName + " is no attribute of the meta model class!");
+			}
+
+			obj.eSet(classAttribute, mappedCodeElement.getSimpleName());
+			
+			return obj;
+	    }
+	    else {
+	    	throw new MappingException(this.getTargetValue() + " as the target value of a MappedDesignmodelClass is currently not yet implemented.");
+	    }
 	}
 	
 }

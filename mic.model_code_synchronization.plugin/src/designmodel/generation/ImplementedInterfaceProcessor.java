@@ -36,7 +36,7 @@ public class ImplementedInterfaceProcessor extends GenerationProcessor<CtClass> 
 		this.getAttributeMappings().forEach(am -> {
 			EObject generatedDesignmodelElement;
 			try {
-				generatedDesignmodelElement = am.createDesignmodelElement(getMetapackage(), markerInterface, element.getSimpleName());
+				generatedDesignmodelElement = am.createDesignmodelElement(getMetapackage(), markerInterface, element);
 				this.addGeneratedDesignmodelElement(generatedDesignmodelElement);
 			} catch (MappingException e) {
 				e.printStackTrace();

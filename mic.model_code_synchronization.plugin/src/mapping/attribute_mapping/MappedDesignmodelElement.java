@@ -3,6 +3,8 @@ package mapping.attribute_mapping;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
+import spoon.reflect.declaration.CtNamedElement;
+
 /**
  * Abstract super class representing one attribute-mapping from designmodel element to code element.
  * Holding the mapped code element and the designmodel-element's targetValue the code element is mapped to, thus making this a complete mapping. 
@@ -48,6 +50,9 @@ public abstract class MappedDesignmodelElement {
 	 * @return created EObject
 	 * @throws MappingException 
 	 */
-	public abstract EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, String instanceValue) throws MappingException;
+	public abstract EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, CtNamedElement mappedCodeElement) throws MappingException;
 	
+	public EObject addMappedAttribute(EPackage metapackage, EObject eClass, String metamodelElement, CtNamedElement mappedCodeElement) throws MappingException {
+		return null;
+	}
 }

@@ -168,13 +168,22 @@ public interface DesignmodelPackage extends EPackage {
 	int INTERFACE__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Another Field</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE__ANOTHER_FIELD = 1;
+
+	/**
 	 * The number of structural features of the '<em>Interface</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERFACE_FEATURE_COUNT = 1;
+	int INTERFACE_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Interface</em>' class.
@@ -308,6 +317,17 @@ public interface DesignmodelPackage extends EPackage {
 	EAttribute getInterface_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link mic.model_code_synchronization.designmodel.Interface#getAnotherField <em>Another Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Another Field</em>'.
+	 * @see mic.model_code_synchronization.designmodel.Interface#getAnotherField()
+	 * @see #getInterface()
+	 * @generated
+	 */
+	EAttribute getInterface_AnotherField();
+
+	/**
 	 * Returns the meta object for class '{@link mic.model_code_synchronization.designmodel.Transition <em>Transition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -420,6 +440,14 @@ public interface DesignmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute INTERFACE__NAME = eINSTANCE.getInterface_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Another Field</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INTERFACE__ANOTHER_FIELD = eINSTANCE.getInterface_AnotherField();
 
 		/**
 		 * The meta object literal for the '{@link mic.model_code_synchronization.designmodel.impl.TransitionImpl <em>Transition</em>}' class.

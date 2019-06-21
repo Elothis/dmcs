@@ -3,6 +3,8 @@ package mapping.attribute_mapping;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
+import spoon.reflect.declaration.CtNamedElement;
+
 /**
  * Representing the mapping to a value of a reference in the design model
  * OR
@@ -32,7 +34,7 @@ public class MappedDesignmodelReference extends MappedDesignmodelElement {
 	}
 
 	@Override
-	public EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, String instanceValue) {
+	public EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, CtNamedElement mappedCodeElement) {
 		// TODO Auto-generated method stub
 		return null;
 	}

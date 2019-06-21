@@ -203,6 +203,16 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 	 * @generated
 	 */
 	@Override
+	public EAttribute getInterface_AnotherField() {
+		return (EAttribute) interfaceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTransition() {
 		return transitionEClass;
 	}
@@ -257,6 +267,7 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 
 		interfaceEClass = createEClass(INTERFACE);
 		createEAttribute(interfaceEClass, INTERFACE__NAME);
+		createEAttribute(interfaceEClass, INTERFACE__ANOTHER_FIELD);
 
 		transitionEClass = createEClass(TRANSITION);
 		createEAttribute(transitionEClass, TRANSITION__NAME);
@@ -315,6 +326,9 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 				IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInterface_Name(), theXMLTypePackage.getString(), "name", null, 0, 1, Interface.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInterface_AnotherField(), theXMLTypePackage.getString(), "anotherField", null, 0, 1,
+				Interface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 
 		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
