@@ -10,7 +10,7 @@ public class MappedDesignmodelAttribute extends MappedDesignmodelElement {
 	}
 
 	@Override
-	public EObject createDesignmodelElement(EPackage metapackage, String metamodelElement) {
+	public EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, String instanceValue) {
 		// TODO Auto-generated method stub
 		return null;
 	}

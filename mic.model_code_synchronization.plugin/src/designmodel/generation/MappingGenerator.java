@@ -95,16 +95,17 @@ public class MappingGenerator {
 			imDeclaration.getCondition().createProcessor(modelElementName, imDeclaration.getAttributeMappings(), metapackage);
 			GenerationProcessor<?> processor = imDeclaration.getCondition().getProcessor();
 			this.astModel.processWith(processor);
-			if(processor.getGeneratedDesignmodelElement() != null) {
-				savingRes.getContents().add(processor.getGeneratedDesignmodelElement());
-			}
-				
-			try {
-				savingRes.save(Collections.EMPTY_MAP);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			//add all the generated design model elements from the processor to the resourceSet of the design model xmi
+			processor.getGeneratedDesignmodelElements().forEach(e -> {
+				savingRes.getContents().add(e);
+			});
 		});
+		//save model as xmi
+		try {
+			savingRes.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private XMIResource initializePersistingResource(String output) {

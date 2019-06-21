@@ -45,6 +45,6 @@ public abstract class MappedDesignmodelElement {
 	 * Note: if depended on other holding EObject (like attribute from an EClass), metamodelElement has to notate holding class via class.name e.g.
 	 * @return
 	 */
-	public abstract EObject createDesignmodelElement(EPackage metapackage, String metamodelElement);
+	public abstract EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, String instanceValue);
 	
 }

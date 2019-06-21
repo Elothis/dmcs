@@ -1,5 +1,6 @@
 package designmodel.generation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -13,12 +14,13 @@ public abstract class GenerationProcessor<E extends CtElement> extends AbstractP
 	private List<MappedDesignmodelElement> attributeMappings;
 	private EPackage metapackage;
 	private String myData;
-	private EObject generatedDesignmodelElement;
+	private List<EObject> generatedDesignmodelElements;
 
 	public GenerationProcessor(List<MappedDesignmodelElement> attributeMappings, EPackage metapackage) {
 		super();
 		this.attributeMappings = attributeMappings;
 		this.metapackage = metapackage;
+		this.generatedDesignmodelElements = new ArrayList<>();
 	}
 
 	public EPackage getMetapackage() {
@@ -37,12 +39,21 @@ public abstract class GenerationProcessor<E extends CtElement> extends AbstractP
 		this.myData = myData;
 	}
 
-	public EObject getGeneratedDesignmodelElement() {
-		return generatedDesignmodelElement;
+	public List<EObject> getGeneratedDesignmodelElements() {
+		return generatedDesignmodelElements;
+	}
+	
+	/**
+	 * Adds an EObject to the list of generated design model elements the processor created during its process-method.
+	 * @param generatedDesignmodelElement
+	 * @return
+	 */
+	public boolean addGeneratedDesignmodelElement(EObject generatedDesignmodelElement) {
+		return this.generatedDesignmodelElements.add(generatedDesignmodelElement);
 	}
 
-	public void setGeneratedDesignmodelElement(EObject generatedDesignmodelElement) {
-		this.generatedDesignmodelElement = generatedDesignmodelElement;
+	public void setGeneratedDesignmodelElements(List<EObject> generatedDesignmodelElement) {
+		this.generatedDesignmodelElements = generatedDesignmodelElement;
 	}
 
 	public List<MappedDesignmodelElement> getAttributeMappings() {

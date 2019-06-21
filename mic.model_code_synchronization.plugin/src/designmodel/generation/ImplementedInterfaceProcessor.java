@@ -33,8 +33,9 @@ public class ImplementedInterfaceProcessor extends GenerationProcessor<CtClass> 
 	@Override
 	public void process(CtClass element) {
 		this.getAttributeMappings().forEach(am -> {
-			EObject generatedDesignmodelElement = am.createDesignmodelElement(getMetapackage(), markerInterface);
-			this.setGeneratedDesignmodelElement(generatedDesignmodelElement);
+			//TODO getSimpleName? only one instance gets saved into xmi: WHY?
+			EObject generatedDesignmodelElement = am.createDesignmodelElement(getMetapackage(), markerInterface, element.getSimpleName());
+			this.addGeneratedDesignmodelElement(generatedDesignmodelElement);
 			//TODO also save a mapping from this generated ecore element to the spoon-element (probably also in a field in GenerationProcessor)
 			//then collect these mapping infos from ecore to spoon elements and build a mappingDatabase in MappingGenerator
 		});
