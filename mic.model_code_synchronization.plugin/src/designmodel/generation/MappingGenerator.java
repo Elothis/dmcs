@@ -97,7 +97,7 @@ public class MappingGenerator {
 			this.astModel.processWith(processor);
 			//add all the generated design model elements from the processor to the resourceSet of the design model xmi
 			processor.getGeneratedDesignmodelElements().forEach(e -> {
-				savingRes.getContents().add(e);
+				if(e != null) savingRes.getContents().add(e);
 			});
 		});
 		//save model as xmi

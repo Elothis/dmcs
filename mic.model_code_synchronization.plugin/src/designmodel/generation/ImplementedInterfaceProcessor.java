@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import mapping.attribute_mapping.MappedDesignmodelElement;
+import mapping.attribute_mapping.MappingException;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.reference.CtTypeReference;
 
@@ -33,9 +34,13 @@ public class ImplementedInterfaceProcessor extends GenerationProcessor<CtClass> 
 	@Override
 	public void process(CtClass element) {
 		this.getAttributeMappings().forEach(am -> {
-			//TODO getSimpleName? only one instance gets saved into xmi: WHY?
-			EObject generatedDesignmodelElement = am.createDesignmodelElement(getMetapackage(), markerInterface, element.getSimpleName());
-			this.addGeneratedDesignmodelElement(generatedDesignmodelElement);
+			EObject generatedDesignmodelElement;
+			try {
+				generatedDesignmodelElement = am.createDesignmodelElement(getMetapackage(), markerInterface, element.getSimpleName());
+				this.addGeneratedDesignmodelElement(generatedDesignmodelElement);
+			} catch (MappingException e) {
+				e.printStackTrace();
+			}			
 			//TODO also save a mapping from this generated ecore element to the spoon-element (probably also in a field in GenerationProcessor)
 			//then collect these mapping infos from ecore to spoon elements and build a mappingDatabase in MappingGenerator
 		});

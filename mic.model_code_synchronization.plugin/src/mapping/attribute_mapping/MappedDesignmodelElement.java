@@ -38,13 +38,16 @@ public abstract class MappedDesignmodelElement {
 	}
 	
 	/**
-	 * Creates the design model element as part of the specified EPackage.
+	 * Creates the design model element as part of the specified EPackage.<br>
+	 * This is also where the targetValue of the MappedDesignmodelElement (e.g. 'attribute(name)') gets interpreted.
 	 * 
 	 * @param metapackage EPackage the model element gets created in (based on the specific meta model, containing factory etc.)
 	 * @param metamodelElement the meta model element that shall get created (type depends on the specific implementing class)
 	 * Note: if depended on other holding EObject (like attribute from an EClass), metamodelElement has to notate holding class via class.name e.g.
-	 * @return
+	 * @param instanceValue the instance value to be set of the metamodelElement
+	 * @return created EObject
+	 * @throws MappingException 
 	 */
-	public abstract EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, String instanceValue);
+	public abstract EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, String instanceValue) throws MappingException;
 	
 }
