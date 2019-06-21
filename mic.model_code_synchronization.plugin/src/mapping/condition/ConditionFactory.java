@@ -32,17 +32,8 @@ public class ConditionFactory {
 		case ANNOTATED_WITH:
 			condition = new AnnotatedWithCondition(targetElement);
 			break;
-		case HAS_NAME_OF:
-			if(codestructureType == CodestructureType.ANNOTATION) {
-				condition = new AnnotationHasNameOfCondition(targetElement);
-			}
-			else {
-				throw new ParserException("hasNameOf not yet implemented for other codestructure-types than annotations");
-			}
-			
-			break;
 			default:
-				throw new IllegalArgumentException("Unknown ConditionKeyword provided for factory class");
+				throw new ParserException("The specified condition-keyword is not yet implemented.");
 		}
 		
 		return condition;
