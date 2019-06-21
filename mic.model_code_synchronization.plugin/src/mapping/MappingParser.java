@@ -178,8 +178,6 @@ public class MappingParser implements IMappingParser {
 				Condition condition = ConditionFactory.createCondition(ConditionKeyword.getConditionKeywordFor(conditionDefinition[0]), conditionDefinition[1], imMappingDeclaration.getCodestructureType());
 				imMappingDeclaration.setCondition(condition);
 				
-				//TODO support list of conditions separated by '&'
-				
 				this.conditionParsed = true;
 				break;
 			case ATTRIBUTE_MAPPING:

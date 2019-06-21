@@ -4,7 +4,6 @@ package testpackage;
 public class BarcodeScanner {
 
 	public BarcodeScanner() {
-		// TODO Auto-generated constructor stub
 	}
 
 }

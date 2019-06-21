@@ -7,8 +7,6 @@ import org.eclipse.emf.ecore.EPackage;
 import mapping.attribute_mapping.MappedDesignmodelElement;
 import spoon.reflect.declaration.CtAnnotation;
 
-
-//TODO generics type named element best fit here?
 public class AnnotationHasNameOfProcessor extends GenerationProcessor<CtAnnotation> {
 	
 	private String nameToMatch;

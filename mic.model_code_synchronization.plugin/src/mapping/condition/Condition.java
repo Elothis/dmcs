@@ -8,7 +8,6 @@ import designmodel.generation.GenerationProcessor;
 import mapping.attribute_mapping.MappedDesignmodelElement;
 
 public abstract class Condition {
-	//TODO until now only as string, has to be dispatched to actual element?
 	private String targetElement;
 	private GenerationProcessor<?> processor;
 

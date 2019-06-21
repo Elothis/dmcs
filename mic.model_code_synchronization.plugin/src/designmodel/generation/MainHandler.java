@@ -52,7 +52,6 @@ public class MainHandler extends AbstractHandler {
 				try {
 					mappingGenerator.buildDesignModel();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	        }
