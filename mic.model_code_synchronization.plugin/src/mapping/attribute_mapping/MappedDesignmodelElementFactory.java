@@ -32,22 +32,8 @@ public class MappedDesignmodelElementFactory {
 		}
 		
 		switch (modelelementType) {
-		case ATTRIBUTE:
-			return new MappedDesignmodelAttribute(mappedDesignmodelElementTargetValue, mappedCodeElement);
 		case CLASS:
 			return new MappedDesignmodelClass(mappedDesignmodelElementTargetValue, mappedCodeElement);
-		case REFERENCE:
-			//if the target is from the target of the reference,
-			//add a MappedDesignmodelClass to the MappedDesignmodelReference and attach targetValue to it
-			if(mappedDesignmodelElementTargetValue.startsWith("target.")) {
-				mappedDesignmodelElementTargetValue = mappedDesignmodelElementTargetValue.split("target.")[1];
-				MappedDesignmodelReference reference = new MappedDesignmodelReference(mappedDesignmodelElementTargetValue, mappedCodeElement);
-				reference.setTarget(new MappedDesignmodelClass(mappedDesignmodelElementTargetValue, mappedCodeElement));
-				return reference;
-			}
-			//if the target is the reference directly (not within the target class or so),
-			//return it with the targetValue attached to it directly			
-			return new MappedDesignmodelReference(mappedDesignmodelElementTargetValue, mappedCodeElement);
 		default:
 			throw new ParserException("ModelelementType not supported");
 		

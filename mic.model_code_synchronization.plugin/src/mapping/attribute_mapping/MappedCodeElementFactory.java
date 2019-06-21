@@ -30,24 +30,10 @@ public class MappedCodeElementFactory {
 			throw new ParserException("Right hand side of an attribute-mapping cannot be empty");
 		}
 		switch (codestructureType) {
-		case ANNOTATION:
-			return new MappedCodeAnnotation(mappedCodeElementTargetValue);
 		case CLASS:
 			return new MappedCodeClass(mappedCodeElementTargetValue);
 		case INTERFACE:
 			return new MappedCodeInterface(mappedCodeElementTargetValue);
-		case METHOD:
-			//if the target is an annotation attached to a method,
-			//add a MappedCodeAnnotation to the MappedCodeMethod and attach targetValue to it
-			if(mappedCodeElementTargetValue.startsWith("annotation.")) {
-				mappedCodeElementTargetValue = mappedCodeElementTargetValue.split("annotation.")[1];
-				MappedCodeMethod mcm = new MappedCodeMethod(mappedCodeElementTargetValue);
-				mcm.setAnnotation(new MappedCodeAnnotation(mappedCodeElementTargetValue));
-				return mcm;
-			}
-			//if the target is the method directly (not an annotation attached to it or anything else),
-			//return it with the targetValue attached to it directly			
-			return new MappedCodeMethod(mappedCodeElementTargetValue);
 		default:
 			throw new ParserException("Codestructure-Type not supported");		
 		}
