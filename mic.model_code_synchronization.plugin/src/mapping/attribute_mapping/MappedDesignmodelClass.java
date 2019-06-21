@@ -30,10 +30,7 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 	}
 
 	@Override
-	public EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, CtNamedElement mappedCodeElement) throws MappingException {		
-		//TODO and what about this.getMappedCodeElement()? what do I do with that data?
-		//-> need to interpret as of what from the codestructure shall get set to the metamodelElement.field
-		
+	public EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, CtNamedElement mappedCodeElement) throws MappingException {
 		//first look up what from the codestructure shall get mapped to some value of the metamodel element
 		//currently only 'codestructure.name' supported, rest is TODO
 		if(!this.getMappedCodeElement().getTargetValue().contentEquals("name")) {
