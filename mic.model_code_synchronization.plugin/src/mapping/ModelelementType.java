@@ -23,7 +23,7 @@ public enum ModelelementType {
 	        return element;
 	      }
 	    }
-	    throw new ParserException("Unknown modelelement type defined");
+	    throw new ParserException("The specified modelelement-type is not yet implemented");
 	}
 	
 	@Override

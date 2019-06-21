@@ -52,7 +52,14 @@ public abstract class MappedDesignmodelElement {
 	 */
 	public abstract EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, CtNamedElement mappedCodeElement) throws MappingException;
 	
-	public EObject addMappedAttribute(EPackage metapackage, EObject eClass, String metamodelElement, CtNamedElement mappedCodeElement) throws MappingException {
-		return null;
-	}
+	/**
+	 * Adds an attribute to an already existing EObject. Necessary for when there are multiple attribute-mappings (separated via '&') in an .im-file.
+	 * @param metapackage
+	 * @param eClass
+	 * @param metamodelElement
+	 * @param mappedCodeElement
+	 * @return
+	 * @throws MappingException
+	 */
+	public abstract EObject addMappedAttribute(EPackage metapackage, EObject eClass, String metamodelElement, CtNamedElement mappedCodeElement) throws MappingException;
 }

@@ -18,7 +18,6 @@ import mapping.MappingDeclarationDatabase;
 import spoon.Launcher;
 import spoon.compiler.Environment;
 import spoon.reflect.CtModel;
-import util.Utility;
 
 
 /**
@@ -84,7 +83,7 @@ public class MappingGenerator {
 		
 		//initialize resource for saving the design model as xmi
 		XMIResource savingRes = initializePersistingResource(DESIGNMODEL_TARGET_PATH);
-		
+
 		this.mappingDeclarationDatabase.getMappingInstantiations().forEach((modelElementName, imDeclaration) -> {
 			//creates a processor that acts upon the specific condition target and runs it
 			if(!imDeclaration.getCondition().getTargetElement().contentEquals("modelelement.name")) {
