@@ -24,7 +24,7 @@ import util.Utility;
  * @author Fabian Glittenberg
  *
  */
-public class MappingParser implements IMappingParser {
+public class MappingDeclarationParser implements IMappingParser {
 	
 	/**
 	 * File extension of the files containing the mapping description of an integration mechanism
@@ -63,7 +63,7 @@ public class MappingParser implements IMappingParser {
 	 * Constructor instantiating a MappingParser object operating on the specified path as the directory containing the required mapping files.
 	 * @param path to the directory containing mapping files
 	 */
-	public MappingParser(String path) {
+	public MappingDeclarationParser(String path) {
 		this.path = path;
 		this.mappingDeclarationDatabase = new MappingDeclarationDatabase();
 	}

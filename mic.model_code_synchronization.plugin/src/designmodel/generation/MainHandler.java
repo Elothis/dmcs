@@ -13,7 +13,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import mappingdeclaration.IMappingParser;
-import mappingdeclaration.MappingParser;
+import mappingdeclaration.MappingDeclarationParser;
 
 
 
@@ -46,7 +46,7 @@ public class MainHandler extends AbstractHandler {
 				.append('/').append("mappingDirectory");
 				mappingDirectoryPath = sb.toString();
 	            
-	            IMappingParser mappingParser = new MappingParser(mappingDirectoryPath);
+	            IMappingParser mappingParser = new MappingDeclarationParser(mappingDirectoryPath);
 				
 	            MappingGenerator mappingGenerator = new MappingGenerator(projectPath, mappingParser);
 				try {
