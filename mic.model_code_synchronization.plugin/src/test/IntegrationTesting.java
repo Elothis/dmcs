@@ -26,7 +26,7 @@ public class IntegrationTesting {
 		MappingGenerator mappingGenerator = new MappingGenerator("C:/Daten/MIC_Sync_Tool_Repo/TestProject", parser);
 		mappingGenerator.buildDesignModel(DESIGNMODEL_TARGET_PATH);
 		
-		TransformationManager tm = mappingGenerator.getTransformationManager();
-		tm.updateCode(Utility.loadExistingModel(DESIGNMODEL_TARGET_PATH));
+//		TransformationManager tm = mappingGenerator.getTransformationManager();
+//		tm.updateCode(Utility.loadExistingModel(DESIGNMODEL_TARGET_PATH));
 	}
 }

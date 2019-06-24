@@ -8,6 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import mappingdeclaration.attribute_mapping.MappedCodeElement;
 import mappingdeclaration.attribute_mapping.MappedCodeElementFactory;
@@ -34,6 +40,10 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 	 * File extension of the file containing the instantiation of the integration mechanisms to concrete model elements
 	 */
 	public static final String MAPPING_INSTANTIATION_FILE_EXTENSION = "mapping";
+	/**
+	 * File extension of the config-file containing the path to the Ecore meta model
+	 */
+	public static final String CONFIG_FILE = "config";
 	/**
 	 * Keyword to parse for in the files defining the integration mechanisms that marks the beginning of the codestructure definition being mapped to.
 	 */
@@ -75,6 +85,7 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 	 */
 	public MappingDeclarationDatabase parseMappingDirectory() {
 		try {
+			//parse in the files defining integration mechanisms
 			Utility.getAllFilesByExtension(this.path, INTEGRATION_MECHANISM_MAPPING_DECLARATION_FILE_EXTENSION).forEach(f -> {
 				try {
 					IntegrationMechanismMappingDeclaration imDeclaration = this.parseIMFile(f);
@@ -86,12 +97,13 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 				}
 			});
 			
+			//parse in the mapping instantiation file that applies the IMs to concrete model elements
 			List<File> l = Utility.getAllFilesByExtension(this.path, MAPPING_INSTANTIATION_FILE_EXTENSION);
 			if(l.size() != 1) {
 				throw new ParserException("Please provide exactly one mapping instantiation file!");
 			}
 			Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiation = this.parseMappingInstantiationFile(l.get(0));
-			this.mappingDeclarationDatabase.setMappingInstantiations(mappingInstantiation);
+			this.mappingDeclarationDatabase.setMappingInstantiations(mappingInstantiation);			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ParserException e) {
@@ -275,6 +287,32 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 			throw new ParserException("The mapping instantiation file is empty! Please provide an instantiation from the declared integration mechanisms to model elements");
 		}
 		return mappingInstantiation;
+	}
+
+	@Override
+	public EPackage parseEcorePathToMetapackage() {
+		try {
+			List<File> l = Utility.getAllFilesByExtension(this.path, CONFIG_FILE);
+			if(l.size() != 1) {
+				throw new ParserException("Please provide exactly one configuration file!");
+			}
+			String content = new String(Files.readAllBytes(l.get(0).toPath())).trim();
+			
+			//get meta model and create metapackage from it
+			ResourceSet rs = new ResourceSetImpl();
+			rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
+			Resource res = rs.createResource(URI.createFileURI(content));
+			res.load(null);
+			EPackage metapackage = (EPackage) res.getContents().get(0);
+			
+			return metapackage;
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParserException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	
