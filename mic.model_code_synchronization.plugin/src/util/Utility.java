@@ -10,12 +10,16 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 public class Utility {
+	
+	public static final String ECORE_PATH = "C:/Daten/MIC_Sync_Tool_Repo/mic.model_code_synchronization.designmodel/model/designmodel.ecore";
 	
 	/**
 	 * Gets all files in the specified directory that have the specified file extension.
@@ -31,6 +35,14 @@ public class Utility {
 		List<File> files = (List<File>) FileUtils.listFiles(directory, extensions, true);
 		return files;
     }
+	
+	public static XMIResource loadExistingModel(String sourcePath) {
+		ResourceSet resSet = new ResourceSetImpl();
+		resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+		XMIResource res = (XMIResource) resSet.getResource(URI.createFileURI(sourcePath), true);
+		
+		return res;
+	}
 	
 	public static void writeToFile(String fileName, String output) {
 	    try {

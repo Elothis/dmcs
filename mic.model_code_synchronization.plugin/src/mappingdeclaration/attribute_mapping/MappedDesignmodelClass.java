@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
+import mapping.MappingEntry;
 import spoon.reflect.declaration.CtNamedElement;
 
 /**
@@ -98,6 +99,17 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 	    else {
 	    	throw new MappingException(this.getTargetValue() + " as the target value of a MappedDesignmodelClass is currently not yet implemented.");
 	    }
+	}
+
+	@Override
+	public MappingEntry createMappingEntry(EObject designmodelElement, CtNamedElement mappedCodeElement) {
+		MappingEntry mappingEntry = new MappingEntry();
+		mappingEntry.setDesignmodelElement(designmodelElement);
+		mappingEntry.setCodeElement(mappedCodeElement);
+		mappingEntry.setMappedDesignmodelElementValue(this.getTargetValue());
+		mappingEntry.setMappedCodeElementValue(this.getMappedCodeElement().getTargetValue());
+		
+		return mappingEntry;
 	}
 	
 }

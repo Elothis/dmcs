@@ -3,6 +3,7 @@ package mappingdeclaration.attribute_mapping;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
+import mapping.MappingEntry;
 import spoon.reflect.declaration.CtNamedElement;
 
 /**
@@ -46,7 +47,7 @@ public abstract class MappedDesignmodelElement {
 	 * @param metapackage EPackage the model element gets created in (based on the specific meta model, containing factory etc.)
 	 * @param metamodelElement the meta model element that shall get created (type depends on the specific implementing class)
 	 * Note: if depended on other holding EObject (like attribute from an EClass), metamodelElement has to notate holding class via class.name e.g.
-	 * @param instanceValue the instance value to be set of the metamodelElement
+	 * @param mappedCodeElement the code element getting mapped to the designmodel element being created
 	 * @return created EObject
 	 * @throws MappingException 
 	 */
@@ -62,4 +63,13 @@ public abstract class MappedDesignmodelElement {
 	 * @throws MappingException
 	 */
 	public abstract EObject addMappedAttribute(EPackage metapackage, EObject eClass, String metamodelElement, CtNamedElement mappedCodeElement) throws MappingException;
+
+	/**
+	 * Creates a mapping entry for TransformationManager to work on, holding all the information about what value from what designmodel element
+	 * got mapped to what value of what code element.
+	 * @param designmodelElement
+	 * @param mappedCodeElement
+	 * @return
+	 */
+	public abstract MappingEntry createMappingEntry(EObject designmodelElement, CtNamedElement mappedCodeElement);
 }

@@ -12,8 +12,10 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import mapping.TransformationManager;
 import mappingdeclaration.IMappingParser;
 import mappingdeclaration.MappingDeclarationParser;
+import util.Utility;
 
 
 
@@ -24,6 +26,11 @@ import mappingdeclaration.MappingDeclarationParser;
  * 
  */
 public class MainHandler extends AbstractHandler {
+	
+	public static final String DESIGNMODEL_TARGET_PATH = "C:/Users/Fabian/mappingDirectory/designmodel.xmi";
+	
+	private boolean designmodelExistent = false;
+	private TransformationManager transformationManager;
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -49,16 +56,22 @@ public class MainHandler extends AbstractHandler {
 	            IMappingParser mappingParser = new MappingDeclarationParser(mappingDirectoryPath);
 				
 	            MappingGenerator mappingGenerator = new MappingGenerator(projectPath, mappingParser);
-				try {
-					mappingGenerator.buildDesignModel();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+	            if(!this.designmodelExistent) {
+	            	try {
+						mappingGenerator.buildDesignModel(DESIGNMODEL_TARGET_PATH);
+						this.transformationManager = mappingGenerator.getTransformationManager();
+						this.designmodelExistent = true;
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+	            }
+	            else { //model was changed by user and he then clicked the menu entry again to propagate the changes back into the code
+	            	System.out.println("Model updated");
+	            	this.transformationManager.updateCode(Utility.loadExistingModel(DESIGNMODEL_TARGET_PATH));
+	            	
+	            }
+				
 	        }
-		
-				
-				
-			
 		}
 		return null;
 	}

@@ -6,6 +6,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
+import mapping.MappingEntry;
 import mappingdeclaration.CodestructureType;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
 import mappingdeclaration.attribute_mapping.MappingException;
@@ -37,9 +38,13 @@ public class ImplementedInterfaceProcessor extends GenerationProcessor<CtClass> 
 		//TODO save mapping from spoon-element to created designmodelelement
 		//-> how to save? which attribute of model gets mapped to what value of codestructure?
 		EObject generatedDesignmodelElement;
+		MappingEntry mappingEntry;
 		try {
 			generatedDesignmodelElement = this.getAttributeMappings().get(0).createDesignmodelElement(getMetapackage(), markerInterface, element);
+			mappingEntry = this.getAttributeMappings().get(0).createMappingEntry(generatedDesignmodelElement, element);
+			this.getMappingEntries().add(mappingEntry);
 			
+			//TODO add mapping entry for multiple mapped values
 			if(this.getAttributeMappings().size() > 1) {
 				for(int i = 1; i < this.getAttributeMappings().size(); i++) {
 					this.getAttributeMappings().get(i).addMappedAttribute(getMetapackage(), generatedDesignmodelElement, markerInterface, element);
@@ -51,11 +56,6 @@ public class ImplementedInterfaceProcessor extends GenerationProcessor<CtClass> 
 		}
 		
 		System.out.println(element.getSimpleName() + " implements " + markerInterface + " and thus got processed with ImplementedInterfaceProcessor");
-//		if (initialName.equals("AnotherOne")) {
-//			element.setSimpleName("ChangedClassName");
-//			System.out.println("Changed name: " + element.getSimpleName());
-//		}
-		//DesignmodelFactory.eINSTANCE.createState();
 		
 		/*
 		Factory factory = element.getFactory();

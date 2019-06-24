@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
+import mapping.MappingEntry;
 import mappingdeclaration.CodestructureType;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
 import spoon.processing.AbstractProcessor;
@@ -16,6 +17,7 @@ public abstract class GenerationProcessor<T extends CtElement> extends AbstractP
 	private EPackage metapackage;
 	private List<EObject> generatedDesignmodelElements;
 	private CodestructureType codestructureType;
+	private List<MappingEntry> mappingEntries;
 
 	public GenerationProcessor(List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType, EPackage metapackage) {
 		super();
@@ -23,6 +25,15 @@ public abstract class GenerationProcessor<T extends CtElement> extends AbstractP
 		this.metapackage = metapackage;
 		this.generatedDesignmodelElements = new ArrayList<>();
 		this.codestructureType = codestructureType;
+		this.mappingEntries = new ArrayList<>();
+	}
+
+	public List<MappingEntry> getMappingEntries() {
+		return mappingEntries;
+	}
+
+	public void setMappingEntries(List<MappingEntry> mappingEntries) {
+		this.mappingEntries = mappingEntries;
 	}
 
 	public EPackage getMetapackage() {

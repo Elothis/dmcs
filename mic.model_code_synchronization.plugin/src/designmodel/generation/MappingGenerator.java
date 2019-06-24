@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import mapping.TransformationManager;
 import mappingdeclaration.IMappingParser;
 import mappingdeclaration.MappingDeclarationDatabase;
 import spoon.Launcher;
@@ -31,13 +32,13 @@ public class MappingGenerator {
 	
 	//TODO parse these from .mapping file or so
 	public static final String ECORE_PATH = "C:/Daten/MIC_Sync_Tool_Repo/mic.model_code_synchronization.designmodel/model/designmodel.ecore";
-	public static final String DESIGNMODEL_TARGET_PATH = "C:/Users/Fabian/mappingDirectory/designmodel.xmi";
 	
 	private Launcher launcher;
 	private String projectPath;
 	private CtModel astModel;
 	private IMappingParser mappingParser;
 	private MappingDeclarationDatabase mappingDeclarationDatabase;
+	private TransformationManager transformationManager;
 	
 	public String getDirectoryPath() {
 		return projectPath;
@@ -63,16 +64,17 @@ public class MappingGenerator {
 		
 		this.mappingParser = mappingParser;
 		
-		
+		this.transformationManager = new TransformationManager(this.launcher);
 	}
 	
 	/**
 	 * Called when clicking context menu entry on Java Project.
 	 * Parses in the mapping file and starts the process of creating the design model on the basis of the mapping file and the Java source code
 	 * of the underlying project.
+	 * @param designmodelTargetPath 
 	 * @throws IOException 
 	 */
-	public void buildDesignModel() throws IOException {
+	public void buildDesignModel(String designmodelTargetPath) throws IOException {
 		this.mappingDeclarationDatabase = this.mappingParser.parseMappingDirectory();
 		//get meta model and create metapackage from it
 		ResourceSet rs = new ResourceSetImpl();
@@ -82,7 +84,7 @@ public class MappingGenerator {
 		EPackage metapackage = (EPackage) res.getContents().get(0);
 		
 		//initialize resource for saving the design model as xmi
-		XMIResource savingRes = initializePersistingResource(DESIGNMODEL_TARGET_PATH);
+		XMIResource savingRes = initializePersistationResource(designmodelTargetPath);
 
 		this.mappingDeclarationDatabase.getMappingInstantiations().forEach((modelElementName, imDeclaration) -> {
 			//creates a processor that acts upon the specific condition target and runs it
@@ -98,7 +100,14 @@ public class MappingGenerator {
 			processor.getGeneratedDesignmodelElements().forEach(e -> {
 				if(e != null) savingRes.getContents().add(e);
 			});
+			//add all the generated mapping entries from the processor to the transformation manager
+			processor.getMappingEntries().forEach(e -> {
+				this.transformationManager.getMappings().add(e);
+			});
 		});
+		//set existent design model in the transformation manager
+		this.transformationManager.setExistentDesignmodel(savingRes);
+		
 		//save model as xmi
 		try {
 			savingRes.save(Collections.EMPTY_MAP);
@@ -107,14 +116,18 @@ public class MappingGenerator {
 		}
 	}
 	
-	private XMIResource initializePersistingResource(String output) {
+	private XMIResource initializePersistationResource(String outputPath) {
 		ResourceSet savingResSet = new ResourceSetImpl();
 		savingResSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 
-		XMIResource savingRes = (XMIResource) savingResSet.createResource(URI.createFileURI(DESIGNMODEL_TARGET_PATH), null);
+		XMIResource savingRes = (XMIResource) savingResSet.createResource(URI.createFileURI(outputPath), null);
 		savingRes.getDefaultSaveOptions().put(XMIResource.OPTION_KEEP_DEFAULT_CONTENT, Boolean.TRUE);
 		
 		return savingRes;
 	}
 
+	public TransformationManager getTransformationManager() {
+		return this.transformationManager;
+	}
+	
 }
