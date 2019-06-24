@@ -6,21 +6,42 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
+import mapping.CodestructureType;
 import mapping.attribute_mapping.MappedDesignmodelElement;
 import mapping.attribute_mapping.MappingException;
 import spoon.reflect.declaration.CtAnnotation;
+import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtInterface;
 import spoon.reflect.declaration.CtNamedElement;
 
+//TODO maybe do AnnotatedWithProcessor<T extends CtNamedElement> to then instantiate the concrete processor based on the codestructure-type
+//defined in the mapping file
 public class AnnotatedWithProcessor extends GenerationProcessor<CtNamedElement> {
 	private String annotationName;
 	
-	public AnnotatedWithProcessor(String annotationName, List<MappedDesignmodelElement> attributeMappings, EPackage metapackage) {
-		super(attributeMappings, metapackage);
+	public AnnotatedWithProcessor(String annotationName, List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType, EPackage metapackage) {
+		super(attributeMappings, codestructureType, metapackage);
 		this.annotationName = annotationName;
 	}
 
 	@Override
 	public boolean isToBeProcessed(CtNamedElement candidate) {
+		//first check whether the candidate getting visited here is of the type defined in the mapping-file
+		switch(this.getCodestructureType()) {
+		case CLASS:
+			if(!(candidate instanceof CtClass)) {
+				return false;
+			}
+			break;
+		case INTERFACE:
+			if(!(candidate instanceof CtInterface)) {
+				return false;
+			}
+			break;
+		default:
+			break;
+		
+		}
 
 		for(CtAnnotation<? extends Annotation> a: candidate.getAnnotations()) {
 			if(a.toString().split("@")[1].split("\\(")[0].contentEquals(annotationName)) {

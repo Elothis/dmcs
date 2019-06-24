@@ -8,8 +8,7 @@ package mapping;
  */
 public enum ModelelementType {
 	CLASS("class"),
-	ATTRIBUTE("attribute"),
-	REFERENCE("reference");
+	ATTRIBUTE("attribute");
 	
 	private String textRepresentation;
 	

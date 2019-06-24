@@ -6,6 +6,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
+import mapping.CodestructureType;
 import mapping.attribute_mapping.MappedDesignmodelElement;
 import mapping.attribute_mapping.MappingException;
 import spoon.reflect.declaration.CtClass;
@@ -15,8 +16,8 @@ import spoon.reflect.reference.CtTypeReference;
 public class ImplementedInterfaceProcessor extends GenerationProcessor<CtClass> {
 	public String markerInterface;
 
-	public ImplementedInterfaceProcessor(String markerInterface, List<MappedDesignmodelElement> attributeMappings, EPackage metapackage) {
-		super(attributeMappings, metapackage);
+	public ImplementedInterfaceProcessor(String markerInterface, List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType, EPackage metapackage) {
+		super(attributeMappings, codestructureType, metapackage);
 		this.markerInterface = markerInterface;
 	}
 
@@ -33,6 +34,8 @@ public class ImplementedInterfaceProcessor extends GenerationProcessor<CtClass> 
 
 	@Override
 	public void process(CtClass element) {
+		//TODO save mapping from spoon-element to created designmodelelement
+		//-> how to save? which attribute of model gets mapped to what value of codestructure?
 		EObject generatedDesignmodelElement;
 		try {
 			generatedDesignmodelElement = this.getAttributeMappings().get(0).createDesignmodelElement(getMetapackage(), markerInterface, element);

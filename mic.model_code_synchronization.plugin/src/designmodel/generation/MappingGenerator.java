@@ -91,7 +91,7 @@ public class MappingGenerator {
 			}
 			//creates the respective processor, handing over the modelelement.name,
 			//the attribute mappings of the IM and the metapackage of the meta model that the design model gets instantiated with
-			imDeclaration.getCondition().createProcessor(modelElementName, imDeclaration.getAttributeMappings(), metapackage);
+			imDeclaration.getCondition().createProcessor(modelElementName, imDeclaration.getAttributeMappings(), imDeclaration.getCodestructureType(), metapackage);
 			GenerationProcessor<?> processor = imDeclaration.getCondition().getProcessor();
 			this.astModel.processWith(processor);
 			//add all the generated design model elements from the processor to the resourceSet of the design model xmi

@@ -5,6 +5,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 
 import designmodel.generation.GenerationProcessor;
+import mapping.CodestructureType;
 import mapping.attribute_mapping.MappedDesignmodelElement;
 
 public abstract class Condition {
@@ -38,5 +39,5 @@ public abstract class Condition {
 	 * @param targetName
 	 * @param attributeMappings
 	 */
-	public abstract void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings, EPackage metapackage);
+	public abstract void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType, EPackage metapackage);
 }
