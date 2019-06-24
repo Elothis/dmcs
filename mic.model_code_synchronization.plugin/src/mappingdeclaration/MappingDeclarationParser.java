@@ -290,7 +290,7 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 	}
 
 	@Override
-	public EPackage parseEcorePathToMetapackage() {
+	public EPackage parseConfigFileToMetaPackage() {
 		try {
 			List<File> l = Utility.getAllFilesByExtension(this.path, CONFIG_FILE);
 			if(l.size() != 1) {

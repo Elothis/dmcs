@@ -35,7 +35,7 @@ public class MappingGenerator {
 	private Launcher launcher;
 	private String projectPath;
 	private CtModel astModel;
-	private IMappingDeclarationParser mappingParser;
+	private IMappingDeclarationParser mappingDeclarationParser;
 	private MappingDeclarationDatabase mappingDeclarationDatabase;
 	private TransformationManager transformationManager;
 	
@@ -61,7 +61,7 @@ public class MappingGenerator {
 		
 		this.astModel = this.launcher.buildModel();
 		
-		this.mappingParser = mappingParser;
+		this.mappingDeclarationParser = mappingParser;
 		
 		this.transformationManager = new TransformationManager(this.launcher);
 	}
@@ -74,9 +74,9 @@ public class MappingGenerator {
 	 * @throws IOException 
 	 */
 	public void buildDesignModel(String designmodelTargetPath) throws IOException {
-		this.mappingDeclarationDatabase = this.mappingParser.parseMappingDirectory();
+		this.mappingDeclarationDatabase = this.mappingDeclarationParser.parseMappingDirectory();
 
-		EPackage metapackage = this.mappingParser.parseEcorePathToMetapackage();
+		EPackage metapackage = this.mappingDeclarationParser.parseConfigFileToMetaPackage();
 		
 		//initialize resource for saving the design model as xmi
 		XMIResource savingRes = initializePersistationResource(designmodelTargetPath);
