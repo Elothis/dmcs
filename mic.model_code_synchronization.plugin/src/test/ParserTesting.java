@@ -3,7 +3,7 @@ package test;
 import org.junit.jupiter.api.Test;
 
 import designmodel.generation.MappingGenerator;
-import mapping.MappingParser;
+import mappingdeclaration.MappingParser;
 
 class ParserTesting {
 

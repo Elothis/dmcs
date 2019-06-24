@@ -1,4 +1,4 @@
-package mapping;
+package mappingdeclaration;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,13 +9,13 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import mapping.attribute_mapping.MappedCodeElement;
-import mapping.attribute_mapping.MappedCodeElementFactory;
-import mapping.attribute_mapping.MappedDesignmodelElement;
-import mapping.attribute_mapping.MappedDesignmodelElementFactory;
-import mapping.condition.Condition;
-import mapping.condition.ConditionFactory;
-import mapping.condition.ConditionKeyword;
+import mappingdeclaration.attribute_mapping.MappedCodeElement;
+import mappingdeclaration.attribute_mapping.MappedCodeElementFactory;
+import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
+import mappingdeclaration.attribute_mapping.MappedDesignmodelElementFactory;
+import mappingdeclaration.condition.Condition;
+import mappingdeclaration.condition.ConditionFactory;
+import mappingdeclaration.condition.ConditionKeyword;
 import util.Utility;
 
 /**

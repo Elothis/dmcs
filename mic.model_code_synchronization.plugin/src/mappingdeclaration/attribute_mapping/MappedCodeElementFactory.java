@@ -1,7 +1,7 @@
-package mapping.attribute_mapping;
+package mappingdeclaration.attribute_mapping;
 
-import mapping.CodestructureType;
-import mapping.ParserException;
+import mappingdeclaration.CodestructureType;
+import mappingdeclaration.ParserException;
 
 /**
  * Factory for creating concrete instances of MappedCodeElements

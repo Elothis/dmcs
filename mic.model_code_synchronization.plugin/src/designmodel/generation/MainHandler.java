@@ -12,8 +12,8 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import mapping.IMappingParser;
-import mapping.MappingParser;
+import mappingdeclaration.IMappingParser;
+import mappingdeclaration.MappingParser;
 
 
 

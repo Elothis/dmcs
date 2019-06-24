@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import mapping.IMappingParser;
-import mapping.MappingDeclarationDatabase;
+import mappingdeclaration.IMappingParser;
+import mappingdeclaration.MappingDeclarationDatabase;
 import spoon.Launcher;
 import spoon.compiler.Environment;
 import spoon.reflect.CtModel;

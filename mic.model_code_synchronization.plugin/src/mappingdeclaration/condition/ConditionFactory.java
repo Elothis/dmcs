@@ -1,7 +1,7 @@
-package mapping.condition;
+package mappingdeclaration.condition;
 
-import mapping.CodestructureType;
-import mapping.ParserException;
+import mappingdeclaration.CodestructureType;
+import mappingdeclaration.ParserException;
 
 /**
  * Factory for creating concrete Conditions based on the ConditionKeyword parsed from the mapping file and the targetElement followed.

@@ -1,4 +1,4 @@
-package mapping;
+package mappingdeclaration;
 
 import java.util.ArrayList;
 import java.util.List;

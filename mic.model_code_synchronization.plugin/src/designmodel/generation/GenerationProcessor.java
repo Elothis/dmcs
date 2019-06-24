@@ -6,8 +6,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
-import mapping.CodestructureType;
-import mapping.attribute_mapping.MappedDesignmodelElement;
+import mappingdeclaration.CodestructureType;
+import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.declaration.CtElement;
 

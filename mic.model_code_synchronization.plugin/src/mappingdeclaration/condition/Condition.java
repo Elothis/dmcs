@@ -1,12 +1,12 @@
-package mapping.condition;
+package mappingdeclaration.condition;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
 
 import designmodel.generation.GenerationProcessor;
-import mapping.CodestructureType;
-import mapping.attribute_mapping.MappedDesignmodelElement;
+import mappingdeclaration.CodestructureType;
+import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
 
 public abstract class Condition {
 	private String targetElement;

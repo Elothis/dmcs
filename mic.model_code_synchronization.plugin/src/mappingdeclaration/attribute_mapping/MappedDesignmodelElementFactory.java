@@ -1,7 +1,7 @@
-package mapping.attribute_mapping;
+package mappingdeclaration.attribute_mapping;
 
-import mapping.ModelelementType;
-import mapping.ParserException;
+import mappingdeclaration.ModelelementType;
+import mappingdeclaration.ParserException;
 
 /**
  * Factory for creating concrete MappedDesignmodelElements.

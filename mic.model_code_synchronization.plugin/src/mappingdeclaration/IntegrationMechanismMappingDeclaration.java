@@ -1,11 +1,11 @@
-package mapping;
+package mappingdeclaration;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import mapping.attribute_mapping.MappedDesignmodelElement;
-import mapping.condition.Condition;
+import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
+import mappingdeclaration.condition.Condition;
 
 /**
  * Class holding all data declared in one mapping file that declares an integration mechanism.

@@ -1,4 +1,4 @@
-package mapping.attribute_mapping;
+package mappingdeclaration.attribute_mapping;
 
 /**
  * Representing the mapping to the value of an inteface in the code.

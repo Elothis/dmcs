@@ -1,4 +1,4 @@
-package mapping;
+package mappingdeclaration;
 
 /**
  * Exception getting thrown when something goes wrong while parsing the mappings.

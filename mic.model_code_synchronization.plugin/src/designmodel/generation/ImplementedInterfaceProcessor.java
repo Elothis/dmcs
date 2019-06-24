@@ -6,9 +6,9 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
-import mapping.CodestructureType;
-import mapping.attribute_mapping.MappedDesignmodelElement;
-import mapping.attribute_mapping.MappingException;
+import mappingdeclaration.CodestructureType;
+import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
+import mappingdeclaration.attribute_mapping.MappingException;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.reference.CtTypeReference;
 

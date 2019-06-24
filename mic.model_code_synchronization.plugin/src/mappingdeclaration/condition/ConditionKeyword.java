@@ -1,6 +1,6 @@
-package mapping.condition;
+package mappingdeclaration.condition;
 
-import mapping.ParserException;
+import mappingdeclaration.ParserException;
 
 /**
  * Supported keywords defined here to describe the condition element in the mapping files.

@@ -1,4 +1,4 @@
-package mapping.attribute_mapping;
+package mappingdeclaration.attribute_mapping;
 
 /**
  * Represents the mapping to a value of a class in the code.
