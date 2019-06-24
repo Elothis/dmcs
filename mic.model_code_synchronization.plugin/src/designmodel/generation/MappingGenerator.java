@@ -29,9 +29,6 @@ import spoon.reflect.CtModel;
  */
 public class MappingGenerator {
 	
-	//TODO parse these from .mapping file or so
-	//public static final String ECORE_PATH = "C:/Daten/MIC_Sync_Tool_Repo/mic.model_code_synchronization.designmodel/model/designmodel.ecore";
-	
 	private Launcher launcher;
 	private String projectPath;
 	private CtModel astModel;

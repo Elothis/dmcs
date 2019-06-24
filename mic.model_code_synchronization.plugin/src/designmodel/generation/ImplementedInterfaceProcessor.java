@@ -35,16 +35,16 @@ public class ImplementedInterfaceProcessor extends GenerationProcessor<CtClass> 
 
 	@Override
 	public void process(CtClass element) {
-		//TODO save mapping from spoon-element to created designmodelelement
-		//-> how to save? which attribute of model gets mapped to what value of codestructure?
 		EObject generatedDesignmodelElement;
 		MappingEntry mappingEntry;
 		try {
+			//create design model element
 			generatedDesignmodelElement = this.getAttributeMappings().get(0).createDesignmodelElement(getMetapackage(), markerInterface, element);
+			//add mapping entry from the created designmodel element to the code element
 			mappingEntry = this.getAttributeMappings().get(0).createMappingEntry(generatedDesignmodelElement, element);
 			this.getMappingEntries().add(mappingEntry);
 			
-			//TODO add mapping entry for multiple mapped values
+			//TODO add mapping entries for multiple mapped values
 			if(this.getAttributeMappings().size() > 1) {
 				for(int i = 1; i < this.getAttributeMappings().size(); i++) {
 					this.getAttributeMappings().get(i).addMappedAttribute(getMetapackage(), generatedDesignmodelElement, markerInterface, element);
