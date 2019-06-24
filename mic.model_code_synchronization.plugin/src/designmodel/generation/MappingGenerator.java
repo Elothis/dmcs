@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import mapping.TransformationManager;
-import mappingdeclaration.IMappingParser;
+import mappingdeclaration.IMappingDeclarationParser;
 import mappingdeclaration.MappingDeclarationDatabase;
 import spoon.Launcher;
 import spoon.compiler.Environment;
@@ -36,7 +36,7 @@ public class MappingGenerator {
 	private Launcher launcher;
 	private String projectPath;
 	private CtModel astModel;
-	private IMappingParser mappingParser;
+	private IMappingDeclarationParser mappingParser;
 	private MappingDeclarationDatabase mappingDeclarationDatabase;
 	private TransformationManager transformationManager;
 	
@@ -48,7 +48,7 @@ public class MappingGenerator {
 	 * Constructor, taking the project path of the target Java program as parameter.
 	 * @param projectPath
 	 */
-	public MappingGenerator(String projectPath, IMappingParser mappingParser) {
+	public MappingGenerator(String projectPath, IMappingDeclarationParser mappingParser) {
 		this.projectPath = projectPath;
 		this.launcher = new Launcher();
 		this.launcher.addInputResource(projectPath);

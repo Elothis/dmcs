@@ -24,7 +24,7 @@ import util.Utility;
  * @author Fabian Glittenberg
  *
  */
-public class MappingDeclarationParser implements IMappingParser {
+public class MappingDeclarationParser implements IMappingDeclarationParser {
 	
 	/**
 	 * File extension of the files containing the mapping description of an integration mechanism

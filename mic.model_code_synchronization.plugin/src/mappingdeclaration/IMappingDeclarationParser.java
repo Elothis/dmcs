@@ -1,5 +1,5 @@
 package mappingdeclaration;
 
-public interface IMappingParser {
+public interface IMappingDeclarationParser {
 	public MappingDeclarationDatabase parseMappingDirectory();
 }

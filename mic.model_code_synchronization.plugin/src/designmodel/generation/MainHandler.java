@@ -13,7 +13,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import mapping.TransformationManager;
-import mappingdeclaration.IMappingParser;
+import mappingdeclaration.IMappingDeclarationParser;
 import mappingdeclaration.MappingDeclarationParser;
 import util.Utility;
 
@@ -53,7 +53,7 @@ public class MainHandler extends AbstractHandler {
 				.append('/').append("mappingDirectory");
 				mappingDirectoryPath = sb.toString();
 	            
-	            IMappingParser mappingParser = new MappingDeclarationParser(mappingDirectoryPath);
+	            IMappingDeclarationParser mappingParser = new MappingDeclarationParser(mappingDirectoryPath);
 				
 	            MappingGenerator mappingGenerator = new MappingGenerator(projectPath, mappingParser);
 	            if(!this.designmodelExistent) {
