@@ -8,8 +8,10 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import mapping.TransformationManager;
@@ -66,8 +68,28 @@ public class MainHandler extends AbstractHandler {
 					}
 	            }
 	            else { //model was changed by user and he then clicked the menu entry again to propagate the changes back into the code
-	            	System.out.println("Model updated");
-	            	this.transformationManager.updateCode(Utility.loadExistingModel(DESIGNMODEL_TARGET_PATH));
+	            	MessageDialog dialog = new MessageDialog(Display.getDefault().getActiveShell(),
+	            			"Synchronization direction",
+	            			null,
+	            		    "Do you want to regenerate the model or update the code based on modifications applied to the existing model?",
+	            		    MessageDialog.QUESTION,
+	            		    new String[] { "Regenerate model", "Update code"},
+	            		    0);
+	            		int result = dialog.open();
+	            		System.out.println("dialog result = " + result);
+	            	if(result == 1) {
+	            		System.out.println("Model updated");
+		            	this.transformationManager.updateCode(Utility.loadExistingModel(DESIGNMODEL_TARGET_PATH));
+	            	}
+	            	else { //user wants to regenerate the model based on the current state of the code
+	            		try {
+	            			//regenerate the design model from scratch
+							mappingGenerator.buildDesignModel(DESIGNMODEL_TARGET_PATH);
+							this.transformationManager = mappingGenerator.getTransformationManager();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+	            	}
 	            	
 	            }
 				
