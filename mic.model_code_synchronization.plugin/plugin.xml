@@ -16,9 +16,9 @@
             locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
          <command
                commandId="mic.model_code_synchronization.plugin.generate"
-               label="Generate Model"
+               label="Synchronize Model and Code"
                style="push"
-               tooltip="Generates Model">
+               tooltip="Synchronizes the underlying code with a design model">
             <visibleWhen
                   checkEnabled="false">
                <with
