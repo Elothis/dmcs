@@ -14,4 +14,11 @@
             genModel="model/designmodel.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated designmodel -->
+      <parser
+            type="designmodel"
+            class="mic.model_code_synchronization.designmodel.util.DesignmodelResourceFactoryImpl"/>
+   </extension>
+
 </plugin>

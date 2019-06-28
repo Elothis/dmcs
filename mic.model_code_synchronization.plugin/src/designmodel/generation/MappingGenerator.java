@@ -3,6 +3,7 @@ package designmodel.generation;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.UUID;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.eclipse.emf.common.util.URI;
@@ -90,7 +91,10 @@ public class MappingGenerator {
 			this.astModel.processWith(processor);
 			//add all the generated design model elements from the processor to the resourceSet of the design model xmi
 			processor.getGeneratedDesignmodelElements().forEach(e -> {
-				if(e != null) savingRes.getContents().add(e);
+				if(e != null) {
+					savingRes.setID(e, UUID.randomUUID().toString());
+					savingRes.getContents().add(e);
+				}
 			});
 			//add all the generated mapping entries from the processor to the transformation manager
 			processor.getMappingEntries().forEach(e -> {
@@ -113,7 +117,7 @@ public class MappingGenerator {
 		savingResSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 
 		XMIResource savingRes = (XMIResource) savingResSet.createResource(URI.createFileURI(outputPath), null);
-		savingRes.getDefaultSaveOptions().put(XMIResource.OPTION_KEEP_DEFAULT_CONTENT, Boolean.TRUE);
+		//savingRes.getDefaultSaveOptions().put(XMIResource.OPTION_KEEP_DEFAULT_CONTENT, Boolean.TRUE);
 		
 		return savingRes;
 	}

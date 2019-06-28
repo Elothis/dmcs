@@ -3,6 +3,7 @@ package mappingdeclaration.attribute_mapping;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -35,7 +36,7 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 		//first look up what from the codestructure shall get mapped to some value of the metamodel element
 		//currently only 'codestructure.name' supported, rest is TODO
 		if(!this.getMappedCodeElement().getTargetValue().contentEquals("name")) {
-			throw new MappingException(this.getMappedCodeElement().getTargetValue() + " as the target value of a MappedCodeElement is currently not yet implemented.");
+			throw new NotImplementedException(this.getMappedCodeElement().getTargetValue() + " as the target value of a MappedCodeElement is currently not yet implemented.");
 		}
 		
 		this.getMappedCodeElement().getTargetValue();
@@ -63,7 +64,7 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 			return stateInstance;
 	    }
 	    else {
-	    	throw new MappingException(this.getTargetValue() + " as the target value of a MappedDesignmodelClass is currently not yet implemented.");
+	    	throw new NotImplementedException(this.getTargetValue() + " as the target value of a MappedDesignmodelClass is currently not yet implemented.");
 	    }
 
 	}
@@ -97,7 +98,7 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 			return obj;
 	    }
 	    else {
-	    	throw new MappingException(this.getTargetValue() + " as the target value of a MappedDesignmodelClass is currently not yet implemented.");
+	    	throw new NotImplementedException(this.getTargetValue() + " as the target value of a MappedDesignmodelClass is currently not yet implemented.");
 	    }
 	}
 

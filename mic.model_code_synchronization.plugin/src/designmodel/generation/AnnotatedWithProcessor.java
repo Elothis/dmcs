@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
+import mapping.MappingEntry;
 import mappingdeclaration.CodestructureType;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
 import mappingdeclaration.attribute_mapping.MappingException;
@@ -52,8 +53,12 @@ public class AnnotatedWithProcessor extends GenerationProcessor<CtNamedElement> 
 	@Override
 	public void process(CtNamedElement element) {
 		EObject generatedDesignmodelElement;
+		MappingEntry mappingEntry;
 		try {
 			generatedDesignmodelElement = this.getAttributeMappings().get(0).createDesignmodelElement(getMetapackage(), annotationName, element);
+			//add mapping entry from the created designmodel element to the code element
+			mappingEntry = this.getAttributeMappings().get(0).createMappingEntry(generatedDesignmodelElement, element);
+			this.getMappingEntries().add(mappingEntry);
 			
 			if(this.getAttributeMappings().size() > 1) {
 				for(int i = 1; i < this.getAttributeMappings().size(); i++) {

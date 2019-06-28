@@ -9,8 +9,8 @@
     copyrightFields="false" operationReflection="true" importOrganizing="true">
   <foreignModel>designmodel.ecore</foreignModel>
   <testsDirectory xsi:nil="true"/>
-  <genPackages prefix="Designmodel" basePackage="mic.model_code_synchronization" disposableProviderFactory="true"
-      ecorePackage="designmodel.ecore#/">
+  <genPackages prefix="Designmodel" basePackage="mic.model_code_synchronization" resource="XMI"
+      disposableProviderFactory="true" ecorePackage="designmodel.ecore#/">
     <genClasses ecoreClass="designmodel.ecore#//State">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute designmodel.ecore#//State/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference designmodel.ecore#//State/transitions"/>

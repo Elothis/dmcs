@@ -46,5 +46,10 @@ public class MappingEntry {
 	public void setMappedDesignmodelElementValue(String mappedDesignmodelElementValue) {
 		this.mappedDesignmodelElementValue = mappedDesignmodelElementValue;
 	}
+	@Override
+	public String toString() {
+		return codeElement.getSimpleName() + " - " + designmodelElement.eClass().getName() + " - " +
+				mappedCodeElementValue + " - " + mappedDesignmodelElementValue;
+	}
 
 }
