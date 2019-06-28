@@ -120,9 +120,14 @@ public class TransformationManager {
 				//-> currently just implemented as deleting it (TODO is full refactoring through renaming it instead of deleting it)
 				System.out.println("deleting at " + entry.getCodeElement().getPosition().getCompilationUnit().getFile());
 				entry.getCodeElement().getPosition().getCompilationUnit().getFile().delete();
-				String newFileName = entry.getCodeElement().getPosition().getCompilationUnit().getFile().toString().split("\\.java")[0].split("\\\\")[0];
+				//setting the path to the .java-file of the possibly renamed code element
+				String pathWithoutJavaExtension = entry.getCodeElement().getPosition().getCompilationUnit().getFile().toString().split("\\.java")[0];
+				String[] a = pathWithoutJavaExtension.split("\\\\");
+				String newFileName = pathWithoutJavaExtension.split(a[a.length-1])[0] + entry.getCodeElement().getSimpleName() + ".java";
 				entry.getCodeElement().getPosition().getCompilationUnit().setFile(new File(newFileName));
 				//entry.getCodeElement().getPosition().getFile().delete();
+				
+				//TODO changes in the code do get lost when renaming the files and creating new ones
 				
 		    }
 		    else {
