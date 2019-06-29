@@ -8,14 +8,10 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 
-import mappingdeclaration.attribute_mapping.MappingException;
 import spoon.Launcher;
-import spoon.support.reflect.cu.position.SourcePositionImpl;
 
 public class TransformationManager {
 	private List<MappingEntry> mappings;
@@ -129,6 +125,19 @@ public class TransformationManager {
 				
 				//TODO changes in the code do get lost when renaming the files and creating new ones
 				
+//				CompilationUnit newCu = entry.getCodeElement().getFactory().Core().createCompilationUnit();
+//				newCu.setFile(new File(newFileName));
+//				JDTTreeBuilder jdtTreeBuilder = new JDTTreeBuilder(this.launcher.createFactory());
+//				entry.getCodeElement().getFactory().Core().createBodyHolderSourcePosition(newCu,
+//						entry.getCodeElement().getPosition().getSourceStart(),
+//						entry.getCodeElement().getPosition().getSourceEnd(),
+//						entry.getCodeElement().getPosition().getSourceStart()+1,
+//						entry.getCodeElement().getPosition().getSourceStart()+1,
+//						entry.getCodeElement().getPosition().getSourceStart()+1,
+//						entry.getCodeElement().getPosition().getSourceStart()+1,
+//						entry.getCodeElement().getPosition().getSourceStart()+1,
+//						entry.getCodeElement().getPosition().getSourceStart()+1,
+//						jdtTreeBuilder.getContextBuilder().getCompilationUnitLineSeparatorPositions());
 		    }
 		    else {
 		    	throw new NotImplementedException(entry.getMappedDesignmodelElementValue() + " as the target value of a MappedDesignmodelClass is currently not yet implemented.");
