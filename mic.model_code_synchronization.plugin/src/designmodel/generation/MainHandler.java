@@ -71,9 +71,9 @@ public class MainHandler extends AbstractHandler {
 	            	MessageDialog dialog = new MessageDialog(Display.getDefault().getActiveShell(),
 	            			"Synchronization direction",
 	            			null,
-	            		    "Do you want to regenerate the model or update the code based on modifications applied to the existing model?",
+	            		    "Did you change the code base or the design model?",
 	            		    MessageDialog.QUESTION,
-	            		    new String[] { "Regenerate model", "Update code"},
+	            		    new String[] { "I changed some code", "I updated the design model"},
 	            		    0);
 	            		int result = dialog.open();
 	            		System.out.println("dialog result = " + result);
