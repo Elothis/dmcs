@@ -20,7 +20,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute designmodel.ecore#//ComponentType/name"/>
     </genClasses>
     <genClasses ecoreClass="designmodel.ecore#//Interface">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute designmodel.ecore#//Interface/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute designmodel.ecore#//Interface/interfaceName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute designmodel.ecore#//Interface/anotherField"/>
     </genClasses>
     <genClasses ecoreClass="designmodel.ecore#//Transition">

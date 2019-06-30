@@ -159,13 +159,13 @@ public interface DesignmodelPackage extends EPackage {
 	int INTERFACE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Interface Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERFACE__NAME = 0;
+	int INTERFACE__INTERFACE_NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>Another Field</b></em>' attribute.
@@ -306,15 +306,15 @@ public interface DesignmodelPackage extends EPackage {
 	EClass getInterface();
 
 	/**
-	 * Returns the meta object for the attribute '{@link mic.model_code_synchronization.designmodel.Interface#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link mic.model_code_synchronization.designmodel.Interface#getInterfaceName <em>Interface Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see mic.model_code_synchronization.designmodel.Interface#getName()
+	 * @return the meta object for the attribute '<em>Interface Name</em>'.
+	 * @see mic.model_code_synchronization.designmodel.Interface#getInterfaceName()
 	 * @see #getInterface()
 	 * @generated
 	 */
-	EAttribute getInterface_Name();
+	EAttribute getInterface_InterfaceName();
 
 	/**
 	 * Returns the meta object for the attribute '{@link mic.model_code_synchronization.designmodel.Interface#getAnotherField <em>Another Field</em>}'.
@@ -434,12 +434,12 @@ public interface DesignmodelPackage extends EPackage {
 		EClass INTERFACE = eINSTANCE.getInterface();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Interface Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute INTERFACE__NAME = eINSTANCE.getInterface_Name();
+		EAttribute INTERFACE__INTERFACE_NAME = eINSTANCE.getInterface_InterfaceName();
 
 		/**
 		 * The meta object literal for the '<em><b>Another Field</b></em>' attribute feature.

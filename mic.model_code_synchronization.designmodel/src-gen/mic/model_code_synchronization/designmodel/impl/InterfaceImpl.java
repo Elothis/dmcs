@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mic.model_code_synchronization.designmodel.impl.InterfaceImpl#getName <em>Name</em>}</li>
+ *   <li>{@link mic.model_code_synchronization.designmodel.impl.InterfaceImpl#getInterfaceName <em>Interface Name</em>}</li>
  *   <li>{@link mic.model_code_synchronization.designmodel.impl.InterfaceImpl#getAnotherField <em>Another Field</em>}</li>
  * </ul>
  *
@@ -28,24 +28,24 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  */
 public class InterfaceImpl extends MinimalEObjectImpl.Container implements Interface {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #getInterfaceName() <em>Interface Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getInterfaceName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
+	protected static final String INTERFACE_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getInterfaceName() <em>Interface Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getInterfaceName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String name = NAME_EDEFAULT;
+	protected String interfaceName = INTERFACE_NAME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getAnotherField() <em>Another Field</em>}' attribute.
@@ -92,8 +92,8 @@ public class InterfaceImpl extends MinimalEObjectImpl.Container implements Inter
 	 * @generated
 	 */
 	@Override
-	public String getName() {
-		return name;
+	public String getInterfaceName() {
+		return interfaceName;
 	}
 
 	/**
@@ -102,11 +102,12 @@ public class InterfaceImpl extends MinimalEObjectImpl.Container implements Inter
 	 * @generated
 	 */
 	@Override
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
+	public void setInterfaceName(String newInterfaceName) {
+		String oldInterfaceName = interfaceName;
+		interfaceName = newInterfaceName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DesignmodelPackage.INTERFACE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, DesignmodelPackage.INTERFACE__INTERFACE_NAME,
+					oldInterfaceName, interfaceName));
 	}
 
 	/**
@@ -141,8 +142,8 @@ public class InterfaceImpl extends MinimalEObjectImpl.Container implements Inter
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case DesignmodelPackage.INTERFACE__NAME:
-			return getName();
+		case DesignmodelPackage.INTERFACE__INTERFACE_NAME:
+			return getInterfaceName();
 		case DesignmodelPackage.INTERFACE__ANOTHER_FIELD:
 			return getAnotherField();
 		}
@@ -157,8 +158,8 @@ public class InterfaceImpl extends MinimalEObjectImpl.Container implements Inter
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case DesignmodelPackage.INTERFACE__NAME:
-			setName((String) newValue);
+		case DesignmodelPackage.INTERFACE__INTERFACE_NAME:
+			setInterfaceName((String) newValue);
 			return;
 		case DesignmodelPackage.INTERFACE__ANOTHER_FIELD:
 			setAnotherField((String) newValue);
@@ -175,8 +176,8 @@ public class InterfaceImpl extends MinimalEObjectImpl.Container implements Inter
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case DesignmodelPackage.INTERFACE__NAME:
-			setName(NAME_EDEFAULT);
+		case DesignmodelPackage.INTERFACE__INTERFACE_NAME:
+			setInterfaceName(INTERFACE_NAME_EDEFAULT);
 			return;
 		case DesignmodelPackage.INTERFACE__ANOTHER_FIELD:
 			setAnotherField(ANOTHER_FIELD_EDEFAULT);
@@ -193,8 +194,9 @@ public class InterfaceImpl extends MinimalEObjectImpl.Container implements Inter
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case DesignmodelPackage.INTERFACE__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+		case DesignmodelPackage.INTERFACE__INTERFACE_NAME:
+			return INTERFACE_NAME_EDEFAULT == null ? interfaceName != null
+					: !INTERFACE_NAME_EDEFAULT.equals(interfaceName);
 		case DesignmodelPackage.INTERFACE__ANOTHER_FIELD:
 			return ANOTHER_FIELD_EDEFAULT == null ? anotherField != null : !ANOTHER_FIELD_EDEFAULT.equals(anotherField);
 		}
@@ -212,8 +214,8 @@ public class InterfaceImpl extends MinimalEObjectImpl.Container implements Inter
 			return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (name: ");
-		result.append(name);
+		result.append(" (interfaceName: ");
+		result.append(interfaceName);
 		result.append(", anotherField: ");
 		result.append(anotherField);
 		result.append(')');
