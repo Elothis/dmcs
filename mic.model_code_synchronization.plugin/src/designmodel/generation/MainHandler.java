@@ -76,14 +76,14 @@ public class MainHandler extends AbstractHandler {
 	            		    new String[] { "I changed some code", "I updated the design model"},
 	            		    0);
 	            		int result = dialog.open();
-	            		System.out.println("dialog result = " + result);
 	            	if(result == 1) {
-	            		System.out.println("Model updated");
+	            		System.out.println("Propagating changes of the design model back to the code");
 		            	this.transformationManager.updateCode(Utility.loadExistingModel(DESIGNMODEL_TARGET_PATH));
 	            	}
 	            	else { //user wants to regenerate the model based on the current state of the code
 	            		try {
 	            			//regenerate the design model from scratch
+	            			System.out.println("Regenerating the design model");
 							mappingGenerator.buildDesignModel(DESIGNMODEL_TARGET_PATH);
 							this.transformationManager = mappingGenerator.getTransformationManager();
 						} catch (IOException e) {

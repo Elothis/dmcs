@@ -55,7 +55,7 @@ public class ImplementedInterfaceProcessor extends GenerationProcessor<CtClass> 
 			e.printStackTrace();
 		}
 		
-		System.out.println(element.getSimpleName() + " in file "  + element.getPosition().getFile() + " implements " + markerInterface + " and thus got processed with ImplementedInterfaceProcessor");
+		System.out.println(element.getSimpleName() + " implements " + markerInterface + " and thus got processed with ImplementedInterfaceProcessor");
 		
 		/*
 		Factory factory = element.getFactory();

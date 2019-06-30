@@ -44,47 +44,19 @@ public class TransformationManager {
 	 * @param updatedModel
 	 */
 	public void updateCode(XMIResource updatedModel) {
-		updatedModel.getContents().forEach(updatedModelElement -> {	
-			System.out.println("getName() = " + updatedModelElement.eClass().getName());
-			System.out.println("getEStructuralFeature('name') = " + updatedModelElement.eGet(updatedModelElement.eClass().getEStructuralFeature("name")));
-			System.out.println("updatedModel-UUID = " + updatedModel.getID(updatedModelElement));
+		updatedModel.getContents().forEach(updatedModelElement -> {
 			
 			//getting respective model element in existing designmodel
 			EObject existentModelElement = existentDesignmodel.getEObject(updatedModel.getID(updatedModelElement));
-			System.out.println("existendModel-UUID = " + existentDesignmodel.getID(existentModelElement));
 			//getting the mapping entry of this model element to check what is mapped to what, to then determine whether it got changed by the user
 			MappingEntry entry = getMappingEntryByModelelement(existentModelElement);
-			System.out.println(entry);
-			System.out.println("-----------------------------");
 			entry = updateMappingEntry(entry, updatedModelElement);
 		});
 		
-		//testing actually changing the spoon element and then printing it into code
-		//--> WORKS! but old class-file has to be removed (only adds new one with new name)
-		//getMappingEntryByCodeElementName("Waiting").getCodeElement().setSimpleName("NotWaitingAnymore");
 		this.launcher.prettyprint();
 		
 		this.existentDesignmodel = updatedModel;
-		
-		//TODO implement updateCode
-		/*
-		 * - check differences between updatedModel and existentDesignmodel
-		 * - find mapped codestructures in this.mappings from modelelements that got changed
-		 * 		-> how to do that? how to know what the old model element was or if its not a newly created one?
-		 * 			-> UUIDs are the answer?
-		 * - update codestructures respective to changes to modelelements
-		 * 		-> can this be done in the codestructures via some overridden method?
-		 * 			-> like codestructure.propagateChangedModelelementToCode(changedMappedModelElement)
-		 * 		-> coding the transformations here is ugly, isnt it?
-		 * - update the EObject in this.mappings (get the respective MappingEntry and set the designmodel element to changed one)
-		 * 		
-		 * - print results and remove old files with old names (manually, no refactoring a la eclipse)
-		 * - set newly updatedModel to existendDesignmodel
-		 * 
-		 * OR
-		 * 
-		 * - go through this.mappings and check for each entry if smth has changed in updatedModel
-		 */
+
 	}
 	
 	/**
@@ -107,23 +79,18 @@ public class TransformationManager {
 		        String attributeName = StringUtils.substringBetween(m.group(2), "(", ")");
 		        //get the new attribute value that is mapped to the name of the codestructure
 				String newAttributeValue = updatedModelElement.eGet(updatedModelElement.eClass().getEStructuralFeature(attributeName)).toString();
-				System.out.println("newAttributeValue = " + newAttributeValue);
 				//change the codestructure respectively
 				entry.getCodeElement().setSimpleName(newAttributeValue);
 				//change the model element to new one
 				entry.setDesignmodelElement(updatedModelElement);
 				//remove the old codestructure
 				//-> currently just implemented as deleting it (TODO is full refactoring through renaming it instead of deleting it)
-				System.out.println("deleting at " + entry.getCodeElement().getPosition().getCompilationUnit().getFile());
 				entry.getCodeElement().getPosition().getCompilationUnit().getFile().delete();
 				//setting the path to the .java-file of the possibly renamed code element
 				String pathWithoutJavaExtension = entry.getCodeElement().getPosition().getCompilationUnit().getFile().toString().split("\\.java")[0];
 				String[] a = pathWithoutJavaExtension.split("\\\\");
 				String newFileName = pathWithoutJavaExtension.split(a[a.length-1])[0] + entry.getCodeElement().getSimpleName() + ".java";
 				entry.getCodeElement().getPosition().getCompilationUnit().setFile(new File(newFileName));
-				//entry.getCodeElement().getPosition().getFile().delete();
-				
-				//TODO changes in the code do get lost when renaming the files and creating new ones
 				
 //				CompilationUnit newCu = entry.getCodeElement().getFactory().Core().createCompilationUnit();
 //				newCu.setFile(new File(newFileName));
