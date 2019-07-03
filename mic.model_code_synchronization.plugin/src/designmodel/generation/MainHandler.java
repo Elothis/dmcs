@@ -83,6 +83,7 @@ public class MainHandler extends AbstractHandler {
 	            		try {
 	            			//regenerate the design model from scratch
 	            			System.out.println("Regenerating the design model");
+	            			transformationManager = new TransformationManager(projectPath, mappingParser);
 							transformationManager.buildDesignModel(mappingDirectoryPath + "/designmodel.xmi");
 						} catch (IOException e) {
 							e.printStackTrace();

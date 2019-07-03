@@ -148,6 +148,9 @@ public class TransformationManager {
 			
 			//getting the mapping entry of this model element to check what is mapped to what, to then determine whether it got changed by the user
 			MappingEntry entry = getMappingEntryByModelelement(existentModelElement);
+			if(entry == null) {
+				entry = getMappingEntryByID(updatedModel.getID(updatedModelElement));
+			}
 			entry = updateMappingEntry(entry, updatedModelElement);
 		});
 		
@@ -155,7 +158,7 @@ public class TransformationManager {
 		
 		this.existentDesignmodel = updatedModel;
 	}
-	
+
 	/**
 	 * Updates the mapping entry with the information from the updatedModelElement.<br>
 	 * Changes the code element itself contained in the mapping entry and thus propagates the model changes back to the actual code
@@ -257,6 +260,16 @@ public class TransformationManager {
 	private MappingEntry getMappingEntryByModelelement(EObject modelelement) {
 		for(MappingEntry e: this.mappings) {
 			if(e.getDesignmodelElement().equals(modelelement))
+				return e;
+		}
+		return null;
+	}
+	
+	private MappingEntry getMappingEntryByID(String id) {
+		for(MappingEntry e: this.mappings) {
+			EObject o = e.getDesignmodelElement();
+			String existentID = this.existentDesignmodel.getID(o);
+			if(existentID.contentEquals(id))
 				return e;
 		}
 		return null;
