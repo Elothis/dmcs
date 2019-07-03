@@ -29,8 +29,6 @@ import util.Utility;
  */
 public class MainHandler extends AbstractHandler {
 	
-	public static final String DESIGNMODEL_TARGET_PATH = "C:/Users/Fabian/mappingDirectory/designmodel.xmi";
-	
 	private boolean designmodelExistent = false;
 	private TransformationManager transformationManager;
 
@@ -60,7 +58,7 @@ public class MainHandler extends AbstractHandler {
 	            MappingGenerator mappingGenerator = new MappingGenerator(projectPath, mappingParser);
 	            if(!this.designmodelExistent) {
 	            	try {
-						mappingGenerator.buildDesignModel(DESIGNMODEL_TARGET_PATH);
+						mappingGenerator.buildDesignModel(mappingDirectoryPath + "/designmodel.xmi");
 						this.transformationManager = mappingGenerator.getTransformationManager();
 						this.designmodelExistent = true;
 					} catch (IOException e) {
@@ -78,13 +76,13 @@ public class MainHandler extends AbstractHandler {
 	            		int result = dialog.open();
 	            	if(result == 1) {
 	            		System.out.println("Propagating changes of the design model back to the code");
-		            	this.transformationManager.updateCode(Utility.loadExistingModel(DESIGNMODEL_TARGET_PATH));
+		            	this.transformationManager.updateCode(Utility.loadExistingModel(mappingDirectoryPath + "/designmodel.xmi"));
 	            	}
 	            	else { //user wants to regenerate the model based on the current state of the code
 	            		try {
 	            			//regenerate the design model from scratch
 	            			System.out.println("Regenerating the design model");
-							mappingGenerator.buildDesignModel(DESIGNMODEL_TARGET_PATH);
+							mappingGenerator.buildDesignModel(mappingDirectoryPath + "/designmodel.xmi");
 							this.transformationManager = mappingGenerator.getTransformationManager();
 						} catch (IOException e) {
 							e.printStackTrace();

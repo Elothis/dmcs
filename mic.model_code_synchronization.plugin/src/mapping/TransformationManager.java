@@ -48,6 +48,13 @@ public class TransformationManager {
 			
 			//getting respective model element in existing designmodel
 			EObject existentModelElement = existentDesignmodel.getEObject(updatedModel.getID(updatedModelElement));
+			
+			if(existentModelElement == null) {
+			//no existend model element there yet, meaning it got added by the user through modifications at the design model
+				System.out.println(updatedModelElement + " was newly created");
+				return;
+			}
+			
 			//getting the mapping entry of this model element to check what is mapped to what, to then determine whether it got changed by the user
 			MappingEntry entry = getMappingEntryByModelelement(existentModelElement);
 			entry = updateMappingEntry(entry, updatedModelElement);
@@ -68,7 +75,11 @@ public class TransformationManager {
 	 * @return the mapping entry containing all updated elements
 	 */
 	private MappingEntry updateMappingEntry(MappingEntry entry, EObject updatedModelElement) {
-		//check the mapped code element value (currently only mapping to the codestructure-name is supported)
+		//when a codestrcuture does not exist yet, this means a new model element got created and the codestructure has to be created freshly
+		if(entry.getCodeElement() == null) {
+			return createNewCodestructure(entry, updatedModelElement);
+		}
+		//dispatch here what is mapped to what (currently only the name of the codestructure mapped to attributes of the design model element is implemented)
 		if(entry.getMappedCodeElementValue().contentEquals("name") && entry.getMappedDesignmodelElementValue().startsWith("attribute(")) {
 			String re1="(attribute)";
 		    String re2="(\\(.*\\))";
@@ -79,6 +90,13 @@ public class TransformationManager {
 		        String attributeName = StringUtils.substringBetween(m.group(2), "(", ")");
 		        //get the new attribute value that is mapped to the name of the codestructure
 				String newAttributeValue = updatedModelElement.eGet(updatedModelElement.eClass().getEStructuralFeature(attributeName)).toString();
+				//check if the design model got changed
+				//-> if it did not change, simply return original entry without modifications
+				if(newAttributeValue.contentEquals(entry.getCodeElement().getSimpleName())) {
+					System.out.println(entry.getCodeElement().getSimpleName() + " did not get changed");
+					return entry;
+				}
+				System.out.println(entry.getCodeElement().getSimpleName() + " got changed to " + newAttributeValue);
 				//change the codestructure respectively
 				entry.getCodeElement().setSimpleName(newAttributeValue);
 				//change the model element to new one
@@ -117,6 +135,17 @@ public class TransformationManager {
 		return entry;
 	}
 	
+	/**
+	 * Responsible for creating a new codestructure based on a new design model element added by the user.
+	 * @param entry
+	 * @param addedDesignmodelelement
+	 * @return MappingEntry containing the mapping to the newly created codestructure
+	 */
+	private MappingEntry createNewCodestructure(MappingEntry entry, EObject addedDesignmodelelement) {
+		
+		return null;
+	}
+
 	/**
 	 * Gets the respective mapping entry holding the specified code element name.
 	 * @param codeElementName

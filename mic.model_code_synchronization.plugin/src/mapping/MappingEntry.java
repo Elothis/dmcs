@@ -4,6 +4,13 @@ import org.eclipse.emf.ecore.EObject;
 
 import spoon.reflect.declaration.CtNamedElement;
 
+/**
+ * Represents the mapping of a concrete codestructure to a design model element.
+ * Contains the CtNamedElement representing the codestructure, an EObject representing the mapped designmodel element
+ * and their exact values about what exactly got mapped to what (e.g. the 'name' of the codestructure got mapped to 'attribute(name)' of the model)
+ * @author Fabian Glittenberg
+ *
+ */
 public class MappingEntry {
 	
 	private CtNamedElement codeElement;
