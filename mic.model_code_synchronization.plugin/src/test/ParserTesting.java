@@ -2,7 +2,7 @@ package test;
 
 import org.junit.jupiter.api.Test;
 
-import designmodel.generation.MappingGenerator;
+import designmodel.generation.TransformationManager;
 import mappingdeclaration.MappingDeclarationParser;
 
 class ParserTesting {

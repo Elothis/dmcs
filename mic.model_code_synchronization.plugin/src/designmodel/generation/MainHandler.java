@@ -29,7 +29,7 @@ import util.Utility;
 public class MainHandler extends AbstractHandler {
 	
 	private boolean designmodelExistent = false;
-	private MappingGenerator mappingGenerator;
+	private TransformationManager transformationManager;
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -54,13 +54,13 @@ public class MainHandler extends AbstractHandler {
 	            
 	            IMappingDeclarationParser mappingParser = new MappingDeclarationParser(mappingDirectoryPath);
 				
-	            if(this.mappingGenerator == null) {
-	            	this.mappingGenerator = new MappingGenerator(projectPath, mappingParser);
+	            if(this.transformationManager == null) {
+	            	this.transformationManager = new TransformationManager(projectPath, mappingParser);
 	            }
 	            
 	            if(!this.designmodelExistent) {
 	            	try {
-						mappingGenerator.buildDesignModel(mappingDirectoryPath + "/designmodel.xmi");
+						transformationManager.buildDesignModel(mappingDirectoryPath + "/designmodel.xmi");
 						this.designmodelExistent = true;
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -77,13 +77,13 @@ public class MainHandler extends AbstractHandler {
 	            		int result = dialog.open();
 	            	if(result == 1) {
 	            		System.out.println("Propagating changes of the design model back to the code");
-		            	mappingGenerator.updateCode(Utility.loadExistingModel(mappingDirectoryPath + "/designmodel.xmi"));
+		            	transformationManager.updateCode(Utility.loadExistingModel(mappingDirectoryPath + "/designmodel.xmi"));
 	            	}
 	            	else { //user wants to regenerate the model based on the current state of the code
 	            		try {
 	            			//regenerate the design model from scratch
 	            			System.out.println("Regenerating the design model");
-							mappingGenerator.buildDesignModel(mappingDirectoryPath + "/designmodel.xmi");
+							transformationManager.buildDesignModel(mappingDirectoryPath + "/designmodel.xmi");
 						} catch (IOException e) {
 							e.printStackTrace();
 						}

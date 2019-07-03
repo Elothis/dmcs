@@ -28,13 +28,13 @@ import spoon.reflect.CtModel;
 
 
 /**
- * Main mapping generator responsible for triggering the initial model generation. Getting created and called directly from clicking the context
- * menu entry.
+ * Main transformation manager responsible for triggering the initial model generation and all following transformations.
+ * Getting created and called directly from clicking the context menu entry.
  * 
  * @author Fabian Glittenberg
  *
  */
-public class MappingGenerator {
+public class TransformationManager {
 	
 	private Launcher launcher;
 	private String projectPath;
@@ -44,22 +44,6 @@ public class MappingGenerator {
 	
 	private List<MappingEntry> mappings;
 	private XMIResource existentDesignmodel;
-	
-	public List<MappingEntry> getMappings() {
-		return mappings;
-	}
-
-	public void setMappings(List<MappingEntry> mappings) {
-		this.mappings = mappings;
-	}
-	
-	public XMIResource getExistentDesignmodel() {
-		return existentDesignmodel;
-	}
-
-	public void setExistentDesignmodel(XMIResource existentDesignmodel) {
-		this.existentDesignmodel = existentDesignmodel;
-	}
 
 	public String getDirectoryPath() {
 		return projectPath;
@@ -69,7 +53,7 @@ public class MappingGenerator {
 	 * Constructor, taking the project path of the target Java program as parameter.
 	 * @param projectPath
 	 */
-	public MappingGenerator(String projectPath, IMappingDeclarationParser mappingParser) {
+	public TransformationManager(String projectPath, IMappingDeclarationParser mappingParser) {
 		this.projectPath = projectPath;
 		this.launcher = new Launcher();
 		this.launcher.addInputResource(projectPath);

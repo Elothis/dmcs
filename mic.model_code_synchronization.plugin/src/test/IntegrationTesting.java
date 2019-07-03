@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
-import designmodel.generation.MappingGenerator;
+import designmodel.generation.TransformationManager;
 import mappingdeclaration.MappingDeclarationParser;
 
 public class IntegrationTesting {
@@ -21,7 +21,7 @@ public class IntegrationTesting {
 		
 		MappingDeclarationParser parser = new MappingDeclarationParser(mappingDirectoryPath);
 		
-		MappingGenerator mappingGenerator = new MappingGenerator("C:/Daten/MIC_Sync_Tool_Repo/TestProject", parser);
+		TransformationManager mappingGenerator = new TransformationManager("C:/Daten/MIC_Sync_Tool_Repo/TestProject", parser);
 		mappingGenerator.buildDesignModel(DESIGNMODEL_TARGET_PATH);
 		
 //		TransformationManager tm = mappingGenerator.getTransformationManager();
