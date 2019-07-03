@@ -14,7 +14,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import mapping.TransformationManager;
 import mappingdeclaration.IMappingDeclarationParser;
 import mappingdeclaration.MappingDeclarationParser;
 import util.Utility;
@@ -30,7 +29,7 @@ import util.Utility;
 public class MainHandler extends AbstractHandler {
 	
 	private boolean designmodelExistent = false;
-	private TransformationManager transformationManager;
+	private MappingGenerator mappingGenerator;
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -55,11 +54,13 @@ public class MainHandler extends AbstractHandler {
 	            
 	            IMappingDeclarationParser mappingParser = new MappingDeclarationParser(mappingDirectoryPath);
 				
-	            MappingGenerator mappingGenerator = new MappingGenerator(projectPath, mappingParser);
+	            if(this.mappingGenerator == null) {
+	            	this.mappingGenerator = new MappingGenerator(projectPath, mappingParser);
+	            }
+	            
 	            if(!this.designmodelExistent) {
 	            	try {
 						mappingGenerator.buildDesignModel(mappingDirectoryPath + "/designmodel.xmi");
-						this.transformationManager = mappingGenerator.getTransformationManager();
 						this.designmodelExistent = true;
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -76,21 +77,18 @@ public class MainHandler extends AbstractHandler {
 	            		int result = dialog.open();
 	            	if(result == 1) {
 	            		System.out.println("Propagating changes of the design model back to the code");
-		            	this.transformationManager.updateCode(Utility.loadExistingModel(mappingDirectoryPath + "/designmodel.xmi"));
+		            	mappingGenerator.updateCode(Utility.loadExistingModel(mappingDirectoryPath + "/designmodel.xmi"));
 	            	}
 	            	else { //user wants to regenerate the model based on the current state of the code
 	            		try {
 	            			//regenerate the design model from scratch
 	            			System.out.println("Regenerating the design model");
 							mappingGenerator.buildDesignModel(mappingDirectoryPath + "/designmodel.xmi");
-							this.transformationManager = mappingGenerator.getTransformationManager();
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-	            	}
-	            	
-	            }
-				
+	            	}	            	
+	            }				
 	        }
 		}
 		return null;

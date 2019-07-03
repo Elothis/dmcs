@@ -5,9 +5,7 @@ import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
 import designmodel.generation.MappingGenerator;
-import mapping.TransformationManager;
 import mappingdeclaration.MappingDeclarationParser;
-import util.Utility;
 
 public class IntegrationTesting {
 	
