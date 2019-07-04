@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -215,6 +216,9 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 					//create MappedDesignmodelElement, by parsing the left hand side of the assignment and providing it with previously parsed MappedCodeElement
 					MappedDesignmodelElement mde = MappedDesignmodelElementFactory.createMappedDesignmodelElement(assignmentValues[0].trim(), imMappingDeclaration.getModelelementType(), mce);
 					imMappingDeclaration.getAttributeMappings().add(mde);
+				}
+				if(attributeMappingDefinitions.length > 1) {
+					throw new NotImplementedException("Currently, there are only transformations for the first attribute-mapping implemented. Additional ones will get ignored.");
 				}
 				
 				this.attributeMappingParsed = true;
