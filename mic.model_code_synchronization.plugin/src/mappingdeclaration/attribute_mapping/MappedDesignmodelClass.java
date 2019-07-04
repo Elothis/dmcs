@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
-import mapping.MappingEntry;
+import concrete_mapping.MappingEntry;
 import mappingdeclaration.CodestructureType;
 import spoon.reflect.declaration.CtNamedElement;
 

@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import mapping.MappingEntry;
+import concrete_mapping.MappingEntry;
 import mappingdeclaration.IMappingDeclarationParser;
 import mappingdeclaration.IntegrationMechanismMappingDeclaration;
 import mappingdeclaration.MappingDeclarationDatabase;

@@ -1,4 +1,4 @@
-package mapping;
+package concrete_mapping;
 
 import org.eclipse.emf.ecore.EObject;
 

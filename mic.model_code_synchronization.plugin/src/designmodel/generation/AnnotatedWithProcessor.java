@@ -6,7 +6,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
-import mapping.MappingEntry;
+import concrete_mapping.MappingEntry;
 import mappingdeclaration.CodestructureType;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
 import mappingdeclaration.attribute_mapping.MappingException;

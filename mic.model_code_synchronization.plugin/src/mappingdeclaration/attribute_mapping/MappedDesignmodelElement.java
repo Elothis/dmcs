@@ -3,7 +3,7 @@ package mappingdeclaration.attribute_mapping;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
-import mapping.MappingEntry;
+import concrete_mapping.MappingEntry;
 import spoon.reflect.declaration.CtNamedElement;
 
 /**
