@@ -207,7 +207,7 @@ public class TransformationManager {
 	 */
 	private MappingEntry getMappingEntryByModelelement(EObject modelelement) {
 		for(MappingEntry e: this.mappings) {
-			if(e.getDesignmodelElement().equals(modelelement))
+			if(e.getDesignmodelElementEObject().equals(modelelement))
 				return e;
 		}
 		return null;
@@ -215,7 +215,7 @@ public class TransformationManager {
 	
 	private MappingEntry getMappingEntryByID(String id) {
 		for(MappingEntry e: this.mappings) {
-			EObject o = e.getDesignmodelElement();
+			EObject o = e.getDesignmodelElementEObject();
 			String existentID = this.existentDesignmodel.getID(o);
 			if(existentID.contentEquals(id))
 				return e;
@@ -259,7 +259,7 @@ public class TransformationManager {
 				//change the codestructure respectively
 				entry.getCodeElement().setSimpleName(newAttributeValue);
 				//change the model element to new one
-				entry.setDesignmodelElement(updatedModelElement);
+				entry.setDesignmodelElementEObject(updatedModelElement);
 				//remove the old codestructure
 				//-> currently just implemented as deleting it (TODO is full refactoring through renaming it instead of deleting it)
 				entry.getCodeElement().getPosition().getCompilationUnit().getFile().delete();
@@ -318,8 +318,8 @@ public class TransformationManager {
 				entry.getMappedDesignmodelElementValue().startsWith("attribute(")) {
 			//currently simply deleting the source file is enough to remove the code representation of the model element
 			this.mappings.remove(entry);
-			entry.getCodeElement().delete();
-			return entry.getCodeElement().getPosition().getCompilationUnit().getFile().delete();
+			//call the delete-function of the mapped code element
+			return entry.getMappedDesignmodelElement().getMappedCodeElement().deleteCodestructure(entry.getCodeElement());
 		}
 		else {
 			throw new NotImplementedException("Currently there are only mappings from attributes from a design model class to names of classes and interfaces as code strucutres implemented");

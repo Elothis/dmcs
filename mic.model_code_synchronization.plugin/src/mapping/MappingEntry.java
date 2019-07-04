@@ -3,6 +3,7 @@ package mapping;
 import org.eclipse.emf.ecore.EObject;
 
 import mappingdeclaration.CodestructureType;
+import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
 import spoon.reflect.declaration.CtNamedElement;
 
 /**
@@ -16,16 +17,19 @@ public class MappingEntry {
 	
 	private CtNamedElement codeElement;
 	private CodestructureType codestructureType;
-	private EObject designmodelElement;
+	private EObject designmodelElementEObject;
+	private MappedDesignmodelElement mappedDesignmodelElement;
 	private String mappedCodeElementValue;
 	private String mappedDesignmodelElementValue;
 	
-	public MappingEntry(CtNamedElement codeElement, CodestructureType codestructureType, EObject designmodelElement, String mappedCodeElementValue,
+	public MappingEntry(CtNamedElement codeElement, CodestructureType codestructureType, MappedDesignmodelElement mappedDesignmodelElement,
+			EObject designmodelElementEObject, String mappedCodeElementValue,
 			String mappedDesignmodelElementValue) {
 		super();
 		this.codeElement = codeElement;
 		this.codestructureType = codestructureType;
-		this.designmodelElement = designmodelElement;
+		this.mappedDesignmodelElement = mappedDesignmodelElement;
+		this.designmodelElementEObject = designmodelElementEObject;
 		this.mappedCodeElementValue = mappedCodeElementValue;
 		this.mappedDesignmodelElementValue = mappedDesignmodelElementValue;
 	}
@@ -44,11 +48,17 @@ public class MappingEntry {
 	public void setCodestructureType(CodestructureType codestructureType) {
 		this.codestructureType = codestructureType;
 	}
-	public EObject getDesignmodelElement() {
-		return designmodelElement;
+	public MappedDesignmodelElement getMappedDesignmodelElement() {
+		return mappedDesignmodelElement;
 	}
-	public void setDesignmodelElement(EObject designmodelElement) {
-		this.designmodelElement = designmodelElement;
+	public void setMappedDesignmodelElement(MappedDesignmodelElement mappedDesignmodelElement) {
+		this.mappedDesignmodelElement = mappedDesignmodelElement;
+	}
+	public EObject getDesignmodelElementEObject() {
+		return designmodelElementEObject;
+	}
+	public void setDesignmodelElementEObject(EObject designmodelElement) {
+		this.designmodelElementEObject = designmodelElement;
 	}
 	public String getMappedCodeElementValue() {
 		return mappedCodeElementValue;
@@ -64,7 +74,7 @@ public class MappingEntry {
 	}
 	@Override
 	public String toString() {
-		return codeElement.getSimpleName() + " - " + designmodelElement.eClass().getName() + " - " +
+		return codeElement.getSimpleName() + " - " + designmodelElementEObject.eClass().getName() + " - " +
 				mappedCodeElementValue + " - " + mappedDesignmodelElementValue;
 	}
 

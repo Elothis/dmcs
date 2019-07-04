@@ -1,6 +1,7 @@
 package mappingdeclaration.attribute_mapping;
 
 import mappingdeclaration.CodestructureType;
+import spoon.reflect.declaration.CtNamedElement;
 
 /**
  * Abstract super class representing one attribute-mapping code element.
@@ -36,4 +37,11 @@ public abstract class MappedCodeElement {
 		this.targetValue = targetValue;
 		this.codestructureType = codestructureType;
 	}
+	
+	/**
+	 * Deletes the codestructure.
+	 * @param codestructure
+	 * @return true on success
+	 */
+	public abstract boolean deleteCodestructure(CtNamedElement codestructure);
 }
