@@ -171,27 +171,12 @@ public class TransformationManager {
 		this.launcher.prettyprint();
 		
 		this.mappings = updatedMappings;
-//		this.existentElementIDs = newElementIDs;
-//		this.existentDesignmodel = updatedModel;
 		try {
 			//rebuild model instance afterwards to reset and reconfigure all data in this TransformationManager instance
 			this.buildDesignModel(existingModelPath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * Gets the respective mapping entry holding the specified code element name.
-	 * @param codeElementName
-	 * @return
-	 */
-	private MappingEntry getMappingEntryByCodeElementName(String codeElementName) {
-		for(MappingEntry e: this.mappings) {
-			if(e.getCodeElement().getSimpleName().contentEquals(codeElementName))
-				return e;
-		}
-		return null;
 	}
 	
 	/**
@@ -204,27 +189,6 @@ public class TransformationManager {
 			if(e.getDesignmodelElementEObject().equals(modelelement))
 				return e;
 		}
-		return null;
-	}
-	
-	private MappingEntry getMappingEntryByID(String id) {
-		for(MappingEntry e: this.mappings) {
-			EObject o = e.getDesignmodelElementEObject();
-			String existentID = this.existentDesignmodel.getID(o);
-			if(existentID.contentEquals(id))
-				return e;
-		}
-		return null;
-	}
-	
-	/**
-	 * Responsible for creating a new codestructure based on a new design model element added by the user.
-	 * @param entry
-	 * @param addedDesignmodelElement
-	 * @return MappingEntry containing the mapping to the newly created codestructure
-	 */
-	private MappingEntry createNewCodestructure(MappingEntry entry, EObject addedDesignmodelElement) {
-		
 		return null;
 	}
 }
