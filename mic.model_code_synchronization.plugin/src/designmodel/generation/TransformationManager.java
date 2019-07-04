@@ -313,9 +313,7 @@ public class TransformationManager {
 	 */
 	private boolean deleteCodestructure(EObject deletedModelElement) {
 		MappingEntry entry = getMappingEntryByModelelement(deletedModelElement);
-		if(entry.getMappedCodeElementValue().contentEquals("name") &&
-				(entry.getCodestructureType() != CodestructureType.CLASS || entry.getCodestructureType() != CodestructureType.INTERFACE) &&
-				entry.getMappedDesignmodelElementValue().startsWith("attribute(")) {
+		if(entry.getMappedDesignmodelElementValue().startsWith("attribute(")) {
 			//currently simply deleting the source file is enough to remove the code representation of the model element
 			this.mappings.remove(entry);
 			//call the delete-function of the mapped code element
