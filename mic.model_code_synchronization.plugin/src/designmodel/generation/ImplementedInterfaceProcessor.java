@@ -15,7 +15,7 @@ import spoon.reflect.reference.CtTypeReference;
 
 
 public class ImplementedInterfaceProcessor extends GenerationProcessor<CtClass> {
-	public String markerInterface;
+	private String markerInterface;
 
 	public ImplementedInterfaceProcessor(String markerInterface, List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType, EPackage metapackage) {
 		super(attributeMappings, codestructureType, metapackage);
