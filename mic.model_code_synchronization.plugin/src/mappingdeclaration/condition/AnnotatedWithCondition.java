@@ -48,9 +48,7 @@ public class AnnotatedWithCondition extends Condition {
 			targetAnnotation = launcher.getFactory().Annotation().create(targetNameInstance);
 			targetAnnotation.setVisibility(ModifierKind.PUBLIC);
 		}
-		
-		targetAnnotation = (CtAnnotationType<?>) launcher.getFactory().Type().get(targetNameInstance);
-		//launcher.getFactory().Annotation().annotate(newClass, customAnnotation.getReference());
+
 		CtAnnotation<?> newAnnotation = launcher.getFactory().createAnnotation(targetAnnotation.getReference());
 		newCodestructure.addAnnotation(newAnnotation);
 		return newCodestructure;
