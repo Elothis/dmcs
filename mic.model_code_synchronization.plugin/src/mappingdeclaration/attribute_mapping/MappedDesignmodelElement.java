@@ -4,7 +4,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import mapping.MappingEntry;
-import mappingdeclaration.IntegrationMechanismMappingDeclaration;
 import spoon.reflect.declaration.CtNamedElement;
 
 /**

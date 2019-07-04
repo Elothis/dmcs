@@ -16,7 +16,6 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import mappingdeclaration.IMappingDeclarationParser;
 import mappingdeclaration.MappingDeclarationParser;
-import util.Utility;
 
 
 

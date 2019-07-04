@@ -28,8 +28,6 @@ import mappingdeclaration.attribute_mapping.MappedDesignmodelElementFactory;
 import spoon.Launcher;
 import spoon.compiler.Environment;
 import spoon.reflect.CtModel;
-import spoon.reflect.declaration.CtAnnotation;
-import spoon.reflect.declaration.CtAnnotationType;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtInterface;
 import spoon.reflect.declaration.CtNamedElement;
