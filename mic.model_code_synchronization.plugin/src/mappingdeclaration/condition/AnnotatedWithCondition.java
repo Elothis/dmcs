@@ -7,8 +7,11 @@ import org.eclipse.emf.ecore.EPackage;
 import designmodel.generation.AnnotatedWithProcessor;
 import mappingdeclaration.CodestructureType;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtInterface;
+import spoon.Launcher;
+import spoon.reflect.declaration.CtAnnotation;
+import spoon.reflect.declaration.CtAnnotationType;
+import spoon.reflect.declaration.CtNamedElement;
+import spoon.reflect.declaration.ModifierKind;
 
 /**
  * Condition representing an "annotated with" relationship for the codestructure mapped to.
@@ -34,5 +37,22 @@ public class AnnotatedWithCondition extends Condition {
 	@Override
 	public void createProcessor(String targetName, List<MappedDesignmodelElement>attributeMappings, CodestructureType codestructureType, EPackage metapackage) {
 		this.setProcessor(new AnnotatedWithProcessor(targetName, attributeMappings, codestructureType, metapackage));
+	}
+
+	@Override
+	public CtNamedElement applyConditionToCreatedCodestructure(CtNamedElement newCodestructure, String targetNameInstance, Launcher launcher) {
+		//first try and get an existing annotation
+		CtAnnotationType<?> targetAnnotation = (CtAnnotationType<?>) launcher.getFactory().Annotation().get(targetNameInstance);
+		//if the annotation type does not exist yet, create it
+		if(targetAnnotation == null) {
+			targetAnnotation = launcher.getFactory().Annotation().create(targetNameInstance);
+			targetAnnotation.setVisibility(ModifierKind.PUBLIC);
+		}
+		
+		targetAnnotation = (CtAnnotationType<?>) launcher.getFactory().Type().get(targetNameInstance);
+		//launcher.getFactory().Annotation().annotate(newClass, customAnnotation.getReference());
+		CtAnnotation<?> newAnnotation = launcher.getFactory().createAnnotation(targetAnnotation.getReference());
+		newCodestructure.addAnnotation(newAnnotation);
+		return newCodestructure;
 	}
 }

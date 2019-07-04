@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.NotImplementedException;
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -18,10 +21,19 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import mapping.MappingEntry;
 import mappingdeclaration.IMappingDeclarationParser;
+import mappingdeclaration.IntegrationMechanismMappingDeclaration;
 import mappingdeclaration.MappingDeclarationDatabase;
+import mappingdeclaration.ParserException;
+import mappingdeclaration.attribute_mapping.MappedDesignmodelElementFactory;
 import spoon.Launcher;
 import spoon.compiler.Environment;
 import spoon.reflect.CtModel;
+import spoon.reflect.declaration.CtAnnotation;
+import spoon.reflect.declaration.CtAnnotationType;
+import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtInterface;
+import spoon.reflect.declaration.CtNamedElement;
+import spoon.reflect.declaration.ModifierKind;
 import util.Utility;
 
 
@@ -155,6 +167,13 @@ public class TransformationManager {
 			else {
 				//exists only in updated model -> CREATE
 				System.out.println(updatedModelElement + " was added by the user");
+				//first find out what Integration Mechanism this newly added object shall get translated with
+				System.out.println("Newly added element is of type " + updatedModelElement.eClass().getName());
+				IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByElementAppliedTo(updatedModelElement.eClass().getName());
+				System.out.println(imd);
+				//creating a new MappingEntry holding the newly created codestructure
+				MappingEntry newlyCreatedEntry = this.createNewCodestructure(imd, updatedModelElement.eClass().getName(), updatedModelElement);
+				updatedMappings.add(newlyCreatedEntry);
 			}
 		});
 		this.existentElementIDs.forEach(existentModelElementID -> {
@@ -191,4 +210,75 @@ public class TransformationManager {
 		}
 		return null;
 	}
+	
+	
+	private MappingEntry createNewCodestructure(IntegrationMechanismMappingDeclaration imd, String designmodelTypeName, EObject addedDesignmodelElement) {
+		CtNamedElement newCodestructure;
+		String newCodestructureName;
+		if(imd.getAttributeMappings().size() > 1) {
+			System.err.println("Attribute-mappings beyond the first one will be ignored when creating a new codestructure based on the mapping provided (as part of the CREATE-transformation)!");
+		}
+		//currently only codestructure names to attributes of model elements implemented, so only dispatching this here
+		if(imd.getAttributeMappings().get(0).getMappedCodeElement().getTargetValue().contentEquals("name") &&
+				imd.getAttributeMappings().get(0).getTargetValue().startsWith("attribute(")) {
+			String re1="(attribute)";
+		    String re2="(\\(.*\\))";
+
+		    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		    Matcher m = p.matcher(imd.getAttributeMappings().get(0).getTargetValue());
+		    if (m.find()) {
+		    	String attributeName = StringUtils.substringBetween(m.group(2), "(", ")");
+		    	newCodestructureName = addedDesignmodelElement.eGet(addedDesignmodelElement.eClass().getEStructuralFeature(attributeName)).toString();
+		    }
+		    else {
+		    	throw new NotImplementedException(imd.getAttributeMappings().get(0).getTargetValue() + " as the target value of a MappedDesignmodelClass is currently not yet implemented.");
+		    }
+		}
+		else {
+			throw new NotImplementedException("Currently there are only CREATE-transformations for mappings from a codestructure's name to attributes of model elements implemented");
+		}
+		//creating the codestructure element
+		switch(imd.getCodestructureType()) {
+		case CLASS:
+			CtClass<?> newClass = launcher.getFactory().Class().create("NewOne");
+			newClass.setVisibility(ModifierKind.PUBLIC);
+			newCodestructure = newClass;			
+			break;
+		case INTERFACE:
+			CtInterface<?> newInterface = launcher.getFactory().Interface().create("NewOne");
+			newInterface.setVisibility(ModifierKind.PUBLIC);
+			newCodestructure = newInterface;
+			break;
+		default:
+			throw new IllegalArgumentException("Invalid codestructure-type");
+		}
+		//setting name of the newly created codestructure according to the name it got mapped from the model element
+		newCodestructure.setSimpleName(newCodestructureName);
+		
+		//now the newly created codestructure has to be made applicable to the integration mechanism it is translated with
+		//i.e. it has to get annotated with a certain annotation if this is specified in the mapping
+		String targetNameInstance = "";
+		if(imd.getCondition().getTargetElement().contentEquals("modelelement.name")) {
+			targetNameInstance = addedDesignmodelElement.eClass().getName();
+			newCodestructure = imd.getCondition().applyConditionToCreatedCodestructure(newCodestructure, targetNameInstance, this.launcher);
+		}
+		else {
+			throw new NotImplementedException("Currently there are only CREATE-transformations for condition target-values of 'modelelement.name' implemented");
+		}
+		
+		MappingEntry entry = new MappingEntry();
+		entry.setDesignmodelElementEObject(addedDesignmodelElement);
+		entry.setCodeElement(newCodestructure);
+		entry.setCodestructureType(imd.getCodestructureType());
+		entry.setMappedDesignmodelElementValue(imd.getAttributeMappings().get(0).getTargetValue());
+		entry.setMappedCodeElementValue(imd.getAttributeMappings().get(0).getMappedCodeElement().getTargetValue());
+		try {
+			entry.setMappedDesignmodelElement(MappedDesignmodelElementFactory
+					.createMappedDesignmodelElement(entry.getMappedDesignmodelElementValue(), imd.getModelelementType(), null));
+		} catch (ParserException e) {
+			e.printStackTrace();
+		}
+		return entry;
+	}
+
 }

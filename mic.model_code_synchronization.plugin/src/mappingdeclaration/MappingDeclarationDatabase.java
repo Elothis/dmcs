@@ -45,7 +45,20 @@ public class MappingDeclarationDatabase {
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Gets an IntegrationMechanismMappingDeclaration based on the specified name of a model element it is applied to.
+	 * @param elementName
+	 * @return IntegrationMechanismDeclaration if found, NULL if no IM is applied to that model element
+	 */
+	public IntegrationMechanismMappingDeclaration getIntegrationMechanismByElementAppliedTo(String elementName) {
+		for (Map.Entry<String, IntegrationMechanismMappingDeclaration> entry : this.mappingInstantiations.entrySet()) {
+		    if(entry.getKey().contentEquals(elementName))
+		    	return entry.getValue();
+		}
+		return null;
+	}
+	
 	public boolean addIntegrationMechanismDeclaration(IntegrationMechanismMappingDeclaration imDeclaration) {
 		for (IntegrationMechanismMappingDeclaration imd: this.imDeclarations) {
 			if(imd.getName().contentEquals(imDeclaration.getName())) return false;

@@ -4,6 +4,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import mapping.MappingEntry;
+import mappingdeclaration.IntegrationMechanismMappingDeclaration;
 import spoon.reflect.declaration.CtNamedElement;
 
 /**
@@ -86,6 +87,5 @@ public abstract class MappedDesignmodelElement {
 	 * @param deletedMappedModelElement
 	 * @return true on success
 	 */
-	public abstract boolean deleteCodestructure(MappingEntry entry, EObject deletedMappedModelElement);
-	
+	public abstract boolean deleteCodestructure(MappingEntry entry, EObject deletedMappedModelElement);	
 }

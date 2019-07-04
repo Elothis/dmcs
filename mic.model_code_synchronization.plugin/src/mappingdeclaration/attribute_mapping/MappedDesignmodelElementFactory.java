@@ -1,5 +1,7 @@
 package mappingdeclaration.attribute_mapping;
 
+import org.apache.commons.lang3.NotImplementedException;
+
 import mappingdeclaration.ModelelementType;
 import mappingdeclaration.ParserException;
 
@@ -35,7 +37,7 @@ public class MappedDesignmodelElementFactory {
 		case CLASS:
 			return new MappedDesignmodelClass(mappedDesignmodelElementTargetValue, mappedCodeElement);
 		default:
-			throw new ParserException("ModelelementType not supported");
+			throw new NotImplementedException("ModelelementType not implemented");
 		
 		}
 	}

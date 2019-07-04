@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import mapping.MappingEntry;
 import mappingdeclaration.CodestructureType;
+import mappingdeclaration.IntegrationMechanismMappingDeclaration;
 import spoon.reflect.declaration.CtNamedElement;
 
 /**

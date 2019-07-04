@@ -7,6 +7,8 @@ import org.eclipse.emf.ecore.EPackage;
 import designmodel.generation.GenerationProcessor;
 import mappingdeclaration.CodestructureType;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
+import spoon.Launcher;
+import spoon.reflect.declaration.CtNamedElement;
 
 public abstract class Condition {
 	private String targetElement;
@@ -40,4 +42,12 @@ public abstract class Condition {
 	 * @param attributeMappings
 	 */
 	public abstract void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType, EPackage metapackage);
+	
+	/**
+	 * Applies the concrete condition to a codestructure, after the codestructure got created in the design model by the user and now gets created in the code.
+	 * E.g. it annotates the codestructure with a certain annotation for a AnnotatedWithCondition etc.
+	 * @param newCodestructure
+	 * @return the codestructure after it got treated accordingly
+	 */
+	public abstract CtNamedElement applyConditionToCreatedCodestructure(CtNamedElement newCodestructure, String targetNameInstance, Launcher launcher);
 }
