@@ -31,9 +31,9 @@ public class MappedCodeElementFactory {
 		}
 		switch (codestructureType) {
 		case CLASS:
-			return new MappedCodeClass(mappedCodeElementTargetValue);
+			return new MappedCodeClass(mappedCodeElementTargetValue, codestructureType);
 		case INTERFACE:
-			return new MappedCodeInterface(mappedCodeElementTargetValue);
+			return new MappedCodeInterface(mappedCodeElementTargetValue, codestructureType);
 		default:
 			throw new ParserException("Codestructure-Type not supported");		
 		}

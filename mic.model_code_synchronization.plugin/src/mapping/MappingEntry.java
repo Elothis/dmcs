@@ -2,6 +2,7 @@ package mapping;
 
 import org.eclipse.emf.ecore.EObject;
 
+import mappingdeclaration.CodestructureType;
 import spoon.reflect.declaration.CtNamedElement;
 
 /**
@@ -14,14 +15,16 @@ import spoon.reflect.declaration.CtNamedElement;
 public class MappingEntry {
 	
 	private CtNamedElement codeElement;
+	private CodestructureType codestructureType;
 	private EObject designmodelElement;
 	private String mappedCodeElementValue;
 	private String mappedDesignmodelElementValue;
 	
-	public MappingEntry(CtNamedElement codeElement, EObject designmodelElement, String mappedCodeElementValue,
+	public MappingEntry(CtNamedElement codeElement, CodestructureType codestructureType, EObject designmodelElement, String mappedCodeElementValue,
 			String mappedDesignmodelElementValue) {
 		super();
 		this.codeElement = codeElement;
+		this.codestructureType = codestructureType;
 		this.designmodelElement = designmodelElement;
 		this.mappedCodeElementValue = mappedCodeElementValue;
 		this.mappedDesignmodelElementValue = mappedDesignmodelElementValue;
@@ -34,6 +37,12 @@ public class MappingEntry {
 	}
 	public void setCodeElement(CtNamedElement codeElement) {
 		this.codeElement = codeElement;
+	}
+	public CodestructureType getCodestructureType() {
+		return codestructureType;
+	}
+	public void setCodestructureType(CodestructureType codestructureType) {
+		this.codestructureType = codestructureType;
 	}
 	public EObject getDesignmodelElement() {
 		return designmodelElement;

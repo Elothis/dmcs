@@ -107,6 +107,7 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 		MappingEntry mappingEntry = new MappingEntry();
 		mappingEntry.setDesignmodelElement(designmodelElement);
 		mappingEntry.setCodeElement(mappedCodeElement);
+		mappingEntry.setCodestructureType(this.getMappedCodeElement().getCodestructureType());
 		mappingEntry.setMappedDesignmodelElementValue(this.getTargetValue());
 		mappingEntry.setMappedCodeElementValue(this.getMappedCodeElement().getTargetValue());
 		

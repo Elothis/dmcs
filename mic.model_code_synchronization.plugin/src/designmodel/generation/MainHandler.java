@@ -54,42 +54,40 @@ public class MainHandler extends AbstractHandler {
 	            
 	            IMappingDeclarationParser mappingParser = new MappingDeclarationParser(mappingDirectoryPath);
 				
-	            if(this.transformationManager == null) {
-	            	this.transformationManager = new TransformationManager(projectPath, mappingParser);
-	            }
-	            
-	            if(!this.designmodelExistent) {
-	            	try {
+	            try {
+					if(this.transformationManager == null) {
+						this.transformationManager = new TransformationManager(projectPath, mappingParser);
+					}
+					
+					if(!this.designmodelExistent) {
 						transformationManager.buildDesignModel(mappingDirectoryPath + "/designmodel.xmi");
 						this.designmodelExistent = true;
-					} catch (IOException e) {
-						e.printStackTrace();
+
 					}
-	            }
-	            else { //model was changed by user and he then clicked the menu entry again to propagate the changes back into the code
-	            	MessageDialog dialog = new MessageDialog(Display.getDefault().getActiveShell(),
-	            			"Synchronization direction",
-	            			null,
-	            		    "Did you change the code base or the design model?",
-	            		    MessageDialog.QUESTION,
-	            		    new String[] { "I changed some code", "I updated the design model"},
-	            		    0);
-	            		int result = dialog.open();
-	            	if(result == 1) {
-	            		System.out.println("Propagating changes of the design model back to the code");
-		            	transformationManager.updateCode(Utility.loadExistingModel(mappingDirectoryPath + "/designmodel.xmi"));
-	            	}
-	            	else { //user wants to regenerate the model based on the current state of the code
-	            		try {
-	            			//regenerate the design model from scratch
-	            			System.out.println("Regenerating the design model");
-	            			transformationManager = new TransformationManager(projectPath, mappingParser);
-							transformationManager.buildDesignModel(mappingDirectoryPath + "/designmodel.xmi");
-						} catch (IOException e) {
-							e.printStackTrace();
+					else { //model was changed by user and he then clicked the menu entry again to propagate the changes back into the code
+						MessageDialog dialog = new MessageDialog(Display.getDefault().getActiveShell(),
+								"Synchronization direction",
+								null,
+							    "Did you change the code base or the design model?",
+							    MessageDialog.QUESTION,
+							    new String[] { "I changed some code", "I updated the design model"},
+							    0);
+							int result = dialog.open();
+						if(result == 1) {
+							System.out.println("Propagating changes of the design model back to the code");
+					    	transformationManager.updateCode(mappingDirectoryPath + "/designmodel.xmi");
 						}
-	            	}	            	
-	            }				
+						else { //user wants to regenerate the model based on the current state of the code
+							//regenerate the design model from scratch
+							System.out.println("Regenerating the design model");
+							transformationManager = new TransformationManager(projectPath, mappingParser);
+							transformationManager.buildDesignModel(mappingDirectoryPath + "/designmodel.xmi");
+						}	            	
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+	            
 	        }
 		}
 		return null;

@@ -20,11 +20,13 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import mapping.MappingEntry;
+import mappingdeclaration.CodestructureType;
 import mappingdeclaration.IMappingDeclarationParser;
 import mappingdeclaration.MappingDeclarationDatabase;
 import spoon.Launcher;
 import spoon.compiler.Environment;
 import spoon.reflect.CtModel;
+import util.Utility;
 
 
 /**
@@ -43,6 +45,7 @@ public class TransformationManager {
 	private MappingDeclarationDatabase mappingDeclarationDatabase;
 	
 	private List<MappingEntry> mappings;
+	private List<String> existentElementIDs;
 	private XMIResource existentDesignmodel;
 
 	public String getDirectoryPath() {
@@ -79,6 +82,7 @@ public class TransformationManager {
 	 * @throws IOException 
 	 */
 	public void buildDesignModel(String designmodelTargetPath) throws IOException {
+		this.existentElementIDs = new ArrayList<>();
 		this.mappingDeclarationDatabase = this.mappingDeclarationParser.parseMappingDirectory();
 
 		EPackage metapackage = this.mappingDeclarationParser.parseConfigFileToMetaPackage();
@@ -100,6 +104,7 @@ public class TransformationManager {
 			processor.getGeneratedDesignmodelElements().forEach(e -> {
 				if(e != null) {
 					savingRes.setID(e, UUID.randomUUID().toString());
+					this.existentElementIDs.add(savingRes.getID(e));
 					savingRes.getContents().add(e);
 				}
 			});
@@ -133,30 +138,89 @@ public class TransformationManager {
 	 * Updates the code to reflect the contents of a changed design model.
 	 * @param updatedModel
 	 */
-	public void updateCode(XMIResource updatedModel) {
+	public void updateCode(String existingModelPath) {
+		XMIResource updatedModel = Utility.loadExistingModel(existingModelPath);
+		
+		List<MappingEntry> updatedMappings = new ArrayList<>();
+		List<String> newElementIDs = new ArrayList<>();
 		updatedModel.getContents().forEach(updatedModelElement -> {
-			
-			//getting respective model element in existing designmodel
-			String id = updatedModel.getID(updatedModelElement);
-			EObject existentModelElement = existentDesignmodel.getEObject(id);
-			
-			if(existentModelElement == null) {
-			//no existend model element there yet, meaning it got added by the user through modifications at the design model
-				System.out.println(updatedModelElement + " was newly created");
-				return;
+			String updatedModelElementID = updatedModel.getID(updatedModelElement);
+			newElementIDs.add(updatedModelElementID);
+			//TODO check for every ID if
+			// - its in both lists -> UPDATE
+			// - its only in the old one -> DELETE
+			// - its only in the new one -> CREATE
+			if(this.existentElementIDs.contains(updatedModelElementID)) {
+				//exists in both lists -> UPDATE
+				System.out.println(updatedModelElement + " was updated/not changed at all");
+				//get MappingEntry for the respective model element
+				EObject existentModelElement = existentDesignmodel.getEObject(updatedModelElementID);
+				MappingEntry entry = getMappingEntryByModelelement(existentModelElement);
+				//update it according to changes applied to the updatedModelElement
+				MappingEntry updatedEntry = updateMappingEntry(entry, updatedModelElement);
+				updatedMappings.add(updatedEntry);
 			}
-			
-			//getting the mapping entry of this model element to check what is mapped to what, to then determine whether it got changed by the user
-			MappingEntry entry = getMappingEntryByModelelement(existentModelElement);
-			if(entry == null) {
-				entry = getMappingEntryByID(updatedModel.getID(updatedModelElement));
+			else {
+				//exists only in updated model -> CREATE
+				System.out.println(updatedModelElement + " was added by the user");
 			}
-			entry = updateMappingEntry(entry, updatedModelElement);
+		});
+		this.existentElementIDs.forEach(existentModelElementID -> {
+			if(!newElementIDs.contains(existentModelElementID)) {
+				//only existent in old model version -> DELETE
+				System.out.println(this.existentDesignmodel.getEObject(existentModelElementID) + " was deleted");
+				EObject existentModelElement = existentDesignmodel.getEObject(existentModelElementID);
+				deleteCodestructure(existentModelElement);				
+			}
 		});
 		
 		this.launcher.prettyprint();
 		
-		this.existentDesignmodel = updatedModel;
+		this.mappings = updatedMappings;
+//		this.existentElementIDs = newElementIDs;
+//		this.existentDesignmodel = updatedModel;
+		try {
+			//rebuild model instance afterwards to reset and reconfigure all data in this TransformationManager instance
+			this.buildDesignModel(existingModelPath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Gets the respective mapping entry holding the specified code element name.
+	 * @param codeElementName
+	 * @return
+	 */
+	private MappingEntry getMappingEntryByCodeElementName(String codeElementName) {
+		for(MappingEntry e: this.mappings) {
+			if(e.getCodeElement().getSimpleName().contentEquals(codeElementName))
+				return e;
+		}
+		return null;
+	}
+	
+	/**
+	 * Gets the respective mapping entry holding the specified model element.
+	 * @param modelelement
+	 * @return
+	 */
+	private MappingEntry getMappingEntryByModelelement(EObject modelelement) {
+		for(MappingEntry e: this.mappings) {
+			if(e.getDesignmodelElement().equals(modelelement))
+				return e;
+		}
+		return null;
+	}
+	
+	private MappingEntry getMappingEntryByID(String id) {
+		for(MappingEntry e: this.mappings) {
+			EObject o = e.getDesignmodelElement();
+			String existentID = this.existentDesignmodel.getID(o);
+			if(existentID.contentEquals(id))
+				return e;
+		}
+		return null;
 	}
 
 	/**
@@ -173,7 +237,9 @@ public class TransformationManager {
 			return createNewCodestructure(entry, updatedModelElement);
 		}
 		//dispatch here what is mapped to what (currently only the name of the codestructure mapped to attributes of the design model element is implemented)
-		if(entry.getMappedCodeElementValue().contentEquals("name") && entry.getMappedDesignmodelElementValue().startsWith("attribute(")) {
+		if(entry.getMappedCodeElementValue().contentEquals("name") &&
+				(entry.getCodestructureType() != CodestructureType.CLASS || entry.getCodestructureType() != CodestructureType.INTERFACE) &&
+				entry.getMappedDesignmodelElementValue().startsWith("attribute(")) {
 			String re1="(attribute)";
 		    String re2="(\\(.*\\))";
 
@@ -222,7 +288,7 @@ public class TransformationManager {
 		    }
 		}
 		else {
-			throw new NotImplementedException("Currently there are only mappings from attributes from a design model class to names of codestructures implemented");
+			throw new NotImplementedException("Currently there are only mappings from attributes from a design model class to names of classes and interfaces as code strucutres implemented");
 		}
 		
 		return entry;
@@ -231,48 +297,33 @@ public class TransformationManager {
 	/**
 	 * Responsible for creating a new codestructure based on a new design model element added by the user.
 	 * @param entry
-	 * @param addedDesignmodelelement
+	 * @param addedDesignmodelElement
 	 * @return MappingEntry containing the mapping to the newly created codestructure
 	 */
-	private MappingEntry createNewCodestructure(MappingEntry entry, EObject addedDesignmodelelement) {
+	private MappingEntry createNewCodestructure(MappingEntry entry, EObject addedDesignmodelElement) {
 		
 		return null;
 	}
+	
+	/**
+	 * Deletes the codestructure the deleted model element was mapped to.
+	 * 
+	 * @param deletedModelElement
+	 * @return true on success
+	 */
+	private boolean deleteCodestructure(EObject deletedModelElement) {
+		MappingEntry entry = getMappingEntryByModelelement(deletedModelElement);
+		if(entry.getMappedCodeElementValue().contentEquals("name") &&
+				(entry.getCodestructureType() != CodestructureType.CLASS || entry.getCodestructureType() != CodestructureType.INTERFACE) &&
+				entry.getMappedDesignmodelElementValue().startsWith("attribute(")) {
+			//currently simply deleting the source file is enough to remove the code representation of the model element
+			this.mappings.remove(entry);
+			entry.getCodeElement().delete();
+			return entry.getCodeElement().getPosition().getCompilationUnit().getFile().delete();
+		}
+		else {
+			throw new NotImplementedException("Currently there are only mappings from attributes from a design model class to names of classes and interfaces as code strucutres implemented");
+		}
+	}
 
-	/**
-	 * Gets the respective mapping entry holding the specified code element name.
-	 * @param codeElementName
-	 * @return
-	 */
-	private MappingEntry getMappingEntryByCodeElementName(String codeElementName) {
-		for(MappingEntry e: this.mappings) {
-			if(e.getCodeElement().getSimpleName().contentEquals(codeElementName))
-				return e;
-		}
-		return null;
-	}
-	
-	/**
-	 * Gets the respective mapping entry holding the specified model element.
-	 * @param modelelement
-	 * @return
-	 */
-	private MappingEntry getMappingEntryByModelelement(EObject modelelement) {
-		for(MappingEntry e: this.mappings) {
-			if(e.getDesignmodelElement().equals(modelelement))
-				return e;
-		}
-		return null;
-	}
-	
-	private MappingEntry getMappingEntryByID(String id) {
-		for(MappingEntry e: this.mappings) {
-			EObject o = e.getDesignmodelElement();
-			String existentID = this.existentDesignmodel.getID(o);
-			if(existentID.contentEquals(id))
-				return e;
-		}
-		return null;
-	}
-	
 }

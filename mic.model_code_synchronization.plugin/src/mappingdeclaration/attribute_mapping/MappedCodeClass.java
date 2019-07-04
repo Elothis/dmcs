@@ -1,5 +1,7 @@
 package mappingdeclaration.attribute_mapping;
 
+import mappingdeclaration.CodestructureType;
+
 /**
  * Represents the mapping to a value of a class in the code.
  *
@@ -8,8 +10,8 @@ package mappingdeclaration.attribute_mapping;
  */
 public class MappedCodeClass extends MappedCodeElement {
 
-	public MappedCodeClass(String targetValue) {
-		super(targetValue);
+	public MappedCodeClass(String targetValue, CodestructureType codestructureType) {
+		super(targetValue, codestructureType);
 	}
 
 	@Override
