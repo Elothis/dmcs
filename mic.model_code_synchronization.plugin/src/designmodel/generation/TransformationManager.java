@@ -268,20 +268,6 @@ public class TransformationManager {
 				String[] a = pathWithoutJavaExtension.split("\\\\");
 				String newFileName = pathWithoutJavaExtension.split(a[a.length-1])[0] + entry.getCodeElement().getSimpleName() + ".java";
 				entry.getCodeElement().getPosition().getCompilationUnit().setFile(new File(newFileName));
-				
-//				CompilationUnit newCu = entry.getCodeElement().getFactory().Core().createCompilationUnit();
-//				newCu.setFile(new File(newFileName));
-//				JDTTreeBuilder jdtTreeBuilder = new JDTTreeBuilder(this.launcher.createFactory());
-//				entry.getCodeElement().getFactory().Core().createBodyHolderSourcePosition(newCu,
-//						entry.getCodeElement().getPosition().getSourceStart(),
-//						entry.getCodeElement().getPosition().getSourceEnd(),
-//						entry.getCodeElement().getPosition().getSourceStart()+1,
-//						entry.getCodeElement().getPosition().getSourceStart()+1,
-//						entry.getCodeElement().getPosition().getSourceStart()+1,
-//						entry.getCodeElement().getPosition().getSourceStart()+1,
-//						entry.getCodeElement().getPosition().getSourceStart()+1,
-//						entry.getCodeElement().getPosition().getSourceStart()+1,
-//						jdtTreeBuilder.getContextBuilder().getCompilationUnitLineSeparatorPositions());
 		    }
 		    else {
 		    	throw new NotImplementedException(entry.getMappedDesignmodelElementValue() + " as the target value of a MappedDesignmodelClass is currently not yet implemented.");
