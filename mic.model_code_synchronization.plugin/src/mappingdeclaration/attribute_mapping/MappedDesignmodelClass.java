@@ -1,5 +1,6 @@
 package mappingdeclaration.attribute_mapping;
 
+import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import mapping.MappingEntry;
+import mappingdeclaration.CodestructureType;
 import spoon.reflect.declaration.CtNamedElement;
 
 /**
@@ -100,6 +102,66 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 	    else {
 	    	throw new NotImplementedException(this.getTargetValue() + " as the target value of a MappedDesignmodelClass is currently not yet implemented.");
 	    }
+	}
+
+	@Override
+	public MappingEntry updateMappingEntry(MappingEntry entry, EObject updatedModelElement) {
+		if(entry.getCodeElement() == null) {
+			return null;
+		}
+		//dispatch here what is mapped to what (currently only the name of the codestructure mapped to attributes of the design model element is implemented)
+		if(entry.getMappedCodeElementValue().contentEquals("name") &&
+				(entry.getCodestructureType() != CodestructureType.CLASS || entry.getCodestructureType() != CodestructureType.INTERFACE) &&
+				entry.getMappedDesignmodelElementValue().startsWith("attribute(")) {
+			String re1="(attribute)";
+		    String re2="(\\(.*\\))";
+
+		    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		    Matcher m = p.matcher(entry.getMappedDesignmodelElementValue());
+		    if (m.find()) {
+		        String attributeName = StringUtils.substringBetween(m.group(2), "(", ")");
+		        //get the new attribute value that is mapped to the name of the codestructure
+				String newAttributeValue = updatedModelElement.eGet(updatedModelElement.eClass().getEStructuralFeature(attributeName)).toString();
+				//check if the design model got changed
+				//-> if it did not change, simply return original entry without modifications
+				if(newAttributeValue.contentEquals(entry.getCodeElement().getSimpleName())) {
+					System.out.println(entry.getCodeElement().getSimpleName() + " did not get changed");
+					return entry;
+				}
+				System.out.println(entry.getCodeElement().getSimpleName() + " got changed to " + newAttributeValue);
+				//change the codestructure respectively
+				entry.getCodeElement().setSimpleName(newAttributeValue);
+				//change the model element to new one
+				entry.setDesignmodelElementEObject(updatedModelElement);
+				//remove the old codestructure
+				//-> currently just implemented as deleting it (TODO is full refactoring through renaming it instead of deleting it)
+				entry.getCodeElement().getPosition().getCompilationUnit().getFile().delete();
+				//setting the path to the .java-file of the possibly renamed code element
+				String pathWithoutJavaExtension = entry.getCodeElement().getPosition().getCompilationUnit().getFile().toString().split("\\.java")[0];
+				String[] a = pathWithoutJavaExtension.split("\\\\");
+				String newFileName = pathWithoutJavaExtension.split(a[a.length-1])[0] + entry.getCodeElement().getSimpleName() + ".java";
+				entry.getCodeElement().getPosition().getCompilationUnit().setFile(new File(newFileName));
+		    }
+		    else {
+		    	throw new NotImplementedException(entry.getMappedDesignmodelElementValue() + " as the target value of a MappedDesignmodelClass is currently not yet implemented.");
+		    }
+		}
+		else {
+			throw new NotImplementedException("Currently there are only mappings from attributes from a design model class to names of classes and interfaces as code strucutres implemented");
+		}
+		return entry;
+	}
+
+	@Override
+	public boolean deleteCodestructure(MappingEntry entry, EObject deletedMappedModelElement) {
+		if(entry.getMappedDesignmodelElementValue().startsWith("attribute(")) {
+			//call the delete-function of the mapped code element
+			return entry.getMappedDesignmodelElement().getMappedCodeElement().deleteCodestructure(entry.getCodeElement());
+		}
+		else {
+			throw new NotImplementedException("Currently there are only mappings from attributes from a design model class to codestructures implemented");
+		}
+		
 	}
 
 	@Override
