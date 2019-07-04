@@ -320,7 +320,7 @@ public class TransformationManager {
 			return entry.getMappedDesignmodelElement().getMappedCodeElement().deleteCodestructure(entry.getCodeElement());
 		}
 		else {
-			throw new NotImplementedException("Currently there are only mappings from attributes from a design model class to names of classes and interfaces as code strucutres implemented");
+			throw new NotImplementedException("Currently there are only mappings from attributes from a design model class to codestructures implemented");
 		}
 	}
 
