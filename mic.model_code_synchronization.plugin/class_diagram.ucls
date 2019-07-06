@@ -6,8 +6,8 @@
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/designmodel/generation/MainHandler.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1433" y="-652"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="747" y="3"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
@@ -17,8 +17,8 @@
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/MappingDeclarationParser.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="976" y="-278"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="313" y="234"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="false"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
@@ -28,52 +28,52 @@
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/designmodel/generation/TransformationManager.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1444" y="-478"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="737" y="189"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="designmodel.generation.GenerationProcessor" 
+  <class id="4" language="java" name="designmodel.generation.ConditionProcessor" 
     project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/designmodel/generation/GenerationProcessor.java" binary="false" 
+    file="/mic.model_code_synchronization.plugin/src/designmodel/generation/ConditionProcessor.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="951" y="315"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="279" width="447" x="283" y="1146"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+      <operations public="true" package="false" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
   <class id="5" language="java" name="designmodel.generation.AnnotatedWithProcessor" 
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/designmodel/generation/AnnotatedWithProcessor.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="52" width="245" x="692" y="516"/>    
-    <display autosize="false" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="138" width="255" x="41" y="1465"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+      <attributes public="true" package="false" protected="false" private="true" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
   <class id="6" language="java" name="designmodel.generation.ImplementedInterfaceProcessor" 
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/designmodel/generation/ImplementedInterfaceProcessor.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1090" y="539"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="121" width="324" x="336" y="1465"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+      <attributes public="true" package="false" protected="false" private="true" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
   <class id="7" language="java" name="mappingdeclaration.MappingDeclarationDatabase" 
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/MappingDeclarationDatabase.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1458" y="-275"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="572" y="464"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
@@ -83,8 +83,8 @@
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/IMappingDeclarationParser.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="985" y="-472"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="347" y="88"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
@@ -94,8 +94,8 @@
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/IntegrationMechanismMappingDeclaration.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1517" y="33"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="576" y="754"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
@@ -105,8 +105,8 @@
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/attribute_mapping/MappedDesignmodelElement.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1550" y="312"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="243" width="392" x="695" y="1630"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
@@ -116,8 +116,8 @@
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/attribute_mapping/MappedDesignmodelClass.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1354" y="541"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="62" width="180" x="845" y="1913"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
@@ -127,8 +127,8 @@
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/attribute_mapping/MappedCodeElement.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1657" y="564"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="171" width="263" x="542" y="1913"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
@@ -138,8 +138,8 @@
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/attribute_mapping/MappedCodeClass.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1552" y="717"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="58" width="167" x="438" y="2124"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
@@ -149,8 +149,8 @@
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/attribute_mapping/MappedCodeInterface.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1754" y="718"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="58" width="167" x="645" y="2124"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
@@ -160,8 +160,8 @@
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/condition/Condition.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="969" y="56"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="189" width="494" x="283" y="917"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
@@ -171,8 +171,8 @@
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/condition/AnnotatedWithCondition.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="872" y="-94"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="131" y="946"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
@@ -182,138 +182,218 @@
     project="mic.model_code_synchronization.plugin" 
     file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/condition/ImplementedInterfaceCondition.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1091" y="-95"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="115" y="1052"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <association id="18">    
+  <class id="18" language="java" name="concrete_mapping.MappingEntry" project="mic.model_code_synchronization.plugin" 
+    file="/mic.model_code_synchronization.plugin/src/concrete_mapping/MappingEntry.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="120" width="216" x="750" y="1322"/>    
+    <display autosize="false" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <association id="19">    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="19" name="imDeclarations">        
-        <position height="18" width="78" x="1473" y="-143"/>      
+      <attribute id="20" name="mappingInstantiations">        
+        <position height="18" width="111" x="431" y="590"/>      
       </attribute>      
-      <multiplicity id="20" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="21">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="22" name="attributeMappings"/>      
-      <multiplicity id="23" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="24">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="25" name="mappingDeclarationParser"/>      
-      <multiplicity id="26" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="27">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="8"/>  
-  </realization>  
-  <association id="28">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="29" name="mappingDeclarationDatabase"/>      
-      <multiplicity id="30" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="31">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="15"/>  
-  </generalization>  
-  <association id="32">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="33" name="mappedCodeElement"/>      
-      <multiplicity id="34" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="35">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="36" name="attributeMappings"/>      
-      <multiplicity id="37" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="38">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="15"/>  
-  </generalization>  
-  <generalization id="39">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <generalization id="40">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="10"/>  
-  </generalization>  
-  <generalization id="41">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <generalization id="42">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
-  <association id="43">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="44" name="processor"/>      
-      <multiplicity id="45" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="46">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="47" name="condition"/>      
-      <multiplicity id="48" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="49">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="50" name="mappingInstantiations">        
-        <position height="18" width="111" x="1317" y="-141"/>      
-      </attribute>      
-      <multiplicity id="51" minimum="0" maximum="2147483647">        
-        <position height="16" width="21" x="1416" y="-114"/>      
+      <multiplicity id="21" minimum="0" maximum="2147483647">        
+        <position height="16" width="21" x="1262" y="7"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="52">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="53" name="transformationManager"/>      
-      <multiplicity id="54" minimum="0" maximum="1"/>    
+  <association id="22">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="23" name="mappingDeclarationParser">        
+        <position height="0" width="0" x="-1228" y="-311"/>      
+      </attribute>      
+      <multiplicity id="24" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1228" y="-311"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="55">    
+  <association id="25">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="56" name="mappingDeclarationDatabase"/>      
-      <multiplicity id="57" minimum="0" maximum="1"/>    
+      <attribute id="26" name="mappingDeclarationDatabase">        
+        <position height="0" width="0" x="-40" y="-62"/>      
+      </attribute>      
+      <multiplicity id="27" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-40" y="-62"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="58">    
+  <association id="28">    
+    <bendpoint x="961" y="351"/>    
+    <bendpoint x="961" y="616"/>    
+    <bendpoint x="961" y="917"/>    
+    <bendpoint x="961" y="1146"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="29" name="mappings"/>      
+      <multiplicity id="30" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="31">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="32">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="33" name="transformationManager">        
+        <position height="0" width="0" x="-888" y="-53"/>      
+      </attribute>      
+      <multiplicity id="34" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-888" y="-53"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="35">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <association id="36">    
+    <bendpoint x="690" y="1465"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="37" name="attributeMappings">        
+        <position height="0" width="0" x="-301" y="112"/>      
+      </attribute>      
+      <multiplicity id="38" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-301" y="112"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="39">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="40" name="mappingEntries"/>      
+      <multiplicity id="41" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="42">    
+    <bendpoint x="940" y="917"/>    
+    <bendpoint x="982" y="1146"/>    
+    <bendpoint x="982" y="1465"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="43" name="attributeMappings">        
+        <position height="0" width="0" x="-301" y="112"/>      
+      </attribute>      
+      <multiplicity id="44" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-301" y="112"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="45">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="46" name="condition">        
+        <position height="0" width="0" x="-775" y="6"/>      
+      </attribute>      
+      <multiplicity id="47" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-775" y="6"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="48">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <association id="49">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="50" name="mappedCodeElement">        
+        <position height="0" width="0" x="-301" y="112"/>      
+      </attribute>      
+      <multiplicity id="51" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-301" y="112"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="52">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <generalization id="53">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="54">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="55" name="mappingDeclarationDatabase">        
+        <position height="0" width="0" x="-40" y="-62"/>      
+      </attribute>      
+      <multiplicity id="56" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-40" y="-62"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="57">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="58" name="imDeclarations">        
+        <position height="18" width="78" x="1303" y="-23"/>      
+      </attribute>      
+      <multiplicity id="59" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-170" y="120"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="60">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="61">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="62" name="mappedDesignmodelElement"/>      
+      <multiplicity id="63" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="64">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="65">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="66" name="processor">        
+        <position height="0" width="0" x="-647" y="8"/>      
+      </attribute>      
+      <multiplicity id="67" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-647" y="8"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="68">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="15"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
 
-import designmodel.generation.GenerationProcessor;
+import designmodel.generation.ConditionProcessor;
 import mappingdeclaration.CodestructureType;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
 import spoon.Launcher;
@@ -12,7 +12,7 @@ import spoon.reflect.declaration.CtNamedElement;
 
 public abstract class Condition {
 	private String targetElement;
-	private GenerationProcessor<?> processor;
+	private ConditionProcessor<?> processor;
 
 	
 	public String getTargetElement() {
@@ -27,11 +27,11 @@ public abstract class Condition {
 		this.targetElement = targetElement;
 	}
 
-	public GenerationProcessor<?> getProcessor() {
+	public ConditionProcessor<?> getProcessor() {
 		return processor;
 	}
 
-	public void setProcessor(GenerationProcessor<?> processor) {
+	public void setProcessor(ConditionProcessor<?> processor) {
 		this.processor = processor;
 	}
 	

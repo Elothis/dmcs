@@ -15,7 +15,7 @@ import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtInterface;
 import spoon.reflect.declaration.CtNamedElement;
 
-public class AnnotatedWithProcessor extends GenerationProcessor<CtNamedElement> {
+public class AnnotatedWithProcessor extends ConditionProcessor<CtNamedElement> {
 	private String annotationName;
 	
 	public AnnotatedWithProcessor(String annotationName, List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType, EPackage metapackage) {

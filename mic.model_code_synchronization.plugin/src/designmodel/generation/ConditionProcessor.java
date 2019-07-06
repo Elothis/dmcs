@@ -12,14 +12,14 @@ import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.declaration.CtElement;
 
-public abstract class GenerationProcessor<T extends CtElement> extends AbstractProcessor<T> {
+public abstract class ConditionProcessor<T extends CtElement> extends AbstractProcessor<T> {
 	private List<MappedDesignmodelElement> attributeMappings;
 	private EPackage metapackage;
 	private List<EObject> generatedDesignmodelElements;
 	private CodestructureType codestructureType;
 	private List<MappingEntry> mappingEntries;
 
-	public GenerationProcessor(List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType, EPackage metapackage) {
+	public ConditionProcessor(List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType, EPackage metapackage) {
 		super();
 		this.attributeMappings = attributeMappings;
 		this.metapackage = metapackage;
