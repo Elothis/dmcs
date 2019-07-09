@@ -5,7 +5,6 @@ package mic.model_code_synchronization.designmodel;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -76,22 +75,13 @@ public interface DesignmodelPackage extends EPackage {
 	int STATE__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Transitions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__TRANSITIONS = 1;
-
-	/**
 	 * The feature id for the '<em><b>Immediate</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__IMMEDIATE = 2;
+	int STATE__IMMEDIATE = 1;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -100,7 +90,7 @@ public interface DesignmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = 3;
+	int STATE_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>State</em>' class.
@@ -195,43 +185,6 @@ public interface DesignmodelPackage extends EPackage {
 	int INTERFACE_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link mic.model_code_synchronization.designmodel.impl.TransitionImpl <em>Transition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see mic.model_code_synchronization.designmodel.impl.TransitionImpl
-	 * @see mic.model_code_synchronization.designmodel.impl.DesignmodelPackageImpl#getTransition()
-	 * @generated
-	 */
-	int TRANSITION = 3;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION__NAME = 0;
-
-	/**
-	 * The number of structural features of the '<em>Transition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Transition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION_OPERATION_COUNT = 0;
-
-	/**
 	 * Returns the meta object for class '{@link mic.model_code_synchronization.designmodel.State <em>State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -251,17 +204,6 @@ public interface DesignmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getState_Name();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link mic.model_code_synchronization.designmodel.State#getTransitions <em>Transitions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Transitions</em>'.
-	 * @see mic.model_code_synchronization.designmodel.State#getTransitions()
-	 * @see #getState()
-	 * @generated
-	 */
-	EReference getState_Transitions();
 
 	/**
 	 * Returns the meta object for the attribute '{@link mic.model_code_synchronization.designmodel.State#isImmediate <em>Immediate</em>}'.
@@ -328,27 +270,6 @@ public interface DesignmodelPackage extends EPackage {
 	EAttribute getInterface_AnotherField();
 
 	/**
-	 * Returns the meta object for class '{@link mic.model_code_synchronization.designmodel.Transition <em>Transition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Transition</em>'.
-	 * @see mic.model_code_synchronization.designmodel.Transition
-	 * @generated
-	 */
-	EClass getTransition();
-
-	/**
-	 * Returns the meta object for the attribute '{@link mic.model_code_synchronization.designmodel.Transition#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see mic.model_code_synchronization.designmodel.Transition#getName()
-	 * @see #getTransition()
-	 * @generated
-	 */
-	EAttribute getTransition_Name();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -388,14 +309,6 @@ public interface DesignmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STATE__NAME = eINSTANCE.getState_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Transitions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STATE__TRANSITIONS = eINSTANCE.getState_Transitions();
 
 		/**
 		 * The meta object literal for the '<em><b>Immediate</b></em>' attribute feature.
@@ -448,24 +361,6 @@ public interface DesignmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute INTERFACE__ANOTHER_FIELD = eINSTANCE.getInterface_AnotherField();
-
-		/**
-		 * The meta object literal for the '{@link mic.model_code_synchronization.designmodel.impl.TransitionImpl <em>Transition</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see mic.model_code_synchronization.designmodel.impl.TransitionImpl
-		 * @see mic.model_code_synchronization.designmodel.impl.DesignmodelPackageImpl#getTransition()
-		 * @generated
-		 */
-		EClass TRANSITION = eINSTANCE.getTransition();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TRANSITION__NAME = eINSTANCE.getTransition_Name();
 
 	}
 

@@ -62,8 +62,6 @@ public class DesignmodelFactoryImpl extends EFactoryImpl implements DesignmodelF
 			return createComponentType();
 		case DesignmodelPackage.INTERFACE:
 			return createInterface();
-		case DesignmodelPackage.TRANSITION:
-			return createTransition();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -100,17 +98,6 @@ public class DesignmodelFactoryImpl extends EFactoryImpl implements DesignmodelF
 	public Interface createInterface() {
 		InterfaceImpl interface_ = new InterfaceImpl();
 		return interface_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Transition createTransition() {
-		TransitionImpl transition = new TransitionImpl();
-		return transition;
 	}
 
 	/**
