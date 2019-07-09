@@ -138,7 +138,7 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 				entry.getCodeElement().getPosition().getCompilationUnit().getFile().delete();
 				//setting the path to the .java-file of the possibly renamed code element
 				String pathWithoutJavaExtension = entry.getCodeElement().getPosition().getCompilationUnit().getFile().toString().split("\\.java")[0];
-				String[] a = pathWithoutJavaExtension.split(System.getProperty("file.separator"));
+				String[] a = pathWithoutJavaExtension.split(Pattern.quote(System.getProperty("file.separator")));
 				String newFileName = pathWithoutJavaExtension.split(a[a.length-1])[0] + entry.getCodeElement().getSimpleName() + ".java";
 				entry.getCodeElement().getPosition().getCompilationUnit().setFile(new File(newFileName));
 		    }
