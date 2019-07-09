@@ -7,10 +7,13 @@ import mic.model_code_synchronization.designmodel.DesignmodelFactory;
 import mic.model_code_synchronization.designmodel.DesignmodelPackage;
 import mic.model_code_synchronization.designmodel.Interface;
 import mic.model_code_synchronization.designmodel.State;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 
 /**
@@ -33,6 +36,7 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 	 * @generated
 	 */
 	private EClass componentTypeEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

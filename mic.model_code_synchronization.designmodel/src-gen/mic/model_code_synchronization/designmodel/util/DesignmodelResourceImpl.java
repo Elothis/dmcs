@@ -25,9 +25,4 @@ public class DesignmodelResourceImpl extends XMIResourceImpl {
 		super(uri);
 	}
 
-	@Override
-	protected boolean useUUIDs() {
-		return true;
-	}
-
 } //DesignmodelResourceImpl
