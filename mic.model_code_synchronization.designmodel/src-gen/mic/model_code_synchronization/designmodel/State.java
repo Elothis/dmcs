@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link mic.model_code_synchronization.designmodel.State#getName <em>Name</em>}</li>
- *   <li>{@link mic.model_code_synchronization.designmodel.State#isImmediate <em>Immediate</em>}</li>
  * </ul>
  *
  * @see mic.model_code_synchronization.designmodel.DesignmodelPackage#getState()
@@ -43,27 +42,5 @@ public interface State extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Immediate</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Immediate</em>' attribute.
-	 * @see #setImmediate(boolean)
-	 * @see mic.model_code_synchronization.designmodel.DesignmodelPackage#getState_Immediate()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.Boolean"
-	 * @generated
-	 */
-	boolean isImmediate();
-
-	/**
-	 * Sets the value of the '{@link mic.model_code_synchronization.designmodel.State#isImmediate <em>Immediate</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Immediate</em>' attribute.
-	 * @see #isImmediate()
-	 * @generated
-	 */
-	void setImmediate(boolean value);
 
 } // State

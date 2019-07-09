@@ -137,16 +137,6 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 	 * @generated
 	 */
 	@Override
-	public EAttribute getState_Immediate() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getComponentType() {
 		return componentTypeEClass;
 	}
@@ -187,16 +177,6 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 	 * @generated
 	 */
 	@Override
-	public EAttribute getInterface_AnotherField() {
-		return (EAttribute) interfaceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public DesignmodelFactory getDesignmodelFactory() {
 		return (DesignmodelFactory) getEFactoryInstance();
 	}
@@ -223,14 +203,12 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 		// Create classes and their features
 		stateEClass = createEClass(STATE);
 		createEAttribute(stateEClass, STATE__NAME);
-		createEAttribute(stateEClass, STATE__IMMEDIATE);
 
 		componentTypeEClass = createEClass(COMPONENT_TYPE);
 		createEAttribute(componentTypeEClass, COMPONENT_TYPE__NAME);
 
 		interfaceEClass = createEClass(INTERFACE);
 		createEAttribute(interfaceEClass, INTERFACE__INTERFACE_NAME);
-		createEAttribute(interfaceEClass, INTERFACE__ANOTHER_FIELD);
 	}
 
 	/**
@@ -271,8 +249,6 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getState_Name(), theXMLTypePackage.getString(), "name", null, 0, 1, State.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_Immediate(), theXMLTypePackage.getBoolean(), "immediate", null, 0, 1, State.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentTypeEClass, ComponentType.class, "ComponentType", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -282,9 +258,6 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 		initEClass(interfaceEClass, Interface.class, "Interface", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInterface_InterfaceName(), theXMLTypePackage.getString(), "interfaceName", null, 0, 1,
-				Interface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getInterface_AnotherField(), theXMLTypePackage.getString(), "anotherField", null, 0, 1,
 				Interface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 

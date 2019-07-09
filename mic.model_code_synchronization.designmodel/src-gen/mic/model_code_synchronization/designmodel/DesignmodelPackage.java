@@ -75,22 +75,13 @@ public interface DesignmodelPackage extends EPackage {
 	int STATE__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Immediate</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__IMMEDIATE = 1;
-
-	/**
 	 * The number of structural features of the '<em>State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = 2;
+	int STATE_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>State</em>' class.
@@ -158,22 +149,13 @@ public interface DesignmodelPackage extends EPackage {
 	int INTERFACE__INTERFACE_NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Another Field</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTERFACE__ANOTHER_FIELD = 1;
-
-	/**
 	 * The number of structural features of the '<em>Interface</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERFACE_FEATURE_COUNT = 2;
+	int INTERFACE_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>Interface</em>' class.
@@ -204,17 +186,6 @@ public interface DesignmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getState_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link mic.model_code_synchronization.designmodel.State#isImmediate <em>Immediate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Immediate</em>'.
-	 * @see mic.model_code_synchronization.designmodel.State#isImmediate()
-	 * @see #getState()
-	 * @generated
-	 */
-	EAttribute getState_Immediate();
 
 	/**
 	 * Returns the meta object for class '{@link mic.model_code_synchronization.designmodel.ComponentType <em>Component Type</em>}'.
@@ -259,17 +230,6 @@ public interface DesignmodelPackage extends EPackage {
 	EAttribute getInterface_InterfaceName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link mic.model_code_synchronization.designmodel.Interface#getAnotherField <em>Another Field</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Another Field</em>'.
-	 * @see mic.model_code_synchronization.designmodel.Interface#getAnotherField()
-	 * @see #getInterface()
-	 * @generated
-	 */
-	EAttribute getInterface_AnotherField();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -311,14 +271,6 @@ public interface DesignmodelPackage extends EPackage {
 		EAttribute STATE__NAME = eINSTANCE.getState_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Immediate</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STATE__IMMEDIATE = eINSTANCE.getState_Immediate();
-
-		/**
 		 * The meta object literal for the '{@link mic.model_code_synchronization.designmodel.impl.ComponentTypeImpl <em>Component Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -353,14 +305,6 @@ public interface DesignmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute INTERFACE__INTERFACE_NAME = eINSTANCE.getInterface_InterfaceName();
-
-		/**
-		 * The meta object literal for the '<em><b>Another Field</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute INTERFACE__ANOTHER_FIELD = eINSTANCE.getInterface_AnotherField();
 
 	}
 

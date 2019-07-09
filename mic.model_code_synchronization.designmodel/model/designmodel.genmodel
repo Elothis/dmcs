@@ -13,14 +13,12 @@
       disposableProviderFactory="true" ecorePackage="designmodel.ecore#/">
     <genClasses ecoreClass="designmodel.ecore#//State">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute designmodel.ecore#//State/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute designmodel.ecore#//State/immediate"/>
     </genClasses>
     <genClasses ecoreClass="designmodel.ecore#//ComponentType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute designmodel.ecore#//ComponentType/name"/>
     </genClasses>
     <genClasses ecoreClass="designmodel.ecore#//Interface">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute designmodel.ecore#//Interface/interfaceName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute designmodel.ecore#//Interface/anotherField"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
