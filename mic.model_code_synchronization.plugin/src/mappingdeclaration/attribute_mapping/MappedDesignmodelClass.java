@@ -60,10 +60,10 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 			}
 			
 			EFactory metafactory = metapackage.getEFactoryInstance();
-			EObject stateInstance = metafactory.create(metaClass);
-			stateInstance.eSet(classAttribute, mappedCodeElement.getSimpleName());
+			EObject concreteModelelement = metafactory.create(metaClass);
+			concreteModelelement.eSet(classAttribute, mappedCodeElement.getSimpleName());
 			
-			return stateInstance;
+			return concreteModelelement;
 	    }
 	    else {
 	    	throw new NotImplementedException(this.getTargetValue() + " as the target value of a MappedDesignmodelClass is currently not yet implemented.");
