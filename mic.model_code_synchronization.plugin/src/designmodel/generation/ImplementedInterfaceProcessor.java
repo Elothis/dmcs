@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import concrete_mapping.MappingEntry;
 import mappingdeclaration.CodestructureType;
+import mappingdeclaration.MappingInstantiation;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
 import mappingdeclaration.attribute_mapping.MappingException;
 import spoon.reflect.declaration.CtClass;
@@ -16,11 +17,13 @@ import spoon.reflect.reference.CtTypeReference;
 
 public class ImplementedInterfaceProcessor extends ConditionProcessor<CtClass> {
 	private String markerInterface;
+	private MappingInstantiation mappingInstantiation;
 
-	public ImplementedInterfaceProcessor(String markerInterface, List<MappedDesignmodelElement> attributeMappings,
+	public ImplementedInterfaceProcessor(MappingInstantiation mappingInstantiation, List<MappedDesignmodelElement> attributeMappings,
 			CodestructureType codestructureType, EPackage metapackage, List<MappingEntry> mappings) {
 		super(attributeMappings, codestructureType, metapackage, mappings);
-		this.markerInterface = markerInterface;
+		this.markerInterface = mappingInstantiation.getInstantiatedModelElement();
+		this.mappingInstantiation = mappingInstantiation;
 	}
 
 	@Override
@@ -40,7 +43,7 @@ public class ImplementedInterfaceProcessor extends ConditionProcessor<CtClass> {
 		MappingEntry mappingEntry;
 		try {
 			//create design model element
-			generatedDesignmodelElement = this.getAttributeMappings().get(0).createDesignmodelElement(getMetapackage(), markerInterface, element, null);
+			generatedDesignmodelElement = this.getAttributeMappings().get(0).createDesignmodelElement(getMetapackage(), mappingInstantiation, element, null);
 			//add mapping entry from the created designmodel element to the code element
 			mappingEntry = this.getAttributeMappings().get(0).createMappingEntry(generatedDesignmodelElement, element);
 			this.getMappingEntries().add(mappingEntry);

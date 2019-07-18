@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import concrete_mapping.MappingEntry;
 import mappingdeclaration.CodestructureType;
+import mappingdeclaration.MappingInstantiation;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
 import mappingdeclaration.attribute_mapping.MappingException;
 import spoon.reflect.declaration.CtAnnotation;
@@ -19,11 +20,13 @@ import spoon.reflect.declaration.CtNamedElement;
 public class AnnotatedWithProcessor extends ConditionProcessor<CtNamedElement> {
 	private String annotationName;
 	private boolean parentObjectExistent = false;
+	private MappingInstantiation mappingInstantiation;
 	
-	public AnnotatedWithProcessor(String annotationName, List<MappedDesignmodelElement> attributeMappings,
+	public AnnotatedWithProcessor(MappingInstantiation mappingInstantiation, List<MappedDesignmodelElement> attributeMappings,
 			CodestructureType codestructureType, EPackage metapackage, List<MappingEntry> mappings) {
 		super(attributeMappings, codestructureType, metapackage, mappings);
-		this.annotationName = annotationName;
+		this.annotationName = mappingInstantiation.getInstantiatedModelElement();
+		this.mappingInstantiation = mappingInstantiation;
 	}
 
 	@Override
@@ -80,7 +83,7 @@ public class AnnotatedWithProcessor extends ConditionProcessor<CtNamedElement> {
 				}
 			}
 			
-			generatedDesignmodelElement = this.getAttributeMappings().get(0).createDesignmodelElement(getMetapackage(), annotationName, element, parentObject);
+			generatedDesignmodelElement = this.getAttributeMappings().get(0).createDesignmodelElement(getMetapackage(), mappingInstantiation, element, parentObject);
 			//add mapping entry from the created designmodel element to the code element
 			mappingEntry = this.getAttributeMappings().get(0).createMappingEntry(generatedDesignmodelElement, element);
 			this.getMappingEntries().add(mappingEntry);

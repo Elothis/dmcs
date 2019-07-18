@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import concrete_mapping.MappingEntry;
 import mappingdeclaration.CodestructureType;
+import mappingdeclaration.MappingInstantiation;
 import spoon.reflect.declaration.CtNamedElement;
 
 /**
@@ -31,7 +32,7 @@ public class MappedDesignmodelContainmentReference extends MappedDesignmodelElem
 	}
 
 	@Override
-	public EObject createDesignmodelElement(EPackage metapackage, String metamodelElement,
+	public EObject createDesignmodelElement(EPackage metapackage, MappingInstantiation mappingInstantiation,
 			CtNamedElement mappedCodeElement, EObject parentObject) throws MappingException {
 		if(parentObject == null) {
 			throw new IllegalArgumentException("parentObject cannot be null for MappedDesignmodelContainmentReferences");
@@ -42,9 +43,8 @@ public class MappedDesignmodelContainmentReference extends MappedDesignmodelElem
 			throw new NotImplementedException(this.getMappedCodeElement().getTargetValue() + " as the target value of a MappedCodeElement is currently not yet implemented.");
 		}
 		
-		String[] splitInstantiationValues = metamodelElement.split("\\.");
-		String holdingClassName = splitInstantiationValues[0];
-		String referenceName = splitInstantiationValues[1];
+		String holdingClassName = mappingInstantiation.getInstantiatedParentModelElement();
+		String referenceName =  mappingInstantiation.getInstantiatedModelElement();
 		
 		EClass holdingMetaClass = (EClass) metapackage.getEClassifier(holdingClassName);
 		
@@ -64,7 +64,7 @@ public class MappedDesignmodelContainmentReference extends MappedDesignmodelElem
 	        if(classReference == null) {
 	        	throw new IllegalArgumentException(referenceName + " is no reference in the meta model!");
 	        }
-	        String targetClassName = classReference.getEType().getName();
+	        String targetClassName = classReference.getEReferenceType().getName();
 	        EClass targetMetaClass = (EClass) metapackage.getEClassifier(targetClassName);
 	        
 	        //set attribute
@@ -77,7 +77,7 @@ public class MappedDesignmodelContainmentReference extends MappedDesignmodelElem
 			EObject targetModelelement = metafactory.create(targetMetaClass);
 			targetModelelement.eSet(classAttribute, mappedCodeElement.getSimpleName());
 			
-			List<EObject> refs = new ArrayList<>();
+			List<EObject> refs = new ArrayList<>(parentObject.eContents());
 			refs.add(targetModelelement);
 			parentObject.eSet(classReference, refs);
 			

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
@@ -38,33 +39,42 @@ class EcoreTesting {
 		EPackage metapackage = (EPackage) res.getContents().get(0);
 		System.out.println(metapackage.getName());
 		
-		EClass componentTypeClass = (EClass) metapackage.getEClassifier("ComponentType");
-		EAttribute nameAttr = (EAttribute) componentTypeClass.getEStructuralFeature("name");
+		EClass sourceClass = (EClass) metapackage.getEClassifier("State");
+		EAttribute nameAttr = (EAttribute) sourceClass.getEStructuralFeature("name");
 		
 		EFactory metafactory = metapackage.getEFactoryInstance();
-		EObject componentTypeInstance = metafactory.create(componentTypeClass);
-		componentTypeInstance.eSet(nameAttr, "CashDesk");
+		EObject sourceInstance = metafactory.create(sourceClass);
+		sourceInstance.eSet(nameAttr, "Ready");
 		
-		EClass interfaceClass = (EClass) metapackage.getEClassifier("Interface");
-		EAttribute interfaceNameAttr = (EAttribute) interfaceClass.getEStructuralFeature("interfaceName");
+		EClass targetClass = (EClass) metapackage.getEClassifier("Transition");
+		EAttribute targetClassNameAttr = (EAttribute) targetClass.getEStructuralFeature("name");
 		
-		EObject interfaceInstance = metafactory.create(interfaceClass);
-		interfaceInstance.eSet(interfaceNameAttr, "IBarcodeScanner");
+		EObject targetClassInstance = metafactory.create(targetClass);
+		targetClassInstance.eSet(targetClassNameAttr, "scanItem");
 		
-		EReference required = (EReference) componentTypeClass.getEStructuralFeature("required");
-		List<EObject> refs = new ArrayList<>(componentTypeInstance.eCrossReferences());
-		refs.add(interfaceInstance);
-		componentTypeInstance.eSet(required, refs);
-		System.out.println("required EType = " + required.getEType().getName());
+		EObject targetClassInstance2 = metafactory.create(targetClass);
+		targetClassInstance2.eSet(targetClassNameAttr, "deleteItem");
 		
-		componentTypeInstance.eCrossReferences().forEach(e -> {
-			System.out.println(e.eGet(interfaceNameAttr));
+		EReference reference = (EReference) sourceClass.getEStructuralFeature("transition");
+		List<EObject> refs = new ArrayList<>(sourceInstance.eCrossReferences());
+		refs.add(targetClassInstance);
+		refs.add(targetClassInstance2);
+		sourceInstance.eSet(reference, refs);
+		
+		System.out.println(sourceInstance.eContents());
+		
+		sourceInstance.eCrossReferences().forEach(e -> {
+			System.out.println(e.eGet(targetClassNameAttr));
 		});
 		
+		System.out.println("eContainer() = " + targetClassInstance.eContainer().eClass().getName());
 		
-		savingRes.getContents().add(componentTypeInstance);
-		savingRes.getContents().add(interfaceInstance);
-		//Utility.storeAsXMI(stateInstance, "C:/Users/Fabian/mappingDirectory/");
+		savingRes.getContents().add(sourceInstance);
+		savingRes.getContents().add(targetClassInstance);
+		savingRes.getContents().add(targetClassInstance2);
+		savingRes.setID(sourceInstance, UUID.randomUUID().toString());
+		savingRes.setID(targetClassInstance, UUID.randomUUID().toString());
+		savingRes.setID(targetClassInstance2, UUID.randomUUID().toString());
 		try {
 			savingRes.save(Collections.EMPTY_MAP);
 		} catch (IOException e) {

@@ -2,7 +2,6 @@ package mappingdeclaration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Holding all necessary information regarding mappings as defined from user.
@@ -18,12 +17,13 @@ public class MappingDeclarationDatabase {
 	 */
 	private List<IntegrationMechanismMappingDeclaration> imDeclarations;
 	/**
-	 * Holds information of which model element (saved as String) gets translated with which IM
+	 * Holds information of which model element (saved as String) gets translated with which IM (including a possible parent element for cases like references)
 	 */
-	private Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiations;
+	private List<MappingInstantiation> mappingInstantiations;
 	
 	public MappingDeclarationDatabase(List<IntegrationMechanismMappingDeclaration> imDeclarations) {
 		this.imDeclarations = imDeclarations;
+		this.mappingInstantiations = new ArrayList<>();
 	}
 
 	public MappingDeclarationDatabase() {
@@ -52,10 +52,16 @@ public class MappingDeclarationDatabase {
 	 * @return IntegrationMechanismDeclaration if found, NULL if no IM is applied to that model element
 	 */
 	public IntegrationMechanismMappingDeclaration getIntegrationMechanismByElementAppliedTo(String elementName) {
-		for (Map.Entry<String, IntegrationMechanismMappingDeclaration> entry : this.mappingInstantiations.entrySet()) {
-		    if(entry.getKey().contentEquals(elementName))
-		    	return entry.getValue();
+		for (MappingInstantiation mi: this.mappingInstantiations) {
+		    if(mi.getInstantiatedModelElement().equalsIgnoreCase(elementName)) {
+		    	return mi.getImd();
+		    }
+//		    if(mi.getInstantiatedParentModelElement() != null && mi.getInstantiatedParentModelElement().equalsIgnoreCase(elementName)) {
+//		    	return mi.getImd();
+//		    }
+		    
 		}
+		
 		return null;
 	}
 	
@@ -72,7 +78,7 @@ public class MappingDeclarationDatabase {
 		return true;
 	}
 	
-	public void setMappingInstantiations(Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiations) {
+	public void setMappingInstantiations(List<MappingInstantiation> mappingInstantiations) {
 		this.mappingInstantiations = mappingInstantiations;
 	}
 
@@ -80,7 +86,7 @@ public class MappingDeclarationDatabase {
 	 * Gets the information of which design model element (saved as String) gets translated with which integration mechanism.
 	 * @return map of design model element-name (key) to IM (value)
 	 */
-	public Map<String, IntegrationMechanismMappingDeclaration> getMappingInstantiations() {
+	public List<MappingInstantiation> getMappingInstantiations() {
 		return mappingInstantiations;
 	}
 
@@ -91,8 +97,8 @@ public class MappingDeclarationDatabase {
 			sb.append(i.toString());
 		});
 		sb.append("\n\nMapping instantiations:\n");
-		this.mappingInstantiations.forEach((modelElementName, imDeclaration) -> {
-			sb.append(modelElementName + " -> ").append(imDeclaration.getName()).append("\n");
+		this.mappingInstantiations.forEach(e -> {
+			sb.append(e.getInstantiatedModelElement() + " -> ").append(e.getImd().getName()).append("\n");
 		});
 		return sb.toString();
 	}

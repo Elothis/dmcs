@@ -4,6 +4,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import concrete_mapping.MappingEntry;
+import mappingdeclaration.MappingInstantiation;
 import spoon.reflect.declaration.CtNamedElement;
 
 /**
@@ -43,14 +44,14 @@ public abstract class MappedDesignmodelElement {
 	 * This is also where the targetValue of the MappedDesignmodelElement (e.g. 'attribute(name)') gets interpreted.
 	 * 
 	 * @param metapackage EPackage the model element gets created in (based on the specific meta model, containing factory etc.)
-	 * @param metamodelElement the meta model element that shall get created (type depends on the specific implementing class)
-	 * Note: if depended on other holding EObject (like reference from an EClass), metamodelElement has to notate holding class via "class.modelelementName" - notation
+	 * @param mappingInstantiation the meta model element that shall get created (type depends on the specific implementing class)
+	 * Note: if depended on other holding EObject (like reference from an EClass), mappingInstantiation contains parent element as well  "class.modelelementName")
 	 * @param mappedCodeElement the code element getting mapped to the designmodel element being created
 	 * @param parentObject EObject containing the design model element to be created, for example the parent class for a reference element (null if its just a simple element without parent)
 	 * @return created EObject
 	 * @throws MappingException 
 	 */
-	public abstract EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, CtNamedElement mappedCodeElement, EObject parentObject) throws MappingException;
+	public abstract EObject createDesignmodelElement(EPackage metapackage, MappingInstantiation mappingInstantiation, CtNamedElement mappedCodeElement, EObject parentObject) throws MappingException;
 	
 	/**
 	 * Adds an attribute to an already existing EObject. Necessary for when there are multiple attribute-mappings (separated via '&') in an .im-file.

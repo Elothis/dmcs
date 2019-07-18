@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link mic.model_code_synchronization.designmodel.State#getName <em>Name</em>}</li>
- *   <li>{@link mic.model_code_synchronization.designmodel.State#getTransitions <em>Transitions</em>}</li>
+ *   <li>{@link mic.model_code_synchronization.designmodel.State#getTransition <em>Transition</em>}</li>
  * </ul>
  *
  * @see mic.model_code_synchronization.designmodel.DesignmodelPackage#getState()
@@ -46,15 +46,15 @@ public interface State extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Transitions</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Transition</b></em>' containment reference list.
 	 * The list contents are of type {@link mic.model_code_synchronization.designmodel.Transition}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Transitions</em>' containment reference list.
-	 * @see mic.model_code_synchronization.designmodel.DesignmodelPackage#getState_Transitions()
+	 * @return the value of the '<em>Transition</em>' containment reference list.
+	 * @see mic.model_code_synchronization.designmodel.DesignmodelPackage#getState_Transition()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Transition> getTransitions();
+	EList<Transition> getTransition();
 
 } // State

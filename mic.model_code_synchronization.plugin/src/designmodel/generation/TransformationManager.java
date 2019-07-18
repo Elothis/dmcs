@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,6 +18,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 
 import concrete_mapping.MappingEntry;
+import mappingdeclaration.CodestructureType;
 import mappingdeclaration.IMappingDeclarationParser;
 import mappingdeclaration.IntegrationMechanismMappingDeclaration;
 import mappingdeclaration.MappingDeclarationDatabase;
@@ -26,8 +29,11 @@ import spoon.compiler.Environment;
 import spoon.reflect.CtModel;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtInterface;
+import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtNamedElement;
 import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.visitor.Filter;
+import spoon.reflect.visitor.filter.TypeFilter;
 import util.Utility;
 
 
@@ -92,16 +98,16 @@ public class TransformationManager {
 		//initialize resource for saving the design model as xmi
 		XMIResource savingRes = Utility.initializePersistationResource(designmodelTargetPath);
 
-		this.mappingDeclarationDatabase.getMappingInstantiations().forEach((modelElementName, imDeclaration) -> {
+		this.mappingDeclarationDatabase.getMappingInstantiations().forEach(mappingInstantiation -> {
 			//creates a processor that acts upon the specific condition target and runs it
-			if(!imDeclaration.getCondition().getTargetElement().contentEquals("modelelement.name")) {
+			if(!mappingInstantiation.getImd().getCondition().getTargetElement().contentEquals("modelelement.name")) {
 				throw new NotImplementedException("Currently cannot apply conditions to other elements than 'modelelement.name'");
 			}
 			//creates the respective processor, handing over the modelelement.name,
 			//the attribute mappings of the IM and the metapackage of the meta model that the design model gets instantiated with
-			imDeclaration.getCondition().createProcessor(modelElementName, imDeclaration.getAttributeMappings(),
-					imDeclaration.getCodestructureType(), metapackage, this.mappings);
-			ConditionProcessor<?> processor = imDeclaration.getCondition().getProcessor();
+			mappingInstantiation.getImd().getCondition().createProcessor(mappingInstantiation, mappingInstantiation.getImd().getAttributeMappings(),
+					mappingInstantiation.getImd().getCodestructureType(), metapackage, this.mappings);
+			ConditionProcessor<?> processor = mappingInstantiation.getImd().getCondition().getProcessor();
 			this.astModel.processWith(processor);
 			//add all the generated design model elements from the processor to the resourceSet of the design model xmi
 			processor.getGeneratedDesignmodelElements().forEach(e -> {
@@ -144,6 +150,9 @@ public class TransformationManager {
 				//get MappingEntry for the respective model element
 				EObject existentModelElement = existentDesignmodel.getEObject(updatedModelElementID);
 				MappingEntry entry = getMappingEntryByModelelement(existentModelElement);
+				if(entry.getCodestructureType() == CodestructureType.METHOD) {
+					System.out.println("contained by " + entry.getDesignmodelElementEObject().eContainer().eClass().getName());
+				}
 				//update it according to changes applied to the updatedModelElement
 				MappingEntry updatedEntry = entry.getMappedDesignmodelElement().updateMappingEntry(entry, updatedModelElement);
 				updatedMappings.add(updatedEntry);
@@ -155,7 +164,7 @@ public class TransformationManager {
 				System.out.println("Newly added element is of type " + updatedModelElement.eClass().getName());
 				IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByElementAppliedTo(updatedModelElement.eClass().getName());
 				System.out.println(imd);
-				//creating a new MappingEntry holding the newly created codestructure
+				//creating a new MappingEntry holding the newly created codestructure				
 				MappingEntry newlyCreatedEntry = this.createNewCodestructure(imd, updatedModelElement.eClass().getName(), updatedModelElement);
 				updatedMappings.add(newlyCreatedEntry);
 			}
@@ -215,7 +224,22 @@ public class TransformationManager {
 		    	newCodestructureName = addedDesignmodelElement.eGet(addedDesignmodelElement.eClass().getEStructuralFeature(attributeName)).toString();
 		    }
 		    else {
-		    	throw new NotImplementedException(imd.getAttributeMappings().get(0).getTargetValue() + " as the target value of a MappedDesignmodelClass is currently not yet implemented.");
+		    	throw new NotImplementedException(imd.getAttributeMappings().get(0).getTargetValue() + " as the target value of a mapped design model element is currently not yet implemented.");
+		    }
+		}
+		else if (imd.getAttributeMappings().get(0).getMappedCodeElement().getTargetValue().contentEquals("name") &&
+				imd.getAttributeMappings().get(0).getTargetValue().startsWith("target.attribute(")) {
+			String re1="(target\\.attribute)";
+		    String re2="(\\(.*\\))";
+
+		    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		    Matcher m = p.matcher(imd.getAttributeMappings().get(0).getTargetValue());
+		    if (m.find()) {
+		    	String attributeName = StringUtils.substringBetween(m.group(2), "(", ")");
+		    	newCodestructureName = addedDesignmodelElement.eGet(addedDesignmodelElement.eClass().getEStructuralFeature(attributeName)).toString();
+		    }
+		    else {
+		    	throw new NotImplementedException(imd.getAttributeMappings().get(0).getTargetValue() + " as the target value of a mapped designmodel element is currently not yet implemented.");
 		    }
 		}
 		else {
@@ -226,12 +250,36 @@ public class TransformationManager {
 		case CLASS:
 			CtClass<?> newClass = launcher.getFactory().Class().create("NewOne");
 			newClass.setVisibility(ModifierKind.PUBLIC);
-			newCodestructure = newClass;			
+			newCodestructure = newClass;
 			break;
 		case INTERFACE:
 			CtInterface<?> newInterface = launcher.getFactory().Interface().create("NewOne");
 			newInterface.setVisibility(ModifierKind.PUBLIC);
 			newCodestructure = newInterface;
+			break;
+		case METHOD:
+			System.out.println("method to add");
+			System.out.println(addedDesignmodelElement);
+			System.out.println(addedDesignmodelElement.eContainer().eClass().getName());
+			List<CtClass> parentClass = launcher.getModel().filterChildren(new TypeFilter<CtClass>(CtClass.class)).
+				filterChildren(new Filter<CtClass>() {
+					@Override
+					public boolean matches(CtClass element) {
+						//the class name is not the eContainer (State) but the name-attr of it (Ready)
+						//-> implement look-up for mapped-codestructure of the eContainer-object in MappingEntry's
+						if(element.getSimpleName().contentEquals(addedDesignmodelElement.eContainer().eClass().getName())) {
+							return true;
+						}
+						return false;
+					}					
+				}).list();
+			if(parentClass.size() == 0) {
+				throw new IllegalArgumentException("There is no class to hold the method the added design model element is mapped to");
+			}
+			Set<ModifierKind> modifierSet = new HashSet<>();
+			modifierSet.add(ModifierKind.PUBLIC);
+			CtMethod<?> newMethod = launcher.getFactory().Method().create(parentClass.get(0), modifierSet, launcher.getFactory().Type().VOID_PRIMITIVE, "newOne", null, null, launcher.getFactory().createBlock());
+			newCodestructure = newMethod;		
 			break;
 		default:
 			throw new IllegalArgumentException("Invalid codestructure-type");

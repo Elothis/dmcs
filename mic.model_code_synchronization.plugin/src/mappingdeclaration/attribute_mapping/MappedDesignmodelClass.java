@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import concrete_mapping.MappingEntry;
 import mappingdeclaration.CodestructureType;
+import mappingdeclaration.MappingInstantiation;
 import spoon.reflect.declaration.CtNamedElement;
 
 /**
@@ -34,7 +35,7 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 	}
 
 	@Override
-	public EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, CtNamedElement mappedCodeElement,
+	public EObject createDesignmodelElement(EPackage metapackage, MappingInstantiation mappingInstantiation, CtNamedElement mappedCodeElement,
 			EObject parentObject) throws MappingException {
 		//first look up what from the codestructure shall get mapped to some value of the metamodel element
 		//currently only 'codestructure.name' supported, rest is TODO
@@ -42,7 +43,7 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 			throw new NotImplementedException(this.getMappedCodeElement().getTargetValue() + " as the target value of a MappedCodeElement is currently not yet implemented.");
 		}
 		
-		EClass metaClass = (EClass) metapackage.getEClassifier(metamodelElement);
+		EClass metaClass = (EClass) metapackage.getEClassifier(mappingInstantiation.getInstantiatedModelElement());
 		
 		//test whether targetValue is of format 'attribute(xyz)'
 		String re1="(attribute)";

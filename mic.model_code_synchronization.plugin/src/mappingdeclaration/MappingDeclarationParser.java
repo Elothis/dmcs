@@ -3,9 +3,8 @@ package mappingdeclaration;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
@@ -103,8 +102,8 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 			if(l.size() != 1) {
 				throw new ParserException("Please provide exactly one mapping instantiation file!");
 			}
-			Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiation = this.parseMappingInstantiationFile(l.get(0));
-			this.mappingDeclarationDatabase.setMappingInstantiations(mappingInstantiation);			
+			List<MappingInstantiation> mappingInstantiations = this.parseMappingInstantiationFile(l.get(0));
+			this.mappingDeclarationDatabase.setMappingInstantiations(mappingInstantiations);		
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ParserException e) {
@@ -252,13 +251,13 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 	 * 		Interface<br>
 	 * };<br>
 	 * @param f mapping instantiation file to parse
-	 * @return map with name of the modelelement as key and IntegrationMechanismDeclaration it gets translated with as value
+	 * @return list of mapping instantiations
 	 * @throws IOException
 	 * @throws ParserException 
 	 */
-	private Map<String, IntegrationMechanismMappingDeclaration> parseMappingInstantiationFile(File f) throws IOException, ParserException {
+	private List<MappingInstantiation> parseMappingInstantiationFile(File f) throws IOException, ParserException {
 		
-		Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiation = new HashMap<>();
+		List<MappingInstantiation> mappingInstantiations = new ArrayList<>();
 		String content = new String(Files.readAllBytes(f.toPath()));
 		if(content.trim().isEmpty()) {
 			throw new ParserException("Mapping instantiation file cannot be empty");
@@ -278,17 +277,24 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 			
 			//get all names between {} separated by commas
 			String[] appliedModelelements = StringUtils.substringBetween(imInstantiation, "{", "}").trim().split(",");
-			for(String modelElement: appliedModelelements) {
-				if(mappingInstantiation.get(modelElement) != null) {
-					throw new ParserException("Cannot map one design model element multiple times!");
+			
+			for(String instantiationDeclaration: appliedModelelements) {
+				String[] split = instantiationDeclaration.split("\\.");
+				String modelElementName = (split.length > 1) ? split[1] : split[0];
+				String parentModelElementName = (split.length > 1) ? split[0] : null;
+				for(MappingInstantiation mi: mappingInstantiations) {
+					if(mi.getInstantiatedModelElement().contentEquals(modelElementName))
+						throw new ParserException("Cannot map one design model element multiple times!");
 				}
-				mappingInstantiation.put(modelElement.trim(), imd);
+				MappingInstantiation mi = new MappingInstantiation(modelElementName, parentModelElementName, imd);
+
+				mappingInstantiations.add(mi);
 			}
 		}
-		if(mappingInstantiation.isEmpty()) {
+		if(mappingInstantiations.isEmpty()) {
 			throw new ParserException("The mapping instantiation file is empty! Please provide an instantiation from the declared integration mechanisms to model elements");
 		}
-		return mappingInstantiation;
+		return mappingInstantiations;
 	}
 
 	@Override

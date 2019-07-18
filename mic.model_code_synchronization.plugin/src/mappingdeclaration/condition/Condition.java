@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EPackage;
 import concrete_mapping.MappingEntry;
 import designmodel.generation.ConditionProcessor;
 import mappingdeclaration.CodestructureType;
+import mappingdeclaration.MappingInstantiation;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
 import spoon.Launcher;
 import spoon.reflect.declaration.CtNamedElement;
@@ -39,11 +40,11 @@ public abstract class Condition {
 	/**
 	 * Creates and sets the processor for the condition based on the specific, instantiated target name of the condition and the attribute mappings of that IM.<br>
 	 * E.g. for "condition: implements modelelement.name" it creates a processor that acts on all classes that implement the targetName.
-	 * @param targetName
+	 * @param mappingInstantiation
 	 * @param attributeMappings
-	 * @param existentModel 
+	 * @param existentModel
 	 */
-	public abstract void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType,
+	public abstract void createProcessor(MappingInstantiation mappingInstantiation, List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType,
 			EPackage metapackage, List<MappingEntry> mappings);
 	
 	/**
