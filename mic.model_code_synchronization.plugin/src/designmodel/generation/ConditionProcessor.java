@@ -18,14 +18,25 @@ public abstract class ConditionProcessor<T extends CtElement> extends AbstractPr
 	private List<EObject> generatedDesignmodelElements;
 	private CodestructureType codestructureType;
 	private List<MappingEntry> mappingEntries;
+	private List<MappingEntry> existentMappings;
 
-	public ConditionProcessor(List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType, EPackage metapackage) {
+	public ConditionProcessor(List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType,
+			EPackage metapackage, List<MappingEntry> mappings) {
 		super();
 		this.attributeMappings = attributeMappings;
 		this.metapackage = metapackage;
 		this.generatedDesignmodelElements = new ArrayList<>();
 		this.codestructureType = codestructureType;
 		this.mappingEntries = new ArrayList<>();
+		this.existentMappings = mappings;
+	}
+
+	public List<MappingEntry> getExistentMappings() {
+		return existentMappings;
+	}
+
+	public void setExistentMappings(List<MappingEntry> existentMappings) {
+		this.existentMappings = existentMappings;
 	}
 
 	public List<MappingEntry> getMappingEntries() {

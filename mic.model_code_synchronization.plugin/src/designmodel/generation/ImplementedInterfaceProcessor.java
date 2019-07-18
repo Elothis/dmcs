@@ -17,8 +17,9 @@ import spoon.reflect.reference.CtTypeReference;
 public class ImplementedInterfaceProcessor extends ConditionProcessor<CtClass> {
 	private String markerInterface;
 
-	public ImplementedInterfaceProcessor(String markerInterface, List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType, EPackage metapackage) {
-		super(attributeMappings, codestructureType, metapackage);
+	public ImplementedInterfaceProcessor(String markerInterface, List<MappedDesignmodelElement> attributeMappings,
+			CodestructureType codestructureType, EPackage metapackage, List<MappingEntry> mappings) {
+		super(attributeMappings, codestructureType, metapackage, mappings);
 		this.markerInterface = markerInterface;
 	}
 
@@ -39,7 +40,7 @@ public class ImplementedInterfaceProcessor extends ConditionProcessor<CtClass> {
 		MappingEntry mappingEntry;
 		try {
 			//create design model element
-			generatedDesignmodelElement = this.getAttributeMappings().get(0).createDesignmodelElement(getMetapackage(), markerInterface, element);
+			generatedDesignmodelElement = this.getAttributeMappings().get(0).createDesignmodelElement(getMetapackage(), markerInterface, element, null);
 			//add mapping entry from the created designmodel element to the code element
 			mappingEntry = this.getAttributeMappings().get(0).createMappingEntry(generatedDesignmodelElement, element);
 			this.getMappingEntries().add(mappingEntry);

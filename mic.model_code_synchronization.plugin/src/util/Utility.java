@@ -42,6 +42,16 @@ public class Utility {
 		return res;
 	}
 	
+	public static XMIResource initializePersistationResource(String outputPath) {
+		ResourceSet savingResSet = new ResourceSetImpl();
+		savingResSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+
+		XMIResource savingRes = (XMIResource) savingResSet.createResource(URI.createFileURI(outputPath), null);
+		//savingRes.getDefaultSaveOptions().put(XMIResource.OPTION_KEEP_DEFAULT_CONTENT, Boolean.TRUE);
+		
+		return savingRes;
+	}
+	
 	public static void writeToFile(String fileName, String output) {
 	    try {
 	    	BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));

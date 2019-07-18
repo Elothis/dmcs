@@ -64,7 +64,12 @@ public class MappingDeclarationDatabase {
 			if(imd.getName().contentEquals(imDeclaration.getName())) return false;
 		}
 			
-		return this.imDeclarations.add(imDeclaration);
+		//check whether its a reference type IM that has to be applied later after all other IMs have been translated (since it needs existing model elements)
+		if(imDeclaration.getModelelementType() == ModelelementType.CONTAINMENT) {
+			return this.imDeclarations.add(imDeclaration);
+		}
+		this.imDeclarations.add(0, imDeclaration);
+		return true;
 	}
 	
 	public void setMappingInstantiations(Map<String, IntegrationMechanismMappingDeclaration> mappingInstantiations) {

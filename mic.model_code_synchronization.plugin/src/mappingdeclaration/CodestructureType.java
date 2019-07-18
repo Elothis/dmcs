@@ -8,7 +8,8 @@ package mappingdeclaration;
  */
 public enum CodestructureType {
 	CLASS("class"),
-	INTERFACE("interface");
+	INTERFACE("interface"),
+	METHOD("method");
 	
 	private String textRepresentation;
 	

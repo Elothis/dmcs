@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
 
+import concrete_mapping.MappingEntry;
 import designmodel.generation.ImplementedInterfaceProcessor;
 import mappingdeclaration.CodestructureType;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
@@ -36,11 +37,6 @@ public class ImplementedInterfaceCondition extends Condition {
 	}
 
 	@Override
-	public void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType, EPackage metapackage) {
-		this.setProcessor(new ImplementedInterfaceProcessor(targetName, attributeMappings, codestructureType, metapackage));
-	}
-
-	@Override
 	public CtNamedElement applyConditionToCreatedCodestructure(CtNamedElement newCodestructure, String targetNameInstance, Launcher launcher) {
 		//first try and get the existing interface
 		CtInterface<?> targetInterface = launcher.getFactory().Interface().get(targetNameInstance);
@@ -51,5 +47,12 @@ public class ImplementedInterfaceCondition extends Condition {
 		}
 		((CtClass<?>) newCodestructure).addSuperInterface(targetInterface.getReference());
 		return newCodestructure;
+	}
+
+
+	@Override
+	public void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings,
+			CodestructureType codestructureType, EPackage metapackage, List<MappingEntry> mappings) {
+		this.setProcessor(new ImplementedInterfaceProcessor(targetName, attributeMappings, codestructureType, metapackage, mappings));
 	}
 }

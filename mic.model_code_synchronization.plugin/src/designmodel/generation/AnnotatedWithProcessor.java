@@ -13,13 +13,16 @@ import mappingdeclaration.attribute_mapping.MappingException;
 import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtInterface;
+import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtNamedElement;
 
 public class AnnotatedWithProcessor extends ConditionProcessor<CtNamedElement> {
 	private String annotationName;
+	private boolean parentObjectExistent = false;
 	
-	public AnnotatedWithProcessor(String annotationName, List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType, EPackage metapackage) {
-		super(attributeMappings, codestructureType, metapackage);
+	public AnnotatedWithProcessor(String annotationName, List<MappedDesignmodelElement> attributeMappings,
+			CodestructureType codestructureType, EPackage metapackage, List<MappingEntry> mappings) {
+		super(attributeMappings, codestructureType, metapackage, mappings);
 		this.annotationName = annotationName;
 	}
 
@@ -37,15 +40,26 @@ public class AnnotatedWithProcessor extends ConditionProcessor<CtNamedElement> {
 				return false;
 			}
 			break;
+		case METHOD:
+			if(!(candidate instanceof CtMethod)) {
+				parentObjectExistent = true;
+				return false;
+			}
+			break;
 		default:
 			break;
 		
 		}
 
 		for(CtAnnotation<? extends Annotation> a: candidate.getAnnotations()) {
-			if(a.toString().split("@")[1].split("\\(")[0].contentEquals(annotationName)) {
+			if(a.toString().split("@")[1].split("\\(")[0].equalsIgnoreCase(annotationName)) {
 				return true;
 			}
+			String[] split = annotationName.split("\\.");
+			if(split.length > 1 && a.toString().split("@")[1].split("\\(")[0].equalsIgnoreCase(split[1])) {
+				return true;
+			}
+			
 		}
 		return false;
 	}
@@ -55,7 +69,18 @@ public class AnnotatedWithProcessor extends ConditionProcessor<CtNamedElement> {
 		EObject generatedDesignmodelElement;
 		MappingEntry mappingEntry;
 		try {
-			generatedDesignmodelElement = this.getAttributeMappings().get(0).createDesignmodelElement(getMetapackage(), annotationName, element);
+			EObject parentObject = null;
+			if(parentObjectExistent) {
+				String parentClassName = ((CtMethod<?>) element).getDeclaringType().getSimpleName();
+				for(MappingEntry e: this.getExistentMappings()) {
+					//if there is a mapping entry containing the parent class of this codestructure, set it to later hand it into the createDesignmodelElement-call
+					if(e.getCodeElement().getSimpleName().contentEquals(parentClassName)) {
+						parentObject = e.getDesignmodelElementEObject();
+					}
+				}
+			}
+			
+			generatedDesignmodelElement = this.getAttributeMappings().get(0).createDesignmodelElement(getMetapackage(), annotationName, element, parentObject);
 			//add mapping entry from the created designmodel element to the code element
 			mappingEntry = this.getAttributeMappings().get(0).createMappingEntry(generatedDesignmodelElement, element);
 			this.getMappingEntries().add(mappingEntry);

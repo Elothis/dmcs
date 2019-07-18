@@ -44,12 +44,13 @@ public abstract class MappedDesignmodelElement {
 	 * 
 	 * @param metapackage EPackage the model element gets created in (based on the specific meta model, containing factory etc.)
 	 * @param metamodelElement the meta model element that shall get created (type depends on the specific implementing class)
-	 * Note: if depended on other holding EObject (like attribute from an EClass), metamodelElement has to notate holding class via class.name e.g.
+	 * Note: if depended on other holding EObject (like reference from an EClass), metamodelElement has to notate holding class via "class.modelelementName" - notation
 	 * @param mappedCodeElement the code element getting mapped to the designmodel element being created
+	 * @param parentObject EObject containing the design model element to be created, for example the parent class for a reference element (null if its just a simple element without parent)
 	 * @return created EObject
 	 * @throws MappingException 
 	 */
-	public abstract EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, CtNamedElement mappedCodeElement) throws MappingException;
+	public abstract EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, CtNamedElement mappedCodeElement, EObject parentObject) throws MappingException;
 	
 	/**
 	 * Adds an attribute to an already existing EObject. Necessary for when there are multiple attribute-mappings (separated via '&') in an .im-file.

@@ -34,14 +34,13 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 	}
 
 	@Override
-	public EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, CtNamedElement mappedCodeElement) throws MappingException {
+	public EObject createDesignmodelElement(EPackage metapackage, String metamodelElement, CtNamedElement mappedCodeElement,
+			EObject parentObject) throws MappingException {
 		//first look up what from the codestructure shall get mapped to some value of the metamodel element
 		//currently only 'codestructure.name' supported, rest is TODO
 		if(!this.getMappedCodeElement().getTargetValue().contentEquals("name")) {
 			throw new NotImplementedException(this.getMappedCodeElement().getTargetValue() + " as the target value of a MappedCodeElement is currently not yet implemented.");
 		}
-		
-		this.getMappedCodeElement().getTargetValue();
 		
 		EClass metaClass = (EClass) metapackage.getEClassifier(metamodelElement);
 		
@@ -111,7 +110,7 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 		}
 		//dispatch here what is mapped to what (currently only the name of the codestructure mapped to attributes of the design model element is implemented)
 		if(entry.getMappedCodeElementValue().contentEquals("name") &&
-				(entry.getCodestructureType() != CodestructureType.CLASS || entry.getCodestructureType() != CodestructureType.INTERFACE) &&
+				(entry.getCodestructureType() == CodestructureType.CLASS || entry.getCodestructureType() == CodestructureType.INTERFACE) &&
 				entry.getMappedDesignmodelElementValue().startsWith("attribute(")) {
 			String re1="(attribute)";
 		    String re2="(\\(.*\\))";
@@ -147,7 +146,7 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 		    }
 		}
 		else {
-			throw new NotImplementedException("Currently there are only mappings from attributes from a design model class to names of classes and interfaces as code strucutres implemented");
+			throw new NotImplementedException("Currently there are only mappings from attributes from a design model class to names of classes and interfaces as code structures implemented");
 		}
 		return entry;
 	}

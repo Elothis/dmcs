@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
 
+import concrete_mapping.MappingEntry;
 import designmodel.generation.AnnotatedWithProcessor;
 import mappingdeclaration.CodestructureType;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
@@ -35,8 +36,9 @@ public class AnnotatedWithCondition extends Condition {
 	}
 
 	@Override
-	public void createProcessor(String targetName, List<MappedDesignmodelElement>attributeMappings, CodestructureType codestructureType, EPackage metapackage) {
-		this.setProcessor(new AnnotatedWithProcessor(targetName, attributeMappings, codestructureType, metapackage));
+	public void createProcessor(String targetName, List<MappedDesignmodelElement>attributeMappings, CodestructureType codestructureType, EPackage metapackage,
+			List<MappingEntry> mappings) {
+		this.setProcessor(new AnnotatedWithProcessor(targetName, attributeMappings, codestructureType, metapackage, mappings));
 	}
 
 	@Override

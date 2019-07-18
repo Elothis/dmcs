@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
 
+import concrete_mapping.MappingEntry;
 import designmodel.generation.ConditionProcessor;
 import mappingdeclaration.CodestructureType;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
@@ -40,8 +41,10 @@ public abstract class Condition {
 	 * E.g. for "condition: implements modelelement.name" it creates a processor that acts on all classes that implement the targetName.
 	 * @param targetName
 	 * @param attributeMappings
+	 * @param existentModel 
 	 */
-	public abstract void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType, EPackage metapackage);
+	public abstract void createProcessor(String targetName, List<MappedDesignmodelElement> attributeMappings, CodestructureType codestructureType,
+			EPackage metapackage, List<MappingEntry> mappings);
 	
 	/**
 	 * Applies the concrete condition to a codestructure, after the codestructure got created in the design model by the user and now gets created in the code.

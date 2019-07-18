@@ -8,10 +8,12 @@ import mic.model_code_synchronization.designmodel.DesignmodelPackage;
 import mic.model_code_synchronization.designmodel.Interface;
 import mic.model_code_synchronization.designmodel.State;
 
+import mic.model_code_synchronization.designmodel.Transition;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
@@ -43,6 +45,13 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 	 * @generated
 	 */
 	private EClass interfaceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass transitionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -137,6 +146,16 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 	 * @generated
 	 */
 	@Override
+	public EReference getState_Transitions() {
+		return (EReference) stateEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getComponentType() {
 		return componentTypeEClass;
 	}
@@ -177,6 +196,26 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 	 * @generated
 	 */
 	@Override
+	public EClass getTransition() {
+		return transitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTransition_Name() {
+		return (EAttribute) transitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public DesignmodelFactory getDesignmodelFactory() {
 		return (DesignmodelFactory) getEFactoryInstance();
 	}
@@ -203,12 +242,16 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 		// Create classes and their features
 		stateEClass = createEClass(STATE);
 		createEAttribute(stateEClass, STATE__NAME);
+		createEReference(stateEClass, STATE__TRANSITIONS);
 
 		componentTypeEClass = createEClass(COMPONENT_TYPE);
 		createEAttribute(componentTypeEClass, COMPONENT_TYPE__NAME);
 
 		interfaceEClass = createEClass(INTERFACE);
 		createEAttribute(interfaceEClass, INTERFACE__INTERFACE_NAME);
+
+		transitionEClass = createEClass(TRANSITION);
+		createEAttribute(transitionEClass, TRANSITION__NAME);
 	}
 
 	/**
@@ -249,6 +292,9 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getState_Name(), theXMLTypePackage.getString(), "name", null, 0, 1, State.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getState_Transitions(), this.getTransition(), null, "transitions", null, 0, -1, State.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentTypeEClass, ComponentType.class, "ComponentType", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -260,6 +306,11 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 		initEAttribute(getInterface_InterfaceName(), theXMLTypePackage.getString(), "interfaceName", null, 0, 1,
 				Interface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
+
+		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTransition_Name(), theXMLTypePackage.getString(), "name", null, 0, 1, Transition.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

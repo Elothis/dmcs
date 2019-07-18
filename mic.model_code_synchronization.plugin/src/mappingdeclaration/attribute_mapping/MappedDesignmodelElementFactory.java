@@ -36,6 +36,8 @@ public class MappedDesignmodelElementFactory {
 		switch (modelelementType) {
 		case CLASS:
 			return new MappedDesignmodelClass(mappedDesignmodelElementTargetValue, mappedCodeElement);
+		case CONTAINMENT:
+			return new MappedDesignmodelContainmentReference(mappedDesignmodelElementTargetValue, mappedCodeElement);
 		default:
 			throw new NotImplementedException("ModelelementType not implemented");
 		
