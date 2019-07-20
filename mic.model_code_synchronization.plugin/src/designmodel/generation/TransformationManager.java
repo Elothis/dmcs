@@ -3,6 +3,7 @@ package designmodel.generation;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -13,8 +14,12 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 
 import concrete_mapping.MappingEntry;
@@ -151,7 +156,8 @@ public class TransformationManager {
 				EObject existentModelElement = existentDesignmodel.getEObject(updatedModelElementID);
 				MappingEntry entry = getMappingEntryByModelelement(existentModelElement);
 				if(entry.getCodestructureType() == CodestructureType.METHOD) {
-					System.out.println("contained by " + entry.getDesignmodelElementEObject().eContainer().eClass().getName());
+					System.out.println(updatedModelElement + " contained by " + entry.getDesignmodelElementEObject().eContainer().eClass().getName());
+					//System.out.println("updatedModelElement contained by " + updatedModelElement.eContainer().eClass().getName());
 				}
 				//update it according to changes applied to the updatedModelElement
 				MappingEntry updatedEntry = entry.getMappedDesignmodelElement().updateMappingEntry(entry, updatedModelElement);
@@ -165,7 +171,7 @@ public class TransformationManager {
 				IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByElementAppliedTo(updatedModelElement.eClass().getName());
 				System.out.println(imd);
 				//creating a new MappingEntry holding the newly created codestructure				
-				MappingEntry newlyCreatedEntry = this.createNewCodestructure(imd, updatedModelElement.eClass().getName(), updatedModelElement);
+				MappingEntry newlyCreatedEntry = this.createNewCodestructure(imd, updatedModelElement, updatedModel.getContents());
 				updatedMappings.add(newlyCreatedEntry);
 			}
 		});
@@ -205,7 +211,7 @@ public class TransformationManager {
 	}
 	
 	
-	private MappingEntry createNewCodestructure(IntegrationMechanismMappingDeclaration imd, String designmodelTypeName, EObject addedDesignmodelElement) {
+	private MappingEntry createNewCodestructure(IntegrationMechanismMappingDeclaration imd, EObject addedDesignmodelElement, EList<EObject> newModel) {
 		CtNamedElement newCodestructure;
 		String newCodestructureName;
 		if(imd.getAttributeMappings().size() > 1) {
@@ -260,6 +266,11 @@ public class TransformationManager {
 		case METHOD:
 			System.out.println("method to add");
 			System.out.println(addedDesignmodelElement);
+			System.out.println(addedDesignmodelElement.eContainmentFeature());
+			ECrossReferenceAdapter cra = ECrossReferenceAdapter.getCrossReferenceAdapter(addedDesignmodelElement);
+			Collection<Setting> crossReferences = EcoreUtil.UsageCrossReferencer.find(addedDesignmodelElement, newModel);
+			System.out.println(crossReferences);
+			//System.out.println("ECrossReferenceAdapter.getInverseReferences = " + cra.getInverseReferences(addedDesignmodelElement));
 			System.out.println(addedDesignmodelElement.eContainer().eClass().getName());
 			List<CtClass> parentClass = launcher.getModel().filterChildren(new TypeFilter<CtClass>(CtClass.class)).
 				filterChildren(new Filter<CtClass>() {

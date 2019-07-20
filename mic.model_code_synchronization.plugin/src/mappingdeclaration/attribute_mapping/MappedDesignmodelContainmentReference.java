@@ -64,8 +64,9 @@ public class MappedDesignmodelContainmentReference extends MappedDesignmodelElem
 	        if(classReference == null) {
 	        	throw new IllegalArgumentException(referenceName + " is no reference in the meta model!");
 	        }
-	        String targetClassName = classReference.getEReferenceType().getName();
-	        EClass targetMetaClass = (EClass) metapackage.getEClassifier(targetClassName);
+	        //String targetClassName = classReference.getEReferenceType().getName();
+	        //EClass targetMetaClass = (EClass) metapackage.getEClassifier(targetClassName);
+	        EClass targetMetaClass = classReference.getEReferenceType();
 	        
 	        //set attribute
 			EAttribute classAttribute = (EAttribute) targetMetaClass.getEStructuralFeature(attributeName);
@@ -77,9 +78,10 @@ public class MappedDesignmodelContainmentReference extends MappedDesignmodelElem
 			EObject targetModelelement = metafactory.create(targetMetaClass);
 			targetModelelement.eSet(classAttribute, mappedCodeElement.getSimpleName());
 			
-			List<EObject> refs = new ArrayList<>(parentObject.eContents());
+			List<EObject> refs = (List<EObject>) parentObject.eGet(classReference);
+			//List<EObject> refs = new ArrayList<>(parentObject.eContents());
 			refs.add(targetModelelement);
-			parentObject.eSet(classReference, refs);
+			//parentObject.eSet(classReference, refs);
 			
 			return targetModelelement;
 	    }

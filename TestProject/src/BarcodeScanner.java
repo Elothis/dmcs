@@ -1,0 +1,5 @@
+
+
+@ComponentType
+public class BarcodeScanner {}
+
