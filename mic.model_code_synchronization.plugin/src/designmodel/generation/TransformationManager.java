@@ -194,9 +194,7 @@ public class TransformationManager {
 	}
 	
 	private void checkForUpdateOrCreateTransformation(EObject updatedModelElement, XMIResource updatedModel, List<MappingEntry> updatedMappings) {
-		//List<String> newElementIDs = new ArrayList<>();
 		String updatedModelElementID = updatedModel.getID(updatedModelElement);
-		//newElementIDs.add(updatedModelElementID);
 		
 		if(this.existentElementIDs.contains(updatedModelElementID)) {
 			//exists in both lists -> UPDATE
