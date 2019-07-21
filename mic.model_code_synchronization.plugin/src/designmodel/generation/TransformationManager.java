@@ -319,17 +319,11 @@ public class TransformationManager {
 			newCodestructure = newInterface;
 			break;
 		case METHOD:
-			System.out.println("method to add");
-			System.out.println(addedDesignmodelElement.eContainer().eClass().getName());
-			//TODO do not hard code this but implement look up
-			String holdingClassName = getCodestructureNameOfMappedModelelement(addedDesignmodelElement.eContainer());
-			
-			List<CtClass> parentClass = launcher.getModel().filterChildren(new TypeFilter<CtClass>(CtClass.class)).
-				filterChildren(new Filter<CtClass>() {
+			String holdingClassName = getCodestructureNameOfMappedModelelement(addedDesignmodelElement.eContainer());			
+			List<CtClass<?>> parentClass = launcher.getModel().filterChildren(new TypeFilter<CtClass<?>>(CtClass.class)).
+				filterChildren(new Filter<CtClass<?>>() {
 					@Override
-					public boolean matches(CtClass element) {
-						//the class name is not the eContainer (State) but the name-attr of it (Ready)
-						//-> implement look-up for mapped-codestructure of the eContainer-object in MappingEntry's
+					public boolean matches(CtClass<?> element) {
 						if(element.getSimpleName().contentEquals(holdingClassName)) {
 							return true;
 						}
@@ -342,7 +336,7 @@ public class TransformationManager {
 			Set<ModifierKind> modifierSet = new HashSet<>();
 			modifierSet.add(ModifierKind.PUBLIC);
 			CtMethod<?> newMethod = launcher.getFactory().Method().create(parentClass.get(0), modifierSet, launcher.getFactory().Type().VOID_PRIMITIVE, newCodestructureName, null, null, launcher.getFactory().createBlock());
-			newCodestructure = newMethod;		
+			newCodestructure = newMethod;
 			break;
 		default:
 			throw new IllegalArgumentException("Invalid codestructure-type");
@@ -350,6 +344,18 @@ public class TransformationManager {
 		
 		//now the newly created codestructure has to be made applicable to the integration mechanism it is translated with
 		//i.e. it has to get annotated with a certain annotation if this is specified in the mapping
+		return applyIntegrationMechanismToCodestructure(imd, addedDesignmodelElement, newCodestructure);
+	}
+
+	/**
+	 * Applies the responsible integration mechanism to a newly created codestructure and creates a newly MappingEntry containing the codestructure and respective model element.
+	 * @param imd
+	 * @param addedDesignmodelElement
+	 * @param newCodestructure
+	 * @return
+	 */
+	private MappingEntry applyIntegrationMechanismToCodestructure(IntegrationMechanismMappingDeclaration imd,
+			EObject addedDesignmodelElement, CtNamedElement newCodestructure) {
 		String targetNameInstance = "";
 		if(imd.getCondition().getTargetElement().contentEquals("modelelement.name")) {
 			targetNameInstance = addedDesignmodelElement.eClass().getName();
