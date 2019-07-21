@@ -150,8 +150,10 @@ public class TransformationManager {
 		updatedModel.getContents().forEach(updatedModelElement -> {
 			String updatedModelElementID = updatedModel.getID(updatedModelElement);
 			newElementIDs.add(updatedModelElementID);
+			//check if updatedModelElement needs UPDATE or CREATE transformation
+			checkForUpdateOrCreateTransformation(updatedModelElement, updatedModel);
 			
-			
+			//check the same for possible contained objects
 			//get the root object (as specified by the user in the .config-file) to then iterate over all designmodel elements contained by it (which should be all created ones)
 			List<EReference> containments = updatedModelElement.eClass().getEAllContainments();
 			//iterate over all containment-references of the  model element
@@ -166,8 +168,7 @@ public class TransformationManager {
 					newElementIDs.add(updatedContainedModelElementID);
 				});
 			});
-			//check if updatedModelElement needs UPDATE or CREATE transformation
-			checkForUpdateOrCreateTransformation(updatedModelElement, updatedModel);
+			
 			
 		}); //this one is added due to the giant block being commented out below
 			
