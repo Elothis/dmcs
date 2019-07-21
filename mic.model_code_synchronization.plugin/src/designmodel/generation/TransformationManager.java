@@ -150,7 +150,7 @@ public class TransformationManager {
 			String updatedModelElementID = updatedModel.getID(updatedModelElement);
 			newElementIDs.add(updatedModelElementID);
 			//check if updatedModelElement needs UPDATE or CREATE transformation
-			checkForUpdateOrCreateTransformation(updatedModelElement, updatedModel);
+			checkForUpdateOrCreateTransformation(updatedModelElement, updatedModel, updatedMappings);
 			
 			//check the same for possible contained objects
 			//get the root object (as specified by the user in the .config-file) to then iterate over all designmodel elements contained by it (which should be all created ones)
@@ -161,7 +161,7 @@ public class TransformationManager {
 				
 				refs.forEach(containedElement -> {
 					//check here, if this containedObject is newly added or possibly updated
-					checkForUpdateOrCreateTransformation(containedElement, updatedModel);
+					checkForUpdateOrCreateTransformation(containedElement, updatedModel, updatedMappings);
 					//add its UUID to the list of elements contained in the updated model (to then later check for DELETEs)
 					String updatedContainedModelElementID = updatedModel.getID(containedElement);
 					newElementIDs.add(updatedContainedModelElementID);
@@ -193,8 +193,7 @@ public class TransformationManager {
 		}
 	}
 	
-	private void checkForUpdateOrCreateTransformation(EObject updatedModelElement, XMIResource updatedModel) {
-		List<MappingEntry> updatedMappings = new ArrayList<>();
+	private void checkForUpdateOrCreateTransformation(EObject updatedModelElement, XMIResource updatedModel, List<MappingEntry> updatedMappings) {
 		//List<String> newElementIDs = new ArrayList<>();
 		String updatedModelElementID = updatedModel.getID(updatedModelElement);
 		//newElementIDs.add(updatedModelElementID);
