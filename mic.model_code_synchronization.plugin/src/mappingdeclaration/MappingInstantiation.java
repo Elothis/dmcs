@@ -1,5 +1,13 @@
 package mappingdeclaration;
 
+/**
+ * Holds the information the user declared in the instantiation-file (.mapping file per default).<br>
+ * If the Integration Mechanism getting instantiated here is part of a holding parent element, e.g. a reference of a class like State.transition,
+ * the parent model element gets saved in here as well. For other IMs without such parent elements, it just holds the model element itself and the parent element is null.
+ * 
+ * @author Fabian Glittenberg
+ *
+ */
 public class MappingInstantiation {
 	private String instantiatedModelElement;
 	private String instantiatedParentModelElement;
