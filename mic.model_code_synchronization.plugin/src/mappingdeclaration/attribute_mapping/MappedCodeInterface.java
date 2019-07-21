@@ -24,7 +24,7 @@ public class MappedCodeInterface extends MappedCodeElement {
 	public boolean deleteCodestructure(CtNamedElement codestructure) {
 		//since this codestructure is an entire typdefinition in form of an interface-file, the whole file gets deleted
 		codestructure.delete();
-		System.out.println("The interface '" + codestructure.getSimpleName() + "' was deleted");
+		//System.out.println("The interface '" + codestructure.getSimpleName() + "' was deleted");
 		return codestructure.getPosition().getCompilationUnit().getFile().delete();
 	}
 	

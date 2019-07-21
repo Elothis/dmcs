@@ -24,7 +24,7 @@ public class MappedCodeClass extends MappedCodeElement {
 	public boolean deleteCodestructure(CtNamedElement codestructure) {
 		//since this codestructure is an entire typdefinition in form of a class-file, the whole file gets deleted
 		codestructure.delete();
-		System.out.println("The class '" + codestructure.getSimpleName() + "' was deleted");
+		//System.out.println("The class '" + codestructure.getSimpleName() + "' was deleted");
 		return codestructure.getPosition().getCompilationUnit().getFile().delete();
 	}
 
