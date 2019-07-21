@@ -1,6 +1,5 @@
 package mappingdeclaration.attribute_mapping;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -64,8 +63,7 @@ public class MappedDesignmodelContainmentReference extends MappedDesignmodelElem
 	        if(classReference == null) {
 	        	throw new IllegalArgumentException(referenceName + " is no reference in the meta model!");
 	        }
-	        //String targetClassName = classReference.getEReferenceType().getName();
-	        //EClass targetMetaClass = (EClass) metapackage.getEClassifier(targetClassName);
+
 	        EClass targetMetaClass = classReference.getEReferenceType();
 	        
 	        //set attribute
@@ -131,10 +129,10 @@ public class MappedDesignmodelContainmentReference extends MappedDesignmodelElem
 				//check if the design model got changed
 				//-> if it did not change, simply return original entry without modifications
 				if(newAttributeValue.contentEquals(entry.getCodeElement().getSimpleName())) {
-					System.out.println(entry.getCodeElement().getSimpleName() + " did not get changed");
+					//System.out.println(entry.getCodeElement().getSimpleName() + " did not get changed");
 					return entry;
 				}
-				System.out.println(entry.getCodeElement().getSimpleName() + " got changed to " + newAttributeValue);
+				//System.out.println(entry.getCodeElement().getSimpleName() + " got changed to " + newAttributeValue);
 				//change the codestructure respectively
 				entry.getCodeElement().setSimpleName(newAttributeValue);
 				//change the model element to new one

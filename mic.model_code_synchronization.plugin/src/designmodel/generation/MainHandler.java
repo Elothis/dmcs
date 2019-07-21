@@ -73,12 +73,12 @@ public class MainHandler extends AbstractHandler {
 							    0);
 							int result = dialog.open();
 						if(result == 1) {
-							System.out.println("Propagating changes of the design model back to the code");
+							//System.out.println("Propagating changes of the design model back to the code");
 					    	transformationManager.updateCode(mappingDirectoryPath + "/designmodel.xmi");
 						}
 						else { //user wants to regenerate the model based on the current state of the code
 							//regenerate the design model from scratch
-							System.out.println("Regenerating the design model");
+							//System.out.println("Regenerating the design model");
 							transformationManager = new TransformationManager(projectPath, mappingParser);
 							transformationManager.buildDesignModel(mappingDirectoryPath + "/designmodel.xmi");
 						}	            	

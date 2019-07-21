@@ -98,6 +98,6 @@ public class AnnotatedWithProcessor extends ConditionProcessor<CtNamedElement> {
 			e.printStackTrace();
 		}		
 		
-		System.out.println(element.getSimpleName() + " is annotated with " + annotationName + " and thus got processed with annotatedWithProcessor");
+		//System.out.println(element.getSimpleName() + " is annotated with " + annotationName + " and thus got processed with annotatedWithProcessor");
 	}
 }

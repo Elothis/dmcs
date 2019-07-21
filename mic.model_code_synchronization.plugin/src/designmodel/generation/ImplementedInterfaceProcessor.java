@@ -59,15 +59,7 @@ public class ImplementedInterfaceProcessor extends ConditionProcessor<CtClass> {
 			e.printStackTrace();
 		}
 		
-		System.out.println(element.getSimpleName() + " implements " + markerInterface + " and thus got processed with ImplementedInterfaceProcessor");
-		
-		/*
-		Factory factory = element.getFactory();
-		CtAnnotationType newAnnotationType = (CtAnnotationType) factory.Type().get(Generated.class);
-		CtAnnotation newAnnotation = factory.createAnnotation(newAnnotationType.getReference());
-		element.addAnnotation(newAnnotation);
-		*/
-		
+		//System.out.println(element.getSimpleName() + " implements " + markerInterface + " and thus got processed with ImplementedInterfaceProcessor");		
 	}
 	
 
