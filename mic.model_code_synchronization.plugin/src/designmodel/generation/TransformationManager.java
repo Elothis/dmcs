@@ -169,34 +169,8 @@ public class TransformationManager {
 				});
 			});
 			
-			
-		}); //this one is added due to the giant block being commented out below
-			
-//			if(this.existentElementIDs.contains(updatedModelElementID)) {
-//				//exists in both lists -> UPDATE
-//				//get MappingEntry for the respective model element
-//				EObject existentModelElement = existentDesignmodel.getEObject(updatedModelElementID);
-//				MappingEntry entry = getMappingEntryByModelelement(existentModelElement);
-//				if(entry.getCodestructureType() == CodestructureType.METHOD) {
-//					System.out.println(updatedModelElement + " contained by " + entry.getDesignmodelElementEObject().eContainer().eClass().getName());
-//					//System.out.println("updatedModelElement contained by " + updatedModelElement.eContainer().eClass().getName());
-//				}
-//				//update it according to changes applied to the updatedModelElement
-//				MappingEntry updatedEntry = entry.getMappedDesignmodelElement().updateMappingEntry(entry, updatedModelElement);
-//				updatedMappings.add(updatedEntry);
-//			}
-//			else {
-//				//exists only in updated model -> CREATE
-//				System.out.println(updatedModelElement + " was added by the user");
-//				//first find out what Integration Mechanism this newly added object shall get translated with
-//				System.out.println("Newly added element is of type " + updatedModelElement.eClass().getName());
-//				IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByElementAppliedTo(updatedModelElement.eClass().getName());
-//				System.out.println(imd);
-//				//creating a new MappingEntry holding the newly created codestructure				
-//				MappingEntry newlyCreatedEntry = this.createNewCodestructure(imd, updatedModelElement, updatedModel.getContents());
-//				updatedMappings.add(newlyCreatedEntry);
-//			}
-//		});
+		});
+		
 		//check for deleted codestructures
 		this.existentElementIDs.forEach(existentModelElementID -> {
 			if(!newElementIDs.contains(existentModelElementID)) {
