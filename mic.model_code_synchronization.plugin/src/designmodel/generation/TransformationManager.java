@@ -3,7 +3,6 @@ package designmodel.generation;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -17,9 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EStructuralFeature.Setting;
-import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 
 import concrete_mapping.MappingEntry;
@@ -117,7 +114,10 @@ public class TransformationManager {
 			//add all the generated design model elements from the processor to the resourceSet of the design model xmi
 			processor.getGeneratedDesignmodelElements().forEach(e -> {
 				if(e != null) {
-					savingRes.getContents().add(e);
+					//only add it to the resource if its not already contained in another EObject via containment-reference
+					if(e.eContainer() == null) {
+						savingRes.getContents().add(e);
+					}					
 					savingRes.setID(e, UUID.randomUUID().toString());
 					this.existentElementIDs.add(savingRes.getID(e));
 				}
@@ -150,31 +150,53 @@ public class TransformationManager {
 		updatedModel.getContents().forEach(updatedModelElement -> {
 			String updatedModelElementID = updatedModel.getID(updatedModelElement);
 			newElementIDs.add(updatedModelElementID);
-			if(this.existentElementIDs.contains(updatedModelElementID)) {
-				//exists in both lists -> UPDATE
-				//get MappingEntry for the respective model element
-				EObject existentModelElement = existentDesignmodel.getEObject(updatedModelElementID);
-				MappingEntry entry = getMappingEntryByModelelement(existentModelElement);
-				if(entry.getCodestructureType() == CodestructureType.METHOD) {
-					System.out.println(updatedModelElement + " contained by " + entry.getDesignmodelElementEObject().eContainer().eClass().getName());
-					//System.out.println("updatedModelElement contained by " + updatedModelElement.eContainer().eClass().getName());
-				}
-				//update it according to changes applied to the updatedModelElement
-				MappingEntry updatedEntry = entry.getMappedDesignmodelElement().updateMappingEntry(entry, updatedModelElement);
-				updatedMappings.add(updatedEntry);
-			}
-			else {
-				//exists only in updated model -> CREATE
-				System.out.println(updatedModelElement + " was added by the user");
-				//first find out what Integration Mechanism this newly added object shall get translated with
-				System.out.println("Newly added element is of type " + updatedModelElement.eClass().getName());
-				IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByElementAppliedTo(updatedModelElement.eClass().getName());
-				System.out.println(imd);
-				//creating a new MappingEntry holding the newly created codestructure				
-				MappingEntry newlyCreatedEntry = this.createNewCodestructure(imd, updatedModelElement, updatedModel.getContents());
-				updatedMappings.add(newlyCreatedEntry);
-			}
-		});
+			
+			
+			//get the root object (as specified by the user in the .config-file) to then iterate over all designmodel elements contained by it (which should be all created ones)
+			List<EReference> containments = updatedModelElement.eClass().getEAllContainments();
+			//iterate over all containment-references of the  model element
+			containments.forEach(containment -> {
+				List<EObject> refs = (List<EObject>) updatedModelElement.eGet(containment);
+				
+				refs.forEach(containedElement -> {
+					//check here, if this containedObject is newly added or possibly updated
+					checkForUpdateOrCreateTransformation(containedElement, updatedModel);
+					//add its UUID to the list of elements contained in the updated model (to then later check for DELETEs)
+					String updatedContainedModelElementID = updatedModel.getID(containedElement);
+					newElementIDs.add(updatedContainedModelElementID);
+				});
+			});
+			//check if updatedModelElement needs UPDATE or CREATE transformation
+			checkForUpdateOrCreateTransformation(updatedModelElement, updatedModel);
+			
+		}); //this one is added due to the giant block being commented out below
+			
+//			if(this.existentElementIDs.contains(updatedModelElementID)) {
+//				//exists in both lists -> UPDATE
+//				//get MappingEntry for the respective model element
+//				EObject existentModelElement = existentDesignmodel.getEObject(updatedModelElementID);
+//				MappingEntry entry = getMappingEntryByModelelement(existentModelElement);
+//				if(entry.getCodestructureType() == CodestructureType.METHOD) {
+//					System.out.println(updatedModelElement + " contained by " + entry.getDesignmodelElementEObject().eContainer().eClass().getName());
+//					//System.out.println("updatedModelElement contained by " + updatedModelElement.eContainer().eClass().getName());
+//				}
+//				//update it according to changes applied to the updatedModelElement
+//				MappingEntry updatedEntry = entry.getMappedDesignmodelElement().updateMappingEntry(entry, updatedModelElement);
+//				updatedMappings.add(updatedEntry);
+//			}
+//			else {
+//				//exists only in updated model -> CREATE
+//				System.out.println(updatedModelElement + " was added by the user");
+//				//first find out what Integration Mechanism this newly added object shall get translated with
+//				System.out.println("Newly added element is of type " + updatedModelElement.eClass().getName());
+//				IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByElementAppliedTo(updatedModelElement.eClass().getName());
+//				System.out.println(imd);
+//				//creating a new MappingEntry holding the newly created codestructure				
+//				MappingEntry newlyCreatedEntry = this.createNewCodestructure(imd, updatedModelElement, updatedModel.getContents());
+//				updatedMappings.add(newlyCreatedEntry);
+//			}
+//		});
+		//check for deleted codestructures
 		this.existentElementIDs.forEach(existentModelElementID -> {
 			if(!newElementIDs.contains(existentModelElementID)) {
 				//only existent in old model version -> DELETE
@@ -196,6 +218,39 @@ public class TransformationManager {
 			e.printStackTrace();
 		}
 	}
+	
+	private void checkForUpdateOrCreateTransformation(EObject updatedModelElement, XMIResource updatedModel) {
+		List<MappingEntry> updatedMappings = new ArrayList<>();
+		//List<String> newElementIDs = new ArrayList<>();
+		String updatedModelElementID = updatedModel.getID(updatedModelElement);
+		//newElementIDs.add(updatedModelElementID);
+		
+		if(this.existentElementIDs.contains(updatedModelElementID)) {
+			//exists in both lists -> UPDATE
+			//get MappingEntry for the respective model element
+			EObject existentModelElement = existentDesignmodel.getEObject(updatedModelElementID);
+			MappingEntry entry = getMappingEntryByModelelement(existentModelElement);
+			if(entry.getCodestructureType() == CodestructureType.METHOD) {
+				System.out.println(updatedModelElement + " contained by " + entry.getDesignmodelElementEObject().eContainer().eClass().getName());
+				//System.out.println("updatedModelElement contained by " + updatedModelElement.eContainer().eClass().getName());
+			}
+			//update it according to changes applied to the updatedModelElement
+			MappingEntry updatedEntry = entry.getMappedDesignmodelElement().updateMappingEntry(entry, updatedModelElement);
+			updatedMappings.add(updatedEntry);
+		}
+		else {
+			//exists only in updated model -> CREATE
+			System.out.println(updatedModelElement + " was added by the user");
+			//first find out what Integration Mechanism this newly added object shall get translated with
+			System.out.println("Newly added element is of type " + updatedModelElement.eClass().getName());
+			IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByElementAppliedTo(updatedModelElement.eClass().getName());
+			System.out.println(imd);
+			//creating a new MappingEntry holding the newly created codestructure				
+			MappingEntry newlyCreatedEntry = this.createNewCodestructure(imd, updatedModelElement, updatedModel.getContents());
+			updatedMappings.add(newlyCreatedEntry);
+		}
+	}
+
 	
 	/**
 	 * Gets the respective mapping entry holding the specified model element.
@@ -254,31 +309,28 @@ public class TransformationManager {
 		//creating the codestructure element
 		switch(imd.getCodestructureType()) {
 		case CLASS:
-			CtClass<?> newClass = launcher.getFactory().Class().create("NewOne");
+			CtClass<?> newClass = launcher.getFactory().Class().create(newCodestructureName);
 			newClass.setVisibility(ModifierKind.PUBLIC);
 			newCodestructure = newClass;
 			break;
 		case INTERFACE:
-			CtInterface<?> newInterface = launcher.getFactory().Interface().create("NewOne");
+			CtInterface<?> newInterface = launcher.getFactory().Interface().create(newCodestructureName);
 			newInterface.setVisibility(ModifierKind.PUBLIC);
 			newCodestructure = newInterface;
 			break;
 		case METHOD:
 			System.out.println("method to add");
-			System.out.println(addedDesignmodelElement);
-			System.out.println(addedDesignmodelElement.eContainmentFeature());
-			ECrossReferenceAdapter cra = ECrossReferenceAdapter.getCrossReferenceAdapter(addedDesignmodelElement);
-			Collection<Setting> crossReferences = EcoreUtil.UsageCrossReferencer.find(addedDesignmodelElement, newModel);
-			System.out.println(crossReferences);
-			//System.out.println("ECrossReferenceAdapter.getInverseReferences = " + cra.getInverseReferences(addedDesignmodelElement));
 			System.out.println(addedDesignmodelElement.eContainer().eClass().getName());
+			//TODO do not hard code this but implement look up
+			String holdingClassName = getCodestructureNameOfMappedModelelement(addedDesignmodelElement.eContainer());
+			
 			List<CtClass> parentClass = launcher.getModel().filterChildren(new TypeFilter<CtClass>(CtClass.class)).
 				filterChildren(new Filter<CtClass>() {
 					@Override
 					public boolean matches(CtClass element) {
 						//the class name is not the eContainer (State) but the name-attr of it (Ready)
 						//-> implement look-up for mapped-codestructure of the eContainer-object in MappingEntry's
-						if(element.getSimpleName().contentEquals(addedDesignmodelElement.eContainer().eClass().getName())) {
+						if(element.getSimpleName().contentEquals(holdingClassName)) {
 							return true;
 						}
 						return false;
@@ -289,14 +341,12 @@ public class TransformationManager {
 			}
 			Set<ModifierKind> modifierSet = new HashSet<>();
 			modifierSet.add(ModifierKind.PUBLIC);
-			CtMethod<?> newMethod = launcher.getFactory().Method().create(parentClass.get(0), modifierSet, launcher.getFactory().Type().VOID_PRIMITIVE, "newOne", null, null, launcher.getFactory().createBlock());
+			CtMethod<?> newMethod = launcher.getFactory().Method().create(parentClass.get(0), modifierSet, launcher.getFactory().Type().VOID_PRIMITIVE, newCodestructureName, null, null, launcher.getFactory().createBlock());
 			newCodestructure = newMethod;		
 			break;
 		default:
 			throw new IllegalArgumentException("Invalid codestructure-type");
 		}
-		//setting name of the newly created codestructure according to the name it got mapped from the model element
-		newCodestructure.setSimpleName(newCodestructureName);
 		
 		//now the newly created codestructure has to be made applicable to the integration mechanism it is translated with
 		//i.e. it has to get annotated with a certain annotation if this is specified in the mapping
@@ -322,6 +372,32 @@ public class TransformationManager {
 			e.printStackTrace();
 		}
 		return entry;
+	}
+
+	/**
+	 * Gets the name of the codestructure the model element is mapped to
+	 * @param modelElement
+	 * @return codestructure name
+	 */
+	private String getCodestructureNameOfMappedModelelement(EObject modelElement) {
+		String holdingClassName = "";
+		IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByElementAppliedTo(modelElement.eClass().getName());
+		if(imd.getAttributeMappings().get(0).getMappedCodeElement().getTargetValue().contentEquals("name") &&
+				imd.getAttributeMappings().get(0).getTargetValue().startsWith("attribute(")) {
+			String re1="(attribute)";
+		    String re2="(\\(.*\\))";
+
+		    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+		    Matcher m = p.matcher(imd.getAttributeMappings().get(0).getTargetValue());
+		    if (m.find()) {
+		    	String attributeName = StringUtils.substringBetween(m.group(2), "(", ")");
+		    	holdingClassName = modelElement.eGet(modelElement.eClass().getEStructuralFeature(attributeName)).toString();
+		    }
+		    else {
+		    	throw new NotImplementedException(imd.getAttributeMappings().get(0).getTargetValue() + " as the target value of a mapped design model element is currently not yet implemented.");
+		    }
+		}
+		return holdingClassName;
 	}
 
 }

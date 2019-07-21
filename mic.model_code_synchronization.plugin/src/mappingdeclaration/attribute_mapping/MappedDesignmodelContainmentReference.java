@@ -79,7 +79,7 @@ public class MappedDesignmodelContainmentReference extends MappedDesignmodelElem
 			targetModelelement.eSet(classAttribute, mappedCodeElement.getSimpleName());
 			
 			List<EObject> refs = (List<EObject>) parentObject.eGet(classReference);
-			//List<EObject> refs = new ArrayList<>(parentObject.eContents());
+			
 			refs.add(targetModelelement);
 			//parentObject.eSet(classReference, refs);
 			

@@ -70,8 +70,8 @@ class EcoreTesting {
 		System.out.println("eContainer() = " + targetClassInstance.eContainer().eClass().getName());
 		
 		savingRes.getContents().add(sourceInstance);
-		savingRes.getContents().add(targetClassInstance);
-		savingRes.getContents().add(targetClassInstance2);
+		//savingRes.getContents().add(targetClassInstance);
+		//savingRes.getContents().add(targetClassInstance2);
 		savingRes.setID(sourceInstance, UUID.randomUUID().toString());
 		savingRes.setID(targetClassInstance, UUID.randomUUID().toString());
 		savingRes.setID(targetClassInstance2, UUID.randomUUID().toString());
