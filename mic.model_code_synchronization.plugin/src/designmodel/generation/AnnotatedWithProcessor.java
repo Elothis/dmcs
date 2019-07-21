@@ -44,10 +44,10 @@ public class AnnotatedWithProcessor extends ConditionProcessor<CtNamedElement> {
 			}
 			break;
 		case METHOD:
-			if(!(candidate instanceof CtMethod)) {
-				parentObjectExistent = true;
+			if(!(candidate instanceof CtMethod)) {				
 				return false;
 			}
+			parentObjectExistent = true;
 			break;
 		default:
 			break;
