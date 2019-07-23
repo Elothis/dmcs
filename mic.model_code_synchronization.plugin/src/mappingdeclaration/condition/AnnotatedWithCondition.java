@@ -2,6 +2,7 @@ package mappingdeclaration.condition;
 
 import java.util.List;
 
+import org.apache.maven.shared.utils.StringUtils;
 import org.eclipse.emf.ecore.EPackage;
 
 import concrete_mapping.MappingEntry;
@@ -44,6 +45,7 @@ public class AnnotatedWithCondition extends Condition {
 
 	@Override
 	public CtNamedElement applyConditionToCreatedCodestructure(CtNamedElement newCodestructure, String targetNameInstance, Launcher launcher) {
+		targetNameInstance = StringUtils.capitalise(targetNameInstance);
 		//first try and get an existing annotation
 		CtAnnotationType<?> targetAnnotation = (CtAnnotationType<?>) launcher.getFactory().Annotation().get(targetNameInstance);
 		//if the annotation type does not exist yet, create it

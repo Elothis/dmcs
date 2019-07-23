@@ -3,8 +3,11 @@ package designmodel.generation;
 import java.lang.annotation.Annotation;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 import concrete_mapping.MappingEntry;
 import mappingdeclaration.CodestructureType;
@@ -25,7 +28,25 @@ public class AnnotatedWithProcessor extends ConditionProcessor<CtNamedElement> {
 	public AnnotatedWithProcessor(MappingInstantiation mappingInstantiation, List<MappedDesignmodelElement> attributeMappings,
 			CodestructureType codestructureType, EPackage metapackage, List<MappingEntry> mappings) {
 		super(attributeMappings, codestructureType, metapackage, mappings);
-		this.annotationName = mappingInstantiation.getInstantiatedModelElement();
+		
+		if(mappingInstantiation.getInstantiatedParentModelElement() != null) {
+			String holdingClassName = mappingInstantiation.getInstantiatedParentModelElement();
+			String referenceName =  mappingInstantiation.getInstantiatedModelElement();
+			
+			EClass holdingMetaClass = (EClass) metapackage.getEClassifier(holdingClassName);
+			EReference classReference = (EReference) holdingMetaClass.getEStructuralFeature(referenceName);
+			if(classReference == null) {
+	        	classReference = (EReference) holdingMetaClass.getEStructuralFeature(StringUtils.uncapitalize(referenceName));
+	        }
+	        if(classReference == null) {
+	        	throw new IllegalArgumentException(referenceName + " is no reference in the meta model!");
+	        }
+	        this.annotationName = classReference.getName();
+		}
+		else {
+			this.annotationName = mappingInstantiation.getInstantiatedModelElement();
+		}
+		
 		this.mappingInstantiation = mappingInstantiation;
 	}
 

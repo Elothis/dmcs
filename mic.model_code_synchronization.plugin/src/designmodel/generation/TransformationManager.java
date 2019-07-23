@@ -23,6 +23,7 @@ import concrete_mapping.MappingEntry;
 import mappingdeclaration.IMappingDeclarationParser;
 import mappingdeclaration.IntegrationMechanismMappingDeclaration;
 import mappingdeclaration.MappingDeclarationDatabase;
+import mappingdeclaration.ModelelementType;
 import mappingdeclaration.ParserException;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElementFactory;
 import spoon.Launcher;
@@ -150,7 +151,7 @@ public class TransformationManager {
 			String updatedModelElementID = updatedModel.getID(updatedModelElement);
 			newElementIDs.add(updatedModelElementID);
 			//check if updatedModelElement needs UPDATE or CREATE transformation
-			checkForUpdateOrCreateTransformation(updatedModelElement, updatedModel, updatedMappings);
+			checkForUpdateOrCreateTransformation(updatedModelElement, updatedModel, updatedMappings, null);
 			
 			//check the same for possible contained objects
 			//get the root object (as specified by the user in the .config-file) to then iterate over all designmodel elements contained by it (which should be all created ones)
@@ -161,7 +162,7 @@ public class TransformationManager {
 				
 				refs.forEach(containedElement -> {
 					//check here, if this containedObject is newly added or possibly updated
-					checkForUpdateOrCreateTransformation(containedElement, updatedModel, updatedMappings);
+					checkForUpdateOrCreateTransformation(containedElement, updatedModel, updatedMappings, containment);
 					//add its UUID to the list of elements contained in the updated model (to then later check for DELETEs)
 					String updatedContainedModelElementID = updatedModel.getID(containedElement);
 					newElementIDs.add(updatedContainedModelElementID);
@@ -193,7 +194,7 @@ public class TransformationManager {
 		}
 	}
 	
-	private void checkForUpdateOrCreateTransformation(EObject updatedModelElement, XMIResource updatedModel, List<MappingEntry> updatedMappings) {
+	private void checkForUpdateOrCreateTransformation(EObject updatedModelElement, XMIResource updatedModel, List<MappingEntry> updatedMappings, EReference containment) {
 		String updatedModelElementID = updatedModel.getID(updatedModelElement);
 		
 		if(this.existentElementIDs.contains(updatedModelElementID)) {
@@ -209,7 +210,14 @@ public class TransformationManager {
 			//exists only in updated model -> CREATE
 			//System.out.println(updatedModelElement + " was added by the user");
 			//first find out what Integration Mechanism this newly added object shall get translated with
-			IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByElementAppliedTo(updatedModelElement.eClass().getName());
+			String mappedModelElementName = updatedModelElement.eClass().getName();
+			//if this updatedModelElement is a contained element (like in containment operation for types - mechanism)
+			// -> the integration mechanism is applied to the containment itself and not the actual modelelement!
+			if(containment != null) {
+				mappedModelElementName = containment.getName();
+			}
+
+			IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByElementAppliedTo(mappedModelElementName);
 			//creating a new MappingEntry holding the newly created codestructure				
 			MappingEntry newlyCreatedEntry = this.createNewCodestructure(imd, updatedModelElement, updatedModel.getContents());
 			updatedMappings.add(newlyCreatedEntry);
@@ -324,6 +332,11 @@ public class TransformationManager {
 		String targetNameInstance = "";
 		if(imd.getCondition().getTargetElement().contentEquals("modelelement.name")) {
 			targetNameInstance = addedDesignmodelElement.eClass().getName();
+			//if the respective IM acts on containment-modelelements, the targetNameInstance is the containment itself and not the actual addedDesignmodelElement!
+			//i.e.: for containment operation for types mechanism, the containment-reference-name and NOT the target-model-element-name is mapped to the annotation-name in the code
+			if(imd.getModelelementType() == ModelelementType.CONTAINMENT && addedDesignmodelElement.eContainer() != null) {
+				targetNameInstance = addedDesignmodelElement.eContainmentFeature().getName();
+			}
 			newCodestructure = imd.getCondition().applyConditionToCreatedCodestructure(newCodestructure, targetNameInstance, this.launcher);
 		}
 		else {
