@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link mic.model_code_synchronization.designmodel.impl.StateImpl#getName <em>Name</em>}</li>
- *   <li>{@link mic.model_code_synchronization.designmodel.impl.StateImpl#getTransition <em>Transition</em>}</li>
+ *   <li>{@link mic.model_code_synchronization.designmodel.impl.StateImpl#getTransitions <em>Transitions</em>}</li>
  * </ul>
  *
  * @generated
@@ -55,14 +55,14 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTransition() <em>Transition</em>}' containment reference list.
+	 * The cached value of the '{@link #getTransitions() <em>Transitions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTransition()
+	 * @see #getTransitions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Transition> transition;
+	protected EList<Transition> transitions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -112,12 +112,12 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 	 * @generated
 	 */
 	@Override
-	public EList<Transition> getTransition() {
-		if (transition == null) {
-			transition = new EObjectContainmentEList<Transition>(Transition.class, this,
-					DesignmodelPackage.STATE__TRANSITION);
+	public EList<Transition> getTransitions() {
+		if (transitions == null) {
+			transitions = new EObjectContainmentEList<Transition>(Transition.class, this,
+					DesignmodelPackage.STATE__TRANSITIONS);
 		}
-		return transition;
+		return transitions;
 	}
 
 	/**
@@ -128,8 +128,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case DesignmodelPackage.STATE__TRANSITION:
-			return ((InternalEList<?>) getTransition()).basicRemove(otherEnd, msgs);
+		case DesignmodelPackage.STATE__TRANSITIONS:
+			return ((InternalEList<?>) getTransitions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -144,8 +144,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 		switch (featureID) {
 		case DesignmodelPackage.STATE__NAME:
 			return getName();
-		case DesignmodelPackage.STATE__TRANSITION:
-			return getTransition();
+		case DesignmodelPackage.STATE__TRANSITIONS:
+			return getTransitions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -162,9 +162,9 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 		case DesignmodelPackage.STATE__NAME:
 			setName((String) newValue);
 			return;
-		case DesignmodelPackage.STATE__TRANSITION:
-			getTransition().clear();
-			getTransition().addAll((Collection<? extends Transition>) newValue);
+		case DesignmodelPackage.STATE__TRANSITIONS:
+			getTransitions().clear();
+			getTransitions().addAll((Collection<? extends Transition>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -181,8 +181,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 		case DesignmodelPackage.STATE__NAME:
 			setName(NAME_EDEFAULT);
 			return;
-		case DesignmodelPackage.STATE__TRANSITION:
-			getTransition().clear();
+		case DesignmodelPackage.STATE__TRANSITIONS:
+			getTransitions().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -198,8 +198,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State {
 		switch (featureID) {
 		case DesignmodelPackage.STATE__NAME:
 			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-		case DesignmodelPackage.STATE__TRANSITION:
-			return transition != null && !transition.isEmpty();
+		case DesignmodelPackage.STATE__TRANSITIONS:
+			return transitions != null && !transitions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

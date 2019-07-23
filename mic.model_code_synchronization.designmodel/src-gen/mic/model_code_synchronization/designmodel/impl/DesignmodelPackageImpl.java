@@ -146,7 +146,7 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 	 * @generated
 	 */
 	@Override
-	public EReference getState_Transition() {
+	public EReference getState_Transitions() {
 		return (EReference) stateEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -242,7 +242,7 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 		// Create classes and their features
 		stateEClass = createEClass(STATE);
 		createEAttribute(stateEClass, STATE__NAME);
-		createEReference(stateEClass, STATE__TRANSITION);
+		createEReference(stateEClass, STATE__TRANSITIONS);
 
 		componentTypeEClass = createEClass(COMPONENT_TYPE);
 		createEAttribute(componentTypeEClass, COMPONENT_TYPE__NAME);
@@ -292,7 +292,7 @@ public class DesignmodelPackageImpl extends EPackageImpl implements DesignmodelP
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getState_Name(), theXMLTypePackage.getString(), "name", null, 0, 1, State.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getState_Transition(), this.getTransition(), null, "transition", null, 0, -1, State.class,
+		initEReference(getState_Transitions(), this.getTransition(), null, "transitions", null, 0, -1, State.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

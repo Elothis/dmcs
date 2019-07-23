@@ -1,8 +1,7 @@
 
 
 public class Ready implements State {
-    @Transition
+    @Transitions
     public void scanItem() {
     }
 }
-

@@ -76,13 +76,13 @@ public interface DesignmodelPackage extends EPackage {
 	int STATE__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Transition</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Transitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__TRANSITION = 1;
+	int STATE__TRANSITIONS = 1;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -235,15 +235,15 @@ public interface DesignmodelPackage extends EPackage {
 	EAttribute getState_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link mic.model_code_synchronization.designmodel.State#getTransition <em>Transition</em>}'.
+	 * Returns the meta object for the containment reference list '{@link mic.model_code_synchronization.designmodel.State#getTransitions <em>Transitions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Transition</em>'.
-	 * @see mic.model_code_synchronization.designmodel.State#getTransition()
+	 * @return the meta object for the containment reference list '<em>Transitions</em>'.
+	 * @see mic.model_code_synchronization.designmodel.State#getTransitions()
 	 * @see #getState()
 	 * @generated
 	 */
-	EReference getState_Transition();
+	EReference getState_Transitions();
 
 	/**
 	 * Returns the meta object for class '{@link mic.model_code_synchronization.designmodel.ComponentType <em>Component Type</em>}'.
@@ -350,12 +350,12 @@ public interface DesignmodelPackage extends EPackage {
 		EAttribute STATE__NAME = eINSTANCE.getState_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Transition</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Transitions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATE__TRANSITION = eINSTANCE.getState_Transition();
+		EReference STATE__TRANSITIONS = eINSTANCE.getState_Transitions();
 
 		/**
 		 * The meta object literal for the '{@link mic.model_code_synchronization.designmodel.impl.ComponentTypeImpl <em>Component Type</em>}' class.

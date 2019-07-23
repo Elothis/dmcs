@@ -174,9 +174,9 @@
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_ETqgwKlVEemcS_4A-W3BIQ" name="[0..*] transition" sourceNode="_4TTQUIK_Eemz1Lp7UAZa0A" targetNode="_02j5kKlUEemcS_4A-W3BIQ">
-      <target xmi:type="ecore:EReference" href="designmodel.ecore#//State/transition"/>
-      <semanticElements xmi:type="ecore:EReference" href="designmodel.ecore#//State/transition"/>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_ETqgwKlVEemcS_4A-W3BIQ" name="[0..*] transitions" sourceNode="_4TTQUIK_Eemz1Lp7UAZa0A" targetNode="_02j5kKlUEemcS_4A-W3BIQ">
+      <target xmi:type="ecore:EReference" href="designmodel.ecore#//State/transitions"/>
+      <semanticElements xmi:type="ecore:EReference" href="designmodel.ecore#//State/transitions"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_ETrH06lVEemcS_4A-W3BIQ" description="_ETrH0KlVEemcS_4A-W3BIQ" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
         <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_ETrH1alVEemcS_4A-W3BIQ" showIcon="false">
           <customFeatures>labelSize</customFeatures>
