@@ -194,6 +194,14 @@ public class TransformationManager {
 		}
 	}
 	
+	/**
+	 * Checks for a given possibly updatedModelElement of the deserialized updatedModel whether it was updated or created
+	 * and if so, calls the respective transformation to propagate these changes back into the code.
+	 * @param updatedModelElement the (potentially) updated modelelement that gets checked against the existing model prior to user modifications
+	 * @param updatedModel the newly deserialized model as updated by the user
+	 * @param updatedMappings MappingEntry's of the new model version
+	 * @param containment possible containment reference of the updatedModelElement (possibly null if not translated as containment reference in the IM)
+	 */
 	private void checkForUpdateOrCreateTransformation(EObject updatedModelElement, XMIResource updatedModel, List<MappingEntry> updatedMappings, EReference containment) {
 		String updatedModelElementID = updatedModel.getID(updatedModelElement);
 		
@@ -239,6 +247,13 @@ public class TransformationManager {
 	}
 	
 	
+	/**
+	 * Creates a new codestructure representing the addedDesignmodelElement in the code according to mapping declaration in the imd.
+	 * @param imd Integration Mechanism Declaration that describes the mapping between the addedDesignmodelElement and the new codestructure to be created
+	 * @param addedDesignmodelElement the modelelement that has to get translated into a new codestructure
+	 * @param newModel the entire designmodel as it was updated by the user and deserialized
+	 * @return updated MappingEntry now containing the newly created codestructure
+	 */
 	private MappingEntry createNewCodestructure(IntegrationMechanismMappingDeclaration imd, EObject addedDesignmodelElement, EList<EObject> newModel) {
 		CtNamedElement newCodestructure;
 		String newCodestructureName;
