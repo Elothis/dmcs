@@ -1,5 +1,7 @@
 package mappingdeclaration.attribute_mapping;
 
+import org.apache.commons.lang3.NotImplementedException;
+
 import mappingdeclaration.CodestructureType;
 import spoon.reflect.declaration.CtNamedElement;
 
@@ -36,6 +38,20 @@ public abstract class MappedCodeElement {
 	public MappedCodeElement(String targetValue, CodestructureType codestructureType) {
 		this.targetValue = targetValue;
 		this.codestructureType = codestructureType;
+	}
+	/**
+	 * Updates the codestructure.
+	 * @param codestructure
+	 * @return true on success
+	 */
+	public CtNamedElement updateCodestructure(CtNamedElement codestructure, String newMappedModelElementValue) {
+		if(this.getTargetValue().contentEquals("name") ) {
+			codestructure.setSimpleName(newMappedModelElementValue);
+			return codestructure;
+		}
+		else {
+			throw new NotImplementedException("Currently there are only mappings to names of codestructures implemented");
+		}
 	}
 	
 	/**

@@ -110,8 +110,7 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 			return null;
 		}
 		//dispatch here what is mapped to what (currently only the name of the codestructure mapped to attributes of the design model element is implemented)
-		if(entry.getMappedCodeElementValue().contentEquals("name") &&
-				(entry.getCodestructureType() == CodestructureType.CLASS || entry.getCodestructureType() == CodestructureType.INTERFACE) &&
+		if(entry.getMappedCodeElementValue().contentEquals("name")  &&
 				entry.getMappedDesignmodelElementValue().startsWith("attribute(")) {
 			String re1="(attribute)";
 		    String re2="(\\(.*\\))";
@@ -130,7 +129,9 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 				}
 				//System.out.println(entry.getCodeElement().getSimpleName() + " got changed to " + newAttributeValue);
 				//change the codestructure respectively
-				entry.getCodeElement().setSimpleName(newAttributeValue);
+				//entry.getCodeElement().setSimpleName(newAttributeValue);
+				entry.setCodeElement(entry.getMappedDesignmodelElement().getMappedCodeElement().updateCodestructure(entry.getCodeElement(), newAttributeValue));
+				
 				//change the model element to new one
 				entry.setDesignmodelElementEObject(updatedModelElement);
 				//remove the old codestructure

@@ -8,7 +8,7 @@ public class MappedCodeMethod extends MappedCodeElement {
 	public MappedCodeMethod(String targetValue, CodestructureType codestructureType) {
 		super(targetValue, codestructureType);
 	}
-
+	
 	@Override
 	public boolean deleteCodestructure(CtNamedElement codestructure) {
 		codestructure.delete();

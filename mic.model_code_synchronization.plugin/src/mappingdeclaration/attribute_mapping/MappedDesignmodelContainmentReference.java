@@ -134,7 +134,8 @@ public class MappedDesignmodelContainmentReference extends MappedDesignmodelElem
 				}
 				//System.out.println(entry.getCodeElement().getSimpleName() + " got changed to " + newAttributeValue);
 				//change the codestructure respectively
-				entry.getCodeElement().setSimpleName(newAttributeValue);
+				//entry.getCodeElement().setSimpleName(newAttributeValue);
+				entry.setCodeElement(entry.getMappedDesignmodelElement().getMappedCodeElement().updateCodestructure(entry.getCodeElement(), newAttributeValue));
 				//change the model element to new one
 				entry.setDesignmodelElementEObject(updatedModelElement);
 		    }
