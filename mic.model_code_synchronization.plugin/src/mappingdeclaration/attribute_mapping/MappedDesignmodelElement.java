@@ -75,12 +75,12 @@ public abstract class MappedDesignmodelElement {
 
 	/**
 	 * Updates the mapping entry after an existing design model element got changed by the user.
-	 * (Also gets called when nothing got changed and then simply recreates the same object without changes.)
+	 * (Also gets called when nothing got changed and then returns existing MappingEntry without changes.)
 	 * @param entry
 	 * @param updatedModelElement
 	 * @return the updated MappingEntry
 	 */
-	public abstract MappingEntry updateMappingEntry(MappingEntry entry, EObject updatedModelElement);
+	public abstract MappingEntry updateTransformation(MappingEntry entry, EObject updatedModelElement);
 
 	/**
 	 * Deletes the codestructure mapped to the model element after the model element got deleted by the user.
@@ -88,5 +88,5 @@ public abstract class MappedDesignmodelElement {
 	 * @param deletedMappedModelElement
 	 * @return true on success
 	 */
-	public abstract boolean deleteCodestructure(MappingEntry entry, EObject deletedMappedModelElement);	
+	public abstract boolean deleteTransformation(MappingEntry entry, EObject deletedMappedModelElement);	
 }

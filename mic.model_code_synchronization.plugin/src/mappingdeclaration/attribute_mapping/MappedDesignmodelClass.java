@@ -105,7 +105,7 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 	}
 
 	@Override
-	public MappingEntry updateMappingEntry(MappingEntry entry, EObject updatedModelElement) {
+	public MappingEntry updateTransformation(MappingEntry entry, EObject updatedModelElement) {
 		if(entry.getCodeElement() == null) {
 			return null;
 		}
@@ -153,7 +153,7 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 	}
 
 	@Override
-	public boolean deleteCodestructure(MappingEntry entry, EObject deletedMappedModelElement) {
+	public boolean deleteTransformation(MappingEntry entry, EObject deletedMappedModelElement) {
 		if(entry.getMappedDesignmodelElementValue().startsWith("attribute(")) {
 			//call the delete-function of the mapped code element
 			return entry.getMappedDesignmodelElement().getMappedCodeElement().deleteCodestructure(entry.getCodeElement());

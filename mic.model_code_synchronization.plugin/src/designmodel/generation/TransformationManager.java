@@ -178,7 +178,7 @@ public class TransformationManager {
 				//System.out.println(this.existentDesignmodel.getEObject(existentModelElementID) + " was deleted");
 				EObject existentModelElement = existentDesignmodel.getEObject(existentModelElementID);
 				MappingEntry entry = getMappingEntryByModelelement(existentModelElement);
-				entry.getMappedDesignmodelElement().deleteCodestructure(entry, existentModelElement);
+				entry.getMappedDesignmodelElement().deleteTransformation(entry, existentModelElement);
 				this.mappings.remove(entry);
 			}
 		});
@@ -211,7 +211,7 @@ public class TransformationManager {
 			EObject existentModelElement = existentDesignmodel.getEObject(updatedModelElementID);
 			MappingEntry entry = getMappingEntryByModelelement(existentModelElement);
 			//update it according to changes applied to the updatedModelElement
-			MappingEntry updatedEntry = entry.getMappedDesignmodelElement().updateMappingEntry(entry, updatedModelElement);
+			MappingEntry updatedEntry = entry.getMappedDesignmodelElement().updateTransformation(entry, updatedModelElement);
 			updatedMappings.add(updatedEntry);
 		}
 		else {
@@ -227,7 +227,7 @@ public class TransformationManager {
 
 			IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByElementAppliedTo(mappedModelElementName);
 			//creating a new MappingEntry holding the newly created codestructure				
-			MappingEntry newlyCreatedEntry = this.createNewCodestructure(imd, updatedModelElement, updatedModel.getContents());
+			MappingEntry newlyCreatedEntry = this.createTransformation(imd, updatedModelElement, updatedModel.getContents());
 			updatedMappings.add(newlyCreatedEntry);
 		}
 	}
@@ -254,7 +254,7 @@ public class TransformationManager {
 	 * @param newModel the entire designmodel as it was updated by the user and deserialized
 	 * @return updated MappingEntry now containing the newly created codestructure
 	 */
-	private MappingEntry createNewCodestructure(IntegrationMechanismMappingDeclaration imd, EObject addedDesignmodelElement, EList<EObject> newModel) {
+	private MappingEntry createTransformation(IntegrationMechanismMappingDeclaration imd, EObject addedDesignmodelElement, EList<EObject> newModel) {
 		CtNamedElement newCodestructure;
 		String newCodestructureName;
 		if(imd.getAttributeMappings().size() > 1) {
