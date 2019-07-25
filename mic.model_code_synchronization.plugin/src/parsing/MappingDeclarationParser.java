@@ -45,7 +45,7 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 	/**
 	 * File extension of the file containing the instantiation of the integration mechanisms to concrete model elements
 	 */
-	public static final String MAPPING_INSTANTIATION_FILE_EXTENSION = "mapping";
+	public static final String MAPPING_INSTANTIATION_FILE_EXTENSION = "inst";
 	/**
 	 * File extension of the config-file containing the path to the Ecore meta model
 	 */
