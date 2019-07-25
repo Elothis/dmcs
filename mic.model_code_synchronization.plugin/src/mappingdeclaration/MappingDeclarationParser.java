@@ -78,11 +78,6 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 		this.mappingDeclarationDatabase = new MappingDeclarationDatabase();
 	}
 	
-	/**
-	 * Parses the mapping directory associated with this MappingParser and stores the defined Integration Mechanisms
-	 * and the instantiation of these Integration Mechanisms applied to concrete model elements in a MappingDeclarationDatabase.
-	 * @return MappingDatabase containing all parsed information
-	 */
 	@Override
 	public MappingDeclarationDatabase parseMappingDirectory() {
 		try {
