@@ -1,6 +1,8 @@
-package mappingdeclaration;
+package parsing;
 
 import org.eclipse.emf.ecore.EPackage;
+
+import mappingdeclaration.MappingDeclarationDatabase;
 
 public interface IMappingDeclarationParser {
 	/**

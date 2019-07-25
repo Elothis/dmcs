@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.junit.jupiter.api.Test;
 
 import designmodel.generation.TransformationManager;
-import mappingdeclaration.MappingDeclarationParser;
+import parsing.MappingDeclarationParser;
 import util.Utility;
 
 public class IntegrationTesting {

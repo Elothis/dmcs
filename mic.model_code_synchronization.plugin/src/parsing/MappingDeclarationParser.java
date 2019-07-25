@@ -1,4 +1,4 @@
-package mappingdeclaration;
+package parsing;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +15,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import mappingdeclaration.CodestructureType;
+import mappingdeclaration.IntegrationMechanismMappingDeclaration;
+import mappingdeclaration.MappingDeclarationDatabase;
+import mappingdeclaration.MappingInstantiation;
+import mappingdeclaration.ModelelementType;
+import mappingdeclaration.ParserException;
 import mappingdeclaration.attribute_mapping.MappedCodeElement;
 import mappingdeclaration.attribute_mapping.MappedCodeElementFactory;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;

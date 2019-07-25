@@ -12,9 +12,8 @@
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="mappingdeclaration.MappingDeclarationParser" 
-    project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/MappingDeclarationParser.java" binary="false" 
+  <class id="2" language="java" name="parsing.MappingDeclarationParser" project="mic.model_code_synchronization.plugin" 
+    file="/mic.model_code_synchronization.plugin/src/parsing/MappingDeclarationParser.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="313" y="234"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -78,9 +77,9 @@
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="8" language="java" name="mappingdeclaration.IMappingDeclarationParser" 
+  <interface id="8" language="java" name="parsing.IMappingDeclarationParser" 
     project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/IMappingDeclarationParser.java" binary="false" 
+    file="/mic.model_code_synchronization.plugin/src/parsing/IMappingDeclarationParser.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="347" y="88"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -198,202 +197,202 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <association id="19">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="20" name="condition">        
-        <position height="0" width="0" x="-775" y="6"/>      
-      </attribute>      
-      <multiplicity id="21" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-775" y="6"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="22">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <association id="23">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="24" name="mappingDeclarationDatabase">        
-        <position height="0" width="0" x="-40" y="-62"/>      
-      </attribute>      
-      <multiplicity id="25" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-40" y="-62"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="26">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="15"/>  
-  </generalization>  
-  <generalization id="27">    
+  <generalization id="19">    
     <end type="SOURCE" refId="16"/>    
     <end type="TARGET" refId="15"/>  
   </generalization>  
-  <association id="28">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="29" name="processor">        
-        <position height="0" width="0" x="-647" y="8"/>      
-      </attribute>      
-      <multiplicity id="30" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-647" y="8"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="31">    
-    <bendpoint x="940" y="917"/>    
-    <bendpoint x="982" y="1146"/>    
-    <bendpoint x="982" y="1465"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="32" name="attributeMappings">        
-        <position height="0" width="0" x="-301" y="112"/>      
-      </attribute>      
-      <multiplicity id="33" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-301" y="112"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="34">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="35" name="mappingDeclarationDatabase">        
-        <position height="0" width="0" x="-40" y="-62"/>      
-      </attribute>      
-      <multiplicity id="36" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-40" y="-62"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="37">    
+  <association id="20">    
+    <bendpoint x="690" y="1465"/>    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="38" name="mappingEntries">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <attribute id="21" name="attributeMappings">        
+        <position height="0" width="0" x="-301" y="112"/>      
       </attribute>      
-      <multiplicity id="39" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="40">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="41" name="mappedDesignmodelElement">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="42" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <multiplicity id="22" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-301" y="112"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="43">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="44" name="transformationManager">        
-        <position height="0" width="0" x="-888" y="-53"/>      
-      </attribute>      
-      <multiplicity id="45" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-888" y="-53"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="46">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <generalization id="47">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
-  <association id="48">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="49" name="imDeclarations">        
-        <position height="18" width="78" x="1303" y="-23"/>      
-      </attribute>      
-      <multiplicity id="50" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-170" y="120"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="51">    
+  <association id="23">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="52" name="mappingDeclarationParser">        
+      <attribute id="24" name="mappingDeclarationParser">        
         <position height="0" width="0" x="-1228" y="-311"/>      
       </attribute>      
-      <multiplicity id="53" minimum="0" maximum="1">        
+      <multiplicity id="25" minimum="0" maximum="1">        
         <position height="0" width="0" x="-1228" y="-311"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="54">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="55" name="mappedCodeElement">        
-        <position height="0" width="0" x="-301" y="112"/>      
+  <realization id="26">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <association id="27">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="28" name="transformationManager">        
+        <position height="0" width="0" x="-888" y="-53"/>      
       </attribute>      
-      <multiplicity id="56" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-301" y="112"/>      
+      <multiplicity id="29" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-888" y="-53"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="57">    
-    <bendpoint x="961" y="351"/>    
-    <bendpoint x="961" y="616"/>    
-    <bendpoint x="961" y="917"/>    
-    <bendpoint x="961" y="1146"/>    
+  <association id="30">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="31" name="condition">        
+        <position height="0" width="0" x="-775" y="6"/>      
+      </attribute>      
+      <multiplicity id="32" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-775" y="6"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="33">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <generalization id="34">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="35">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="58" name="mappings">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <attribute id="36" name="mappingDeclarationDatabase">        
+        <position height="0" width="0" x="-40" y="-62"/>      
       </attribute>      
-      <multiplicity id="59" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <multiplicity id="37" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-40" y="-62"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="60">    
-    <bendpoint x="690" y="1465"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="61" name="attributeMappings">        
+  <generalization id="38">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="39">    
+    <bendpoint x="940" y="917"/>    
+    <bendpoint x="982" y="1146"/>    
+    <bendpoint x="982" y="1465"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="40" name="attributeMappings">        
         <position height="0" width="0" x="-301" y="112"/>      
       </attribute>      
-      <multiplicity id="62" minimum="0" maximum="2147483647">        
+      <multiplicity id="41" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="-301" y="112"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="63">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="8"/>  
-  </realization>  
-  <generalization id="64">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="4"/>  
+  <generalization id="42">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="15"/>  
   </generalization>  
-  <generalization id="65">    
+  <generalization id="43">    
     <end type="SOURCE" refId="11"/>    
     <end type="TARGET" refId="10"/>  
   </generalization>  
+  <association id="44">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="45" name="imDeclarations">        
+        <position height="18" width="78" x="1303" y="-23"/>      
+      </attribute>      
+      <multiplicity id="46" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-170" y="120"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="47">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="48" name="mappingDeclarationDatabase">        
+        <position height="0" width="0" x="-40" y="-62"/>      
+      </attribute>      
+      <multiplicity id="49" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-40" y="-62"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="50">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="51" name="mappedDesignmodelElement">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="52" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="53">    
+    <bendpoint x="961" y="351"/>    
+    <bendpoint x="961" y="616"/>    
+    <bendpoint x="961" y="917"/>    
+    <bendpoint x="961" y="1146"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="54" name="mappings">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="55" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="56">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="57">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="58" name="processor">        
+        <position height="0" width="0" x="-647" y="8"/>      
+      </attribute>      
+      <multiplicity id="59" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-647" y="8"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="61" name="mappedCodeElement">        
+        <position height="0" width="0" x="-301" y="112"/>      
+      </attribute>      
+      <multiplicity id="62" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-301" y="112"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="63">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="64" name="mappingEntries">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="65" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="false" protected="false" private="false" static="true"/>    

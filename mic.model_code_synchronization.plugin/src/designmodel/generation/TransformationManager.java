@@ -20,12 +20,12 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 
 import concrete_mapping.MappingEntry;
-import mappingdeclaration.IMappingDeclarationParser;
 import mappingdeclaration.IntegrationMechanismMappingDeclaration;
 import mappingdeclaration.MappingDeclarationDatabase;
 import mappingdeclaration.ModelelementType;
 import mappingdeclaration.ParserException;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElementFactory;
+import parsing.IMappingDeclarationParser;
 import spoon.Launcher;
 import spoon.compiler.Environment;
 import spoon.reflect.CtModel;

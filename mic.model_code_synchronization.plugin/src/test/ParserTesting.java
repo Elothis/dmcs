@@ -2,7 +2,7 @@ package test;
 
 import org.junit.jupiter.api.Test;
 
-import mappingdeclaration.MappingDeclarationParser;
+import parsing.MappingDeclarationParser;
 
 class ParserTesting {
 

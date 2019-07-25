@@ -2,318 +2,76 @@
 <class-diagram version="1.2.3" icons="false" automaticImage="JPEG" always-add-relationships="false" 
   generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
   router="FAN">  
-  <class id="1" language="java" name="designmodel.generation.TransformationManager" 
+  <package id="1" language="java" name="mappingdeclaration.condition" project="mic.model_code_synchronization.plugin" 
+    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/condition" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="33" width="176" x="62" y="183"/>    
+    <display autosize="true" stereotype="false" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="2" language="java" name="mappingdeclaration.attribute_mapping" 
     project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/designmodel/generation/TransformationManager.java" binary="false" 
+    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/attribute_mapping" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1313" y="959"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="designmodel.generation.ConditionProcessor" 
-    project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/designmodel/generation/ConditionProcessor.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="311" y="1118"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="true" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="designmodel.generation.AnnotatedWithProcessor" 
-    project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/designmodel/generation/AnnotatedWithProcessor.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="138" width="255" x="58" y="1331"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="true" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="designmodel.generation.ImplementedInterfaceProcessor" 
-    project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/designmodel/generation/ImplementedInterfaceProcessor.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="121" width="324" x="378" y="1343"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="true" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="mappingdeclaration.MappingDeclarationDatabase" 
-    project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/MappingDeclarationDatabase.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="835" y="477"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="mappingdeclaration.IntegrationMechanismMappingDeclaration" 
-    project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/IntegrationMechanismMappingDeclaration.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="761" y="770"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="mappingdeclaration.attribute_mapping.MappedDesignmodelElement" 
-    project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/attribute_mapping/MappedDesignmodelElement.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="824" y="1089"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="8" language="java" name="mappingdeclaration.attribute_mapping.MappedDesignmodelClass" 
-    project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/attribute_mapping/MappedDesignmodelClass.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="62" width="180" x="882" y="1428"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="9" language="java" name="mappingdeclaration.attribute_mapping.MappedCodeElement" 
-    project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/attribute_mapping/MappedCodeElement.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="829" y="1664"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="10" language="java" name="mappingdeclaration.attribute_mapping.MappedCodeClass" 
-    project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/attribute_mapping/MappedCodeClass.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="695" y="1839"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="11" language="java" name="mappingdeclaration.attribute_mapping.MappedCodeInterface" 
-    project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/attribute_mapping/MappedCodeInterface.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="914" y="1841"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="12" language="java" name="mappingdeclaration.condition.Condition" 
-    project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/condition/Condition.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="303" y="770"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="13" language="java" name="mappingdeclaration.condition.AnnotatedWithCondition" 
-    project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/condition/AnnotatedWithCondition.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="431" y="619"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="14" language="java" name="mappingdeclaration.condition.ImplementedInterfaceCondition" 
-    project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/condition/ImplementedInterfaceCondition.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="195" y="621"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="15" language="java" name="concrete_mapping.MappingEntry" project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/concrete_mapping/MappingEntry.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="120" width="216" x="1174" y="1330"/>    
-    <display autosize="false" stereotype="true" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="true" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <generalization id="16">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <generalization id="17">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="9"/>  
-  </generalization>  
-  <association id="18">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="19" name="attributeMappings">        
-        <position height="0" width="0" x="-368" y="-550"/>      
-      </attribute>      
-      <multiplicity id="20" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-368" y="-550"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="21">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="22" name="mappedCodeElement">        
-        <position height="0" width="0" x="-145" y="-222"/>      
-      </attribute>      
-      <multiplicity id="23" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-145" y="-222"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="24">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="25" name="mappingEntries">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="26" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="27">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="28" name="mappedDesignmodelElement">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="29" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="30">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="31" name="imDeclarations">        
-        <position height="18" width="78" x="1488" y="-7"/>      
-      </attribute>      
-      <multiplicity id="32" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="15" y="136"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="33">    
+    <position height="33" width="228" x="202" y="329"/>    
+    <display autosize="true" stereotype="false" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="3" language="java" name="mappingdeclaration" project="mic.model_code_synchronization.plugin" 
+    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="33" width="121" x="41" y="329"/>    
+    <display autosize="true" stereotype="false" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="4" language="java" name="designmodel.generation" project="mic.model_code_synchronization.plugin" 
+    file="/mic.model_code_synchronization.plugin/src/designmodel/generation" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="33" width="145" x="280" y="37"/>    
+    <display autosize="true" stereotype="false" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="5" language="java" name="concrete_mapping" project="mic.model_code_synchronization.plugin" 
+    file="/mic.model_code_synchronization.plugin/src/concrete_mapping" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="33" width="115" x="123" y="256"/>    
+    <display autosize="true" stereotype="false" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="6" language="java" name="parsing" project="mic.model_code_synchronization.plugin" 
+    file="/mic.model_code_synchronization.plugin/src/parsing" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="33" width="51" x="150" y="110"/>    
+    <display autosize="true" stereotype="false" sort-features="false" accessors="true"/>  
+  </package>  
+  <dependency id="7">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="8">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="9">    
+    <bendpoint x="268" y="183"/>    
+    <bendpoint x="268" y="256"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="10">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="11">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="12">    
+    <bendpoint x="31" y="183"/>    
+    <bendpoint x="31" y="256"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="13">    
+    <bendpoint x="289" y="110"/>    
+    <bendpoint x="289" y="183"/>    
     <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="2"/>  
-  </generalization>  
-  <generalization id="34">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="9"/>  
-  </generalization>  
-  <association id="35">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="36" name="processor">        
-        <position height="0" width="0" x="-842" y="-159"/>      
-      </attribute>      
-      <multiplicity id="37" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-842" y="-159"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="38">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <association id="39">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="40" name="condition">        
-        <position height="0" width="0" x="-1002" y="-235"/>      
-      </attribute>      
-      <multiplicity id="41" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-1002" y="-235"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="42">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <generalization id="43">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
-  </generalization>  
-  <association id="44">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="45" name="mappings">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="46" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="47">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="48" name="attributeMappings">        
-        <position height="0" width="0" x="-368" y="-550"/>      
-      </attribute>      
-      <multiplicity id="49" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-368" y="-550"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="50">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="51" name="mappingDeclarationDatabase">        
-        <position height="0" width="0" x="223" y="-49"/>      
-      </attribute>      
-      <multiplicity id="52" minimum="0" maximum="1">        
-        <position height="0" width="0" x="223" y="-49"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="14">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
   <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="false" package="true" protected="true" private="false" static="false"/>    
