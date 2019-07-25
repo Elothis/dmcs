@@ -1,5 +1,0 @@
-
-
-@Interface
-public interface IBarcodeScanner {}
-
