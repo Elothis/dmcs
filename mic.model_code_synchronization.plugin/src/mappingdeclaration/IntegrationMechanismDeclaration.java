@@ -13,14 +13,14 @@ import mappingdeclaration.condition.Condition;
  * @author Fabian Glittenberg
  *
  */
-public class IntegrationMechanismMappingDeclaration {
+public class IntegrationMechanismDeclaration {
 	private String name;
 	private CodestructureType codestructureType;
 	private ModelelementType modelelementType;
 	private Condition condition;
 	private List<MappedDesignmodelElement> attributeMappings;
 	
-	public IntegrationMechanismMappingDeclaration(String name) {
+	public IntegrationMechanismDeclaration(String name) {
 		this.name = name;
 		this.attributeMappings = new ArrayList<>();
 	}

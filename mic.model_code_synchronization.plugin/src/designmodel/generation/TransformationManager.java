@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 
 import concrete_mapping.MappingEntry;
-import mappingdeclaration.IntegrationMechanismMappingDeclaration;
+import mappingdeclaration.IntegrationMechanismDeclaration;
 import mappingdeclaration.MappingDeclarationDatabase;
 import mappingdeclaration.ModelelementType;
 import mappingdeclaration.ParserException;
@@ -233,7 +233,7 @@ public class TransformationManager {
 				mappedModelElementName = containment.getName();
 			}
 
-			IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByElementAppliedTo(mappedModelElementName);
+			IntegrationMechanismDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByElementAppliedTo(mappedModelElementName);
 			//creating a new MappingEntry holding the newly created codestructure				
 			MappingEntry newlyCreatedEntry = this.createTransformation(imd, updatedModelElement, updatedModel.getContents());
 			updatedMappings.add(newlyCreatedEntry);
@@ -262,7 +262,7 @@ public class TransformationManager {
 	 * @param newModel the entire designmodel as it was updated by the user and deserialized
 	 * @return updated MappingEntry now containing the newly created codestructure
 	 */
-	private MappingEntry createTransformation(IntegrationMechanismMappingDeclaration imd, EObject addedDesignmodelElement, EList<EObject> newModel) {
+	private MappingEntry createTransformation(IntegrationMechanismDeclaration imd, EObject addedDesignmodelElement, EList<EObject> newModel) {
 		CtNamedElement newCodestructure;
 		String newCodestructureName;
 		if(imd.getAttributeMappings().size() > 1) {
@@ -350,7 +350,7 @@ public class TransformationManager {
 	 * @param newCodestructure
 	 * @return
 	 */
-	private MappingEntry applyIntegrationMechanismToCodestructure(IntegrationMechanismMappingDeclaration imd,
+	private MappingEntry applyIntegrationMechanismToCodestructure(IntegrationMechanismDeclaration imd,
 			EObject addedDesignmodelElement, CtNamedElement newCodestructure) {
 		String targetNameInstance = "";
 		if(imd.getCondition().getTargetElement().contentEquals("modelelement.name")) {
@@ -388,7 +388,7 @@ public class TransformationManager {
 	 */
 	private String getCodestructureNameOfMappedModelelement(EObject modelElement) {
 		String holdingClassName = "";
-		IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByElementAppliedTo(modelElement.eClass().getName());
+		IntegrationMechanismDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByElementAppliedTo(modelElement.eClass().getName());
 		if(imd.getAttributeMappings().get(0).getMappedCodeElement().getTargetValue().contentEquals("name") &&
 				imd.getAttributeMappings().get(0).getTargetValue().startsWith("attribute(")) {
 			String re1="(attribute)";

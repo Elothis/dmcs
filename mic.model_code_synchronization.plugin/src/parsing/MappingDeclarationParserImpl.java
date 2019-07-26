@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import mappingdeclaration.CodestructureType;
-import mappingdeclaration.IntegrationMechanismMappingDeclaration;
+import mappingdeclaration.IntegrationMechanismDeclaration;
 import mappingdeclaration.MappingDeclarationDatabase;
 import mappingdeclaration.MappingInstantiation;
 import mappingdeclaration.ModelelementType;
@@ -84,7 +84,7 @@ public class MappingDeclarationParserImpl implements IMappingDeclarationParser {
 			//parse in the files defining integration mechanisms
 			Utility.getAllFilesByExtension(directoryPath, INTEGRATION_MECHANISM_MAPPING_DECLARATION_FILE_EXTENSION).forEach(f -> {
 				try {
-					IntegrationMechanismMappingDeclaration imDeclaration = this.parseIMFile(f);
+					IntegrationMechanismDeclaration imDeclaration = this.parseIMFile(f);
 					this.mappingDeclarationDatabase.addIntegrationMechanismDeclaration(imDeclaration);
 				} catch (ParserException e) {
 					e.printStackTrace();
@@ -120,9 +120,9 @@ public class MappingDeclarationParserImpl implements IMappingDeclarationParser {
 	 * @throws IOException
 	 * @throws ParserException
 	 */
-	private IntegrationMechanismMappingDeclaration parseIMFile(File f) throws IOException, ParserException {
+	private IntegrationMechanismDeclaration parseIMFile(File f) throws IOException, ParserException {
 		String integrationMechanismName = f.getName().split("\\.")[0];
-		IntegrationMechanismMappingDeclaration imMappingDeclaration = new IntegrationMechanismMappingDeclaration(integrationMechanismName);
+		IntegrationMechanismDeclaration imMappingDeclaration = new IntegrationMechanismDeclaration(integrationMechanismName);
 		String content = new String(Files.readAllBytes(f.toPath()));
 		
 		//split by ';' delimiter to receive all the fields of the mapping (first-level keywords)
@@ -266,7 +266,7 @@ public class MappingDeclarationParserImpl implements IMappingDeclarationParser {
 		for(String imInstantiation: imInstantiations) {
 			//get integration mechanism
 			String integrationMechanismName = imInstantiation.split("\\{")[0].trim();
-			IntegrationMechanismMappingDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByName(integrationMechanismName);
+			IntegrationMechanismDeclaration imd = this.mappingDeclarationDatabase.getIntegrationMechanismByName(integrationMechanismName);
 			if(imd == null) {
 				throw new ParserException("The integration mechanism applied to certain model elements in the .mapping-file does not exist");
 			}

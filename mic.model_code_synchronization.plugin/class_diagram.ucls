@@ -89,9 +89,9 @@
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="9" language="java" name="mappingdeclaration.IntegrationMechanismMappingDeclaration" 
+  <class id="9" language="java" name="mappingdeclaration.IntegrationMechanismDeclaration" 
     project="mic.model_code_synchronization.plugin" 
-    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/IntegrationMechanismMappingDeclaration.java" 
+    file="/mic.model_code_synchronization.plugin/src/mappingdeclaration/IntegrationMechanismDeclaration.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="576" y="754"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

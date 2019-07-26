@@ -11,10 +11,10 @@ package mappingdeclaration;
 public class MappingInstantiation {
 	private String instantiatedModelElement;
 	private String instantiatedParentModelElement;
-	private IntegrationMechanismMappingDeclaration imd;
+	private IntegrationMechanismDeclaration imd;
 	
 	public MappingInstantiation(String instantiatedModelElement, String instantiatedParentModelElement,
-			IntegrationMechanismMappingDeclaration imd) {
+			IntegrationMechanismDeclaration imd) {
 		super();
 		this.instantiatedModelElement = instantiatedModelElement;
 		this.instantiatedParentModelElement = instantiatedParentModelElement;
@@ -32,10 +32,10 @@ public class MappingInstantiation {
 	public void setInstantiatedParentModelElement(String instantiatedParentModelElement) {
 		this.instantiatedParentModelElement = instantiatedParentModelElement;
 	}
-	public IntegrationMechanismMappingDeclaration getImd() {
+	public IntegrationMechanismDeclaration getImd() {
 		return imd;
 	}
-	public void setImd(IntegrationMechanismMappingDeclaration imd) {
+	public void setImd(IntegrationMechanismDeclaration imd) {
 		this.imd = imd;
 	}
 }

@@ -15,13 +15,13 @@ public class MappingDeclarationDatabase {
 	/**
 	 * List holding all Integration Mechanism Declarations that got parsed from the .im-files
 	 */
-	private List<IntegrationMechanismMappingDeclaration> imDeclarations;
+	private List<IntegrationMechanismDeclaration> imDeclarations;
 	/**
 	 * Holds information of which model element (saved as String) gets translated with which IM (including a possible parent element for cases like references)
 	 */
 	private List<MappingInstantiation> mappingInstantiations;
 	
-	public MappingDeclarationDatabase(List<IntegrationMechanismMappingDeclaration> imDeclarations) {
+	public MappingDeclarationDatabase(List<IntegrationMechanismDeclaration> imDeclarations) {
 		this.imDeclarations = imDeclarations;
 		this.mappingInstantiations = new ArrayList<>();
 	}
@@ -30,7 +30,7 @@ public class MappingDeclarationDatabase {
 		this.imDeclarations = new ArrayList<>();
 	}
 	
-	public List<IntegrationMechanismMappingDeclaration> getIntegrationMechanismDeclarations() {
+	public List<IntegrationMechanismDeclaration> getIntegrationMechanismDeclarations() {
 		return this.imDeclarations;
 	}
 	
@@ -39,8 +39,8 @@ public class MappingDeclarationDatabase {
 	 * @param name
 	 * @return IntegrationMechanismDeclaration if found, NULL if no such IM exists
 	 */
-	public IntegrationMechanismMappingDeclaration getIntegrationMechanismByName(String name) {
-		for(IntegrationMechanismMappingDeclaration imd: this.imDeclarations) {
+	public IntegrationMechanismDeclaration getIntegrationMechanismByName(String name) {
+		for(IntegrationMechanismDeclaration imd: this.imDeclarations) {
 			if(imd.getName().contentEquals(name)) return imd;
 		}
 		return null;
@@ -51,7 +51,7 @@ public class MappingDeclarationDatabase {
 	 * @param elementName
 	 * @return IntegrationMechanismDeclaration if found, NULL if no IM is applied to that model element
 	 */
-	public IntegrationMechanismMappingDeclaration getIntegrationMechanismByElementAppliedTo(String elementName) {
+	public IntegrationMechanismDeclaration getIntegrationMechanismByElementAppliedTo(String elementName) {
 		for (MappingInstantiation mi: this.mappingInstantiations) {
 		    if(mi.getInstantiatedModelElement().equalsIgnoreCase(elementName)) {
 		    	return mi.getImd();
@@ -65,8 +65,8 @@ public class MappingDeclarationDatabase {
 		return null;
 	}
 	
-	public boolean addIntegrationMechanismDeclaration(IntegrationMechanismMappingDeclaration imDeclaration) {
-		for (IntegrationMechanismMappingDeclaration imd: this.imDeclarations) {
+	public boolean addIntegrationMechanismDeclaration(IntegrationMechanismDeclaration imDeclaration) {
+		for (IntegrationMechanismDeclaration imd: this.imDeclarations) {
 			if(imd.getName().contentEquals(imDeclaration.getName())) return false;
 		}
 			
