@@ -178,12 +178,20 @@ public class MappingDeclarationParserImpl implements IMappingDeclarationParser {
 				if(lineElements.length < 2 ) {
 					throw new ParserException("Please provide a condition");
 				}
+	
 				String[] conditionDefinition = lineElements[1].trim().split(" ");
 				if(conditionDefinition.length < 2) {
 					throw new ParserException("Please provide a target-element the condition shall get evaluated against in addition to the keyword");
 				}
+				if(conditionDefinition.length == 3 && !conditionDefinition[0].contentEquals("codestructure")) {
+					throw new ParserException("Currently there are only conditions directly applied to the codestructure itself implemented");
+				}
+				int keywordIndex = 0;
+				if(conditionDefinition.length == 3) {
+					keywordIndex = 1;
+				}
 
-				Condition condition = ConditionFactory.createCondition(ConditionKeyword.getConditionKeywordFor(conditionDefinition[0]), conditionDefinition[1], imMappingDeclaration.getCodestructureType());
+				Condition condition = ConditionFactory.createCondition(ConditionKeyword.getConditionKeywordFor(conditionDefinition[keywordIndex]), conditionDefinition[keywordIndex+1], imMappingDeclaration.getCodestructureType());
 				imMappingDeclaration.setCondition(condition);
 				
 				this.conditionParsed = true;
