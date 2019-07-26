@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.junit.jupiter.api.Test;
 
 import designmodel.generation.TransformationManager;
-import parsing.MappingDeclarationParser;
+import parsing.MappingDeclarationParserImpl;
 import util.Utility;
 
 public class IntegrationTesting {
@@ -17,7 +17,7 @@ public class IntegrationTesting {
 
 	@Test
 	void testMenuEntryClick() throws IOException {		
-		MappingDeclarationParser parser = new MappingDeclarationParser();
+		MappingDeclarationParserImpl parser = new MappingDeclarationParserImpl();
 		
 		TransformationManager tm = new TransformationManager(MAPPING_DIRECTORY_PATH, PROJECT_PATH, parser);
 		tm.buildDesignModel();

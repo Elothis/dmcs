@@ -2,7 +2,7 @@ package test;
 
 import org.junit.jupiter.api.Test;
 
-import parsing.MappingDeclarationParser;
+import parsing.MappingDeclarationParserImpl;
 
 class ParserTesting {
 
@@ -15,7 +15,7 @@ class ParserTesting {
 			.append('/').append("mappingDirectory");
 		mappingDirectoryPath = sb.toString();
 		
-		MappingDeclarationParser parser = new MappingDeclarationParser();
+		MappingDeclarationParserImpl parser = new MappingDeclarationParserImpl();
 		System.out.println(parser.parseMappingDirectory(mappingDirectoryPath));
 	}
 }

@@ -60,6 +60,7 @@ public class TransformationManager {
 	private XMIResource existentDesignmodel;
 	
 	public static final String DESIGNMODEL_FILE_NAME = "/designmodel.xmi";
+	public static final String CONFIG_FILE_NAME = "/metamodel-configuration.config";
 
 	public String getDirectoryPath() {
 		return projectPath;
@@ -102,7 +103,7 @@ public class TransformationManager {
 		this.existentElementIDs = new ArrayList<>();
 		this.mappingDeclarationDatabase = this.mappingDeclarationParser.parseMappingDirectory(this.mappingDirectoryPath);
 
-		EPackage metapackage = this.mappingDeclarationParser.parseConfigFileToMetaPackage(this.mappingDirectoryPath);
+		EPackage metapackage = this.mappingDeclarationParser.parseConfigFileToMetaPackage(this.mappingDirectoryPath + CONFIG_FILE_NAME);
 		
 		//initialize resource for saving the design model as xmi
 		XMIResource savingRes = Utility.initializePersistationResource(this.mappingDirectoryPath + DESIGNMODEL_FILE_NAME);

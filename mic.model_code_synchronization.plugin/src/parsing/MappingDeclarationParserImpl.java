@@ -36,7 +36,7 @@ import util.Utility;
  * @author Fabian Glittenberg
  *
  */
-public class MappingDeclarationParser implements IMappingDeclarationParser {
+public class MappingDeclarationParserImpl implements IMappingDeclarationParser {
 	
 	/**
 	 * File extension of the files containing the mapping description of an integration mechanism
@@ -46,10 +46,6 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 	 * File extension of the file containing the instantiation of the integration mechanisms to concrete model elements
 	 */
 	public static final String MAPPING_INSTANTIATION_FILE_EXTENSION = "inst";
-	/**
-	 * File extension of the config-file containing the path to the Ecore meta model
-	 */
-	public static final String CONFIG_FILE = "config";
 	/**
 	 * Keyword to parse for in the files defining the integration mechanisms that marks the beginning of the codestructure definition being mapped to.
 	 */
@@ -78,7 +74,7 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 	 * Constructor instantiating a MappingParser object operating on the specified path as the directory containing the required mapping files.
 	 * @param path to the directory containing mapping files
 	 */
-	public MappingDeclarationParser() {
+	public MappingDeclarationParserImpl() {
 		this.mappingDeclarationDatabase = new MappingDeclarationDatabase();
 	}
 	
@@ -298,13 +294,9 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 	}
 
 	@Override
-	public EPackage parseConfigFileToMetaPackage(String directoryPath) {
+	public EPackage parseConfigFileToMetaPackage(String path) {
 		try {
-			List<File> l = Utility.getAllFilesByExtension(directoryPath, CONFIG_FILE);
-			if(l.size() != 1) {
-				throw new ParserException("Please provide exactly one configuration file!");
-			}
-			String content = new String(Files.readAllBytes(l.get(0).toPath())).trim();
+			String content = new String(Files.readAllBytes(new File(path).toPath())).trim();
 			
 			//get meta model and create metapackage from it
 			ResourceSet rs = new ResourceSetImpl();
@@ -316,13 +308,8 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 			return metapackage;
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (ParserException e) {
-			e.printStackTrace();
-		}
+			}
 		
 		return null;
-	}
-	
-	
-	
+	}	
 }

@@ -15,7 +15,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import parsing.IMappingDeclarationParser;
-import parsing.MappingDeclarationParser;
+import parsing.MappingDeclarationParserImpl;
 
 
 
@@ -51,7 +51,7 @@ public class MainHandler extends AbstractHandler {
 				.append('/').append("mappingDirectory");
 				mappingDirectoryPath = sb.toString();
 	            
-	            IMappingDeclarationParser mappingParser = new MappingDeclarationParser();
+	            IMappingDeclarationParser mappingParser = new MappingDeclarationParserImpl();
 				
 	            try {
 					if(this.transformationManager == null) {
