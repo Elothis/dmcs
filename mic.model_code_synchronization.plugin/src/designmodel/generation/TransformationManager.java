@@ -50,6 +50,7 @@ public class TransformationManager {
 	
 	private Launcher launcher;
 	private String projectPath;
+	private String mappingDirectoryPath;
 	private CtModel astModel;
 	private IMappingDeclarationParser mappingDeclarationParser;
 	private MappingDeclarationDatabase mappingDeclarationDatabase;
@@ -57,16 +58,22 @@ public class TransformationManager {
 	private List<MappingEntry> mappings;
 	private List<String> existentElementIDs;
 	private XMIResource existentDesignmodel;
+	
+	public static final String DESIGNMODEL_FILE_NAME = "/designmodel.xmi";
 
 	public String getDirectoryPath() {
 		return projectPath;
 	}
 
+	
 	/**
-	 * Constructor, taking the project path of the target Java program as parameter.
+	 * Creates a TransformationManager working on the specified mapping directory, java project and mapping parser.
+	 * @param mappingDirectoryPath
 	 * @param projectPath
+	 * @param mappingParser
 	 */
-	public TransformationManager(String projectPath, IMappingDeclarationParser mappingParser) {
+	public TransformationManager(String mappingDirectoryPath, String projectPath, IMappingDeclarationParser mappingParser) {
+		this.mappingDirectoryPath = mappingDirectoryPath;
 		this.projectPath = projectPath;
 		this.launcher = new Launcher();
 		this.launcher.addInputResource(projectPath);
@@ -91,14 +98,14 @@ public class TransformationManager {
 	 * @param designmodelTargetPath 
 	 * @throws IOException 
 	 */
-	public void buildDesignModel(String designmodelTargetPath) throws IOException {
+	public void buildDesignModel() throws IOException {
 		this.existentElementIDs = new ArrayList<>();
-		this.mappingDeclarationDatabase = this.mappingDeclarationParser.parseMappingDirectory();
+		this.mappingDeclarationDatabase = this.mappingDeclarationParser.parseMappingDirectory(this.mappingDirectoryPath);
 
-		EPackage metapackage = this.mappingDeclarationParser.parseConfigFileToMetaPackage();
+		EPackage metapackage = this.mappingDeclarationParser.parseConfigFileToMetaPackage(this.mappingDirectoryPath);
 		
 		//initialize resource for saving the design model as xmi
-		XMIResource savingRes = Utility.initializePersistationResource(designmodelTargetPath);
+		XMIResource savingRes = Utility.initializePersistationResource(this.mappingDirectoryPath + DESIGNMODEL_FILE_NAME);
 
 		this.mappingDeclarationDatabase.getMappingInstantiations().forEach(mappingInstantiation -> {
 			//creates a processor that acts upon the specific condition target and runs it
@@ -142,8 +149,8 @@ public class TransformationManager {
 	 * Updates the code to reflect the contents of a changed design model.
 	 * @param updatedModel
 	 */
-	public void updateCode(String existingModelPath) {
-		XMIResource updatedModel = Utility.loadExistingModel(existingModelPath);
+	public void updateCode() {
+		XMIResource updatedModel = Utility.loadExistingModel(this.mappingDirectoryPath + DESIGNMODEL_FILE_NAME);
 		
 		List<MappingEntry> updatedMappings = new ArrayList<>();
 		List<String> newElementIDs = new ArrayList<>();
@@ -188,7 +195,7 @@ public class TransformationManager {
 		this.mappings = updatedMappings;
 		try {
 			//rebuild model instance afterwards to reset and reconfigure all data in this TransformationManager instance
-			this.buildDesignModel(existingModelPath);
+			this.buildDesignModel();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

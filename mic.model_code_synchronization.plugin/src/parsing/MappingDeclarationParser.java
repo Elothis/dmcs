@@ -71,24 +71,22 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 			modelelementParsed = false,
 			conditionParsed = false,
 			attributeMappingParsed = false;
-	
-	private String path;
+
 	private MappingDeclarationDatabase mappingDeclarationDatabase;
 	
 	/**
 	 * Constructor instantiating a MappingParser object operating on the specified path as the directory containing the required mapping files.
 	 * @param path to the directory containing mapping files
 	 */
-	public MappingDeclarationParser(String path) {
-		this.path = path;
+	public MappingDeclarationParser() {
 		this.mappingDeclarationDatabase = new MappingDeclarationDatabase();
 	}
 	
 	@Override
-	public MappingDeclarationDatabase parseMappingDirectory() {
+	public MappingDeclarationDatabase parseMappingDirectory(String directoryPath) {
 		try {
 			//parse in the files defining integration mechanisms
-			Utility.getAllFilesByExtension(this.path, INTEGRATION_MECHANISM_MAPPING_DECLARATION_FILE_EXTENSION).forEach(f -> {
+			Utility.getAllFilesByExtension(directoryPath, INTEGRATION_MECHANISM_MAPPING_DECLARATION_FILE_EXTENSION).forEach(f -> {
 				try {
 					IntegrationMechanismMappingDeclaration imDeclaration = this.parseIMFile(f);
 					this.mappingDeclarationDatabase.addIntegrationMechanismDeclaration(imDeclaration);
@@ -100,7 +98,7 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 			});
 			
 			//parse in the mapping instantiation file that applies the IMs to concrete model elements
-			List<File> l = Utility.getAllFilesByExtension(this.path, MAPPING_INSTANTIATION_FILE_EXTENSION);
+			List<File> l = Utility.getAllFilesByExtension(directoryPath, MAPPING_INSTANTIATION_FILE_EXTENSION);
 			if(l.size() != 1) {
 				throw new ParserException("Please provide exactly one mapping instantiation file!");
 			}
@@ -300,9 +298,9 @@ public class MappingDeclarationParser implements IMappingDeclarationParser {
 	}
 
 	@Override
-	public EPackage parseConfigFileToMetaPackage() {
+	public EPackage parseConfigFileToMetaPackage(String directoryPath) {
 		try {
-			List<File> l = Utility.getAllFilesByExtension(this.path, CONFIG_FILE);
+			List<File> l = Utility.getAllFilesByExtension(directoryPath, CONFIG_FILE);
 			if(l.size() != 1) {
 				throw new ParserException("Please provide exactly one configuration file!");
 			}

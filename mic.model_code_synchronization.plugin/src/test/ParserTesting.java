@@ -15,7 +15,7 @@ class ParserTesting {
 			.append('/').append("mappingDirectory");
 		mappingDirectoryPath = sb.toString();
 		
-		MappingDeclarationParser parser = new MappingDeclarationParser(mappingDirectoryPath);
-		System.out.println(parser.parseMappingDirectory());
+		MappingDeclarationParser parser = new MappingDeclarationParser();
+		System.out.println(parser.parseMappingDirectory(mappingDirectoryPath));
 	}
 }

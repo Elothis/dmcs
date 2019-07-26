@@ -51,15 +51,15 @@ public class MainHandler extends AbstractHandler {
 				.append('/').append("mappingDirectory");
 				mappingDirectoryPath = sb.toString();
 	            
-	            IMappingDeclarationParser mappingParser = new MappingDeclarationParser(mappingDirectoryPath);
+	            IMappingDeclarationParser mappingParser = new MappingDeclarationParser();
 				
 	            try {
 					if(this.transformationManager == null) {
-						this.transformationManager = new TransformationManager(projectPath, mappingParser);
+						this.transformationManager = new TransformationManager(mappingDirectoryPath, projectPath, mappingParser);
 					}
 					
 					if(!this.designmodelExistent) {
-						transformationManager.buildDesignModel(mappingDirectoryPath + "/designmodel.xmi");
+						transformationManager.buildDesignModel();
 						this.designmodelExistent = true;
 
 					}
@@ -74,13 +74,13 @@ public class MainHandler extends AbstractHandler {
 							int result = dialog.open();
 						if(result == 1) {
 							//System.out.println("Propagating changes of the design model back to the code");
-					    	transformationManager.updateCode(mappingDirectoryPath + "/designmodel.xmi");
+					    	transformationManager.updateCode();
 						}
 						else { //user wants to regenerate the model based on the current state of the code
 							//regenerate the design model from scratch
 							//System.out.println("Regenerating the design model");
-							transformationManager = new TransformationManager(projectPath, mappingParser);
-							transformationManager.buildDesignModel(mappingDirectoryPath + "/designmodel.xmi");
+							transformationManager = new TransformationManager(mappingDirectoryPath, projectPath, mappingParser);
+							transformationManager.buildDesignModel();
 						}	            	
 					}
 				} catch (IOException e) {
