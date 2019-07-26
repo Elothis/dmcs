@@ -16,13 +16,7 @@ public class IntegrationTesting {
 	public static final String PROJECT_PATH = "C:/Daten/MIC_Sync_Tool_Repo/TestProject";
 
 	@Test
-	void testMenuEntryClick() throws IOException {
-		StringBuilder sb = new StringBuilder();
-        String mappingDirectoryPath;
-			sb.append(System.getProperty("user.home").replace('\\', '/'))
-			.append('/').append("mappingDirectory");
-		mappingDirectoryPath = sb.toString();
-		
+	void testMenuEntryClick() throws IOException {		
 		MappingDeclarationParser parser = new MappingDeclarationParser();
 		
 		TransformationManager tm = new TransformationManager(MAPPING_DIRECTORY_PATH, PROJECT_PATH, parser);
