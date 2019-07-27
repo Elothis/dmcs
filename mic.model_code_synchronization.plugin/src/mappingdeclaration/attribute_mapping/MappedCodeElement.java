@@ -45,7 +45,7 @@ public abstract class MappedCodeElement {
 	 * @return true on success
 	 */
 	public CtNamedElement updateCodestructure(CtNamedElement codestructure, String newMappedModelElementValue) {
-		if(this.getTargetValue().contentEquals("name") ) {
+		if(this.targetValue.contentEquals("name") ) {
 			codestructure.setSimpleName(newMappedModelElementValue);
 			return codestructure;
 		}
