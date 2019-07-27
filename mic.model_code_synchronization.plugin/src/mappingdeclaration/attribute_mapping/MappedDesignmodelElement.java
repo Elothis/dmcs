@@ -71,7 +71,17 @@ public abstract class MappedDesignmodelElement {
 	 * @param mappedCodeElement
 	 * @return
 	 */
-	public abstract MappingEntry createMappingEntry(EObject designmodelElement, CtNamedElement mappedCodeElement);
+	public MappingEntry createMappingEntry(EObject designmodelElement, CtNamedElement mappedCodeElement) {
+		MappingEntry mappingEntry = new MappingEntry();
+		mappingEntry.setDesignmodelElementEObject(designmodelElement);
+		mappingEntry.setCodeElement(mappedCodeElement);
+		mappingEntry.setCodestructureType(this.getMappedCodeElement().getCodestructureType());
+		mappingEntry.setMappedDesignmodelElementValue(this.getTargetValue());
+		mappingEntry.setMappedCodeElementValue(this.getMappedCodeElement().getTargetValue());
+		mappingEntry.setMappedDesignmodelElement(this);
+		
+		return mappingEntry;
+	}
 
 	/**
 	 * Updates the mapping entry after an existing design model element got changed by the user.

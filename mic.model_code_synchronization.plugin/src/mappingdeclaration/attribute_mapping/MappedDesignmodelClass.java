@@ -163,19 +163,5 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 			throw new NotImplementedException("Currently there are only mappings from attributes from a design model class to codestructures implemented");
 		}
 		
-	}
-
-	@Override
-	public MappingEntry createMappingEntry(EObject designmodelElement, CtNamedElement mappedCodeElement) {
-		MappingEntry mappingEntry = new MappingEntry();
-		mappingEntry.setDesignmodelElementEObject(designmodelElement);
-		mappingEntry.setCodeElement(mappedCodeElement);
-		mappingEntry.setCodestructureType(this.getMappedCodeElement().getCodestructureType());
-		mappingEntry.setMappedDesignmodelElementValue(this.getTargetValue());
-		mappingEntry.setMappedCodeElementValue(this.getMappedCodeElement().getTargetValue());
-		mappingEntry.setMappedDesignmodelElement(this);
-		
-		return mappingEntry;
-	}
-	
+	}	
 }
