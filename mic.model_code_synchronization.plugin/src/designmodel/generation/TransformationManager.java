@@ -149,7 +149,6 @@ public class TransformationManager {
 
 	/**
 	 * Updates the code to reflect the contents of a changed design model.
-	 * @param updatedModel
 	 */
 	public void updateCode() {
 		XMIResource updatedModel = Utility.loadExistingModel(this.mappingDirectoryPath + DESIGNMODEL_FILE_NAME);
