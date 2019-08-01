@@ -90,6 +90,8 @@ public class TransformationManager {
 		
 		this.mappingDeclarationParser = mappingParser;
 		this.mappings = new ArrayList<>();
+		
+		this.mappingDeclarationDatabase = this.mappingDeclarationParser.parseMappingDirectory(this.mappingDirectoryPath);
 	}
 	
 	/**
@@ -101,7 +103,6 @@ public class TransformationManager {
 	 */
 	public void buildDesignModel() throws IOException {
 		this.existentElementIDs = new ArrayList<>();
-		this.mappingDeclarationDatabase = this.mappingDeclarationParser.parseMappingDirectory(this.mappingDirectoryPath);
 
 		EPackage metapackage = this.mappingDeclarationParser.parseConfigFileToMetaPackage(this.mappingDirectoryPath + CONFIG_FILE_NAME);
 		
