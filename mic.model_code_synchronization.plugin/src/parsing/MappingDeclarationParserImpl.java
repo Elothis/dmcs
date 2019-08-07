@@ -275,8 +275,8 @@ public class MappingDeclarationParserImpl implements IMappingDeclarationParser {
 			
 			for(String instantiationDeclaration: appliedModelelements) {
 				String[] split = instantiationDeclaration.split("\\.");
-				String modelElementName = (split.length > 1) ? split[1] : split[0];
-				String parentModelElementName = (split.length > 1) ? split[0] : null;
+				String modelElementName = (split.length > 1) ? split[1].trim() : split[0].trim();
+				String parentModelElementName = (split.length > 1) ? split[0].trim() : null;
 				for(MappingInstantiation mi: mappingInstantiations) {
 					if(mi.getInstantiatedModelElement().contentEquals(modelElementName))
 						throw new ParserException("Cannot map one design model element multiple times!");
