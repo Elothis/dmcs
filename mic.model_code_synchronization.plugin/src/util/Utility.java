@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+//import jack3_metamodel.Jack3_metamodelPackage;
 
 public class Utility {
 	
@@ -36,6 +37,7 @@ public class Utility {
 	
 	public static XMIResource loadExistingModel(String sourcePath) {
 		DesignmodelPackage dmp = DesignmodelPackage.eINSTANCE;
+		//Jack3_metamodelPackage mmp = Jack3_metamodelPackage.eINSTANCE;
 		ResourceSet resSet = new ResourceSetImpl();
 		resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		XMIResource res = (XMIResource) resSet.getResource(URI.createFileURI(sourcePath), true);

@@ -14,6 +14,7 @@ public class IntegrationTesting {
 	
 	public static final String MAPPING_DIRECTORY_PATH = "C:/Users/Fabian/mappingDirectory";
 	public static final String PROJECT_PATH = "C:/Daten/MIC_Sync_Tool_Repo/TestProject";
+	//public static final String PROJECT_PATH = "C:/Daten/UNI/jack3";
 
 	@Test
 	void testMenuEntryClick() throws IOException {		

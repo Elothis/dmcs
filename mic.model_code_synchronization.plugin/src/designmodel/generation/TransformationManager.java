@@ -80,7 +80,13 @@ public class TransformationManager {
 		this.launcher.addInputResource(projectPath);
 		Environment env = this.launcher.getEnvironment();
 		
-		env.setSourceOutputDirectory(new File(projectPath + "/src"));
+		File outputDir = new File(projectPath);
+		File srcDir = new File(projectPath + "/src");
+		if(srcDir.exists()) {
+			outputDir = srcDir;
+		}
+		
+		env.setSourceOutputDirectory(outputDir);
 		env.setCopyResources(false);
 		env.setNoClasspath(true);
 		env.setCommentEnabled(true);
