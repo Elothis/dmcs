@@ -40,8 +40,7 @@ public class MainHandler extends AbstractHandler {
 			IStructuredSelection strucSelection = (IStructuredSelection) selection;
 			Object projectObj = strucSelection.getFirstElement();
 			
-			if (projectObj instanceof IAdaptable && projectObj instanceof IJavaProject)
-	        {
+			if (projectObj instanceof IAdaptable && projectObj instanceof IJavaProject) {
 	            IProject project = (IProject)((IAdaptable)projectObj).getAdapter(IProject.class);
 	            String projectPath = project.getLocation().toString();;
 	            
@@ -61,7 +60,6 @@ public class MainHandler extends AbstractHandler {
 					if(!this.designmodelExistent) {
 						transformationManager.buildDesignModel();
 						this.designmodelExistent = true;
-
 					}
 					else { //model was changed by user and he then clicked the menu entry again to propagate the changes back into the code
 						MessageDialog dialog = new MessageDialog(Display.getDefault().getActiveShell(),
@@ -85,11 +83,9 @@ public class MainHandler extends AbstractHandler {
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
-				}
-	            
+				}	            
 	        }
 		}
 		return null;
 	}
-
 }

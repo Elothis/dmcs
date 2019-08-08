@@ -13,10 +13,14 @@ class ExtractModel {
 	public static final String PROJECT_PATH = "C:/Daten/UNI/jack3/";
 
 	@Test
-	void extractModel() throws IOException {		
+	void extractModel() throws IOException {
+		
 		MappingDeclarationParserImpl parser = new MappingDeclarationParserImpl();
 		
+		//this takes really long
 		TransformationManager tm = new TransformationManager(MAPPING_DIRECTORY_PATH, PROJECT_PATH, parser);
+		long before = System.currentTimeMillis();
 		tm.buildDesignModel();
+		System.out.println(System.currentTimeMillis() - before);
 	}
 }
