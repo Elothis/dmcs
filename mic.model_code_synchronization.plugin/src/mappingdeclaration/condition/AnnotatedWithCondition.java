@@ -52,7 +52,7 @@ public class AnnotatedWithCondition extends Condition {
 		//if the annotation type does not exist here, search in entire project
 		if(targetAnnotation == null) {
 			List<CtAnnotationType> annotationList = launcher.getModel().filterChildren(new NamedElementFilter<CtAnnotationType>(CtAnnotationType.class, targetNameInstance)).list();
-			targetAnnotation = annotationList.get(0); //simply get the first element, implicitly assuming there is only one interface of that name
+			targetAnnotation = annotationList.isEmpty() ? null : annotationList.get(0); //simply get the first element, implicitly assuming there is only one interface of that name
 			//if annotation does not exist in entire project either, create it
 			if(targetAnnotation == null) {
 				targetAnnotation = launcher.getFactory().Annotation().create(targetNameInstance);

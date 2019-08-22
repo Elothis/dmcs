@@ -45,7 +45,7 @@ public class ImplementedInterfaceCondition extends Condition {
 		//if the interface type does not exist there, search for an interface in the entire project
 		if(targetInterface == null) {
 			List<CtInterface> interfaceList = launcher.getModel().filterChildren(new NamedElementFilter<CtInterface>(CtInterface.class, targetNameInstance)).list();
-			targetInterface = interfaceList.get(0); //simply get the first element, implicitly assuming there is only one interface of that name
+			targetInterface = interfaceList.isEmpty() ? null : interfaceList.get(0); //simply get the first element, implicitly assuming there is only one interface of that name
 			//if interface does not exist in entire project either, create it
 			if(targetInterface == null) {
 				targetInterface = launcher.getFactory().Interface().create(targetNameInstance);
