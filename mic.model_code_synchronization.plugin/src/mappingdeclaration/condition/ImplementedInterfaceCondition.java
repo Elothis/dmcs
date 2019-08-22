@@ -56,7 +56,7 @@ public class ImplementedInterfaceCondition extends Condition {
 				MessageDialog createOrSpecifiyDialog = new MessageDialog(Display.getDefault().getActiveShell(),
 						"Create Interface?",
 						null,
-					    "There is no interface of that name in your project. Do you want to specifiy its fully qualified name because it is part of an external dependency or create a new one?",
+					    "There is no interface with the name " + targetNameInstance + " in your project. Do you want to specifiy its fully qualified name because it is part of an external dependency or create a new one?",
 					    MessageDialog.QUESTION,
 					    new String[] { "Create new interface", "Specify its fully qualified name"},
 					    0);
@@ -68,7 +68,7 @@ public class ImplementedInterfaceCondition extends Condition {
 				else { //ask user for fully qualified name
 					String fullyQualifiedInterfaceName = "";
 					InputDialog dialog = new InputDialog(Display.getDefault().getActiveShell(),
-							"Interface selection", "Please enter the fully qualified name of the interface here",
+							"Interface selection", "Please enter the fully qualified name of the interface "+ targetNameInstance + " here:",
 							"org.example.ISampleInterface", null);
 					if(dialog.open() == Window.OK) {
 						fullyQualifiedInterfaceName = dialog.getValue();

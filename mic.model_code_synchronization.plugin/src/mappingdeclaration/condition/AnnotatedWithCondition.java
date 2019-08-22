@@ -63,7 +63,7 @@ public class AnnotatedWithCondition extends Condition {
 				MessageDialog createOrSpecifiyDialog = new MessageDialog(Display.getDefault().getActiveShell(),
 						"Create Annotation?",
 						null,
-					    "There is no annotation of that name in your project. Do you want to specifiy its fully qualified name because it is part of an external dependency or create a new one?",
+					    "There is no annotation with the name " + targetNameInstance + " in your project. Do you want to specifiy its fully qualified name because it is part of an external dependency or create a new one?",
 					    MessageDialog.QUESTION,
 					    new String[] { "Create new annotation", "Specify its fully qualified name"},
 					    0);
@@ -75,7 +75,7 @@ public class AnnotatedWithCondition extends Condition {
 				else { //ask user for fully qualified name
 					String fullyQualifiedAnnotation = "";
 					InputDialog dialog = new InputDialog(Display.getDefault().getActiveShell(),
-							"Annotation selection", "Please enter the fully qualified name of the annotation here",
+							"Annotation selection", "Please enter the fully qualified name of the " + targetNameInstance + " annotation here:",
 							"org.example.SampleAnnotation", null);
 					if(dialog.open() == Window.OK) {
 						fullyQualifiedAnnotation = dialog.getValue();
