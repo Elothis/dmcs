@@ -14,6 +14,7 @@ import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtInterface;
 import spoon.reflect.declaration.CtNamedElement;
 import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.visitor.filter.NamedElementFilter;
 
 /**
  * Condition reprenseting an "implements" relationship of codestructure mapped to.
@@ -38,13 +39,18 @@ public class ImplementedInterfaceCondition extends Condition {
 	}
 
 	@Override
-	public CtNamedElement applyConditionToCreatedCodestructure(CtNamedElement newCodestructure, String targetNameInstance, Launcher launcher) {
-		//first try and get the existing interface
+	public CtNamedElement applyConditionToCreatedCodestructure(CtNamedElement newCodestructure, String targetNameInstance, Launcher launcher) {	
+		//first try and get the existing interface in the same package
 		CtInterface<?> targetInterface = launcher.getFactory().Interface().get(targetNameInstance);
-		//if the interface type does not exist yet, create it
+		//if the interface type does not exist there, search for an interface in the entire project
 		if(targetInterface == null) {
-			targetInterface = launcher.getFactory().Interface().create(targetNameInstance);
-			targetInterface.setVisibility(ModifierKind.PUBLIC);
+			List<CtInterface> interfaceList = launcher.getModel().filterChildren(new NamedElementFilter<CtInterface>(CtInterface.class, targetNameInstance)).list();
+			targetInterface = interfaceList.get(0); //simply get the first element, implicitly assuming there is only one interface of that name
+			//if interface does not exist in entire project either, create it
+			if(targetInterface == null) {
+				targetInterface = launcher.getFactory().Interface().create(targetNameInstance);
+				targetInterface.setVisibility(ModifierKind.PUBLIC);
+			}			
 		}
 		((CtClass<?>) newCodestructure).addSuperInterface(targetInterface.getReference());
 		return newCodestructure;

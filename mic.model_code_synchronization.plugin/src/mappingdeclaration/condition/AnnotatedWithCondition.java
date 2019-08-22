@@ -15,6 +15,7 @@ import spoon.reflect.declaration.CtAnnotation;
 import spoon.reflect.declaration.CtAnnotationType;
 import spoon.reflect.declaration.CtNamedElement;
 import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.visitor.filter.NamedElementFilter;
 
 /**
  * Condition representing an "annotated with" relationship for the codestructure mapped to.
@@ -46,12 +47,17 @@ public class AnnotatedWithCondition extends Condition {
 	@Override
 	public CtNamedElement applyConditionToCreatedCodestructure(CtNamedElement newCodestructure, String targetNameInstance, Launcher launcher) {
 		targetNameInstance = StringUtils.capitalise(targetNameInstance);
-		//first try and get an existing annotation
+		//first try and get the existing annotation in the same package
 		CtAnnotationType<?> targetAnnotation = (CtAnnotationType<?>) launcher.getFactory().Annotation().get(targetNameInstance);
-		//if the annotation type does not exist yet, create it
+		//if the annotation type does not exist here, search in entire project
 		if(targetAnnotation == null) {
-			targetAnnotation = launcher.getFactory().Annotation().create(targetNameInstance);
-			targetAnnotation.setVisibility(ModifierKind.PUBLIC);
+			List<CtAnnotationType> annotationList = launcher.getModel().filterChildren(new NamedElementFilter<CtAnnotationType>(CtAnnotationType.class, targetNameInstance)).list();
+			targetAnnotation = annotationList.get(0); //simply get the first element, implicitly assuming there is only one interface of that name
+			//if annotation does not exist in entire project either, create it
+			if(targetAnnotation == null) {
+				targetAnnotation = launcher.getFactory().Annotation().create(targetNameInstance);
+				targetAnnotation.setVisibility(ModifierKind.PUBLIC);
+			}		
 		}
 
 		CtAnnotation<?> newAnnotation = launcher.getFactory().createAnnotation(targetAnnotation.getReference());
