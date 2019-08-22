@@ -11,7 +11,6 @@ import org.eclipse.swt.widgets.Display;
 
 import concrete_mapping.MappingEntry;
 import designmodel.generation.AnnotatedWithProcessor;
-import designmodel.generation.TransformationManager;
 import mappingdeclaration.CodestructureType;
 import mappingdeclaration.MappingInstantiation;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
@@ -82,6 +81,11 @@ public class AnnotatedWithCondition extends Condition {
 						fullyQualifiedAnnotation = dialog.getValue();
 						targetAnnotation = launcher.getFactory().Annotation().create(fullyQualifiedAnnotation);
 						targetAnnotation.setVisibility(ModifierKind.PUBLIC);
+
+						//current workaround because when the user e.g. specifies "javax.ejb.Stateless" as annotation, spoon creates a Stateless-AnnotationType in a package javax.ejb
+						//this is because the spoon meta model currently does not involve dependencies so it cannot find the actual javax.ejb annotation
+						//so a new annotation type in the package gets initially created and then deleted directly again, so the actual/original javax.ejb annotation is used
+						launcher.getFactory().Package().get(fullyQualifiedAnnotation.split("\\.")[0]).delete();
 					}
 				}
 			}

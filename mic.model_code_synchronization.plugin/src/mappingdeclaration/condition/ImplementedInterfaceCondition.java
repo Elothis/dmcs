@@ -3,6 +3,10 @@ package mappingdeclaration.condition;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
+import org.eclipse.swt.widgets.Display;
 
 import concrete_mapping.MappingEntry;
 import designmodel.generation.ImplementedInterfaceProcessor;
@@ -48,8 +52,35 @@ public class ImplementedInterfaceCondition extends Condition {
 			targetInterface = interfaceList.isEmpty() ? null : interfaceList.get(0); //simply get the first element, implicitly assuming there is only one interface of that name
 			//if interface does not exist in entire project either, create it
 			if(targetInterface == null) {
-				targetInterface = launcher.getFactory().Interface().create(targetNameInstance);
-				targetInterface.setVisibility(ModifierKind.PUBLIC);
+				
+				MessageDialog createOrSpecifiyDialog = new MessageDialog(Display.getDefault().getActiveShell(),
+						"Create Interface?",
+						null,
+					    "There is no interface of that name in your project. Do you want to specifiy its fully qualified name because it is part of an external dependency or create a new one?",
+					    MessageDialog.QUESTION,
+					    new String[] { "Create new interface", "Specify its fully qualified name"},
+					    0);
+					int result = createOrSpecifiyDialog.open();
+				if(result == 0) { //create new annotation
+					targetInterface = launcher.getFactory().Interface().create(targetNameInstance);
+					targetInterface.setVisibility(ModifierKind.PUBLIC);
+				}
+				else { //ask user for fully qualified name
+					String fullyQualifiedInterfaceName = "";
+					InputDialog dialog = new InputDialog(Display.getDefault().getActiveShell(),
+							"Interface selection", "Please enter the fully qualified name of the interface here",
+							"org.example.ISampleInterface", null);
+					if(dialog.open() == Window.OK) {
+						fullyQualifiedInterfaceName = dialog.getValue();
+						targetInterface = launcher.getFactory().Interface().create(fullyQualifiedInterfaceName);
+						targetInterface.setVisibility(ModifierKind.PUBLIC);
+
+						//current workaround because when the user e.g. specifies "java.io.Serializabe" as interface, spoon creates a Serializable interface in a package java.io
+						//this is because the spoon meta model currently does not involve dependencies so it cannot find the actual java.io interface
+						//so a new interface in the package gets initially created and then deleted directly again, so the actual/original java.io annotation is used
+						launcher.getFactory().Package().get(fullyQualifiedInterfaceName.split("\\.")[0]).delete();
+					}
+				}
 			}			
 		}
 		((CtClass<?>) newCodestructure).addSuperInterface(targetInterface.getReference());
