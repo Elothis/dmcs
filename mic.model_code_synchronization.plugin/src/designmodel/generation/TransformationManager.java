@@ -80,8 +80,18 @@ public class TransformationManager {
 		this.launcher.addInputResource(projectPath);
 		Environment env = this.launcher.getEnvironment();
 		
-		new File(projectPath + "/src/").mkdirs();
-		File outputDir = new File(projectPath + "/src/");
+		//generated files will be located here
+		File outputDir;
+		//if the maven-convention of having /src/main/java exists, use it as output directory for generated code artifacts
+		File src_main_java_dir = new File(projectPath + "/src/main/java/");
+		if(src_main_java_dir.exists()) {
+			outputDir = src_main_java_dir;
+		}
+		else {
+			//if it does not exist, use standard /src directory
+			outputDir = new File(projectPath + "/src/");
+		}
+		System.out.println("-----------------" + outputDir + "--------------------");
 		
 		env.setSourceOutputDirectory(outputDir);
 		env.setCopyResources(false);
