@@ -63,11 +63,11 @@ public class MainHandler extends AbstractHandler {
 					}
 					else { //model was changed by user and he then clicked the menu entry again to propagate the changes back into the code
 						MessageDialog dialog = new MessageDialog(Display.getDefault().getActiveShell(),
-								"Synchronization direction",
+								"Transformation direction",
 								null,
-							    "Did you change the code base or the design model?",
+							    "In which direction do you want to synchronize model and code?",
 							    MessageDialog.QUESTION,
-							    new String[] { "I changed some code", "I updated the design model"},
+							    new String[] { "Code -> Model", "Model -> Code"},
 							    0);
 							int result = dialog.open();
 						if(result == 1) {
