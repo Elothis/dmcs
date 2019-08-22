@@ -4,9 +4,14 @@ import java.util.List;
 
 import org.apache.maven.shared.utils.StringUtils;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
+import org.eclipse.swt.widgets.Display;
 
 import concrete_mapping.MappingEntry;
 import designmodel.generation.AnnotatedWithProcessor;
+import designmodel.generation.TransformationManager;
 import mappingdeclaration.CodestructureType;
 import mappingdeclaration.MappingInstantiation;
 import mappingdeclaration.attribute_mapping.MappedDesignmodelElement;
@@ -53,11 +58,33 @@ public class AnnotatedWithCondition extends Condition {
 		if(targetAnnotation == null) {
 			List<CtAnnotationType> annotationList = launcher.getModel().filterChildren(new NamedElementFilter<CtAnnotationType>(CtAnnotationType.class, targetNameInstance)).list();
 			targetAnnotation = annotationList.isEmpty() ? null : annotationList.get(0); //simply get the first element, implicitly assuming there is only one interface of that name
-			//if annotation does not exist in entire project either, create it
+			//if annotation does not exist in entire project either, ask user if he wants to create it or specify fully qualified name if existent in dependency (e.g. javax.ejb.Stateless)
 			if(targetAnnotation == null) {
-				targetAnnotation = launcher.getFactory().Annotation().create(targetNameInstance);
-				targetAnnotation.setVisibility(ModifierKind.PUBLIC);
-			}		
+				
+				MessageDialog createOrSpecifiyDialog = new MessageDialog(Display.getDefault().getActiveShell(),
+						"Create Annotation?",
+						null,
+					    "There is no annotation of that name in your project. Do you want to specifiy its fully qualified name because it is part of an external dependency or create a new one?",
+					    MessageDialog.QUESTION,
+					    new String[] { "Create new annotation", "Specify its fully qualified name"},
+					    0);
+					int result = createOrSpecifiyDialog.open();
+				if(result == 0) { //create new annotation
+					targetAnnotation = launcher.getFactory().Annotation().create(targetNameInstance);
+					targetAnnotation.setVisibility(ModifierKind.PUBLIC);
+				}
+				else { //ask user for fully qualified name
+					String fullyQualifiedAnnotation = "";
+					InputDialog dialog = new InputDialog(Display.getDefault().getActiveShell(),
+							"Annotation selection", "Please enter the fully qualified name of the annotation here",
+							"org.example.SampleAnnotation", null);
+					if(dialog.open() == Window.OK) {
+						fullyQualifiedAnnotation = dialog.getValue();
+						targetAnnotation = launcher.getFactory().Annotation().create(fullyQualifiedAnnotation);
+						targetAnnotation.setVisibility(ModifierKind.PUBLIC);
+					}
+				}
+			}
 		}
 
 		CtAnnotation<?> newAnnotation = launcher.getFactory().createAnnotation(targetAnnotation.getReference());
