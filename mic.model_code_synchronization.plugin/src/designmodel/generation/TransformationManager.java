@@ -91,7 +91,6 @@ public class TransformationManager {
 			//if it does not exist, use standard /src directory
 			outputDir = new File(projectPath + "/src/");
 		}
-		System.out.println("-----------------" + outputDir + "--------------------");
 		
 		env.setSourceOutputDirectory(outputDir);
 		env.setCopyResources(false);
