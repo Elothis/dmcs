@@ -18,6 +18,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.jface.window.Window;
+import org.eclipse.swt.widgets.Display;
 
 import concrete_mapping.MappingEntry;
 import mappingdeclaration.IntegrationMechanismDeclaration;
@@ -314,15 +317,19 @@ public class TransformationManager {
 		else {
 			throw new NotImplementedException("Currently there are only CREATE-transformations for mappings from a codestructure's name to attributes of model elements implemented");
 		}
+		String packagePath;
 		//creating the codestructure element
 		switch(imd.getCodestructureType()) {
 		case CLASS:
-			CtClass<?> newClass = launcher.getFactory().Class().create(newCodestructureName);
+			packagePath = this.askUserForTargetPackage(newCodestructureName);
+			CtClass<?> newClass = launcher.getFactory().Class().create(packagePath + "." + newCodestructureName);
 			newClass.setVisibility(ModifierKind.PUBLIC);
+			
 			newCodestructure = newClass;
 			break;
 		case INTERFACE:
-			CtInterface<?> newInterface = launcher.getFactory().Interface().create(newCodestructureName);
+			packagePath = this.askUserForTargetPackage(newCodestructureName);
+			CtInterface<?> newInterface = launcher.getFactory().Interface().create(packagePath + "." + newCodestructureName);
 			newInterface.setVisibility(ModifierKind.PUBLIC);
 			newCodestructure = newInterface;
 			break;
@@ -353,6 +360,22 @@ public class TransformationManager {
 		//now the newly created codestructure has to be made applicable to the integration mechanism it is translated with
 		//i.e. it has to get annotated with a certain annotation if this is specified in the mapping
 		return applyIntegrationMechanismToCodestructure(imd, addedDesignmodelElement, newCodestructure);
+	}
+	
+	/**
+	 * Opens a dialog to ask the user to specify the target package the newly created newElement shall get created in.
+	 * @param newElement
+	 * @return target package
+	 */
+	private String askUserForTargetPackage(String newCodestructureName) {
+		String fullyQualifiedName = "";
+		InputDialog dialog = new InputDialog(Display.getDefault().getActiveShell(),
+				"Target package specification", "Please enter the fully qualified name of the target package you want the new element '" + newCodestructureName + "' to be created in here:",
+				"generated_elements", null);
+		if(dialog.open() == Window.OK) {
+			fullyQualifiedName = dialog.getValue();
+		}
+		return fullyQualifiedName;
 	}
 
 	/**
