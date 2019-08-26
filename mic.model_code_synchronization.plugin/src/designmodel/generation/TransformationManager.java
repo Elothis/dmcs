@@ -13,11 +13,14 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
@@ -52,7 +55,7 @@ import util.Utility;
 public class TransformationManager {
 	
 	private Launcher launcher;
-	private String projectPath;
+	private IJavaProject project;
 	private String mappingDirectoryPath;
 	private CtModel astModel;
 	private IMappingDeclarationParser mappingDeclarationParser;
@@ -65,21 +68,23 @@ public class TransformationManager {
 	public static final String DESIGNMODEL_FILE_NAME = "/designmodel.xmi";
 	public static final String CONFIG_FILE_NAME = "/metamodel-configuration.config";
 
-	public String getDirectoryPath() {
-		return projectPath;
+	public IJavaProject getDirectoryPath() {
+		return project;
 	}
 
 	
 	/**
 	 * Creates a TransformationManager working on the specified mapping directory, java project and mapping parser.
 	 * @param mappingDirectoryPath
-	 * @param projectPath
+	 * @param projectObj
 	 * @param mappingParser
 	 */
-	public TransformationManager(String mappingDirectoryPath, String projectPath, IMappingDeclarationParser mappingParser) {
+	public TransformationManager(String mappingDirectoryPath, IJavaProject projectObj, IMappingDeclarationParser mappingParser) {
 		this.mappingDirectoryPath = mappingDirectoryPath;
-		this.projectPath = projectPath;
+		this.project = projectObj;
 		this.launcher = new Launcher();
+		 IProject project = (IProject)((IAdaptable)projectObj).getAdapter(IProject.class);
+         String projectPath = project.getLocation().toString();;
 		this.launcher.addInputResource(projectPath);
 		Environment env = this.launcher.getEnvironment();
 		
@@ -234,7 +239,7 @@ public class TransformationManager {
 			EObject existentModelElement = existentDesignmodel.getEObject(updatedModelElementID);
 			MappingEntry entry = getMappingEntryByModelelement(existentModelElement);
 			//update it according to changes applied to the updatedModelElement
-			MappingEntry updatedEntry = entry.getMappedDesignmodelElement().updateTransformation(entry, updatedModelElement);
+			MappingEntry updatedEntry = entry.getMappedDesignmodelElement().updateTransformation(entry, updatedModelElement, this.project);
 			updatedMappings.add(updatedEntry);
 		}
 		else {

@@ -1,7 +1,9 @@
 package mappingdeclaration.attribute_mapping;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.core.IJavaProject;
 
 import concrete_mapping.MappingEntry;
 import mappingdeclaration.MappingInstantiation;
@@ -88,9 +90,10 @@ public abstract class MappedDesignmodelElement {
 	 * (Also gets called when nothing got changed and then returns existing MappingEntry without changes.)
 	 * @param entry
 	 * @param updatedModelElement
+	 * @param project 
 	 * @return the updated MappingEntry
 	 */
-	public abstract MappingEntry updateTransformation(MappingEntry entry, EObject updatedModelElement);
+	public abstract MappingEntry updateTransformation(MappingEntry entry, EObject updatedModelElement, IJavaProject project);
 
 	/**
 	 * Deletes the codestructure mapped to the model element after the model element got deleted by the user.

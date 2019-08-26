@@ -1,6 +1,8 @@
 package mappingdeclaration.attribute_mapping;
 
 import org.apache.commons.lang3.NotImplementedException;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.jdt.core.IJavaProject;
 
 import mappingdeclaration.CodestructureType;
 import spoon.reflect.declaration.CtNamedElement;
@@ -42,9 +44,10 @@ public abstract class MappedCodeElement {
 	/**
 	 * Updates the codestructure.
 	 * @param codestructure
+	 * @param project 
 	 * @return true on success
 	 */
-	public CtNamedElement updateCodestructure(CtNamedElement codestructure, String newMappedModelElementValue) {
+	public CtNamedElement updateCodestructure(CtNamedElement codestructure, String newMappedModelElementValue, IJavaProject project) {
 		if(this.targetValue.contentEquals("name") ) {
 			codestructure.setSimpleName(newMappedModelElementValue);
 			return codestructure;

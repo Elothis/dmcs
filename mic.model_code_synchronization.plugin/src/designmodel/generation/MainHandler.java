@@ -8,6 +8,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -42,7 +43,8 @@ public class MainHandler extends AbstractHandler {
 			
 			if (projectObj instanceof IAdaptable && projectObj instanceof IJavaProject) {
 	            IProject project = (IProject)((IAdaptable)projectObj).getAdapter(IProject.class);
-	            String projectPath = project.getLocation().toString();;
+	            String projectPath = project.getLocation().toString();
+	            IJavaProject javaProject = JavaCore.create(project);
 	            
 	            StringBuilder sb = new StringBuilder();
 	            String mappingDirectoryPath;
@@ -54,7 +56,7 @@ public class MainHandler extends AbstractHandler {
 				
 	            try {
 					if(this.transformationManager == null) {
-						this.transformationManager = new TransformationManager(mappingDirectoryPath, projectPath, mappingParser);
+						this.transformationManager = new TransformationManager(mappingDirectoryPath, javaProject, mappingParser);
 					}
 					
 					if(!this.designmodelExistent) {
@@ -77,7 +79,7 @@ public class MainHandler extends AbstractHandler {
 						else { //user wants to regenerate the model based on the current state of the code
 							//regenerate the design model from scratch
 							//System.out.println("Regenerating the design model");
-							transformationManager = new TransformationManager(mappingDirectoryPath, projectPath, mappingParser);
+							transformationManager = new TransformationManager(mappingDirectoryPath, javaProject, mappingParser);
 							transformationManager.buildDesignModel();
 						}	            	
 					}

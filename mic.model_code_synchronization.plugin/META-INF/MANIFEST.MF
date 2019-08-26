@@ -25,7 +25,9 @@ Require-Bundle: org.eclipse.jdt.core;bundle-version="3.12.1",
  org.junit.vintage.engine,
  org.hamcrest.core,
  org.opentest4j,
- org.apiguardian
+ org.apiguardian,
+ org.eclipse.ltk.core.refactoring;bundle-version="3.10.100",
+ org.eclipse.jdt.core.manipulation;bundle-version="1.11.200"
 Import-Package: jack3_metamodel,
  mic.model_code_synchronization.designmodel,
  org.eclipse.emf.common.util,

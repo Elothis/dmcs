@@ -11,9 +11,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.core.IJavaProject;
 
 import concrete_mapping.MappingEntry;
-import mappingdeclaration.CodestructureType;
 import mappingdeclaration.MappingInstantiation;
 import spoon.reflect.declaration.CtNamedElement;
 
@@ -105,7 +105,7 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 	}
 
 	@Override
-	public MappingEntry updateTransformation(MappingEntry entry, EObject updatedModelElement) {
+	public MappingEntry updateTransformation(MappingEntry entry, EObject updatedModelElement, IJavaProject project) {
 		if(entry.getCodeElement() == null) {
 			return null;
 		}
@@ -130,7 +130,7 @@ public class MappedDesignmodelClass extends MappedDesignmodelElement {
 				//System.out.println(entry.getCodeElement().getSimpleName() + " got changed to " + newAttributeValue);
 				//change the codestructure respectively
 				//entry.getCodeElement().setSimpleName(newAttributeValue);
-				entry.setCodeElement(entry.getMappedDesignmodelElement().getMappedCodeElement().updateCodestructure(entry.getCodeElement(), newAttributeValue));
+				entry.setCodeElement(entry.getMappedDesignmodelElement().getMappedCodeElement().updateCodestructure(entry.getCodeElement(), newAttributeValue, project));
 				
 				//change the model element to new one
 				entry.setDesignmodelElementEObject(updatedModelElement);
