@@ -1,4 +1,4 @@
-package testpackage;
+package examples;
 
 
 public class Ready implements State {

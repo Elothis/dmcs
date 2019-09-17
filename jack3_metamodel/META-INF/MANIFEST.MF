@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: jack3_metamodel;singleton:=true
+Bundle-SymbolicName: dmcs.jack3_metamodel;singleton:=true
 Automatic-Module-Name: jack3_metamodel
 Bundle-Version: 0.1.0.qualifier
 Bundle-ClassPath: .
