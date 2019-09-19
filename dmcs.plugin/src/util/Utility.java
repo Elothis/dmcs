@@ -36,7 +36,8 @@ public class Utility {
     }
 	
 	public static XMIResource loadExistingModel(String sourcePath) {
-		DesignmodelPackage dmp = DesignmodelPackage.eINSTANCE;
+		//load the metamodel here when running DMCS outside of an Eclipse instance to register the metamodel
+		//DesignmodelPackage dmp = DesignmodelPackage.eINSTANCE;
 		//Jack3_metamodelPackage mmp = Jack3_metamodelPackage.eINSTANCE;
 		ResourceSet resSet = new ResourceSetImpl();
 		resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
