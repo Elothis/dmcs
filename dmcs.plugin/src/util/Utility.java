@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
-//import mic.model_code_synchronization.designmodel.DesignmodelPackage;
+import mic.model_code_synchronization.designmodel.DesignmodelPackage;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
