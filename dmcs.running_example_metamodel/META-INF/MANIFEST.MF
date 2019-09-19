@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: dmcs.running_example_designmodel;singleton:=true
+Bundle-SymbolicName: dmcs.running_example_metamodel;singleton:=true
 Automatic-Module-Name: mic.model_code_synchronization.designmodel
 Bundle-Version: 0.1.0.qualifier
 Bundle-ClassPath: .
